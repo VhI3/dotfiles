@@ -1,8 +1,4 @@
 #!/bin/bash
-# TODO: install cmus if
-# TODO: cmus theme
-# TODO: install vis if
-# TODO: vis theme
 
 clear
 echo "  - - - - - - VHI3- - - - - - - -"
