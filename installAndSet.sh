@@ -52,9 +52,9 @@ sudo apt install npm
 echo "- - - - - - - - - - - - - - - - -"
 echo "       S O F T W A R E S         "
 echo "- - - - - - - - - - - - - - - - -"
-echo "- - - - - - URXVT - - - - - - - -"
+echo "- - - - - - Konsole - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
-sudo apt install rxvt-unicode-256color
+sudo apt install konsole
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - XCLIP - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -73,7 +73,6 @@ echo "- - - - - - - - - - - - - - - - -"
 echo "- - - -Plugins dependencies - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install software-properties-common
-#sudo apt install python-software-properties
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - - VIM - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -122,14 +121,6 @@ echo "- - - - - - I3LOCK- - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt -y install pkg-config libxcb1-dev libxcb1 libgl2ps-dev libx11-dev libglc0 libglc-dev libcairo2-dev libcairo-gobject2 libcairo2-dev libxkbfile-dev libxkbfile1 libxkbcommon-dev libxkbcommon-x11-dev libxcb-xkb-dev libxcb-dpms0-dev libxcb-damage0-dev libpam0g-dev libev-dev libxcb-image0-dev libxcb-util0-dev libxcb-composite0-dev libxcb-xinerama0-dev
 sudo apt install i3lock
-#    cd ~/tmp
-#    git clone git@github.com:karulont/i3lock-blur.git
-#    cd i3lock-blur
-#    make
-#    sudo make install
-#    cd ~
-#  fi
-#fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - I3LOCK-Color- - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -159,7 +150,6 @@ pip3 install colour
 pip3 install geoip2
 pip3 install netifaces
 pip3 install psutil
-#pip3 install basiciw
 pip3 install i3ipc
 pip3 install xkbgroup
 cd ~
@@ -175,7 +165,7 @@ sudo apt install alsa-utils
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - -COMPTON- - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
-sudo apt install compton
+sudo apt install compton compton-conf
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - -FONTS- - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -184,11 +174,11 @@ cd ~/tmp
 git clone https://github.com/powerline/fonts.git
 cd fonts
 ./install.sh
+cd ~/tmp
+git clone https://github.com/ryanoasis/nerd-fonts.git
+cd nerd-fonts
+./install.sh
 cd ~
-#git clone https://github.com/ryanoasis/nerd-fonts.git
-#cd nerd-fonts
-#./install.sh
-#cd ~
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - Betterlockscreen- - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -208,6 +198,18 @@ wget https://wallpapercave.com/uwp/uwp1103730.jpeg
 cd ~/.config/betterlockscreen
 ./betterlockscreen -u ~/tmp/uwp1103730.jpeg
 cd ~
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - - -  Hyper  - - - - - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+cd ~/tmp
+wget -O hyper.deb https://releases.hyper.is/download/deb
+sudo apt install ./hyper.deb
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - - -  Mailspring - - - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+cd ~/tmp
+wget -O mailspring.deb https://updates.getmailspring.com/download?platform=linuxDeb mailspring
+sudo apt install ./mailspring.deb
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - -  XFCE4 Power Manager  - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -268,11 +270,11 @@ if [ $oneAPI == "y" ] || [ $oneAPI == "Y" ] ; then
   #sudo apt install intel-dlfdkit 
   #sudo apt install intel-aikit 
   #sudo apt install intel-renderkit
-  #echo "source /opt/intel/oneapi/setvars.sh > /dev/null" > /etc/profile.d/intel-oneAPI.sh
+
   echo "source /opt/intel/oneapi/setvars.sh > /dev/null" | sudo tee -a /etc/profile.d/intel-oneAPI.sh
   echo "DONE"
 fi
-
+#
 sudo apt-get install cups
 sudo apt-get install conky htop
 sudo apt-get install xbindkeys
@@ -281,122 +283,118 @@ sudo apt install libnotify-bin
 sudo apt install multitail
 sudo apt install tree joe
 sudo apt install powerline
-
-
+#
 echo "- - - - - - - - - - - - - - - - -"
 echo "       D O T F I L E S           "
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - - Bash- - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
-  echo "Do you want to use bash dotfile? (y/n)"
-  read -n 1 INPUT ; echo; echo
-  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-    ln -s -f ~/dotfiles/bash/bashrc ~/.bashrc
- #   ln -s -f ~/comfy_guration/dotfiles/inputrc ~/.inputrc
-#    ln -s -f ~/comfy_guration/dotfiles/common/git-prompt.sh ~/.git-prompt.sh
-    echo "DONE"
-  fi
+echo "Do you want to use bash dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  ln -s -f ~/dotfiles/bash/bashrc ~/.bashrc
+  #ln -s -f ~/comfy_guration/dotfiles/inputrc ~/.inputrc
+  #ln -s -f ~/comfy_guration/dotfiles/common/git-prompt.sh ~/.git-prompt.sh
+fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - VIM dotfile- - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
-  INPUT=false;
-  echo "Do you want to use NVIM dotfile? (y/n)"
-  read -n 1 INPUT ; echo; echo
-  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+INPUT=false;
+echo "Do you want to use NVIM dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
   ln -s -f ~/dotfiles/vim/vimrc ~/.vimrc
-vim +PluginInstall +qall
-#    ln -s -f ~/comfy_guration/dotfiles/ctagsrc ~/.ctags
-#    ln -s -f ~/comfy_guration/dotfiles/custom_snips ~/.config/nvim/UltiSnips
-    echo "DONE"
-  fi
+  vim +PluginInstall +qall
+fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -i3wm dotfile - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
-  INPUT=false;
-  echo "Do you want to use i3WM dotfile? (y/n)"
-  read -n 1 INPUT ; echo; echo
-  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-   mkdir -p ~/.config/i3/
-   ln -s -f ~/dotfiles/i3/config ~/.config/i3/config
-   echo "DONE"
-  fi
+INPUT=false;
+echo "Do you want to use i3WM dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  mkdir -p ~/.config/i3/
+  ln -s -f ~/dotfiles/i3/config ~/.config/i3/config
+fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -i3pystatus dotfile - - -"
 echo "- - - - - - - - - - - - - - - - -"
-  INPUT=false;
-  echo "Do you want to use i3pystatus dotfile? (y/n)"
-  read -n 1 INPUT ; echo; echo
-  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-   mkdir -p ~/.config/i3pystatus/
-   ln -s -f ~/dotfiles/i3pystatus/i3pystatus.conf ~/.config/i3pystatus/i3pystatus.conf
-   echo "DONE"
-  fi
+INPUT=false;
+echo "Do you want to use i3pystatus dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  mkdir -p ~/.config/i3pystatus/
+  ln -s -f ~/dotfiles/i3pystatus/i3pystatus.conf ~/.config/i3pystatus/i3pystatus.conf
+fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -wallpapers dotfile - - -"
 echo "- - - - - - - - - - - - - - - - -"
-  INPUT=false;
-  echo "Do you want to use wallpapers dotfile? (y/n)"
-  read -n 1 INPUT ; echo; echo
-  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-   mkdir -p ~/.config/setWallpaper/
-   ln -s -f ~/dotfiles/setWallpaper/wallpapers.sh ~/.config/setWallpaper/wallpapers.sh
-   cd ~/.config/setWallpaper/
-   chmod +x wallpapers.sh
-   echo "DONE"
-   cd ~
-  fi
+INPUT=false;
+echo "Do you want to use wallpapers dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  mkdir -p ~/.config/setWallpaper/
+  ln -s -f ~/dotfiles/setWallpaper/wallpapers.sh ~/.config/setWallpaper/wallpapers.sh
+  cd ~/.config/setWallpaper/
+  chmod +x wallpapers.sh
+  cd ~
+fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - -  bashtop dotfile  - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
-  INPUT=false;
-  echo "Do you want to use bashtop dotfile? (y/n)"
-  read -n 1 INPUT ; echo; echo
-  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-   cp ~/tmp/bashtop/dracula.theme ~/dotfiles/bashtop/dracula.theme
-   mkdir -p ~/.config/bashtop/user_themes
-    if [ $LAPTOP ] ; then
-      ln -s -f ~/dotfiles/bashtop/dracula.theme ~/.config/bashtop/user_themes/dracula.theme
-      echo "DONE"
-    fi
-  fi
+INPUT=false;
+echo "Do you want to use bashtop dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  cp ~/tmp/bashtop/dracula.theme ~/dotfiles/bashtop/dracula.theme
+  mkdir -p ~/.config/bashtop/user_themes
+  ln -s -f ~/dotfiles/bashtop/dracula.theme ~/.config/bashtop/user_themes/dracula.theme
+fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - -  set Monitors - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
-  INPUT=false;
-  LAPTOP=false; 
-  echo "Do you want set Monitors? (y/n)"
-  read -n 1 INPUT ; echo; echo
-  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-   mkdir -p ~/.config/setMonitors/
-   echo "Do you use laptop? (y/n)"
-   read -n 1 LAPTOP ; echo; echo
-    if [ $LAPTOP == "y" ] || [ $LAPTOP == "Y" ] ; then
-      ln -s -f ~/dotfiles/setMonitors/setMonitor_laptop.sh ~/.config/setMonitors/setMonitor_laptop.sh
-      cd ~/.config/setMonitors/
-      chmod +x setMonitor_laptop.sh
-      cd ~
-    fi
-    if [ $LAPTOP == "n" ] || [ $LAPTOP == "N" ] ; then
-      ln -s -f ~/dotfiles/setMonitors/setMonitor_TinkStation.sh ~/.config/setMonitors/setMonitor_TinkStation.sh
-      cd ~/.config/setMonitors/
-      chmod +x setMonitor_TinkStation.sh
-      cd ~
-    fi
+INPUT=false;
+echo "Do you want set Monitors? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  mkdir -p ~/.config/setMonitors/
+  echo "Do you use laptop? (y/n)"
+  read -n 1 LAPTOP ; echo; echo
+  if [ $LAPTOP == "y" ] || [ $LAPTOP == "Y" ] ; then
+    ln -s -f ~/dotfiles/setMonitors/setMonitor_laptop.sh ~/.config/setMonitors/setMonitor.sh
+    cd ~/.config/setMonitors/
+    chmod +x setMonitor_laptop.sh
+    cd ~
   fi
-echo "- - - - - - - - - - - - - - - - -"
-echo "- - - - URXVT dotfile - - - - - -"
-echo "- - - - - - - - - - - - - - - - -"
-  INPUT=false;
-  echo "Do you want to use URXVT dotfile? (y/n)"
-  read -n 1 INPUT ; echo; echo
-  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-    ln -s -f ~/comfy_guration/dotfiles/Xresources ~/.Xresources
-    xrdb ~/.Xresources
-    sudo cp ~/comfy_guration/scripts/clipboard /usr/lib/urxvt/perl/
-    echo "DONE"
+  if [ $LAPTOP == "n" ] || [ $LAPTOP == "N" ] ; then
+    ln -s -f ~/dotfiles/setMonitors/setMonitor_TinkStation.sh ~/.config/setMonitors/setMonitor.sh
+    cd ~/.config/setMonitors/
+    chmod +x setMonitor_TinkStation.sh
+    cd ~
   fi
 fi
-
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - - -  Hyper dotfile- - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+INPUT=false;
+echo "Do you want to use Hyper dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  ln -s -f ~/dotfiles/hyper/hyper.js ~/.hyper.js
+fi
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - Mailspring dotfile  - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+INPUT=false;
+echo "Do you want to use Mailspring dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  cd ~/tmp
+  git clone https://github.com/dracula/mailspring.git
+  mkdir -p ~/.config/Mailspring/packages/dracula-theme
+  cd mailspring
+  cp -rf * ~/.config/Mailspring/packages/dracula-theme/
+fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - ML - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"

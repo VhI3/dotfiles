@@ -14,13 +14,13 @@ font pango: SpaceMono Nerd Font Mono Medium 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec hyper
 
 # Kill focused window
 bindsym $mod+Shift+q kill
 
 # Set monitor arrangement on TinkStation with 3 Monitors
-exec --no-startup-id ~/.config/i3/setMonitor_TinkStation.sh
+exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
 
 # variables for left and right monitor 
 # (Left: VGA-1 Right: HDMI-1)
