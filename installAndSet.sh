@@ -60,6 +60,16 @@ echo "- - - - - - XCLIP - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install xclip
 echo "- - - - - - - - - - - - - - - - -"
+echo "- - - - - - Bashtop - - - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+sudo add-apt-repository ppa:bashtop-monitor/bashtop
+sudo apt update
+sudo apt install bashtop
+mkdir -p ~/tmp
+cd ~/tmp
+git clone https://github.com/dracula/bashtop.git
+cd ~
+echo "- - - - - - - - - - - - - - - - -"
 echo "- - - -Plugins dependencies - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install software-properties-common
@@ -73,8 +83,13 @@ sudo apt install vim
 sudo apt install python-dev python-pip python3-dev python3-pip
 sudo apt install vim-gtk3 vim-nox
 sudo apt install vim-youcompleteme
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+mkdir -p ~/.vim/pack/themes/start
+cd ~/.vim/pack/themes/start
+git clone https://github.com/dracula/vim.git dracula
 sudo apt upgrade
 sudo apt autoremove
+cd ~
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - Plugins manager - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -181,15 +196,16 @@ mkdir -p ~/tmp
 cd ~/tmp
 git clone https://github.com/pavanjadhaw/betterlockscreen
 cd betterlockscreen
-mv betterlockscreen ~/.config/i3/
-cd ~/.config/i3/
+mkdir -p ~/.config/betterlockscreen
+mv betterlockscreen ~/.config/betterlockscreen
+cd ~/.config/betterlockscreen
 chmod +x ./betterlockscreen
 cd ~
 sudo apt install imagemagick-6.q16
 sudo apt install bc
 cd ~/tmp
 wget https://wallpapercave.com/uwp/uwp1103730.jpeg
-cd ~/.config/i3/
+cd ~/.config/betterlockscreen
 ./betterlockscreen -u ~/tmp/uwp1103730.jpeg
 cd ~
 echo "- - - - - - - - - - - - - - - - -"
@@ -232,10 +248,6 @@ sudo apt install apt-transport-https
 sudo apt update
 sudo apt install code
 cd ~
-sudo apt-get install cups
-sudo apt-get install conky htop
-sudo apt-get install xbindkeys
-sudo apt-get install arandr
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - Intel® oneAPI - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -260,44 +272,39 @@ if [ $oneAPI == "y" ] || [ $oneAPI == "Y" ] ; then
   echo "source /opt/intel/oneapi/setvars.sh > /dev/null" | sudo tee -a /etc/profile.d/intel-oneAPI.sh
   echo "DONE"
 fi
+
+sudo apt-get install cups
+sudo apt-get install conky htop
+sudo apt-get install xbindkeys
+sudo apt-get install arandr
+sudo apt install libnotify-bin
+sudo apt install multitail
+sudo apt install tree joe
+sudo apt install powerline
+
+
 echo "- - - - - - - - - - - - - - - - -"
 echo "       D O T F I L E S           "
-echo "- - - - - - - - - - - - - - - - -"
-INPUT=false;
-echo
-echo "Do you want to use dotfiles from ~/comfy_guration/dotfiles? (y/n)"
-read -n 1 INPUT ; echo; echo
-if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-echo "- - Activate laptop dotfiles- - -"
-echo "- - - - - - - - - - - - - - - - -"
-  LAPTOP=false;
-  INPUT=false;
-  echo "Are you on a laptop (y/n)"
-  read -n 1 INPUT ; echo; echo
-  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-    LAPTOP=true;
-  fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - - Bash- - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
   echo "Do you want to use bash dotfile? (y/n)"
   read -n 1 INPUT ; echo; echo
   if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-    ln -s -f ~/comfy_guration/dotfiles/laptop/bashrc_laptop ~/.bashrc
+    ln -s -f ~/dotfiles/bash/bashrc ~/.bashrc
  #   ln -s -f ~/comfy_guration/dotfiles/inputrc ~/.inputrc
-    ln -s -f ~/comfy_guration/dotfiles/common/git-prompt.sh ~/.git-prompt.sh
+#    ln -s -f ~/comfy_guration/dotfiles/common/git-prompt.sh ~/.git-prompt.sh
     echo "DONE"
   fi
 echo "- - - - - - - - - - - - - - - - -"
-echo "- - - - - NVIM dotfile- - - - - -"
+echo "- - - - - VIM dotfile- - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
   INPUT=false;
   echo "Do you want to use NVIM dotfile? (y/n)"
   read -n 1 INPUT ; echo; echo
   if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-#    mkdir -p ~/.config
-    mkdir -p ~/.config/nvim
-    ln -s -f ~/comfy_guration/dotfiles/common/init.vim ~/.config/nvim/init.vim
+  ln -s -f ~/dotfiles/vim/vimrc ~/.vimrc
+vim +PluginInstall +qall
 #    ln -s -f ~/comfy_guration/dotfiles/ctagsrc ~/.ctags
 #    ln -s -f ~/comfy_guration/dotfiles/custom_snips ~/.config/nvim/UltiSnips
     echo "DONE"
@@ -309,25 +316,71 @@ echo "- - - - - - - - - - - - - - - - -"
   echo "Do you want to use i3WM dotfile? (y/n)"
   read -n 1 INPUT ; echo; echo
   if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-#    mkdir -p ~/.config
-#    mkdir -p ~/.config/i3/
+   mkdir -p ~/.config/i3/
+   ln -s -f ~/dotfiles/i3/config ~/.config/i3/config
+   echo "DONE"
+  fi
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - - - -i3pystatus dotfile - - -"
+echo "- - - - - - - - - - - - - - - - -"
+  INPUT=false;
+  echo "Do you want to use i3pystatus dotfile? (y/n)"
+  read -n 1 INPUT ; echo; echo
+  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+   mkdir -p ~/.config/i3pystatus/
+   ln -s -f ~/dotfiles/i3pystatus/i3pystatus.conf ~/.config/i3pystatus/i3pystatus.conf
+   echo "DONE"
+  fi
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - - - -wallpapers dotfile - - -"
+echo "- - - - - - - - - - - - - - - - -"
+  INPUT=false;
+  echo "Do you want to use wallpapers dotfile? (y/n)"
+  read -n 1 INPUT ; echo; echo
+  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+   mkdir -p ~/.config/setWallpaper/
+   ln -s -f ~/dotfiles/setWallpaper/wallpapers.sh ~/.config/setWallpaper/wallpapers.sh
+   cd ~/.config/setWallpaper/
+   chmod +x wallpapers.sh
+   echo "DONE"
+   cd ~
+  fi
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - -  bashtop dotfile  - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+  INPUT=false;
+  echo "Do you want to use bashtop dotfile? (y/n)"
+  read -n 1 INPUT ; echo; echo
+  if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+   cp ~/tmp/bashtop/dracula.theme ~/dotfiles/bashtop/dracula.theme
+   mkdir -p ~/.config/bashtop/user_themes
     if [ $LAPTOP ] ; then
-      ln -s -f ~/comfy_guration/dotfiles/laptop/i3_laptop ~/.config/i3/config
+      ln -s -f ~/dotfiles/bashtop/dracula.theme ~/.config/bashtop/user_themes/dracula.theme
       echo "DONE"
     fi
   fi
 echo "- - - - - - - - - - - - - - - - -"
-echo "- - -  polybar dotfile  - - - - -"
+echo "- - -  set Monitors - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
   INPUT=false;
-  echo "Do you want to use polybar dotfile? (y/n)"
+  LAPTOP=false; 
+  echo "Do you want set Monitors? (y/n)"
   read -n 1 INPUT ; echo; echo
   if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
-#    mkdir -p ~/.config
-    mkdir -p ~/.config/polybar/
-    if [ $LAPTOP ] ; then
-      ln -s -f ~/comfy_guration/dotfiles/laptop/polybar_laptop ~/.config/polybar/config
-      echo "DONE"
+   mkdir -p ~/.config/setMonitors/
+   echo "Do you use laptop? (y/n)"
+   read -n 1 LAPTOP ; echo; echo
+    if [ $LAPTOP == "y" ] || [ $LAPTOP == "Y" ] ; then
+      ln -s -f ~/dotfiles/setMonitors/setMonitor_laptop.sh ~/.config/setMonitors/setMonitor_laptop.sh
+      cd ~/.config/setMonitors/
+      chmod +x setMonitor_laptop.sh
+      cd ~
+    fi
+    if [ $LAPTOP == "n" ] || [ $LAPTOP == "N" ] ; then
+      ln -s -f ~/dotfiles/setMonitors/setMonitor_TinkStation.sh ~/.config/setMonitors/setMonitor_TinkStation.sh
+      cd ~/.config/setMonitors/
+      chmod +x setMonitor_TinkStation.sh
+      cd ~
     fi
   fi
 echo "- - - - - - - - - - - - - - - - -"
