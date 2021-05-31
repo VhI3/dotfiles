@@ -133,6 +133,9 @@ alias .....='cd ../../../..'
 # cd into the old directory
 alias bd='cd "$OLDPWD"'
 
+# Single Line update, upgrade ..
+alias aaa='sudo apt update && sudo apt upgrade && sudo apt autoremove && sudo apt autoclean'
+
 # Remove a directory and all files
 alias rmd='/bin/rm  --recursive --force --verbose '
 
