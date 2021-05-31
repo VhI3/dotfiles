@@ -136,6 +136,19 @@ alias bd='cd "$OLDPWD"'
 # Single Line update, upgrade ..
 alias aaa='sudo apt update && sudo apt upgrade && sudo apt autoremove && sudo apt autoclean'
 
+alias bye="sudo systemctl poweroff"
+alias reboot="sudo systemctl reboot"
+alias zzz="sudo systemctl suspend"
+
+
+# git alias
+alias gs="git status -s"
+alias gl='git log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
+alias ga='git add'
+alias gall='git add -A'
+alias gap='git add -p'
+
+
 # Remove a directory and all files
 alias rmd='/bin/rm  --recursive --force --verbose '
 

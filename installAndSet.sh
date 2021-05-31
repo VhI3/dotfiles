@@ -6,13 +6,16 @@ echo "/ D O T F I L E S   M A N A G E R \\"
 echo "- - - - - - - - - - - - - - - - -"
 
 # Check if using pacman (arch) or apt (debian)
+sudo apt install command-not-found apt-file
 sudo apt update
+sudo apt-file update
 echo "- - - - - - - - - - - - - - - - -"
 echo "    I N S T A L L   B A S I C S  "
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -Intel Microcode- - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install intel-microcode
+sudo apt install command-not-found apt-file
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - Git - - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -283,6 +286,8 @@ sudo apt install libnotify-bin
 sudo apt install multitail
 sudo apt install tree joe
 sudo apt install powerline
+sudo systemctl enable fstrim.timer
+sudo apt install clipit
 #
 echo "- - - - - - - - - - - - - - - - -"
 echo "       D O T F I L E S           "
