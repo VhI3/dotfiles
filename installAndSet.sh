@@ -5,17 +5,16 @@ echo "  - - - - - - VHI3- - - - - - - -"
 echo "/ D O T F I L E S   M A N A G E R \\"
 echo "- - - - - - - - - - - - - - - - -"
 
-# Check if using pacman (arch) or apt (debian)
 sudo apt install command-not-found apt-file
 sudo apt update
 sudo apt-file update
+sudo apt upgrade
 echo "- - - - - - - - - - - - - - - - -"
 echo "    I N S T A L L   B A S I C S  "
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -Intel Microcode- - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install intel-microcode
-sudo apt install command-not-found apt-file
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - Git - - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -63,6 +62,10 @@ echo "- - - - - - XCLIP - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install xclip
 echo "- - - - - - - - - - - - - - - - -"
+echo "- - - -Plugins dependencies - - -"
+echo "- - - - - - - - - - - - - - - - -"
+sudo apt install software-properties-common
+echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - Bashtop - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo add-apt-repository ppa:bashtop-monitor/bashtop
@@ -72,10 +75,6 @@ mkdir -p ~/tmp
 cd ~/tmp
 git clone https://github.com/dracula/bashtop.git
 cd ~
-echo "- - - - - - - - - - - - - - - - -"
-echo "- - - -Plugins dependencies - - -"
-echo "- - - - - - - - - - - - - - - - -"
-sudo apt install software-properties-common
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - - VIM - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -105,15 +104,14 @@ echo "- - - - - - i3WM- - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo add-apt-repository ppa:aguignard/ppa
 sudo apt update
-sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake libxcb-shape0-dev
-sudo apt install xorg lightdm suckless-tools
+sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake libxcb-shape0-dev meson
+sudo apt install xorg lightdm suckless-tools # just for minimalist
 sudo apt install i3
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - i3WM-GAPS - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 mkdir -p ~/tmp
 cd ~/tmp
-sudo apt install meson
 git clone https://www.github.com/Airblader/i3 i3-gaps
 cd i3-gaps
 meson build
@@ -129,8 +127,8 @@ echo "- - - - - - I3LOCK-Color- - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install autoconf gcc make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev
 cd ~/tmp
-git clone https://github.com/Raymo111/i3lock-cd i3lock-color
-color
+git clone https://github.com/Raymo111/i3lock-color.git
+cd i3lock-color
 sudo ./install-i3lock-color.sh
 cd ~
 echo "- - - - - - - - - - - - - - - - -"
@@ -214,6 +212,16 @@ cd ~/tmp
 wget -O mailspring.deb https://updates.getmailspring.com/download?platform=linuxDeb mailspring
 sudo apt install ./mailspring.deb
 echo "- - - - - - - - - - - - - - - - -"
+echo "- - - -  Google Chrome- - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+cd ~/tmp
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+wget https://dl.google.com/linux/linux_signing_key.pub
+sudo apt-key add linux_signing_key.pub
+sudo apt update
+sudo apt install google-chrome-stable
+cd ~
+echo "- - - - - - - - - - - - - - - - -"
 echo "- - - -  XFCE4 Power Manager  - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install xfce4-power-manager
@@ -224,6 +232,7 @@ sudo apt install volumeicon-alsa
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - Sciebo- - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
+cd ~/tmp
 wget -nv https://www.sciebo.de/install/linux/Ubuntu_18.04/Release.key -O - | sudo apt-key add -
 echo 'deb https://www.sciebo.de/install/linux/Ubuntu_18.04/ /' | sudo tee -a /etc/apt/sources.list.d/owncloud.list
 sudo apt update
@@ -277,17 +286,11 @@ if [ $oneAPI == "y" ] || [ $oneAPI == "Y" ] ; then
   echo "source /opt/intel/oneapi/setvars.sh > /dev/null" | sudo tee -a /etc/profile.d/intel-oneAPI.sh
   echo "DONE"
 fi
+cd ~
 #
-sudo apt-get install cups
-sudo apt-get install conky htop
-sudo apt-get install xbindkeys
-sudo apt-get install arandr
-sudo apt install libnotify-bin
-sudo apt install multitail
-sudo apt install tree joe
-sudo apt install powerline
+sudo apt install cups conky htop xbindkeys arandr libnotify-bin multitail tree joe powerline clipit
+sudo apt autoremove 
 sudo systemctl enable fstrim.timer
-sudo apt install clipit
 #
 echo "- - - - - - - - - - - - - - - - -"
 echo "       D O T F I L E S           "
@@ -374,7 +377,7 @@ if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
   if [ $LAPTOP == "n" ] || [ $LAPTOP == "N" ] ; then
     ln -s -f ~/dotfiles/setMonitors/setMonitor_TinkStation.sh ~/.config/setMonitors/setMonitor.sh
     cd ~/.config/setMonitors/
-    chmod +x setMonitor_TinkStation.sh
+    chmod +x setMonitor.sh
     cd ~
   fi
 fi
@@ -412,7 +415,9 @@ if [ $ML == "y" ] || [ $ML == "Y" ] ; then
   cd Hands-On-Machine-Learning-with-CPP/env_scripts
   sudo apt install -y build-essential gdb git cmake cmake-curses-gui python python-pip libblas-dev libopenblas-dev libatlas-base-dev liblapack-dev libboost-all-dev libopencv-core3.2 libopencv-imgproc3.2 libopencv-dev libopencv-highgui3.2 libopencv-highgui-dev libhdf5-dev libjson-c-dev libx11-dev openjdk-8-jdk wget ninja-build gnuplot vim python3-venv
   pip install pyyaml
+  pip3 install pyyaml
   pip install typing
+  pip3 install typing
   sed -i 's/442d52ba052115b32035a6e7dc6587bb6a462dec/106cafdae41834c637fe5cb63980834517a05024/g'  install_env.sh
   mkdir ~/development
   cp checkout_lib.sh ~/development
