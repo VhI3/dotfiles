@@ -76,6 +76,10 @@ cd ~/tmp
 git clone https://github.com/dracula/bashtop.git
 cd ~
 echo "- - - - - - - - - - - - - - - - -"
+echo "- - - - - Media Codecs- - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+
+echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - - VIM - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo add-apt-repository ppa:jonathonf/vim
@@ -84,6 +88,7 @@ sudo apt install vim
 sudo apt install python-dev python-pip python3-dev python3-pip
 sudo apt install vim-gtk3 vim-nox
 sudo apt install vim-youcompleteme
+vim-addon-manager install youcompleteme
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 mkdir -p ~/.vim/pack/themes/start
 cd ~/.vim/pack/themes/start
@@ -225,6 +230,10 @@ echo "- - - - - - - - - - - - - - - - -"
 echo "- - - -  XFCE4 Power Manager  - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install xfce4-power-manager
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - - - - Telegram- - - - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+sudo apt install telegram-desktop 
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - Volume Icon - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -402,6 +411,18 @@ if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
   mkdir -p ~/.config/Mailspring/packages/dracula-theme
   cd mailspring
   cp -rf * ~/.config/Mailspring/packages/dracula-theme/
+fi
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - -  Telegram dotfile - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+INPUT=false;
+echo "Do you want to use Telegram dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  cd ~/tmp
+  git clone https://github.com/dracula/telegram.git
+
+  ln -s -f ~/dotfiles/hyper/hyper.js ~/.hyper.js
 fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - ML - - - - - -"

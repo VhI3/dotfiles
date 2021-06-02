@@ -20,15 +20,13 @@ bindsym $mod+Return exec hyper
 bindsym $mod+Shift+q kill
 
 # Set monitor arrangement on TinkStation with 3 Monitors
-exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
+exec --no-startup-id ~/.config/setMonitors/setMonitor_laptop.sh
 
 # variables for left and right monitor 
 # (Left: VGA-1 Right: HDMI-1)
-#set $monEven HDMI-1    # 2,4,8,10,12,14,16,18,20,22
-#set $monOdd VGA-1      # 1,3,5,7,9,11,13,15,17,19,21
+set $monEven HDMI-1   
+set $monOdd VGA-1    
 
-#set $monEven HDMI-1    
-#set $monOdd VGA-1
 
 # Set Keyboard layouts
 exec_always "setxkbmap -layout us,de,ir"
@@ -166,7 +164,7 @@ bindsym $mod+Shift+F12 move container to workspace $workspace22
 
 # Always open some programs on specified workspace
 assign [class="Google-chrome"]    $workspace2
-#assign [class="URxvt"]    $workspace1
+assign [class="Hyper"]    $workspace1
 assign [class="Mailspring"]   $workspace3
 for_window [class="Spotify"] move to workspace $workspace0
 assign [class="Spotify"] $workspace0
@@ -193,28 +191,28 @@ assign [class="jetbrains-clion"] $workspace15
 #for_window [title="^Steam Keyboard$"] floating enable
 for_window [class="Yad"] floating enable
 
-#workspace  $workspace1 output $monOdd
-#workspace  $workspace2 output $monEven
-#workspace  $workspace3 output $monOdd
-#workspace  $workspace4 output $monEven
-#workspace  $workspace5 output $monOdd
-#workspace  $workspace6 output $monEven
-#workspace  $workspace7 output $monOdd
-#workspace  $workspace8 output $monEven
-#workspace  $workspace9 output $monOdd
-#workspace  $workspace0 output $monEven
-#workspace  $workspace11 output $monOdd
-#workspace  $workspace12 output $monEven
-#workspace  $workspace13 output $monOdd
-#workspace  $workspace14 output $monEven
-#workspace  $workspace15 output $monOdd
-#workspace  $workspace16 output $monEven
-#workspace  $workspace17 output $monOdd
-#workspace  $workspace18 output $monEven
-#workspace  $workspace19 output $monOdd
-#workspace  $workspace20 output $monEven
-#workspace  $workspace21 output $monOdd
-#workspace  $workspace22 output $monEven
+workspace  $workspace1 output $monOdd
+workspace  $workspace2 output $monEven
+workspace  $workspace3 output $monOdd
+workspace  $workspace4 output $monEven
+workspace  $workspace5 output $monOdd
+workspace  $workspace6 output $monEven
+workspace  $workspace7 output $monOdd
+workspace  $workspace8 output $monEven
+workspace  $workspace9 output $monOdd
+workspace  $workspace0 output $monEven
+workspace  $workspace11 output $monOdd
+workspace  $workspace12 output $monEven
+workspace  $workspace13 output $monOdd
+workspace  $workspace14 output $monEven
+workspace  $workspace15 output $monOdd
+workspace  $workspace16 output $monEven
+workspace  $workspace17 output $monOdd
+workspace  $workspace18 output $monEven
+workspace  $workspace19 output $monOdd
+workspace  $workspace20 output $monEven
+workspace  $workspace21 output $monOdd
+workspace  $workspace22 output $monEven
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
