@@ -330,6 +330,11 @@ sudo apt autoremove
 sudo systemctl enable fstrim.timer
 sudo apt install dunst
 sudo apt install mutt
+echo "- - - - - - - - - - - - - - - - -"
+echo "       Nvidia Driver             "
+echo "- - - - - - - - - - - - - - - - -"
+sudo apt install ubuntu-drivers-common
+sudo ubuntu-drivers autoinstall
 #
 echo "- - - - - - - - - - - - - - - - -"
 echo "       D O T F I L E S           "
@@ -484,6 +489,23 @@ if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
   cp dunstrc ~/.config/dunst/
   cd ~
 fi
+echo "- - - - - - - - - - - - - - - - -"
+echo "         Python Packages         "
+echo "- - - - - - - - - - - - - - - - -"
+sudo apt install ubuntu-drivers-common
+sudo ubuntu-drivers autoinstall
+sudo apt install nvidia-cuda-toolkit
+nvcc -V
+python -m pip install -U scikit-image
+python3 -m pip install -U scikit-image
+python -m pip install -U scikit-learn
+python3 -m pip install -U scikit-learn
+python -m pip install -U statsmodels
+python3 -m pip install -U statsmodels
+python -m pip install -U sympy
+python3 -m pip install -U sympy
+pip3 install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - ML - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
