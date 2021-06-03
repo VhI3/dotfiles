@@ -143,7 +143,7 @@ if [ $TelegramINPUT == "y" ] || [ $TelegramINPUT == "Y" ] ; then
   cd ~
 fi
 echo "- - - - - - - - - - - - - - - - -"
-echo "- - - - -Dunst dotfile  - - - - -"
+echo "          Dunst dotfile          "
 echo "- - - - - - - - - - - - - - - - -"
 DunstINPUT=false;
 echo "Do you want to use Dunst dotfile? (y/n)"
@@ -160,9 +160,10 @@ echo "- - - - - - - - - - - - - - - - -"
 echo "         Python Packages         "
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install ubuntu-drivers-common
-sudo ubuntu-drivers autoinstall
-sudo apt install nvidia-cuda-toolkit
-nvcc -V
+PyPackINPUT=false;
+echo "Do you want to install Python Packages? (y/n)"
+read -n 1 PyPackINPUT ; echo; echo
+if [ $PyPackINPUT == "y" ] || [ $PyPackINPUT == "Y" ] ; then
 python -m pip install -U scikit-image
 python3 -m pip install -U scikit-image
 python -m pip install -U scikit-learn
@@ -173,6 +174,7 @@ python -m pip install -U sympy
 python3 -m pip install -U sympy
 pip3 install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - ML - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -203,4 +205,3 @@ if [ $ML == "y" ] || [ $ML == "Y" ] ; then
   ./install_android.sh
   echo "DONE"
 fi
-
