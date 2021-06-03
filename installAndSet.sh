@@ -76,8 +76,37 @@ cd ~/tmp
 git clone https://github.com/dracula/bashtop.git
 cd ~
 echo "- - - - - - - - - - - - - - - - -"
+echo "- - - - - Cmake-3.20.2- - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+sudo apt install build-essential libssl-dev
+cd ~/tmp
+wget https://github.com/Kitware/CMake/releases/download/v3.20.2/cmake-3.20.2.tar.gz
+tar -zxvf cmake-3.20.2.tar.gz
+cd cmake-3.20.2
+./bootstrap
+make -j4
+sudo make install
+wget https://github.com/ninja-build/ninja/archive/refs/tags/v1.10.2.tar.gz
+tar -xvf v1.10.2.tar.gz
+cd ninja-1.10.2/
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+cd ~
+echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - Media Codecs- - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
+sudo add-apt-repository multiverse
+sudo apt install ubuntu-restricted-extras
+sudo apt-get install libxvidcore4 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-alsa gstreamer1.0-fluendo-mp3 gstreamer1.0-libav 
+sudo apt install vlc
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - - - - - - -Ranger - - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+sudo apt update
+sudo apt install ranger caca-utils highlight atool w3m poppler-utils mediainfo
 
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - - VIM - - - - - - - -"
@@ -291,8 +320,7 @@ if [ $oneAPI == "y" ] || [ $oneAPI == "Y" ] ; then
   #sudo apt install intel-dlfdkit 
   #sudo apt install intel-aikit 
   #sudo apt install intel-renderkit
-
-  echo "source /opt/intel/oneapi/setvars.sh > /dev/null" | sudo tee -a /etc/profile.d/intel-oneAPI.sh
+  echo "source /opt/intel/oneapi/setvars.sh > /dev/null" | sudo tee -a /etc/bash.bashrc
   echo "DONE"
 fi
 cd ~
@@ -300,6 +328,8 @@ cd ~
 sudo apt install cups conky htop xbindkeys arandr libnotify-bin multitail tree joe powerline clipit
 sudo apt autoremove 
 sudo systemctl enable fstrim.timer
+sudo apt install dunst
+sudo apt install mutt
 #
 echo "- - - - - - - - - - - - - - - - -"
 echo "       D O T F I L E S           "
@@ -354,6 +384,20 @@ if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
   ln -s -f ~/dotfiles/setWallpaper/wallpapers.sh ~/.config/setWallpaper/wallpapers.sh
   cd ~/.config/setWallpaper/
   chmod +x wallpapers.sh
+  cd ~
+fi
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - - - -rofi dotfile - - -"
+echo "- - - - - - - - - - - - - - - - -"
+INPUT=false;
+echo "Do you want to use rofi dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  mkdir -p ~/.config/rofi/
+  ln -s -f ~/dotfiles/rofi/config.rasi ~/.config/rofi/config.rasi
+  cd ~/tmp
+  git clone https://github.com/jluttine/rofi-power-menu.git
+  cp rofi-power-menu ~/.local/bin/
   cd ~
 fi
 echo "- - - - - - - - - - - - - - - - -"
@@ -421,8 +465,24 @@ read -n 1 INPUT ; echo; echo
 if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
   cd ~/tmp
   git clone https://github.com/dracula/telegram.git
-
-  ln -s -f ~/dotfiles/hyper/hyper.js ~/.hyper.js
+  cd telegram/
+  mkdir -p ~/.config/telegramTheme/
+  cp colors.tdesktop-theme ~/.config/telegramTheme/
+  cd ~
+fi
+echo "- - - - - - - - - - - - - - - - -"
+echo "- - - - -Dunst dotfile  - - - - -"
+echo "- - - - - - - - - - - - - - - - -"
+INPUT=false;
+echo "Do you want to use Dunst dotfile? (y/n)"
+read -n 1 INPUT ; echo; echo
+if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
+  cd ~/tmp
+  git clone https://github.com/dracula/dunst.git
+  mkdir -p ~/.config/dunst/
+  cd dunst/
+  cp dunstrc ~/.config/dunst/
+  cd ~
 fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - ML - - - - - -"
@@ -434,7 +494,7 @@ if [ $ML == "y" ] || [ $ML == "Y" ] ; then
   cd ~/tmp
   git clone https://github.com/PacktPublishing/Hands-On-Machine-Learning-with-CPP.git
   cd Hands-On-Machine-Learning-with-CPP/env_scripts
-  sudo apt install -y build-essential gdb git cmake cmake-curses-gui python python-pip libblas-dev libopenblas-dev libatlas-base-dev liblapack-dev libboost-all-dev libopencv-core3.2 libopencv-imgproc3.2 libopencv-dev libopencv-highgui3.2 libopencv-highgui-dev libhdf5-dev libjson-c-dev libx11-dev openjdk-8-jdk wget ninja-build gnuplot vim python3-venv
+  sudo apt install -y build-essential gdb git python python-pip libblas-dev libopenblas-dev libatlas-base-dev liblapack-dev libboost-all-dev libopencv-core3.2 libopencv-imgproc3.2 libopencv-dev libopencv-highgui3.2 libopencv-highgui-dev libhdf5-dev libjson-c-dev libx11-dev openjdk-8-jdk wget gnuplot vim python3-venv
   pip install pyyaml
   pip3 install pyyaml
   pip install typing
