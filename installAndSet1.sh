@@ -81,7 +81,6 @@ echo "- - - - - - - -Ranger - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt update
 sudo apt install ranger caca-utils highlight atool w3m poppler-utils mediainfo
-
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - - VIM - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"

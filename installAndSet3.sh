@@ -21,6 +21,7 @@ sudo apt install intel-hpckit
 #sudo apt install intel-dlfdkit 
 #sudo apt install intel-aikit 
 #sudo apt install intel-renderkit
+source /opt/intel/oneapi/setvars.sh
 echo "source /opt/intel/oneapi/setvars.sh > /dev/null" | sudo tee -a /etc/bash.bashrc
 echo "DONE"
 fi
@@ -31,9 +32,12 @@ sudo apt autoremove
 sudo systemctl enable fstrim.timer
 sudo apt install dunst
 sudo apt install mutt
+sudo apt install xautolock
 echo "- - - - - - - - - - - - - - - - -"
 echo "       Nvidia Driver             "
 echo "- - - - - - - - - - - - - - - - -"
-#sudo apt install ubuntu-drivers-common
-#sudo ubuntu-drivers autoinstall
-#
+sudo apt install ubuntu-drivers-common
+sudo ubuntu-drivers autoinstall
+sudo apt install nvidia-cuda-toolkit
+sudo apt install libcupti-dev
+

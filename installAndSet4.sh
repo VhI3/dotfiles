@@ -157,6 +157,20 @@ if [ $DunstINPUT == "y" ] || [ $DunstINPUT == "Y" ] ; then
   cd ~
 fi
 echo "- - - - - - - - - - - - - - - - -"
+echo "     matrixlock dotfile          "
+echo "- - - - - - - - - - - - - - - - -"
+matrixlockINPUT=false;
+echo "Do you want to use Dunst dotfile? (y/n)"
+read -n 1 matrixlockINPUT ; echo; echo
+if [ $matrixlockINPUT == "y" ] || [ $matrixlockINPUT == "Y" ] ; then
+  cd ~/tmp
+  git clone https://github.com/mherrmann/matrixlock.git
+  mkdir -p ~/.config/matrixlock/
+  cd matrixlock/
+  cp matrixlock.py ~/.config/matrixlock/
+  cd ~
+fi
+echo "- - - - - - - - - - - - - - - - -"
 echo "         Python Packages         "
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install ubuntu-drivers-common
@@ -172,8 +186,10 @@ python -m pip install -U statsmodels
 python3 -m pip install -U statsmodels
 python -m pip install -U sympy
 python3 -m pip install -U sympy
+python3 -m pip install ninja pyyaml mkl mkl-include setuptools cmake cffi typing
 pip3 install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+python3 -m pip install tensorflow
 fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - ML - - - - - -"

@@ -20,7 +20,7 @@ bindsym $mod+Return exec hyper
 bindsym $mod+Shift+q kill
 
 # Set monitor arrangement on TinkStation with 3 Monitors
-exec --no-startup-id ~/.config/setMonitors/setMonitor_laptop.sh
+exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
 
 # variables for left and right monitor 
 # (Left: VGA-1 Right: HDMI-1)
@@ -222,7 +222,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:rofi-power-menu   -theme Paper   -font "Hack Nerd Font Mono 16"   -width 20   -lines 6
 
 #Lock the screen 
-bindsym $mod+Shift+x exec ~/.config/i3/betterlockscreen --lock blur
+bindsym $mod+Shift+x exec ~/.config/betterlockscreen/betterlockscreen --lock blur
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -288,11 +288,11 @@ bar {
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/betterlockscreen --lock blur
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/betterlockscreen/betterlockscreen
 
-#exec  xrdb -merge ~/.Xresources
+
 exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
-
+#exec --no-startup-id xautolock -time 5 -locker ~/.config/matrixlock/matrixlock.py
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id sciebo
