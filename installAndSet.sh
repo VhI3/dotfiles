@@ -51,6 +51,7 @@ echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - NPM - - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt install npm
+sudo reboot
 echo "- - - - - - - - - - - - - - - - -"
 echo "       S O F T W A R E S         "
 echo "- - - - - - - - - - - - - - - - -"
@@ -303,25 +304,25 @@ cd ~
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - Intel® oneAPI - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
-oneAPI=false;
+oneAPIInput=false;
 echo "Do you want to install Intel® oneAPI? (y/n)"
-read -n 1 ML ; echo; echo
-if [ $oneAPI == "y" ] || [ $oneAPI == "Y" ] ; then
-  cd ~/tmp
-  sudo apt autoremove
-  wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-  sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-  rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-  echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
-  sudo apt update
-  sudo apt install intel-basekit
-  sudo apt install intel-hpckit
-  #sudo apt install intel-iotkit 
-  #sudo apt install intel-dlfdkit 
-  #sudo apt install intel-aikit 
-  #sudo apt install intel-renderkit
-  echo "source /opt/intel/oneapi/setvars.sh > /dev/null" | sudo tee -a /etc/bash.bashrc
-  echo "DONE"
+read -n 1 oneAPIInput ; echo; echo
+if [ $oneAPIInput == "y" ] || [ $oneAPIInput == "Y" ] ; then
+cd ~/tmp
+sudo apt autoremove
+wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+sudo apt update
+sudo apt install intel-basekit
+sudo apt install intel-hpckit
+#sudo apt install intel-iotkit 
+#sudo apt install intel-dlfdkit 
+#sudo apt install intel-aikit 
+#sudo apt install intel-renderkit
+echo "source /opt/intel/oneapi/setvars.sh > /dev/null" | sudo tee -a /etc/bash.bashrc
+echo "DONE"
 fi
 cd ~
 #
@@ -333,14 +334,15 @@ sudo apt install mutt
 echo "- - - - - - - - - - - - - - - - -"
 echo "       Nvidia Driver             "
 echo "- - - - - - - - - - - - - - - - -"
-sudo apt install ubuntu-drivers-common
-sudo ubuntu-drivers autoinstall
+#sudo apt install ubuntu-drivers-common
+#sudo ubuntu-drivers autoinstall
 #
 echo "- - - - - - - - - - - - - - - - -"
 echo "       D O T F I L E S           "
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - - Bash- - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
+INPUT=false;
 echo "Do you want to use bash dotfile? (y/n)"
 read -n 1 INPUT ; echo; echo
 if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
@@ -402,6 +404,7 @@ if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
   ln -s -f ~/dotfiles/rofi/config.rasi ~/.config/rofi/config.rasi
   cd ~/tmp
   git clone https://github.com/jluttine/rofi-power-menu.git
+  cd rofi-power-menu/
   cp rofi-power-menu ~/.local/bin/
   cd ~
 fi
@@ -429,7 +432,7 @@ if [ $INPUT == "y" ] || [ $INPUT == "Y" ] ; then
   if [ $LAPTOP == "y" ] || [ $LAPTOP == "Y" ] ; then
     ln -s -f ~/dotfiles/setMonitors/setMonitor_laptop.sh ~/.config/setMonitors/setMonitor.sh
     cd ~/.config/setMonitors/
-    chmod +x setMonitor_laptop.sh
+    chmod +x setMonitor.sh
     cd ~
   fi
   if [ $LAPTOP == "n" ] || [ $LAPTOP == "N" ] ; then
