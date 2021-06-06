@@ -62,6 +62,8 @@ pip3 install netifaces
 pip3 install psutil
 pip3 install i3ipc
 pip3 install xkbgroup
+pip3 install pynvim --upgrade 
+
 cd ~
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -NM-APPLET- - - - - - - -"

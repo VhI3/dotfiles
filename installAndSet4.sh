@@ -22,6 +22,9 @@ read -n 1 VIMINPUT ; echo; echo
 if [ $VIMINPUT == "y" ] || [ $VIMINPUT == "Y" ] ; then
   ln -s -f ~/dotfiles/vim/vimrc ~/.vimrc
   vim +PluginInstall +qall
+  mkdir -p ~/.vim/autoload/
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -i3wm dotfile - - - - - -"
