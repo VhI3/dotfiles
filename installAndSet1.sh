@@ -87,6 +87,7 @@ sudo add-apt-repository multiverse
 sudo apt install ubuntu-restricted-extras
 sudo apt-get install libxvidcore4 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-alsa gstreamer1.0-fluendo-mp3 gstreamer1.0-libav 
 sudo apt install vlc
+sudo sed -i 's/resample-method = speex-float-1/resample-method = ffmpeg/g'  /etc/pulse/daemon.conf
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - - - -Ranger - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
