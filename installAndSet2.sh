@@ -62,8 +62,6 @@ pip3 install netifaces
 pip3 install psutil
 pip3 install i3ipc
 pip3 install xkbgroup
-pip3 install pynvim --upgrade 
-
 cd ~
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -NM-APPLET- - - - - - - -"
@@ -180,3 +178,23 @@ sudo apt update
 sudo apt upgrade
 sudo apt autoremove
 cd ~
+
+
+
+sudo apt-get install pavucontrol
+sudo apt install ubuntu-restricted-extras
+sudo apt install chromium-codecs-ffmpeg*
+sudo apt install chromium-codecs-ffmpeg
+sudo apt install chromium-codecs-ffmpeg-extra 
+sudo apt install libfaac-dev
+sudo apt install libfaac0
+sudo apt install aften
+sudo apt install faac
+sudo apt install libavcodec-dev
+sudo apt install libavcodec57
+sudo apt install libaften-dev
+sudo apt install libaften0
+sudo apt autoremove
+sudo apt install librem-dev
+sudo apt install librem0
+sudo apt install pd-readanysf
