@@ -3,7 +3,9 @@
 " https://github.com/hmybmny/vimrc
 
 set nocompatible
-
+" Last line
+set showmode
+set showcmd
 " }}}
 
 " VIM-PLUG BLOCK
@@ -24,13 +26,13 @@ Plug 'matze/vim-move'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-operator-user'
 Plug 'gcmt/wildfire.vim'
-Plug 'lilydjwg/fcitx.vim'
+"Plug 'lilydjwg/fcitx.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'derekwyatt/vim-protodef', { 'for': ['c', 'cpp', 'objc'] }
 Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 
 " Navigation
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+"Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp', 'objc'] }
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'
@@ -101,9 +103,6 @@ set incsearch
 " Enble search highlighting
 set hlsearch
 
-" Always show window statuses
-set laststatus=2
-
 " Statusline style
 set statusline=
 set statusline+=%7*\[%n]                                  "buffernr
@@ -152,6 +151,14 @@ set ruler
 " Highlight line under cursor
 set cursorline
 set cursorcolumn
+
+
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
+" Always show window statuses
+set laststatus=2
 
 
 " }}}
