@@ -6,9 +6,9 @@ iatest=$(expr index "$-" i)
 #######################################################
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
-	 . /etc/bashrc
-fi
+#if [ -f /etc/bashrc ]; then
+#	 . /etc/bashrc
+#fi
 
 # Enable bash programmable completion features in interactive shells
 if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -39,7 +39,7 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 # Allow ctrl-S for history navigation (with ctrl-R)
-stty -ixon
+stty -ixon &> /dev/null || true
 
 # Ignore case on auto-completion
 # Note: bind used instead of sticking these in .inputrc
@@ -609,7 +609,7 @@ if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
 fi
 
 
-
+export PATH="$HOME/.local/bin:$PATH"
 
 
 #function __setprompt
