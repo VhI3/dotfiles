@@ -267,19 +267,17 @@ client.focused_inactive     $bg      $bg        $green   $bg
 client.urgent               $bg      $bg        $magenta $bg
 client.placeholder          $bg      $bg        $cyan    $bg
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
     status_command    python3 ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
     font pango:Hack, FontAwesome 10
     colors {
-        background #253941
-        statusline #e7dfd9
+#        background #253941
+#        statusline #e7dfd9
         separator  #081419
         focused_workspace  #2aa198 #073642 #eee895
-        active_workspace   #073642 #859900 #839496
+#        active_workspace   #073642 #859900 #839496
         inactive_workspace #002b36  #002b36   #586e75
         urgent_workspace   #cb4b16 #dc322f #fdf6e3
     }
