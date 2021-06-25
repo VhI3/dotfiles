@@ -18,7 +18,9 @@ packadd! dracula
 syntax enable
 colorscheme dracula
 
-
+" vim-latex-live-preview Settings VHI3
+let g:livepreview_previewer = 'okular'
+ 
 
 " Turn on syntax highlighting
 syntax on
