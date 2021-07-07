@@ -163,12 +163,12 @@ bindsym $mod+Shift+F11 move container to workspace $workspace21
 bindsym $mod+Shift+F12 move container to workspace $workspace22
 
 # Always open some programs on specified workspace
-assign [class="Firefox"]    $workspace2
+assign [class="Brave-browser"]    $workspace2
 assign [class="Hyper"]    $workspace1
 assign [class="Thunderbird"]   $workspace3
 for_window [class="Spotify"] move to workspace $workspace0
 assign [class="Spotify"] $workspace0
-assign [class="MATLAB R2017b"] $workspace8
+assign [class="MATLAB R2020b"] $workspace8
 assign [class="qpdfview"] $workspace9
 assign [class="TelegramDesktop"] $workspace7
 assign [class="Gnome-terminal"] $workspace1
