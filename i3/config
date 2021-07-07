@@ -31,7 +31,6 @@ set $monOdd VGA-1
 # Set Keyboard layouts
 exec_always "setxkbmap -layout us,de,ir"
 exec_always "setxkbmap -option 'grp:alt_shift_toggle'"
-exec_always "setxkbmap -option caps:swapescape"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -295,3 +294,4 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id sciebo
 exec --no-startup-id clipit
+exec_always "setxkbmap -option caps:swapescape"
