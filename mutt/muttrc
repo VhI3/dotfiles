@@ -1,0 +1,30 @@
+# vi ~/.muttrc
+# About Me
+set from = "nvahab@gmx.de"
+set realname = "Vahab Narouie"
+
+# My credentials
+set smtp_url = "smtp://mail.gmx.net:587/"
+set smtp_pass = "BigBaraBoom"
+set imap_user = "nvahab@gmx.de"
+set imap_pass = "BigBaraBoom"
+
+# My mailboxes
+set folder = "imaps://imap.gmx.net:993"
+set spoolfile = "+INBOX"
+
+
+# Where to put the stuff
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+
+# Etc
+set mail_check = 30
+set move = no
+set imap_keepalive = 900
+set sort = threads
+set editor = "vim"
+
+# GnuPG bootstrap
+# source ~/.mutt/gpg.rc

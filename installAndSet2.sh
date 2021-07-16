@@ -163,6 +163,10 @@ echo "- - - - - LaTeX - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 cd ~
 sudo apt-get install texlive-full texmaker kile
+sudo apt-get install libsynctex-dev
+sudo apt install libgtk-3-dev
+sudo apt-get install libmagic-dev
+sudo apt install libgirara-dev
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - VS Code - - - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"

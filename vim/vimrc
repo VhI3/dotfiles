@@ -8,8 +8,16 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'xuhdev/vim-latex-live-preview'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'lervag/vimtex'
 Plugin 'puremourning/vimspector'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+"Plugin 'shougo/deoplete.nvim'
+
 call vundle#end()
 
 packadd! dracula
@@ -25,7 +33,8 @@ syntax on
 filetype plugin indent on
 
 " TODO: Pick a leader key
-let mapleader = ","
+"let mapleader = ","
+let mapleader = " "
 
 " add vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -39,6 +48,37 @@ nmap <leader>do :VimspectorShowOutput
 nmap <Leader>di <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
 xmap <Leader>di <Plug>VimspectorBalloonEval
+
+" for vim-latex-live-preview
+let g:livepreview_previewer = 'zathura'
+
+
+" for vim snippets
+"let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger=","
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" for vimtex
+let g:vimtex_view_method = 'zathura'
+"let g:vimtex_view_general_viewer = 'zathura'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
+
+"for deoplete
+"let g:deoplete#enable_at_startup = 1
+
+
+let g:ycm_language_server =
+  \ [{
+  \   'name': 'ccls',
+  \   'cmdline': [ 'ccls' ],
+  \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
+  \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
+  \ }]
 
 
 " Security
@@ -97,7 +137,7 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-map <leader><space> :let @/=''<cr> " clear search
+"map <leader><space> :let @/=''<cr> " clear search
 
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
