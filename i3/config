@@ -14,7 +14,7 @@ font pango: SpaceMono Nerd Font Mono Medium 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec hyper
+bindsym $mod+Return exec konsole 
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -24,9 +24,11 @@ exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
 
 # variables for left and right monitor 
 # (Left: VGA-1 Right: HDMI-1)
-set $monEven HDMI-1   
-set $monOdd VGA-1    
-
+#set $monEven HDMI-1   
+set $monExt HDMI-1   
+#set $monOdd VGA-1    
+#set $monOdd LVDS-1
+set $monLpt LVDS-1
 
 # Set Keyboard layouts
 exec_always "setxkbmap -layout us,de,ir"
@@ -91,27 +93,30 @@ bindsym $mod+a focus parent
 
 # Name the workspaces
 set $workspace1 "1: " 
-set $workspace2 "2: "
-set $workspace3 "3:﫯 "
-set $workspace4 "4: "
-set $workspace5 "5: "
-set $workspace6 "6: "
-set $workspace7 "7: "
-set $workspace8 "8: "
-set $workspace9 "9: "
+set $workspace2 "2:﫯 "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5:﬏ "
+set $workspace6 "6: "
+set $workspace7 "7: "
+set $workspace8 "8: "
+set $workspace9 "9: "
 set $workspace0 "10: "
-set $workspace11 "11: "
-set $workspace12 "12:"
-set $workspace13 "13:"
-set $workspace14 "14:"
-set $workspace15 "15:"
-set $workspace16 "16:"
-set $workspace17 "17:"
-set $workspace18 "18:"
-set $workspace19 "19:"
-set $workspace20 "20:"
-set $workspace21 "21:"
-set $workspace22 "22: "
+#set $workspace12 "12:"
+#set $workspace13 "13:"
+#set $workspace14 "14:"
+#set $workspace15 "15:"
+#set $workspace16 "16:"
+#set $workspace17 "17:"
+#set $workspace18 "18:"
+#set $workspace19 "19:"
+#set $workspace20 "20:"
+#set $workspace21 "21:"
+#set $workspace22 "22:"
+#set $workspace22 "22: "
+#set $workspace4 "4: "
+#set $workspace5 "5: "
+#set $workspace9 "9: "
 
 # Switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -124,18 +129,18 @@ bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace0
-bindsym $mod+F1 workspace $workspace11
-bindsym $mod+F2 workspace $workspace12
-bindsym $mod+F3 workspace $workspace13
-bindsym $mod+F4 workspace $workspace14
-bindsym $mod+F5 workspace $workspace15
-bindsym $mod+F6 workspace $workspace16
-bindsym $mod+F7 workspace $workspace17
-bindsym $mod+F8 workspace $workspace18
-bindsym $mod+F9 workspace $workspace19
-bindsym $mod+F10 workspace $workspace20
-bindsym $mod+F11 workspace $workspace21
-bindsym $mod+F12 workspace $workspace22
+#bindsym $mod+F1 workspace $workspace11
+#bindsym $mod+F2 workspace $workspace12
+#bindsym $mod+F3 workspace $workspace13
+#bindsym $mod+F4 workspace $workspace14
+#bindsym $mod+F5 workspace $workspace15
+#bindsym $mod+F6 workspace $workspace16
+#bindsym $mod+F7 workspace $workspace17
+#bindsym $mod+F8 workspace $workspace18
+#bindsym $mod+F9 workspace $workspace19
+#bindsym $mod+F10 workspace $workspace20
+#bindsym $mod+F11 workspace $workspace21
+#bindsym $mod+F12 workspace $workspace22
 
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -148,33 +153,31 @@ bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace0
-bindsym $mod+Shift+F1 move container to workspace $workspace11
-bindsym $mod+Shift+F2 move container to workspace $workspace12
-bindsym $mod+Shift+F3 move container to workspace $workspace13
-bindsym $mod+Shift+F4 move container to workspace $workspace14
-bindsym $mod+Shift+F5 move container to workspace $workspace15
-bindsym $mod+Shift+F6 move container to workspace $workspace16
-bindsym $mod+Shift+F7 move container to workspace $workspace17
-bindsym $mod+Shift+F8 move container to workspace $workspace18
-bindsym $mod+Shift+F9 move container to workspace $workspace19
-bindsym $mod+Shift+F10 move container to workspace $workspace20
-bindsym $mod+Shift+F11 move container to workspace $workspace21
-bindsym $mod+Shift+F12 move container to workspace $workspace22
+#bindsym $mod+Shift+F1 move container to workspace $workspace11
+#bindsym $mod+Shift+F2 move container to workspace $workspace12
+#bindsym $mod+Shift+F3 move container to workspace $workspace13
+#bindsym $mod+Shift+F4 move container to workspace $workspace14
+#bindsym $mod+Shift+F5 move container to workspace $workspace15
+#bindsym $mod+Shift+F6 move container to workspace $workspace16
+#bindsym $mod+Shift+F7 move container to workspace $workspace17
+#bindsym $mod+Shift+F8 move container to workspace $workspace18
+#bindsym $mod+Shift+F9 move container to workspace $workspace19
+#bindsym $mod+Shift+F10 move container to workspace $workspace20
+#bindsym $mod+Shift+F11 move container to workspace $workspace21
+#bindsym $mod+Shift+F12 move container to workspace $workspace22
 
 # Always open some programs on specified workspace
-assign [class="Brave-browser"]    $workspace2
-assign [class="Hyper"]    $workspace1
-assign [class="Thunderbird"]   $workspace3
-for_window [class="Spotify"] move to workspace $workspace0
-assign [class="Spotify"] $workspace0
-assign [class="MATLAB R2020b"] $workspace8
-assign [class="qpdfview"] $workspace9
-assign [class="TelegramDesktop"] $workspace7
-assign [class="Gnome-terminal"] $workspace1
-assign [class="Nemo"] $workspace11
-assign [class="Code"] $workspace5
-assign [class="Texmaker"] $workspace4
-assign [class="jetbrains-clion"] $workspace15
+assign [class="konsole"]           $workspace1
+assign [class="Thunderbird"]       $workspace2
+assign [class="Google-chrome"]     $workspace3
+assign [class="jetbrains-pycharm"] $workspace4
+assign [class="Code"]              $workspace5
+assign [class="MATLAB R2020b"]     $workspace6
+assign [class="jetbrains-clion"]   $workspace7
+assign [class="TelegramDesktop"]   $workspace8
+assign [class="Nemo"]              $workspace9
+for_window [class="Spotify"]       move to workspace $workspace0
+assign [class="Spotify"]           $workspace0
 # Enable float for some windows
 #for_window [class="^Pavucontrol$"] floating enable
 #for_window [class="^Arandr$"] floating enable
@@ -190,28 +193,28 @@ assign [class="jetbrains-clion"] $workspace15
 #for_window [title="^Steam Keyboard$"] floating enable
 for_window [class="Yad"] floating enable
 
-workspace  $workspace1 output $monOdd
-workspace  $workspace2 output $monEven
-workspace  $workspace3 output $monOdd
-workspace  $workspace4 output $monEven
-workspace  $workspace5 output $monOdd
-workspace  $workspace6 output $monEven
-workspace  $workspace7 output $monOdd
-workspace  $workspace8 output $monEven
-workspace  $workspace9 output $monOdd
-workspace  $workspace0 output $monEven
-workspace  $workspace11 output $monOdd
-workspace  $workspace12 output $monEven
-workspace  $workspace13 output $monOdd
-workspace  $workspace14 output $monEven
-workspace  $workspace15 output $monOdd
-workspace  $workspace16 output $monEven
-workspace  $workspace17 output $monOdd
-workspace  $workspace18 output $monEven
-workspace  $workspace19 output $monOdd
-workspace  $workspace20 output $monEven
-workspace  $workspace21 output $monOdd
-workspace  $workspace22 output $monEven
+workspace  $workspace1 output $monLpt
+workspace  $workspace2 output $monLpt
+workspace  $workspace3 output $monExt
+workspace  $workspace4 output $monExt
+workspace  $workspace5 output $monExt
+workspace  $workspace6 output $monLpt
+workspace  $workspace7 output $monExt
+workspace  $workspace8 output $monLpt
+workspace  $workspace9 output $monLpt
+workspace  $workspace0 output $monLpt
+#workspace  $workspace11 output $monOdd
+#workspace  $workspace12 output $monEven
+#workspace  $workspace13 output $monOdd
+#workspace  $workspace14 output $monEven
+#workspace  $workspace15 output $monOdd
+#workspace  $workspace16 output $monEven
+#workspace  $workspace17 output $monOdd
+#workspace  $workspace18 output $monEven
+#workspace  $workspace19 output $monOdd
+#workspace  $workspace20 output $monEven
+#workspace  $workspace21 output $monOdd
+#workspace  $workspace22 output $monEven
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -270,7 +273,7 @@ bar {
     status_command    python3 ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
-    font pango:Hack, FontAwesome 10
+    font pango:Hack, FontAwesome 11
     colors {
 #        background #253941
 #        statusline #e7dfd9
@@ -294,4 +297,4 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id sciebo
 exec --no-startup-id clipit
-#exec_always setxkbmap -option caps:swapescape
+exec_always setxkbmap -option caps:swapescape

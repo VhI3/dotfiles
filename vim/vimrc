@@ -7,10 +7,26 @@ filetype off
 " TODO: Load plugins here (pathogen or vundle)
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'bryanmylee/vim-colorscheme-icons'
+Plugin 'mhinz/vim-startify'
+Plugin 'nightsense/nemo'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+Plugin 'preservim/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mhinz/vim-signify'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'lervag/vimtex'
 Plugin 'puremourning/vimspector'
+Plugin 'Chiel92/vim-autoformat'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
@@ -33,8 +49,7 @@ syntax on
 filetype plugin indent on
 
 " TODO: Pick a leader key
-"let mapleader = ","
-let mapleader = " "
+let mapleader = ","
 
 " add vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -80,7 +95,7 @@ let g:ycm_language_server =
   \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
   \ }]
 
-
+noremap <C-F3> :Autoformat<CR>
 " Security
 set modelines=0
 
@@ -89,6 +104,9 @@ set number
 
 " Show file stats
 set ruler
+
+" esc screen flash deactivate 
+set belloff=esc
 
 " Blink cursor on error instead of beeping (grr)
 set visualbell
@@ -138,6 +156,29 @@ set ignorecase
 set smartcase
 set showmatch
 "map <leader><space> :let @/=''<cr> " clear search
+
+" NERDTree
+let NERDTreeShowHidden=1
+" Exit Vim if NERDTree is the only window left.
+ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Startify + NERDTree on start when no file is specified
+autocmd VimEnter *
+    \   if !argc()
+    \ |   Startify
+    \ |   NERDTree
+    \ |   wincmd w
+    \ | endif
+
+
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+
+
 
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a

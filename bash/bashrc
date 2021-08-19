@@ -19,6 +19,7 @@ fi
 
 #######################################################
 # EXPORTS
+source  /opt/intel/oneapi/setvars.sh > /dev/null
 #######################################################
 
 # Disable the bell
@@ -118,7 +119,7 @@ alias cls='clear'
 alias apt-get='sudo apt-get'
 alias multitail='multitail --no-repeat -c'
 #alias freshclam='sudo freshclam'
-alias vi='vim'
+alias vi='vim --servername vim'
 alias svi='sudo vi'
 alias vis='vim "+set si"'
 
@@ -610,6 +611,7 @@ fi
 
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/ina/tools:$PATH"
 
 
 #function __setprompt
