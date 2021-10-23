@@ -27,13 +27,16 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'lervag/vimtex'
 Plugin 'puremourning/vimspector'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'francoiscabrol/ranger.vim'
+Plugin 'severin-lemaignan/vim-minimap'
+Plugin 'vim-scripts/indentpython.vim'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 "Plugin 'shougo/deoplete.nvim'
-
+Plugin 'junegunn/goyo.vim'
 call vundle#end()
 
 packadd! dracula
@@ -44,6 +47,9 @@ colorscheme dracula
 
 " Turn on syntax highlighting
 syntax on
+
+" Clipboard from system
+set clipboard=unnamed
 
 " For plugins to load correctly
 filetype plugin indent on
@@ -88,12 +94,12 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 
 
 let g:ycm_language_server =
-  \ [{
-  \   'name': 'ccls',
-  \   'cmdline': [ 'ccls' ],
-  \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
-  \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
-  \ }]
+      \ [{
+      \   'name': 'ccls',
+      \   'cmdline': [ 'ccls' ],
+      \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
+      \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
+      \ }]
 
 noremap <C-F3> :Autoformat<CR>
 " Security
@@ -105,7 +111,7 @@ set number
 " Show file stats
 set ruler
 
-" esc screen flash deactivate 
+" esc screen flash deactivate
 set belloff=esc
 
 " Blink cursor on error instead of beeping (grr)
@@ -146,7 +152,8 @@ set laststatus=2
 " Last line
 set showmode
 set showcmd
-
+" To highlight beween insert and normal mode
+autocmd InsertEnter,InsertLeave * set cul!
 " Searching
 nnoremap / /\v
 vnoremap / /\v
@@ -160,16 +167,31 @@ set showmatch
 " NERDTree
 let NERDTreeShowHidden=1
 " Exit Vim if NERDTree is the only window left.
- autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 " Startify + NERDTree on start when no file is specified
 autocmd VimEnter *
-    \   if !argc()
-    \ |   Startify
-    \ |   NERDTree
-    \ |   wincmd w
-    \ | endif
+      \   if !argc()
+      \ |   Startify
+      \ |   NERDTree
+      \ |   wincmd w
+      \ | endif
 
+" Vim-airline tab configuration
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'default'
+nmap <leader>1 :bfirst<CR>
+nmap <leader>2 :bfirst<CR>:bn<CR>
+nmap <leader>3 :bfirst<CR>:2bn<CR>
+nmap <leader>4 :bfirst<CR>:3bn<CR>
+nmap <leader>5 :bfirst<CR>:4bn<CR>
+nmap <leader>6 :bfirst<CR>:5bn<CR>
+nmap <leader>7 :bfirst<CR>:6bn<CR>
+nmap <leader>8 :bfirst<CR>:7bn<CR>
+nmap <leader>9 :bfirst<CR>:8bn<CR>
+nmap <leader>10 :bfirst<CR>:9bn<CR>
 
 
 nnoremap <leader>n :NERDTreeFocus<CR>

@@ -92,27 +92,40 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # Name the workspaces
-set $workspace1 "1: " 
-set $workspace2 "2:﫯 "
-set $workspace3 "3: "
-set $workspace4 "4: "
-set $workspace5 "5:﬏ "
-set $workspace6 "6: "
-set $workspace7 "7: "
-set $workspace8 "8: "
-set $workspace9 "9: "
-set $workspace0 "10: "
-#set $workspace12 "12:"
-#set $workspace13 "13:"
-#set $workspace14 "14:"
-#set $workspace15 "15:"
-#set $workspace16 "16:"
-#set $workspace17 "17:"
-#set $workspace18 "18:"
-#set $workspace19 "19:"
-#set $workspace20 "20:"
-#set $workspace21 "21:"
-#set $workspace22 "22:"
+# Konsole 
+set $workspace1 "1:>_" 
+# Thunderbird
+set $workspace2 "2:﫯" 
+# Chrome
+set $workspace3 "3: " 
+# Pycharm
+set $workspace4 "4: " 
+# VScode
+set $workspace5 "5:﬏ " 
+# Matlab
+set $workspace6 "6: " 
+# Clion
+set $workspace7 "7: " 
+# Telegram
+set $workspace8 "8: " 
+# Nemo
+set $workspace9 "9: " 
+# Spotify
+set $workspace0 "10:" 
+# qpdfview
+set $workspace11 "11:" 
+set $workspace12 "12:"
+set $workspace13 "13:"
+set $workspace14 "14:"
+set $workspace15 "15:"
+set $workspace16 "16:"
+set $workspace17 "17:"
+set $workspace18 "18:"
+set $workspace19 "19:"
+set $workspace20 "20:"
+set $workspace21 "21:"
+# WebEx
+set $workspace22 "22:" 
 #set $workspace22 "22: "
 #set $workspace4 "4: "
 #set $workspace5 "5: "
@@ -129,18 +142,18 @@ bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace0
-#bindsym $mod+F1 workspace $workspace11
-#bindsym $mod+F2 workspace $workspace12
-#bindsym $mod+F3 workspace $workspace13
-#bindsym $mod+F4 workspace $workspace14
-#bindsym $mod+F5 workspace $workspace15
-#bindsym $mod+F6 workspace $workspace16
-#bindsym $mod+F7 workspace $workspace17
-#bindsym $mod+F8 workspace $workspace18
-#bindsym $mod+F9 workspace $workspace19
-#bindsym $mod+F10 workspace $workspace20
-#bindsym $mod+F11 workspace $workspace21
-#bindsym $mod+F12 workspace $workspace22
+bindsym $mod+F1 workspace $workspace11
+bindsym $mod+F2 workspace $workspace12
+bindsym $mod+F3 workspace $workspace13
+bindsym $mod+F4 workspace $workspace14
+bindsym $mod+F5 workspace $workspace15
+bindsym $mod+F6 workspace $workspace16
+bindsym $mod+F7 workspace $workspace17
+bindsym $mod+F8 workspace $workspace18
+bindsym $mod+F9 workspace $workspace19
+bindsym $mod+F10 workspace $workspace20
+bindsym $mod+F11 workspace $workspace21
+bindsym $mod+F12 workspace $workspace22
 
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -153,18 +166,18 @@ bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace0
-#bindsym $mod+Shift+F1 move container to workspace $workspace11
-#bindsym $mod+Shift+F2 move container to workspace $workspace12
-#bindsym $mod+Shift+F3 move container to workspace $workspace13
-#bindsym $mod+Shift+F4 move container to workspace $workspace14
-#bindsym $mod+Shift+F5 move container to workspace $workspace15
-#bindsym $mod+Shift+F6 move container to workspace $workspace16
-#bindsym $mod+Shift+F7 move container to workspace $workspace17
-#bindsym $mod+Shift+F8 move container to workspace $workspace18
-#bindsym $mod+Shift+F9 move container to workspace $workspace19
-#bindsym $mod+Shift+F10 move container to workspace $workspace20
-#bindsym $mod+Shift+F11 move container to workspace $workspace21
-#bindsym $mod+Shift+F12 move container to workspace $workspace22
+bindsym $mod+Shift+F1 move container to workspace $workspace11
+bindsym $mod+Shift+F2 move container to workspace $workspace12
+bindsym $mod+Shift+F3 move container to workspace $workspace13
+bindsym $mod+Shift+F4 move container to workspace $workspace14
+bindsym $mod+Shift+F5 move container to workspace $workspace15
+bindsym $mod+Shift+F6 move container to workspace $workspace16
+bindsym $mod+Shift+F7 move container to workspace $workspace17
+bindsym $mod+Shift+F8 move container to workspace $workspace18
+bindsym $mod+Shift+F9 move container to workspace $workspace19
+bindsym $mod+Shift+F10 move container to workspace $workspace20
+bindsym $mod+Shift+F11 move container to workspace $workspace21
+bindsym $mod+Shift+F12 move container to workspace $workspace22
 
 # Always open some programs on specified workspace
 assign [class="konsole"]           $workspace1
@@ -178,6 +191,8 @@ assign [class="TelegramDesktop"]   $workspace8
 assign [class="Nemo"]              $workspace9
 for_window [class="Spotify"]       move to workspace $workspace0
 assign [class="Spotify"]           $workspace0
+assign [class="qpdfview"]          $workspace11
+assign [class="webex"]             $workspace22
 # Enable float for some windows
 #for_window [class="^Pavucontrol$"] floating enable
 #for_window [class="^Arandr$"] floating enable
@@ -192,29 +207,31 @@ assign [class="Spotify"]           $workspace0
 #for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 #for_window [title="^Steam Keyboard$"] floating enable
 for_window [class="Yad"] floating enable
+#for_window [title="Figure*"] floating enable
 
 workspace  $workspace1 output $monLpt
 workspace  $workspace2 output $monLpt
 workspace  $workspace3 output $monExt
 workspace  $workspace4 output $monExt
 workspace  $workspace5 output $monExt
-workspace  $workspace6 output $monLpt
+workspace  $workspace6 output $monExt
 workspace  $workspace7 output $monExt
 workspace  $workspace8 output $monLpt
 workspace  $workspace9 output $monLpt
 workspace  $workspace0 output $monLpt
-#workspace  $workspace11 output $monOdd
-#workspace  $workspace12 output $monEven
-#workspace  $workspace13 output $monOdd
-#workspace  $workspace14 output $monEven
-#workspace  $workspace15 output $monOdd
-#workspace  $workspace16 output $monEven
-#workspace  $workspace17 output $monOdd
-#workspace  $workspace18 output $monEven
-#workspace  $workspace19 output $monOdd
-#workspace  $workspace20 output $monEven
-#workspace  $workspace21 output $monOdd
-#workspace  $workspace22 output $monEven
+workspace  $workspace11 output $monExt
+workspace  $workspace12 output $monExt
+workspace  $workspace13 output $monExt
+workspace  $workspace14 output $monExt
+workspace  $workspace15 output $monExt
+workspace  $workspace16 output $monExt
+workspace  $workspace17 output $monExt
+workspace  $workspace18 output $monExt
+workspace  $workspace19 output $monLpt
+workspace  $workspace20 output $monLpt
+workspace  $workspace21 output $monLpt
+workspace  $workspace22 output $monLpt
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -270,7 +287,8 @@ client.urgent               $bg      $bg        $magenta $bg
 client.placeholder          $bg      $bg        $cyan    $bg
 
 bar {
-    status_command    python3 ~/.config/i3pystatus/i3pystatus.conf
+    #status_command    /opt/intel/oneapi/intelpython/latest/bin/python3.7 ~/.config/i3pystatus/i3pystatus.conf
+    status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
     font pango:Hack, FontAwesome 11
@@ -297,4 +315,4 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id sciebo
 exec --no-startup-id clipit
-exec_always setxkbmap -option caps:swapescape
+exec --no-startup-id ~/startupley.sh 
