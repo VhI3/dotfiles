@@ -113,7 +113,7 @@ set $workspace9 "9: "
 # Spotify
 set $workspace0 "10:" 
 # qpdfview
-set $workspace11 "11:" 
+set $workspace11 "11:"
 set $workspace12 "12:"
 set $workspace13 "13:"
 set $workspace14 "14:"
@@ -123,10 +123,10 @@ set $workspace17 "17:"
 set $workspace18 "18:"
 set $workspace19 "19:"
 set $workspace20 "20:"
-set $workspace21 "21:"
+# GitHub
+set $workspace21 "21:"
 # WebEx
 set $workspace22 "22:" 
-#set $workspace22 "22: "
 #set $workspace4 "4: "
 #set $workspace5 "5: "
 #set $workspace9 "9: "
@@ -192,6 +192,7 @@ assign [class="Nemo"]              $workspace9
 for_window [class="Spotify"]       move to workspace $workspace0
 assign [class="Spotify"]           $workspace0
 assign [class="qpdfview"]          $workspace11
+assign [class="GitHub Desktop"]    $workspace21
 assign [class="webex"]             $workspace22
 # Enable float for some windows
 #for_window [class="^Pavucontrol$"] floating enable

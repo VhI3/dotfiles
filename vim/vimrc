@@ -30,6 +30,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'francoiscabrol/ranger.vim'
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'vim-scripts/indentpython.vim'
+Plugin 'ervandew/supertab'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
@@ -60,25 +61,28 @@ let mapleader = ","
 " add vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
 packadd! vimspector
-nmap <leader>dd :call vimspector#Launch()<CR>
+nmap <leader>di :call vimspector#Launch()<CR>
 nmap <leader>dx :VimspectorReset<CR>
 nmap <leader>de :VimspectorEval
 nmap <leader>dw :VimspectorWatch
 nmap <leader>do :VimspectorShowOutput
 " for normal mode - the word under the cursor
-nmap <Leader>di <Plug>VimspectorBalloonEval
+nmap <Leader>dd <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
-xmap <Leader>di <Plug>VimspectorBalloonEval
+xmap <Leader>dd <Plug>VimspectorBalloonEval
 
 " for vim-latex-live-preview
 let g:livepreview_previewer = 'zathura'
 
 
 " for vim snippets
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsExpandTrigger=","
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger=","
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -100,6 +104,10 @@ let g:ycm_language_server =
       \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
       \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
       \ }]
+
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 noremap <C-F3> :Autoformat<CR>
 " Security
@@ -195,8 +203,8 @@ nmap <leader>10 :bfirst<CR>:9bn<CR>
 
 
 nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTree %<CR>
+nnoremap <C-t> :NERDTreeToggle %<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 
