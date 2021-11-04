@@ -208,7 +208,8 @@ assign [class="webex"]             $workspace22
 #for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 #for_window [title="^Steam Keyboard$"] floating enable
 for_window [class="Yad"] floating enable
-#for_window [title="Figure*"] floating enable
+for_window [title="Figure*"] floating enable
+for_window [title="Figure*"] move to workspace $workspace20
 
 workspace  $workspace1 output $monLpt
 workspace  $workspace2 output $monLpt
@@ -292,7 +293,7 @@ bar {
     status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
-    font pango:Hack, FontAwesome 11
+    font pango:Hack, FontAwesome 9
     colors {
 #        background #253941
 #        statusline #e7dfd9
@@ -316,4 +317,11 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id sciebo
 exec --no-startup-id clipit
-exec --no-startup-id ~/startupley.sh 
+#exec --no-startup-id ~/startupley.sh 
+exec --no-startup-id caffeine-indicator 
+exec --no-startup-id xscreensaver
+exec --no-startup-id setxkbmap -option caps:swapescape 
+exec_always --no-startup-id thunderbird 
+exec_always --no-startup-id  /opt/Webex/bin/CiscoCollabHost
+exec_always --no-startup-id  /opt/google/chrome/google-chrome
+

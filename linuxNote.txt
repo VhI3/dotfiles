@@ -1,0 +1,2 @@
+# To solve the gi package in python3
+sudo python3.8 -m pip install --ignore-installed PyGObject
