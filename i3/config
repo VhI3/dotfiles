@@ -5,10 +5,10 @@ set $mod Mod4
 new_window pixel
 
 # i3-gaps
-gaps inner 8
+gaps inner 10
 
 # Font for window titles.
-font pango: SpaceMono Nerd Font Mono Medium 11
+font pango: SpaceMono Nerd Font Mono Medium 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -20,26 +20,22 @@ bindsym $mod+Return exec konsole
 bindsym $mod+Shift+q kill
 
 # Set monitor arrangement on TinkStation with 3 Monitors
-exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
+#exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
 
 # variables for left and right monitor 
 # (Left: VGA-1 Right: HDMI-1)
-#set $monEven HDMI-1   
 set $monExt HDMI-1   
-#set $monOdd VGA-1    
-#set $monOdd LVDS-1
 set $monLpt LVDS-1
 
 # Set Keyboard layouts
 exec_always "setxkbmap -layout us,de,ir"
 exec_always "setxkbmap -option 'grp:alt_shift_toggle'"
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # Start rofi
 bindsym $mod+d exec rofi -show drun -columns 3
-#bindsym $mod+d exec ~/.config/rofi/launchers/launcher.sh 
-#bindsym $mod+d exec dmenu_run
 
 # Move between windows
 bindsym $mod+h focus left
@@ -94,42 +90,48 @@ bindsym $mod+a focus parent
 # Name the workspaces
 # Konsole 
 set $workspace1 "1:>_" 
-# Thunderbird
-set $workspace2 "2:﫯" 
 # Chrome
-set $workspace3 "3: " 
+set $workspace2 "2: " 
+# VScode
+set $workspace3 "3:﬏ "
 # Pycharm
 set $workspace4 "4: " 
-# VScode
-set $workspace5 "5:﬏ " 
 # Matlab
-set $workspace6 "6: " 
+set $workspace5 "5: " 
 # Clion
-set $workspace7 "7: " 
+set $workspace6 "6: " 
 # Telegram
-set $workspace8 "8: " 
+set $workspace7 "7: " 
 # Nemo
 set $workspace9 "9: " 
 # Spotify
 set $workspace0 "10:" 
 # qpdfview
 set $workspace11 "11:"
+#
 set $workspace12 "12:"
+#
 set $workspace13 "13:"
+#
 set $workspace14 "14:"
+#
 set $workspace15 "15:"
+#
 set $workspace16 "16:"
+#
 set $workspace17 "17:"
+#
 set $workspace18 "18:"
+#
 set $workspace19 "19:"
+#
 set $workspace20 "20:"
 # GitHub
-set $workspace21 "21:"
+set $workspace20 "20:"
+# Thunderbird
+set $workspace21 "21:﫯"
 # WebEx
 set $workspace22 "22:" 
-#set $workspace4 "4: "
-#set $workspace5 "5: "
-#set $workspace9 "9: "
 
 # Switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -181,35 +183,26 @@ bindsym $mod+Shift+F12 move container to workspace $workspace22
 
 # Always open some programs on specified workspace
 assign [class="konsole"]           $workspace1
-assign [class="Thunderbird"]       $workspace2
-assign [class="Google-chrome"]     $workspace3
+assign [class="Google-chrome"]     $workspace2
+assign [class="Code"]              $workspace3
 assign [class="jetbrains-pycharm"] $workspace4
-assign [class="Code"]              $workspace5
-assign [class="MATLAB R2020b"]     $workspace6
-assign [class="jetbrains-clion"]   $workspace7
-assign [class="TelegramDesktop"]   $workspace8
+assign [class="MATLAB R2020b"]     $workspace5
+assign [class="jetbrains-clion"]   $workspace6
+assign [class="TelegramDesktop"]   $workspace7
 assign [class="Nemo"]              $workspace9
 for_window [class="Spotify"]       move to workspace $workspace0
 assign [class="Spotify"]           $workspace0
 assign [class="qpdfview"]          $workspace11
-assign [class="GitHub Desktop"]    $workspace21
+assign [class="GitHub Desktop"]    $workspace20
+assign [class="Thunderbird"]       $workspace21
 assign [class="webex"]             $workspace22
 # Enable float for some windows
 #for_window [class="^Pavucontrol$"] floating enable
-#for_window [class="^Arandr$"] floating enable
-#for_window [class="^Steam$" title="^Friends List$"] floating enable
-#for_window [class="^Steam$" title="Steam - News"] floating enable
-#for_window [class="^Steam$" title=".* - Chat"] floating enable
-#for_window [class="^Steam$" title="^Settings$"] floating enable
-#for_window [class="^Steam$" title=".* - event started"] floating enable
-#for_window [class="^Steam$" title=".* CD key"] floating enable
-#for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
-#for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
-#for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
-#for_window [title="^Steam Keyboard$"] floating enable
-for_window [class="Yad"] floating enable
-for_window [title="Figure*"] floating enable
-for_window [title="Figure*"] move to workspace $workspace20
+for_window [class="^Arandr$"] floating enable
+#for_window [class="Yad"] floating enable
+#for_window [title="Figure*"] floating enable
+#for_window [title="Figure*"] move to workspace $workspace20
+for_window [title="Form"] floating disable
 
 workspace  $workspace1 output $monLpt
 workspace  $workspace2 output $monLpt
@@ -240,19 +233,13 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu   -theme Paper   -font "Hack Nerd Font Mono 16"   -width 20   -lines 6
+bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu   -theme Paper   -font "Hack Nerd Font Mono 12"   -width 17   -lines 6
 
 #Lock the screen 
 bindsym $mod+Shift+x exec ~/.config/betterlockscreen/betterlockscreen --lock blur
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
@@ -289,17 +276,16 @@ client.urgent               $bg      $bg        $magenta $bg
 client.placeholder          $bg      $bg        $cyan    $bg
 
 bar {
-    #status_command    /opt/intel/oneapi/intelpython/latest/bin/python3.7 ~/.config/i3pystatus/i3pystatus.conf
-    status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
+    status_command    python ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
-    font pango:Hack, FontAwesome 9
+    font pango:Hack, FontAwesome 7
     colors {
-#        background #253941
-#        statusline #e7dfd9
+        background #253941
+        statusline #e7dfd9
         separator  #081419
         focused_workspace  #2aa198 #073642 #eee895
-#        active_workspace   #073642 #859900 #839496
+        active_workspace   #073642 #859900 #839496
         inactive_workspace #002b36  #002b36   #586e75
         urgent_workspace   #cb4b16 #dc322f #fdf6e3
     }
@@ -308,8 +294,7 @@ bar {
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/betterlockscreen/betterlockscreen
-
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/betterlockscreen/betterlockscreen
 
 exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 #exec --no-startup-id xautolock -time 5 -locker ~/.config/matrixlock/matrixlock.py
@@ -317,11 +302,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id sciebo
 exec --no-startup-id clipit
-#exec --no-startup-id ~/startupley.sh 
 exec --no-startup-id caffeine-indicator 
-exec --no-startup-id xscreensaver
 exec --no-startup-id setxkbmap -option caps:swapescape 
-exec_always --no-startup-id thunderbird 
-exec_always --no-startup-id  /opt/Webex/bin/CiscoCollabHost
-exec_always --no-startup-id  /opt/google/chrome/google-chrome
-
+exec --no-startup-id thunderbird 
+exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
+exec --no-startup-id  /opt/google/chrome/google-chrome
