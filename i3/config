@@ -199,7 +199,7 @@ assign [class="webex"]             $workspace22
 # Enable float for some windows
 #for_window [class="^Pavucontrol$"] floating enable
 for_window [class="^Arandr$"] floating enable
-#for_window [class="Yad"] floating enable
+for_window [class="Yad"] floating enable
 #for_window [title="Figure*"] floating enable
 #for_window [title="Figure*"] move to workspace $workspace20
 for_window [title="Form"] floating disable
@@ -276,7 +276,7 @@ client.urgent               $bg      $bg        $magenta $bg
 client.placeholder          $bg      $bg        $cyan    $bg
 
 bar {
-    status_command    python ~/.config/i3pystatus/i3pystatus.conf
+    status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
     font pango:Hack, FontAwesome 7
@@ -291,11 +291,9 @@ bar {
     }
   }
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/betterlockscreen/betterlockscreen
 
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.  #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork #exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/betterlockscreen/betterlockscreen
 exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 #exec --no-startup-id xautolock -time 5 -locker ~/.config/matrixlock/matrixlock.py
 exec --no-startup-id nm-applet
