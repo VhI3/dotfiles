@@ -297,6 +297,7 @@ bar {
 # screen before suspend. Use loginctl lock-session to lock your screen.  #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork #exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/betterlockscreen/betterlockscreen
 exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 #exec --no-startup-id xautolock -time 5 -locker ~/.config/matrixlock/matrixlock.py
+exec --no-startup-id compton 
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id sciebo
