@@ -202,7 +202,8 @@ for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
 #for_window [title="Figure*"] floating enable
 #for_window [title="Figure*"] move to workspace $workspace20
-for_window [title="Form"] floating disable
+#for_window [title="Form"] floating disable
+for_window [title="Webex*"] floating disable 
 
 workspace  $workspace1 output $monLpt
 workspace  $workspace2 output $monLpt
