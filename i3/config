@@ -258,22 +258,15 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Defining colors
-set $bg      #282A36
-set $lg      #44475a
-set $fg      #f8f8f2
-set $cyan    #8be9fd
-set $green   #50fa7b
-set $magenta #ff79c6
-set $comment #6272a4
-set $purple  #bd93f9
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
-# Set some nice colors      border	 background text     indicator
-client.focused              $comment $comment   $fg      $comment
-client.unfocused            $bg      $bg        $cyan    $bg
-client.focused_inactive     $bg      $bg        $green   $bg
-client.urgent               $bg      $bg        $magenta $bg
-client.placeholder          $bg      $bg        $cyan    $bg
+client.background       #F8F8F2
+
 
 bar {
     status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
@@ -281,14 +274,16 @@ bar {
     workspace_buttons yes
     font pango:Hack, FontAwesome 12
     colors {
-        background #253941
-        statusline #e7dfd9
-        separator  #081419
-        focused_workspace  #2aa198 #073642 #eee895
-        active_workspace   #073642 #859900 #839496
-        inactive_workspace #002b36  #002b36   #586e75
-        urgent_workspace   #cb4b16 #dc322f #fdf6e3
-    }
+       background #282A36
+       statusline #F8F8F2
+       separator  #44475A
+   
+       focused_workspace  #44475A #44475A #F8F8F2
+       active_workspace   #282A36 #44475A #F8F8F2
+       inactive_workspace #282A36 #282A36 #BFBFBF
+       urgent_workspace   #FF5555 #FF5555 #F8F8F2
+       binding_mode       #FF5555 #FF5555 #F8F8F2
+     }
   }
 
 
