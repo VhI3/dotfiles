@@ -8,8 +8,7 @@ new_window pixel
 gaps inner 10
 
 # Font for window titles.
-font pango: SpaceMono Nerd Font Mono Medium 9
-
+font pango: SpaceMono Nerd Font Mono Medium 12
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -24,8 +23,8 @@ bindsym $mod+Shift+q kill
 
 # variables for left and right monitor 
 # (Left: VGA-1 Right: HDMI-1)
-set $monExt HDMI-1   
-set $monLpt LVDS-1
+set $monExt HDMI-1-1
+set $monLpt LVDS-1-1
 
 # Set Keyboard layouts
 exec_always "setxkbmap -layout us,de,ir"
@@ -280,7 +279,7 @@ bar {
     status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
-    font pango:Hack, FontAwesome 7
+    font pango:Hack, FontAwesome 12
     colors {
         background #253941
         statusline #e7dfd9
@@ -304,6 +303,7 @@ exec --no-startup-id sciebo
 exec --no-startup-id clipit
 exec --no-startup-id caffeine-indicator 
 exec --no-startup-id setxkbmap -option caps:swapescape 
-exec --no-startup-id thunderbird 
-exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
-exec --no-startup-id  /opt/google/chrome/google-chrome
+exec --no-startup-id ~/.screenlayout/twoMonitors.sh 
+#exec --no-startup-id thunderbird 
+#exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
+#exec --no-startup-id  /opt/google/chrome/google-chrome

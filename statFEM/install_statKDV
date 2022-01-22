@@ -12,4 +12,6 @@ conda activate
 conda create -n fenicsproject -c conda-forge fenics
 conda activate fenicsproject
 python -m pip install matplotlib
+conda install -c conda-forge hdf5=1.12.1
+conda install -c conda-forge h5py
 
