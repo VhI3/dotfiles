@@ -8,7 +8,7 @@ new_window pixel
 gaps inner 10
 
 # Font for window titles.
-font pango: SpaceMono Nerd Font Mono Medium 12
+font pango: SpaceMono Nerd Font Mono Medium 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -212,7 +212,7 @@ workspace  $workspace5 output $monExt
 workspace  $workspace6 output $monExt
 workspace  $workspace7 output $monExt
 workspace  $workspace8 output $monLpt
-workspace  $workspace9 output $monLpt
+workspace  $workspace9 output $monExt
 workspace  $workspace0 output $monLpt
 workspace  $workspace11 output $monExt
 workspace  $workspace12 output $monExt
@@ -224,8 +224,8 @@ workspace  $workspace17 output $monExt
 workspace  $workspace18 output $monExt
 workspace  $workspace19 output $monLpt
 workspace  $workspace20 output $monLpt
-workspace  $workspace21 output $monLpt
-workspace  $workspace22 output $monLpt
+workspace  $workspace21 output $monExt
+workspace  $workspace22 output $monExt
 
 
 # reload the configuration file
@@ -272,7 +272,7 @@ bar {
     status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
-    font pango:Hack, FontAwesome 12
+    font pango:Hack, FontAwesome 10
     colors {
        background #282A36
        statusline #F8F8F2
