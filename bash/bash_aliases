@@ -26,7 +26,7 @@ alias ps='ps auxf'
 alias ping='ping -c 10'
 alias less='less -R'
 alias cls='clear'
-alias apt-get='sudo apt-get'
+alias apt='sudo apt'
 alias multitail='multitail --no-repeat -c'
 #alias freshclam='sudo freshclam'
 alias vi='vim --servername vim'
@@ -131,7 +131,7 @@ alias ungz='tar -xvzf'
 alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
 
 # SHA1
-alias sha1='openssl sha1'
+# alias sha1='openssl sha1'
 
 # Python
 #alias python='python3.8'
