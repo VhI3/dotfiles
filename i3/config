@@ -8,12 +8,14 @@ new_window pixel
 gaps inner 10
 
 # Font for window titles.
-font pango: SpaceMono Nerd Font Mono Medium 10
+font pango: SpaceMono Nerd Font Mono Medium 9
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec konsole 
+# bindsym $mod+Return exec konsole 
+bindsym $mod+Return exec alacritty
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -22,14 +24,13 @@ bindsym $mod+Shift+q kill
 #exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
 
 # variables for left and right monitor 
-# (Left: VGA-1 Right: HDMI-1)
-set $monExt HDMI-1-1
-set $monLpt LVDS-1-1
+set $monV4k DP-6
+set $monV2k DP-0
+# set $monSml DP-4
 
 # Set Keyboard layouts
 exec_always "setxkbmap -layout us,de,ir"
 exec_always "setxkbmap -option 'grp:alt_shift_toggle'"
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -92,7 +93,7 @@ set $workspace1 "1:>_"
 # Chrome
 set $workspace2 "2: " 
 # VScode
-set $workspace3 "3:﬏ "
+set $workspace3 "3:﬏ " 
 # Pycharm
 set $workspace4 "4: " 
 # Matlab
@@ -101,34 +102,26 @@ set $workspace5 "5: "
 set $workspace6 "6: " 
 # Telegram
 set $workspace7 "7: " 
+# Xournalpp
+set $workspace8 "8: " 
 # Nemo
 set $workspace9 "9: " 
 # Spotify
 set $workspace0 "10:" 
 # qpdfview
 set $workspace11 "11:"
-#
 set $workspace12 "12:"
-#
 set $workspace13 "13:"
-#
 set $workspace14 "14:"
-#
 set $workspace15 "15:"
-#
 set $workspace16 "16:"
-#
 set $workspace17 "17:"
-#
-set $workspace18 "18:"
-#
-set $workspace19 "19:"
-#
-set $workspace20 "20:"
+set $workspace18 "18:"
+set $workspace19 "19:"
 # GitHub
 set $workspace20 "20:"
 # Thunderbird
-set $workspace21 "21:﫯"
+set $workspace21 "21:﫯" 
 # WebEx
 set $workspace22 "22:" 
 
@@ -181,17 +174,22 @@ bindsym $mod+Shift+F11 move container to workspace $workspace21
 bindsym $mod+Shift+F12 move container to workspace $workspace22
 
 # Always open some programs on specified workspace
-assign [class="konsole"]           $workspace1
+# assign [class="konsole"]           $workspace1
+assign [class="Alacritty"]           $workspace1
 assign [class="Google-chrome"]     $workspace2
 assign [class="Code"]              $workspace3
 assign [class="jetbrains-pycharm"] $workspace4
 assign [class="MATLAB R2020b"]     $workspace5
 assign [class="jetbrains-clion"]   $workspace6
 assign [class="TelegramDesktop"]   $workspace7
+assign [class="Xournalpp"]  	   $workspace8
+assign [class="okular"]  	   $workspace8
 assign [class="Nemo"]              $workspace9
 for_window [class="Spotify"]       move to workspace $workspace0
 assign [class="Spotify"]           $workspace0
 assign [class="qpdfview"]          $workspace11
+assign [class="Mendeley Desktop"]  $workspace18
+for_window [title="Figure*"class="MATLAB R2020b"] move to workspace $workspace19
 assign [class="GitHub Desktop"]    $workspace20
 assign [class="Thunderbird"]       $workspace21
 assign [class="webex"]             $workspace22
@@ -199,33 +197,34 @@ assign [class="webex"]             $workspace22
 #for_window [class="^Pavucontrol$"] floating enable
 for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
-#for_window [title="Figure*"] floating enable
-#for_window [title="Figure*"] move to workspace $workspace20
-#for_window [title="Form"] floating disable
+for_window [title="Figure *" class="MATLAB R2020b"] floating enable
+# for_window [title="Figure*" class="MATLAB R2020b"] floating disable 
+#for_window [title="Webex*"] floating enable 
 for_window [title="Webex*"] floating disable 
+ # for_window [title="Form"] floating enable 
 
-workspace  $workspace1 output $monLpt
-workspace  $workspace2 output $monLpt
-workspace  $workspace3 output $monExt
-workspace  $workspace4 output $monExt
-workspace  $workspace5 output $monExt
-workspace  $workspace6 output $monExt
-workspace  $workspace7 output $monExt
-workspace  $workspace8 output $monLpt
-workspace  $workspace9 output $monExt
-workspace  $workspace0 output $monLpt
-workspace  $workspace11 output $monExt
-workspace  $workspace12 output $monExt
-workspace  $workspace13 output $monExt
-workspace  $workspace14 output $monExt
-workspace  $workspace15 output $monExt
-workspace  $workspace16 output $monExt
-workspace  $workspace17 output $monExt
-workspace  $workspace18 output $monExt
-workspace  $workspace19 output $monLpt
-workspace  $workspace20 output $monLpt
-workspace  $workspace21 output $monExt
-workspace  $workspace22 output $monExt
+workspace  $workspace1 output $monV4k
+workspace  $workspace2 output $monV2k
+workspace  $workspace3 output $monV4k
+workspace  $workspace4 output $monV4k
+workspace  $workspace5 output $monV4k
+workspace  $workspace6 output $monV4k
+workspace  $workspace7 output $monV2k
+workspace  $workspace8 output $monV4k
+workspace  $workspace9 output $monV4k	
+workspace  $workspace0 output $monV4k
+workspace  $workspace11 output $monV2k
+workspace  $workspace12 output $monV4k
+workspace  $workspace13 output $monV4k
+workspace  $workspace14 output $monV4k
+workspace  $workspace15 output $monV4k
+workspace  $workspace16 output $monV4k
+workspace  $workspace17 output $monV4k
+workspace  $workspace18 output $monV2k
+workspace  $workspace19 output $monV2k
+workspace  $workspace20 output $monV2k
+workspace  $workspace21 output $monV2k
+workspace  $workspace22 output $monV2k
 
 
 # reload the configuration file
@@ -233,13 +232,14 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu   -theme Paper   -font "Hack Nerd Font Mono 12"   -width 17   -lines 6
+bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu   -theme Paper   -font "Hack Nerd Font Mono 16"   -width 20   -lines 6
 
 #Lock the screen 
 bindsym $mod+Shift+x exec ~/.config/betterlockscreen/betterlockscreen --lock blur
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
@@ -258,6 +258,25 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+#bar {
+#    font pango:DejaVu Sans Mono, FontAwesome 9
+##    font pango:Hack, FontAwesome 8
+#
+##      font pango:DejaVu Sans Mono, Icons 12
+#      position top
+#      status_command /home/vahab/tmp/i3status-rust/target/release/i3status-rs /home/vahab/.config/i3status-rust/config.toml
+#      #status_command /home/vahab/tmp/i3status-rust/target/release/i3status-rs /home/vahab/.local/share/i3status-rust/themes/bad-wolf.toml
+#      colors {
+#            separator #666666
+#            background #222222
+#            statusline #dddddd
+#            focused_workspace #0088CC #0088CC #ffffff
+#            active_workspace #333333 #333333 #ffffff
+#            inactive_workspace #333333 #333333 #888888
+#            urgent_workspace #2f343a #900000 #ffffff
+#      }
+#}
+
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
@@ -270,35 +289,50 @@ client.background       #F8F8F2
 
 bar {
     status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
+    #status_command /home/vahab/tmp/i3status-rust/target/release/i3status-rs /home/vahab/.config/i3status-rust/config.toml 
     position          top
     workspace_buttons yes
-    font pango:Hack, FontAwesome 10
+    font pango:Hack, FontAwesome 8
     colors {
-       background #282A36
-       statusline #F8F8F2
-       separator  #44475A
-   
-       focused_workspace  #44475A #44475A #F8F8F2
-       active_workspace   #282A36 #44475A #F8F8F2
-       inactive_workspace #282A36 #282A36 #BFBFBF
-       urgent_workspace   #FF5555 #FF5555 #F8F8F2
-       binding_mode       #FF5555 #FF5555 #F8F8F2
-     }
-  }
+        background #282A36
+        statusline #F8F8F2
+        separator  #44475A
+  
+        focused_workspace  #44475A #44475A #F8F8F2
+        active_workspace   #282A36 #44475A #F8F8F2
+        inactive_workspace #282A36 #282A36 #BFBFBF
+        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        binding_mode       #FF5555 #FF5555 #F8F8F2
+   }
 
+ }
+
+
+# Spotify related key bindings
+bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.  #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork #exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/betterlockscreen/betterlockscreen
+# screen before suspend. Use loginctl lock-session to lock your screen.
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/betterlockscreen/betterlockscreen
+
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s noblank
+
+
 exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 #exec --no-startup-id xautolock -time 5 -locker ~/.config/matrixlock/matrixlock.py
-exec --no-startup-id compton 
 exec --no-startup-id nm-applet
+exec --no-startup-id ~/.screenlayout/twoMonitor.sh 
 exec --no-startup-id volumeicon
-exec --no-startup-id sciebo
-exec --no-startup-id clipit
-exec --no-startup-id caffeine-indicator 
+#exec --no-startup-id caffeine-indicator 
+#exec --no-startup-id sciebo
 exec --no-startup-id setxkbmap -option caps:swapescape 
-exec --no-startup-id ~/.screenlayout/twoMonitors.sh 
-#exec --no-startup-id thunderbird 
+exec --no-startup-id ~/.opt/thunderbird/thunderbird
+exec --no-startup-id  /usr/lib/pentablet/pentablet.sh
+exec --no-startup-id  /usr/share/PowerFolder/PowerFolder-Client.sh
 #exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
-#exec --no-startup-id  /opt/google/chrome/google-chrome
