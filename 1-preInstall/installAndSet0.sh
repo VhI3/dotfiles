@@ -25,9 +25,4 @@ if [ $basicInstall == "y" ] || [ $basicInstall == "Y" ] ; then
     echo "- - - - - - CURL- - - - - - - - -"
     echo "- - - - - - - - - - - - - - - - -"
     sudo apt install curl
-    echo "- - - - - - - - - - - - - - - - -"
-    echo "- - - - - - Python3 - - - - - - -"
-    echo "- - - - - - - - - - - - - - - - -"
-    sudo apt install python3.9
-    sudo apt install python3-pip
 fi
