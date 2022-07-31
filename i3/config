@@ -8,7 +8,7 @@ new_window pixel
 gaps inner 10
 
 # Font for window titles.
-font pango: SpaceMono Nerd Font Mono Medium 9
+font pango: SpaceMono Nerd Font Mono Medium 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -25,7 +25,7 @@ bindsym $mod+Shift+q kill
 
 # variables for left and right monitor 
 set $monV4k DP-6
-set $monV2k DP-0
+set $monV2k DP-4
 # set $monSml DP-4
 
 # Set Keyboard layouts
@@ -89,28 +89,31 @@ bindsym $mod+a focus parent
 
 # Name the workspaces
 # Konsole 
-set $workspace1 "1:>_" 
+# set $workspace1 "1:>_" 
+set $workspace1 "1: " 
 # Chrome
-set $workspace2 "2: " 
+# set $workspace2 "2: " 
+set $workspace2 "2: " 
 # VScode
 set $workspace3 "3:﬏ " 
 # Pycharm
 set $workspace4 "4: " 
 # Matlab
-set $workspace5 "5: " 
+set $workspace5 "5: " 
 # Clion
 set $workspace6 "6: " 
 # Telegram
 set $workspace7 "7: " 
 # Xournalpp
-set $workspace8 "8: " 
+set $workspace8 "8:" 
 # Nemo
-set $workspace9 "9: " 
+set $workspace9 "9: " 
 # Spotify
 set $workspace0 "10:" 
 # qpdfview
 set $workspace11 "11:"
-set $workspace12 "12:"
+# Powerpoint
+set $workspace12 "12:"
 set $workspace13 "13:"
 set $workspace14 "14:"
 set $workspace15 "15:"
@@ -123,7 +126,8 @@ set $workspace20 "20:"
 # Thunderbird
 set $workspace21 "21:﫯" 
 # WebEx
-set $workspace22 "22:" 
+# set $workspace22 "22:" 
+set $workspace22 "22:" 
 
 # Switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -176,10 +180,12 @@ bindsym $mod+Shift+F12 move container to workspace $workspace22
 # Always open some programs on specified workspace
 # assign [class="konsole"]           $workspace1
 assign [class="Alacritty"]           $workspace1
-assign [class="Google-chrome"]     $workspace2
+# assign [class="Google-chrome"]     $workspace2
+# assign [class="librewolf-default"]     $workspace2
+assign [class="firefox"]     $workspace2
 assign [class="Code"]              $workspace3
 assign [class="jetbrains-pycharm"] $workspace4
-assign [class="MATLAB R2020b"]     $workspace5
+assign [class="MATLAB R2021a"]     $workspace5
 assign [class="jetbrains-clion"]   $workspace6
 assign [class="TelegramDesktop"]   $workspace7
 assign [class="Xournalpp"]  	   $workspace8
@@ -188,8 +194,12 @@ assign [class="Nemo"]              $workspace9
 for_window [class="Spotify"]       move to workspace $workspace0
 assign [class="Spotify"]           $workspace0
 assign [class="qpdfview"]          $workspace11
+assign [class="libreoffice-impress"]          $workspace12
+assign [title="GiD"] $workspace17
+assign [class="Toplevel"] $workspace17
+assign [class="Zotero"]  $workspace18
 assign [class="Mendeley Desktop"]  $workspace18
-for_window [title="Figure*"class="MATLAB R2020b"] move to workspace $workspace19
+for_window [title="Figure*"class="MATLAB R2021a"] move to workspace $workspace19
 assign [class="GitHub Desktop"]    $workspace20
 assign [class="Thunderbird"]       $workspace21
 assign [class="webex"]             $workspace22
@@ -197,10 +207,10 @@ assign [class="webex"]             $workspace22
 #for_window [class="^Pavucontrol$"] floating enable
 for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
-for_window [title="Figure *" class="MATLAB R2020b"] floating enable
-# for_window [title="Figure*" class="MATLAB R2020b"] floating disable 
-#for_window [title="Webex*"] floating enable 
-for_window [title="Webex*"] floating disable 
+for_window [title="Figure *" class="MATLAB R2021a"] floating enable
+for_window [title="Webex*"] floating enable 
+for_window [class="Toplevel"] floating enable 
+# for_window [title="Webex*"] floating disable 
  # for_window [title="Form"] floating enable 
 
 workspace  $workspace1 output $monV4k
@@ -258,25 +268,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#bar {
-#    font pango:DejaVu Sans Mono, FontAwesome 9
-##    font pango:Hack, FontAwesome 8
-#
-##      font pango:DejaVu Sans Mono, Icons 12
-#      position top
-#      status_command /home/vahab/tmp/i3status-rust/target/release/i3status-rs /home/vahab/.config/i3status-rust/config.toml
-#      #status_command /home/vahab/tmp/i3status-rust/target/release/i3status-rs /home/vahab/.local/share/i3status-rust/themes/bad-wolf.toml
-#      colors {
-#            separator #666666
-#            background #222222
-#            statusline #dddddd
-#            focused_workspace #0088CC #0088CC #ffffff
-#            active_workspace #333333 #333333 #ffffff
-#            inactive_workspace #333333 #333333 #888888
-#            urgent_workspace #2f343a #900000 #ffffff
-#      }
-#}
-
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
@@ -292,7 +283,7 @@ bar {
     #status_command /home/vahab/tmp/i3status-rust/target/release/i3status-rs /home/vahab/.config/i3status-rust/config.toml 
     position          top
     workspace_buttons yes
-    font pango:Hack, FontAwesome 8
+    font pango:Hack, FontAwesome 11
     colors {
         background #282A36
         statusline #F8F8F2
@@ -331,7 +322,7 @@ exec --no-startup-id ~/.screenlayout/twoMonitor.sh
 exec --no-startup-id volumeicon
 #exec --no-startup-id caffeine-indicator 
 #exec --no-startup-id sciebo
-exec --no-startup-id setxkbmap -option caps:swapescape 
+# exec --no-startup-id setxkbmap -option caps:swapescape 
 exec --no-startup-id ~/.opt/thunderbird/thunderbird
 exec --no-startup-id  /usr/lib/pentablet/pentablet.sh
 exec --no-startup-id  /usr/share/PowerFolder/PowerFolder-Client.sh
