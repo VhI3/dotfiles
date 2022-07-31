@@ -1,20 +1,19 @@
 #!/bin/bash
-RofiFehInstall=false
-echo "Do you want to install RofiFeh? (y/n)"
-read -n 1 RofiFehInstall
+FehInstall=false
+echo "Do you want to install Feh? (y/n)"
+read -n 1 FehInstall
 echo
 echo
-if [ $RofiFehInstall == "y" ] || [ $RofiFehInstall == "Y" ]; then
+if [ $FehInstall == "y" ] || [ $FehInstall == "Y" ]; then
     echo "- - - - - - - - - - - - - - - - -"
-    echo "- - - - - RofiFeh- - - - - - - - - -"
+    echo "- - - - - Feh - - - - - - - - - -"
     echo "- - - - - - - - - - - - - - - - -"
     sudo apt update
     sudo apt upgrade
     sudo apt autoremove
-    sudo apt install rofi
     sudo apt install feh
     sudo apt upgrade
     echo "- - - - - - - - - - - - - - - - -"
-    echo "- - - - - - End RofiFeh - - - - - -"
+    echo "- - - - - - End Feh - - - - - - -"
     echo "- - - - - - - - - - - - - - - - -"
 fi
