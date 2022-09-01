@@ -214,7 +214,7 @@ workspace  $workspace1 output $monV4k
 workspace  $workspace2 output $monV2k
 workspace  $workspace3 output $monV4k
 workspace  $workspace4 output $monV4k
-workspace  $workspace5 output $monV4k
+workspace  $workspace5 output $monV2k
 workspace  $workspace6 output $monV4k
 workspace  $workspace7 output $monV2k
 workspace  $workspace8 output $monV4k
@@ -314,8 +314,9 @@ exec --no-startup-id xset s noblank
 exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 #exec --no-startup-id xautolock -time 5 -locker ~/.config/matrixlock/matrixlock.py
 exec --no-startup-id nm-applet
-#exec --no-startup-id ~/.screenlayout/twoMonitor.sh 
+exec --no-startup-id ~/.screenlayout/laptop2Monitor_Home.sh
 exec --no-startup-id volumeicon
+exec --no-startup-id Nextcloud-3.5.4-x86_64.AppImage
 #exec --no-startup-id caffeine-indicator 
 #exec --no-startup-id sciebo
 # exec --no-startup-id setxkbmap -option caps:swapescape 
