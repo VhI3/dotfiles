@@ -180,12 +180,12 @@ bindsym $mod+Shift+F12 move container to workspace $workspace22
 # Always open some programs on specified workspace
 assign [class="Alacritty"]           $workspace1
 # assign [class="Google-chrome"]     $workspace2
-# assign [class="librewolf-default"]     $workspace2
+assign [class="librewolf-default"]     $workspace2
 # assign [class="firefox"]     $workspace2
-assign [class="Brave-browser"]     $workspace2
+# assign [class="Brave-browser"]     $workspace2
 assign [class="Code"]              $workspace3
 assign [class="jetbrains-pycharm"] $workspace4
-assign [class="MATLAB R2022a"]     $workspace5
+assign [class="MATLAB R2020b"]     $workspace5
 assign [class="jetbrains-clion"]   $workspace6
 assign [class="TelegramDesktop"]   $workspace7
 assign [class="Xournalpp"]  	   $workspace8
@@ -199,15 +199,15 @@ assign [title="GiD"] $workspace17
 assign [class="Toplevel"] $workspace17
 assign [class="Zotero"]  $workspace18
 assign [class="Mendeley Desktop"]  $workspace18
-for_window [title="Figure*"class="MATLAB R2022a"] move to workspace $workspace19
+for_window [title="Figure*"class="MATLAB R2020b"] move to workspace $workspace19
 assign [class="GitHub Desktop"]    $workspace20
-assign [class="Thunderbird"]       $workspace21
+assign [class="thunderbird"]       $workspace21
 assign [class="webex"]             $workspace22
 # Enable float for some windows
 #for_window [class="^Pavucontrol$"] floating enable
 for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
-for_window [title="Figure *" class="MATLAB R2022a"] floating enable
+# for_window [title="Figure *" class="MATLAB R2020b"] floating enable
 for_window [title="Webex*"] floating enable 
 for_window [class="Toplevel"] floating enable 
 
@@ -229,7 +229,7 @@ workspace  $workspace15 output $monV4k
 workspace  $workspace16 output $monV4k
 workspace  $workspace17 output $monV4k
 workspace  $workspace18 output $monV2k
-workspace  $workspace19 output $monV2k
+workspace  $workspace19 output $monV4k
 workspace  $workspace20 output $monV2k
 workspace  $workspace21 output $monV2k
 workspace  $workspace22 output $monV2k
@@ -277,7 +277,7 @@ client.background       #F8F8F2
 
 
 bar {
-    status_command    python3 ~/.config/i3pystatus/i3pystatus.conf
+    status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
     font pango:Hack, FontAwesome 15
