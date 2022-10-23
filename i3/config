@@ -180,8 +180,8 @@ bindsym $mod+Shift+F12 move container to workspace $workspace22
 # Always open some programs on specified workspace
 assign [class="Alacritty"]           $workspace1
 # assign [class="Google-chrome"]     $workspace2
-assign [class="librewolf-default"]     $workspace2
-# assign [class="firefox"]     $workspace2
+# assign [class="librewolf-default"]     $workspace2
+assign [class="firefox"]     $workspace2
 # assign [class="Brave-browser"]     $workspace2
 assign [class="Code"]              $workspace3
 assign [class="jetbrains-pycharm"] $workspace4
