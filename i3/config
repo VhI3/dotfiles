@@ -317,7 +317,8 @@ exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id ~/.screenlayout/laptop2Monitor_Home.sh
 exec --no-startup-id volumeicon
-exec --no-startup-id Nextcloud-3.5.4-x86_64.AppImage
+# exec --no-startup-id Nextcloud-3.5.4-x86_64.AppImage
+exec --no-startup-id Nextcloud
 #exec --no-startup-id caffeine-indicator 
 #exec --no-startup-id sciebo
 # exec --no-startup-id setxkbmap -option caps:swapescape 
