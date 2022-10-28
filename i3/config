@@ -93,6 +93,7 @@ bindsym $mod+a focus parent
 set $workspace1 "1: " 
 # Chrome
 # set $workspace2 "2: " 
+# FireFox 
 set $workspace2 "2: " 
 # VScode
 set $workspace3 "3:﬏ " 
@@ -126,7 +127,6 @@ set $workspace20 "20:"
 # Thunderbird
 set $workspace21 "21:﫯" 
 # WebEx
-# set $workspace22 "22:" 
 set $workspace22 "22:" 
 
 # Switch to workspace
@@ -178,36 +178,34 @@ bindsym $mod+Shift+F11 move container to workspace $workspace21
 bindsym $mod+Shift+F12 move container to workspace $workspace22
 
 # Always open some programs on specified workspace
-assign [class="Alacritty"]           $workspace1
-# assign [class="Google-chrome"]     $workspace2
-# assign [class="librewolf-default"]     $workspace2
-assign [class="firefox"]     $workspace2
-# assign [class="Brave-browser"]     $workspace2
-assign [class="Code"]              $workspace3
-assign [class="jetbrains-pycharm"] $workspace4
-assign [class="MATLAB R2020b"]     $workspace5
-assign [class="jetbrains-clion"]   $workspace6
-assign [class="TelegramDesktop"]   $workspace7
-assign [class="Xournalpp"]  	   $workspace8
-assign [class="okular"]  	   $workspace8
-assign [class="Nemo"]              $workspace9
-for_window [class="Spotify"]       move to workspace $workspace0
-assign [class="Spotify"]           $workspace0
-assign [class="qpdfview"]          $workspace11
-assign [class="libreoffice-impress"]          $workspace12
-assign [title="GiD"] $workspace17
-assign [class="Toplevel"] $workspace17
-assign [class="Zotero"]  $workspace18
-assign [class="Mendeley Desktop"]  $workspace18
-for_window [title="Figure*"class="MATLAB R2020b"] move to workspace $workspace19
-assign [class="GitHub Desktop"]    $workspace20
-assign [class="thunderbird"]       $workspace21
-assign [class="webex"]             $workspace22
+assign [class="Alacritty"]                           $workspace1
+# assign [class="librewolf-default"]                 $workspace2
+assign [class="firefox"]                             $workspace2
+assign [class="Code"]                                $workspace3
+assign [class="jetbrains-pycharm"]                   $workspace4
+assign [class="MATLAB R2021b"]                       $workspace5
+assign [class="jetbrains-clion"]                     $workspace6
+assign [class="TelegramDesktop"]                     $workspace7
+assign [class="Xournalpp"]  	                     $workspace8
+assign [class="okular"]  	                         $workspace8
+assign [class="Nemo"]                                $workspace9
+for_window [class="Spotify"]                         move to workspace $workspace0
+assign [class="Spotify"]                             $workspace0
+assign [class="qpdfview"]                            $workspace11
+assign [class="libreoffice-impress"]                 $workspace12
+assign [title="GiD"]                                 $workspace17
+assign [class="Toplevel"]                            $workspace17
+assign [class="Zotero"]                              $workspace18
+assign [class="Mendeley Desktop"]                    $workspace18
+for_window [title="Figure*"class="MATLAB R2021b"]    move to workspace $workspace19
+assign [class="GitHub Desktop"]                      $workspace20
+assign [class="thunderbird"]                         $workspace21
+assign [class="webex"]                               $workspace22
 # Enable float for some windows
 #for_window [class="^Pavucontrol$"] floating enable
 for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
-# for_window [title="Figure *" class="MATLAB R2020b"] floating enable
+# for_window [title="Figure *" class="MATLAB R2021b"] floating enable
 for_window [title="Webex*"] floating enable 
 for_window [class="Toplevel"] floating enable 
 
@@ -317,12 +315,9 @@ exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id ~/.screenlayout/laptop2Monitor_Home.sh
 exec --no-startup-id volumeicon
-# exec --no-startup-id Nextcloud-3.5.4-x86_64.AppImage
 exec --no-startup-id Nextcloud
+exec --no-startup-id GitHubDesktop 
+exec --no-startup-id thunderbird
 #exec --no-startup-id caffeine-indicator 
-#exec --no-startup-id sciebo
-# exec --no-startup-id setxkbmap -option caps:swapescape 
-#exec --no-startup-id ~/.opt/thunderbird/thunderbird
 #exec --no-startup-id  /usr/lib/pentablet/pentablet.sh
-#exec --no-startup-id  /usr/share/PowerFolder/PowerFolder-Client.sh
 #exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
