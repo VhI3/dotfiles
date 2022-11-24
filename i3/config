@@ -119,11 +119,12 @@ set $workspace13 "13:"
 set $workspace14 "14:"
 set $workspace15 "15:"
 set $workspace16 "16:"
-set $workspace17 "17:"
+# GitHub
+set $workspace17 "17:"
 set $workspace18 "18:"
 set $workspace19 "19:"
-# GitHub
-set $workspace20 "20:"
+# Hiri
+set $workspace20 "20:﫯"
 # Thunderbird
 set $workspace21 "21:﫯" 
 # WebEx
@@ -193,12 +194,13 @@ for_window [class="Spotify"]                         move to workspace $workspac
 assign [class="Spotify"]                             $workspace0
 assign [class="qpdfview"]                            $workspace11
 assign [class="libreoffice-impress"]                 $workspace12
-assign [title="GiD"]                                 $workspace17
-assign [class="Toplevel"]                            $workspace17
+assign [class="GitHub Desktop"]                      $workspace17
+# assign [title="GiD"]                                 $workspace17
+# assign [class="Toplevel"]                            $workspace17
 assign [class="Zotero"]                              $workspace18
 assign [class="Mendeley Desktop"]                    $workspace18
 for_window [title="Figure*"class="MATLAB R2021b"]    move to workspace $workspace19
-assign [class="GitHub Desktop"]                      $workspace20
+assign [class="hiri"]                                $workspace20
 assign [class="thunderbird"]                         $workspace21
 assign [class="webex"]                               $workspace22
 # Enable float for some windows
@@ -211,7 +213,7 @@ for_window [class="Toplevel"] floating enable
 
 workspace  $workspace1 output $monV4k
 workspace  $workspace2 output $monV2k
-workspace  $workspace3 output $monV4k
+workspace  $workspace3 output $monV2k
 workspace  $workspace4 output $monV4k
 workspace  $workspace5 output $monV2k
 workspace  $workspace6 output $monV4k
@@ -314,6 +316,7 @@ exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 #exec --no-startup-id xautolock -time 5 -locker ~/.config/matrixlock/matrixlock.py
 exec --no-startup-id nm-applet
 exec --no-startup-id ~/.screenlayout/laptop2Monitor_Home.sh
+exec --no-startup-id ~/.opt/hiri/hiri.sh
 exec --no-startup-id volumeicon
 exec --no-startup-id Nextcloud
 exec --no-startup-id GitHubDesktop 
