@@ -184,7 +184,7 @@ assign [class="Alacritty"]                           $workspace1
 assign [class="firefox"]                             $workspace2
 assign [class="Code"]                                $workspace3
 assign [class="jetbrains-pycharm"]                   $workspace4
-assign [class="MATLAB R2021b"]                       $workspace5
+assign [class="MATLAB R202*"]                       $workspace5
 assign [class="jetbrains-clion"]                     $workspace6
 assign [class="TelegramDesktop"]                     $workspace7
 assign [class="Xournalpp"]  	                     $workspace8
@@ -199,7 +199,7 @@ assign [class="GitHub Desktop"]                      $workspace17
 # assign [class="Toplevel"]                            $workspace17
 assign [class="Zotero"]                              $workspace18
 assign [class="Mendeley Desktop"]                    $workspace18
-for_window [title="Figure*"class="MATLAB R2021b"]    move to workspace $workspace19
+for_window [title="Figure*"class="MATLAB R202*"]    move to workspace $workspace19
 assign [class="hiri"]                                $workspace20
 assign [class="thunderbird"]                         $workspace21
 assign [class="webex"]                               $workspace22
