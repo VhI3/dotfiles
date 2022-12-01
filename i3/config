@@ -309,6 +309,7 @@ exec --no-startup-id Nextcloud
 exec --no-startup-id GitHubDesktop 
 exec --no-startup-id compton 
 exec --no-startup-id thunderbird
+exec --no-startup-id plcoud 
 exec --no-startup-id udisksctl mount -b /dev/sda1
 #exec --no-startup-id caffeine-indicator 
 #exec --no-startup-id  /usr/lib/pentablet/pentablet.sh
