@@ -198,13 +198,13 @@ for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
 for_window [title="Webex*"] floating enable 
 
-workspace  $workspace1  output $belowMonitor
+workspace  $workspace1  output $aboveMonitor
 workspace  $workspace2  output $aboveMonitor
 workspace  $workspace3  output $aboveMonitor
 workspace  $workspace4  output $belowMonitor
 workspace  $workspace5  output $aboveMonitor
 workspace  $workspace6  output $belowMonitor
-workspace  $workspace7  output $aboveMonitor
+workspace  $workspace7  output $belowMonitor
 workspace  $workspace8  output $belowMonitor
 workspace  $workspace9  output $belowMonitor	
 workspace  $workspace0  output $belowMonitor
@@ -309,8 +309,8 @@ exec --no-startup-id Nextcloud
 exec --no-startup-id GitHubDesktop 
 exec --no-startup-id compton 
 exec --no-startup-id thunderbird
-exec --no-startup-id plcoud 
+exec --no-startup-id pcloud 
 exec --no-startup-id udisksctl mount -b /dev/sda1
 #exec --no-startup-id caffeine-indicator 
 #exec --no-startup-id  /usr/lib/pentablet/pentablet.sh
-#exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
+exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
