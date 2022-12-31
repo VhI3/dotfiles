@@ -198,7 +198,7 @@ for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
 for_window [title="Webex*"] floating enable 
 
-workspace  $workspace1  output $aboveMonitor
+workspace  $workspace1  output $belowMonitor
 workspace  $workspace2  output $aboveMonitor
 workspace  $workspace3  output $aboveMonitor
 workspace  $workspace4  output $belowMonitor
