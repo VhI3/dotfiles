@@ -24,7 +24,8 @@ bindsym $mod+Shift+q kill
 
 # variables for left and right monitor 
 set $belowMonitor eDP-1 
-set $aboveMonitor HDMI-2 
+set $aboveMonitor DP-1 
+# set $aboveMonitor DP-2 
 
 # Set Keyboard layouts
 # exec_always "setxkbmap -layout us,de,ir"
