@@ -24,8 +24,8 @@ bindsym $mod+Shift+q kill
 
 # variables for left and right monitor 
 set $belowMonitor eDP-1 
-set $aboveMonitor DP-1 
-# set $aboveMonitor DP-2 
+# set $aboveMonitor DP-1 
+set $aboveMonitor DP-2 
 
 # Set Keyboard layouts
 # exec_always "setxkbmap -layout us,de,ir"
@@ -177,6 +177,7 @@ assign [class="Alacritty"]                           $workspace1
 assign [class="firefox"]                             $workspace2
 assign [class="Code"]                                $workspace3
 assign [class="jetbrains-pycharm"]                   $workspace4
+assign [class="Zathura"]                             $workspace4
 assign [class="MATLAB R202*"]                        $workspace5
 assign [class="jetbrains-clion"]                     $workspace6
 assign [class="TelegramDesktop"]                     $workspace7
@@ -191,7 +192,8 @@ assign [class="Zotero"]                              $workspace18
 assign [class="Mendeley Desktop"]                    $workspace18
 assign [class="hiri"]                                $workspace20
 assign [class="thunderbird"]                         $workspace21
-assign [class="webex"]                               $workspace22
+assign [class="webex*"]                              $workspace22
+for_window [class="Webex*"]                          move to workspace $workspace22
 for_window [class="Spotify"]                         move to workspace $workspace0
 for_window [title="Figure*"class="MATLAB R202*"]     move to workspace $workspace19
 # Enable float for some windows
