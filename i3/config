@@ -177,7 +177,7 @@ assign [class="Alacritty"]                           $workspace1
 assign [class="firefox"]                             $workspace2
 assign [class="Code"]                                $workspace3
 assign [class="jetbrains-pycharm"]                   $workspace4
-assign [class="Zathura"]                             $workspace4
+# assign [class="Zathura"]                             $workspace4
 assign [class="MATLAB R202*"]                        $workspace5
 assign [class="jetbrains-clion"]                     $workspace6
 assign [class="TelegramDesktop"]                     $workspace7
@@ -213,7 +213,7 @@ workspace  $workspace9  output $belowMonitor
 workspace  $workspace0  output $belowMonitor
 workspace  $workspace11 output $aboveMonitor
 workspace  $workspace12 output $belowMonitor
-workspace  $workspace13 output $belowMonitor
+workspace  $workspace13 output $aboveMonitor
 workspace  $workspace14 output $belowMonitor
 workspace  $workspace15 output $belowMonitor
 workspace  $workspace16 output $belowMonitor
