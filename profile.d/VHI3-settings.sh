@@ -1,5 +1,5 @@
 setxkbmap -option caps:swapescape
-setxkbmap -layout us,de,ir
+setxkbmap -layout us,ir
 setxkbmap -option 'grp:alt_shift_toggle'
 export PATH="~/.local/bin:$PATH"
 #export PATH="/usr/local/texlive/2022/bin/x86_64-linux:$PATH"
