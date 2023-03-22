@@ -30,6 +30,21 @@ set $aboveMonitor DP-2
 # Set Keyboard layouts
 # exec_always "setxkbmap -layout us,de,ir"
 # exec_always "setxkbmap -option 'grp:alt_shift_toggle'"
+# To add the umlauts
+# sudo dpkg-reconfigure keyboard-configuration
+# choose 1: Generic 105-key PC (int.)
+# choose 2: English (US) 
+# choose 3: English (US) 
+# choose 4: No AltGr key 
+# choose 5: Right Alt (AltGr) 
+# AltGr + u + "          ----> ü
+# AltGr + Shift + u + "  ----> Ü
+# AltGr + a + "          ----> ä
+# AltGr + Shift + a + "  ----> Ä
+# AltGr + o + "          ----> ö
+# AltGr + Shift + o + "  ----> Ö 
+# AltGr + s + s          ----> ß 
+#
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
