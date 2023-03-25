@@ -11,7 +11,7 @@ if [ $profiledInstall == "y" ] || [ $profiledInstall == "Y" ]; then
     sudo apt update
     sudo apt upgrade
     sudo apt autoremove
-    sudo ln -s -f ~/dotfiles/profile.d/VHI3-settings.sh /etc/profile.d/
+    sudo ln -s -f ~/dotfiles/17-profile.d/VHI3-settings.sh /etc/profile.d/
     echo "- - - - - - - - - - - - - - - - -"
     echo "- - - - - - End profile.d - - - -"
     echo "- - - - - - - - - - - - - - - - -"
