@@ -28,6 +28,9 @@ set $belowMonitor eDP-1
 set $aboveMonitor DP-2 
 
 # Set Keyboard layouts
+# exec setxkbmap -option caps:swapescape
+# exec setxkbmap -layout us,ir
+# exec setxkbmap -option 'grp:alt_shift_toggle'
 # exec_always "setxkbmap -layout us,de,ir"
 # exec_always "setxkbmap -option 'grp:alt_shift_toggle'"
 # To add the umlauts
