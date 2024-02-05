@@ -194,6 +194,7 @@ bindsym $mod+Shift+F12 move container to workspace $workspace22
 assign [class="Alacritty"]                           $workspace1
 assign [class="firefox"]                             $workspace2
 assign [class="Code"]                                $workspace3
+assign [class="VSCodium"]                                $workspace3
 assign [class="jetbrains-pycharm"]                   $workspace4
 # assign [class="Zathura"]                             $workspace4
 assign [class="MATLAB R202*"]                        $workspace5
