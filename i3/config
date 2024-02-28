@@ -325,7 +325,8 @@ exec --no-startup-id xset s noblank
 exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 # exec --no-startup-id xautolock -time 1 -locker ~/.config/matrixlock/matrixlock.py
 exec --no-startup-id nm-applet
-exec --no-startup-id ~/.screenlayout/laptop2Monitor_Home.sh
+# exec --no-startup-id ~/.screenlayout/laptop2Monitor_Home.sh
+exec --no-startup-id ~/.screenlayout/setMonitors.sh
 exec --no-startup-id ~/.opt/hiri/hiri.sh
 exec --no-startup-id volumeicon
 exec --no-startup-id Nextcloud
