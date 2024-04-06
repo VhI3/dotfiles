@@ -195,8 +195,8 @@ assign [class="Alacritty"]                           $workspace1
 assign [class="firefox"]                             $workspace2
 assign [class="Code"]                                $workspace3
 assign [class="VSCodium"]                                $workspace3
-assign [class="jetbrains-pycharm"]                   $workspace4
-# assign [class="Zathura"]                             $workspace4
+# assign [class="jetbrains-pycharm"]                   $workspace4
+assign [class="Zathura"]                             $workspace4
 assign [class="MATLAB R202*"]                        $workspace5
 assign [class="jetbrains-clion"]                     $workspace6
 assign [class="TelegramDesktop"]                     $workspace7
@@ -219,13 +219,13 @@ for_window [title="Figure*"class="MATLAB R202*"]     move to workspace $workspac
 # Enable float for some windows
 for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
-# for_window [title="Webex*"] floating enable 
+for_window [title="Figure*"class="MATLAB R202*"] floating enable 
 
 workspace  $workspace1  output $belowMonitor
 workspace  $workspace2  output $aboveMonitor
-workspace  $workspace3  output $aboveMonitor
-workspace  $workspace4  output $belowMonitor
-workspace  $workspace5  output $aboveMonitor
+workspace  $workspace3  output $belowMonitor
+workspace  $workspace4  output $aboveMonitor
+workspace  $workspace5  output $belowMonitor
 workspace  $workspace6  output $belowMonitor
 workspace  $workspace7  output $belowMonitor
 workspace  $workspace8  output $belowMonitor
