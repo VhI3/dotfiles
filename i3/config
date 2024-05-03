@@ -239,7 +239,7 @@ workspace  $workspace15 output $belowMonitor
 workspace  $workspace16 output $belowMonitor
 workspace  $workspace17 output $belowMonitor
 workspace  $workspace18 output $aboveMonitor
-workspace  $workspace19 output $belowMonitor
+workspace  $workspace19 output $aboveMonitor
 workspace  $workspace20 output $aboveMonitor
 workspace  $workspace21 output $aboveMonitor
 workspace  $workspace22 output $aboveMonitor
@@ -326,7 +326,8 @@ exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 # exec --no-startup-id xautolock -time 1 -locker ~/.config/matrixlock/matrixlock.py
 exec --no-startup-id nm-applet
 # exec --no-startup-id ~/.screenlayout/laptop2Monitor_Home.sh
-exec --no-startup-id ~/.screenlayout/setMonitors.sh
+# exec --no-startup-id ~/.screenlayout/setMonitors.sh
+exec --no-startup-id ~/.screenlayout/cambridgeSettings.sh
 exec --no-startup-id ~/.opt/hiri/hiri.sh
 exec --no-startup-id volumeicon
 exec --no-startup-id Nextcloud
