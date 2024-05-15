@@ -26,6 +26,7 @@ bindsym $mod+Shift+q kill
 set $belowMonitor eDP-1 
 # set $aboveMonitor DP-1 
 set $aboveMonitor DP-2 
+# set $aboveMonitor HDMI-2 
 
 # Set Keyboard layouts
 # exec setxkbmap -option caps:swapescape
@@ -105,12 +106,12 @@ bindsym $mod+a focus parent
 # Name the workspaces
 # Alacritty
 set $workspace1 "1: " 
+# Zathura 
+set $workspace2 "2: " 
 # FireFox 
-set $workspace2 "2: " 
+set $workspace3 "3: " 
 # VScode
-set $workspace3 "3:﬏ " 
-# Pycharm
-set $workspace4 "4: " 
+set $workspace4 "4:﬏ " 
 # Matlab
 set $workspace5 "5: " 
 # Clion
@@ -192,11 +193,9 @@ bindsym $mod+Shift+F12 move container to workspace $workspace22
 
 # Always open some programs on specified workspace
 assign [class="Alacritty"]                           $workspace1
-assign [class="firefox"]                             $workspace2
-assign [class="Code"]                                $workspace3
-assign [class="VSCodium"]                                $workspace3
-# assign [class="jetbrains-pycharm"]                   $workspace4
-assign [class="Zathura"]                             $workspace4
+assign [class="Zathura"]                             $workspace2
+assign [class="firefox"]                             $workspace3
+assign [class="VSCodium"]                            $workspace4
 assign [class="MATLAB R202*"]                        $workspace5
 assign [class="jetbrains-clion"]                     $workspace6
 assign [class="TelegramDesktop"]                     $workspace7
@@ -221,9 +220,9 @@ for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
 for_window [title="Figure*"class="MATLAB R202*"] floating enable 
 
-workspace  $workspace1  output $belowMonitor
-workspace  $workspace2  output $aboveMonitor
-workspace  $workspace3  output $belowMonitor
+workspace  $workspace1  output $aboveMonitor
+workspace  $workspace2  output $belowMonitor
+workspace  $workspace3  output $aboveMonitor
 workspace  $workspace4  output $aboveMonitor
 workspace  $workspace5  output $belowMonitor
 workspace  $workspace6  output $belowMonitor
