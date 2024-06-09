@@ -1,17 +1,12 @@
-# I'm a markdown file.
+# This is some notes regarding my Linux settings.
 
-And I can do *emphasis*.
-## With sub-headers
+## The problem with running Chrome, Github-dektop, ...
 
-> Block quotes are
-> written like so.
->
-> They can span multiple paragraphs,
-> if you like.
+One way is to add a this commend in /etc/environment
 
-Use 3 dashes for an em-dash. Use 2 dashes for 
-ranges (ex., "it's all in chapters 12--14"). 
-Three dots ... will be converted to an ellipsis 
-(provided you include the smartEllipses option 
-in your preamble). Unicode is supported.
+sudo vim /etc/environment
 
+add following this:
+export LIBVA_DRIVER_NAME=disable
+
+source /etc/environment
