@@ -311,6 +311,13 @@ bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
+# Increase brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xrandr --output eDP-1 --brightness $(/usr/bin/python3 -c "print(min(1, $(/usr/bin/xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') + 0.1))")
+
+# Decrease brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xrandr --output eDP-1 --brightness $(/usr/bin/python3 -c "print(max(0, $(/usr/bin/xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1))")
+
+
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
