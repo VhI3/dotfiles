@@ -191,6 +191,29 @@ bindsym $mod+Shift+F10 move container to workspace $workspace20
 bindsym $mod+Shift+F11 move container to workspace $workspace21
 bindsym $mod+Shift+F12 move container to workspace $workspace22
 
+workspace  $workspace1  output $aboveMonitor
+workspace  $workspace2  output $belowMonitor
+workspace  $workspace3  output $aboveMonitor
+workspace  $workspace4  output $aboveMonitor
+workspace  $workspace5  output $aboveMonitor
+workspace  $workspace6  output $belowMonitor
+workspace  $workspace7  output $belowMonitor
+workspace  $workspace8  output $belowMonitor
+workspace  $workspace9  output $belowMonitor	
+workspace  $workspace0  output $belowMonitor
+workspace  $workspace11 output $aboveMonitor
+workspace  $workspace12 output $belowMonitor
+workspace  $workspace13 output $aboveMonitor
+workspace  $workspace14 output $belowMonitor
+workspace  $workspace15 output $belowMonitor
+workspace  $workspace16 output $belowMonitor
+workspace  $workspace17 output $belowMonitor
+workspace  $workspace18 output $belowMonitor
+workspace  $workspace19 output $belowMonitor
+workspace  $workspace20 output $belowMonitor
+workspace  $workspace21 output $belowMonitor
+workspace  $workspace22 output $belowMonitor
+
 # Always open some programs on specified workspace
 assign [class="Alacritty"]                           $workspace1
 assign [class="Zathura"]                             $workspace2
@@ -214,34 +237,21 @@ assign [class="thunderbird"]                         $workspace21
 assign [class="webex*"]                              $workspace22
 for_window [class="Webex*"]                          move to workspace $workspace22
 for_window [class="Spotify"]                         move to workspace $workspace0
-# for_window [title="Figure*"class="MATLAB R202*"] floating enable 
-for_window [title="Figure*"class="MATLAB R202*"]     move to workspace $workspace19
+# Open all figures in workspace 19 and in float format
+# for_window [title="Figure*" class="MATLAB R202*"] move to workspace $workspace19, floating enable
+
+
+# Move all figures to workspace 19
+for_window [title="^Figure.*" class="MATLAB R202*"] move to workspace $workspace19
+# Enable float for all figures
+# for_window [title="^Figure.*" class="MATLAB R202*"] floating enable
+
+
+# for_window [title="Figure*"class="MATLAB R202*"]     move to workspace $workspace19
 # Enable float for some windows
 for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
-
-workspace  $workspace1  output $aboveMonitor
-workspace  $workspace2  output $belowMonitor
-workspace  $workspace3  output $aboveMonitor
-workspace  $workspace4  output $aboveMonitor
-workspace  $workspace5  output $belowMonitor
-workspace  $workspace6  output $belowMonitor
-workspace  $workspace7  output $belowMonitor
-workspace  $workspace8  output $belowMonitor
-workspace  $workspace9  output $belowMonitor	
-workspace  $workspace0  output $belowMonitor
-workspace  $workspace11 output $aboveMonitor
-workspace  $workspace12 output $belowMonitor
-workspace  $workspace13 output $aboveMonitor
-workspace  $workspace14 output $belowMonitor
-workspace  $workspace15 output $belowMonitor
-workspace  $workspace16 output $belowMonitor
-workspace  $workspace17 output $belowMonitor
-workspace  $workspace18 output $belowMonitor
-workspace  $workspace19 output $belowMonitor
-workspace  $workspace20 output $belowMonitor
-workspace  $workspace21 output $belowMonitor
-workspace  $workspace22 output $belowMonitor
+# for_window [class="MATLAB R202*"] floating enable 
 
 
 # reload the configuration file
@@ -311,11 +321,11 @@ bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
-# Increase brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xrandr --output eDP-1 --brightness $(/usr/bin/python3 -c "print(min(1, $(/usr/bin/xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') + 0.1))")
+# Increase brightness Still notworking
+# bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xrandr --output eDP-1 --brightness $(/usr/bin/python3 -c "print(min(1, $(/usr/bin/xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') + 0.1))")
 
-# Decrease brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xrandr --output eDP-1 --brightness $(/usr/bin/python3 -c "print(max(0, $(/usr/bin/xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1))")
+# Decrease brightness Still notworking
+# bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xrandr --output eDP-1 --brightness $(/usr/bin/python3 -c "print(max(0, $(/usr/bin/xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1))")
 
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
@@ -346,3 +356,8 @@ exec --no-startup-id udisksctl mount -b /dev/sda1
 #exec --no-startup-id caffeine-indicator 
 #exec --no-startup-id  /usr/lib/pentablet/pentablet.sh
 exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
+
+
+
+
+# exec --no-startup-id i3-msg reload

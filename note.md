@@ -4,6 +4,7 @@
 - [Linux Notes.](#linux-notes)
   - [The problem with running Chrome, Github-dektop, ...](#the-problem-with-running-chrome-github-dektop)
   - [To preview the markdown for notes taking](#to-preview-the-markdown-for-notes-taking)
+  - [How to install polybar on Linux from source file](#how-to-install-polybar-on-linux-from-source-file)
 <!--toc:end-->
 
 ## The problem with running Chrome, Github-dektop, ...
@@ -39,4 +40,22 @@ source /etc/environment
    ```bash
    Lazy build peek.nvim
    ```
+4. To preview the code, you need to run:
+    
+   ```
+   :PeekOpen
+   ```
+## How to install poly bar on Linux from the source file
+refer to 
 
+https://github.com/polybar/polybar/wiki/Compiling
+
+Don't forget these to command:
+
+```
+pip install --upgrade jinja2
+pip install --upgrade sphinx
+```
+
+TODO:
+Write a bash file.
