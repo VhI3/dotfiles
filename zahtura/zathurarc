@@ -1,0 +1,9 @@
+set synctex true
+set window-title-basename "true"
+set selection-clipboard "clipboard"
+
+
+set highlight-color		"#7aa2f7"
+set highlight-active-color	"#bb9af7"
+set highlight-transparency .3
+set adjust-open			"width"
