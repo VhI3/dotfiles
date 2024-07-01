@@ -8,7 +8,7 @@ new_window pixel
 gaps inner 13
 
 # Font for window titles.
-font pango: SpaceMono Nerd Font Mono Medium 15
+font pango: SpaceMono Nerd Font Mono Medium 13
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -23,9 +23,12 @@ bindsym $mod+Shift+q kill
 #exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
 
 # variables for left and right monitor 
-set $belowMonitor eDP-1 
+set $firstMonitor DP-6 
+set $secodMonitor DP-4 
+
 # set $aboveMonitor DP-1 
-set $aboveMonitor DP-2 
+# set $belowMonitor eDP-1 
+# set $aboveMonitor DP-2 
 # set $aboveMonitor HDMI-2 
 
 # Set Keyboard layouts
@@ -191,28 +194,28 @@ bindsym $mod+Shift+F10 move container to workspace $workspace20
 bindsym $mod+Shift+F11 move container to workspace $workspace21
 bindsym $mod+Shift+F12 move container to workspace $workspace22
 
-workspace  $workspace1  output $aboveMonitor
-workspace  $workspace2  output $belowMonitor
-workspace  $workspace3  output $aboveMonitor
-workspace  $workspace4  output $aboveMonitor
-workspace  $workspace5  output $aboveMonitor
-workspace  $workspace6  output $belowMonitor
-workspace  $workspace7  output $belowMonitor
-workspace  $workspace8  output $belowMonitor
-workspace  $workspace9  output $belowMonitor	
-workspace  $workspace0  output $belowMonitor
-workspace  $workspace11 output $aboveMonitor
-workspace  $workspace12 output $belowMonitor
-workspace  $workspace13 output $aboveMonitor
-workspace  $workspace14 output $belowMonitor
-workspace  $workspace15 output $belowMonitor
-workspace  $workspace16 output $belowMonitor
-workspace  $workspace17 output $belowMonitor
-workspace  $workspace18 output $belowMonitor
-workspace  $workspace19 output $belowMonitor
-workspace  $workspace20 output $belowMonitor
-workspace  $workspace21 output $belowMonitor
-workspace  $workspace22 output $belowMonitor
+workspace  $workspace1  output $firstMonitor
+workspace  $workspace2  output $firstMonitor
+workspace  $workspace3  output $secodMonitor
+workspace  $workspace4  output $firstMonitor
+workspace  $workspace5  output $firstMonitor
+workspace  $workspace6  output $firstMonitor
+workspace  $workspace7  output $secodMonitor
+workspace  $workspace8  output $firstMonitor
+workspace  $workspace9  output $secodMonitor
+workspace  $workspace0  output $secodMonitor
+workspace  $workspace11 output $secodMonitor
+workspace  $workspace12 output $secodMonitor
+workspace  $workspace13 output $secodMonitor
+workspace  $workspace14 output $secodMonitor
+workspace  $workspace15 output $secodMonitor
+workspace  $workspace16 output $secodMonitor
+workspace  $workspace17 output $secodMonitor
+workspace  $workspace18 output $secodMonitor
+workspace  $workspace19 output $secodMonitor
+workspace  $workspace20 output $secodMonitor
+workspace  $workspace21 output $secodMonitor
+workspace  $workspace22 output $secodMonitor
 
 # Always open some programs on specified workspace
 assign [class="Alacritty"]                           $workspace1
@@ -296,10 +299,10 @@ client.background       #F8F8F2
 
 
 bar {
-    status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
+    status_command    python3 ~/.config/i3pystatus/i3pystatus.conf
     position          top
     workspace_buttons yes
-    font pango:Hack, FontAwesome 15
+        font pango:Hack Nerd Font Mono 13
     colors {
         background #282A36
         statusline #F8F8F2
@@ -341,9 +344,7 @@ exec --no-startup-id xset s noblank
 exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
 # exec --no-startup-id xautolock -time 1 -locker ~/.config/matrixlock/matrixlock.py
 exec --no-startup-id nm-applet
-# exec --no-startup-id ~/.screenlayout/laptop2Monitor_Home.sh
-# exec --no-startup-id ~/.screenlayout/setMonitors.sh
-exec --no-startup-id ~/.screenlayout/cambridgeSettings.sh
+exec --no-startup-id ~/.screenlayout/twoMonitor.sh
 exec --no-startup-id ~/.opt/hiri/hiri.sh
 exec --no-startup-id volumeicon
 exec --no-startup-id Nextcloud
