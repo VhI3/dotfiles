@@ -219,7 +219,7 @@ workspace  $workspace22 output $secodMonitor
 
 # Always open some programs on specified workspace
 assign [class="Alacritty"]                           $workspace1
-assign [class="Zathura"]                             $workspace2
+assign [class="Zathura"]                             $workspace1
 assign [class="firefox"]                             $workspace3
 assign [class="VSCodium"]                            $workspace4
 assign [class="MATLAB R202*"]                        $workspace5
