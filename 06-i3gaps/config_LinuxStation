@@ -23,8 +23,8 @@ bindsym $mod+Shift+q kill
 #exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
 
 # variables for left and right monitor 
-set $firstMonitor DP-6 
-set $secodMonitor DP-4 
+set $firstMonitor DP-2 
+set $secondMonitor DP-4 
 
 # set $aboveMonitor DP-1 
 # set $belowMonitor eDP-1 
@@ -197,26 +197,26 @@ bindsym $mod+Shift+F12 move container to workspace $workspace22
 
 workspace  $workspace1  output $firstMonitor
 workspace  $workspace2  output $firstMonitor
-workspace  $workspace3  output $secodMonitor
+workspace  $workspace3  output $secondMonitor
 workspace  $workspace4  output $firstMonitor
 workspace  $workspace5  output $firstMonitor
 workspace  $workspace6  output $firstMonitor
-workspace  $workspace7  output $secodMonitor
+workspace  $workspace7  output $secondMonitor
 workspace  $workspace8  output $firstMonitor
-workspace  $workspace9  output $secodMonitor
-workspace  $workspace0  output $secodMonitor
-workspace  $workspace11 output $secodMonitor
-workspace  $workspace12 output $secodMonitor
-workspace  $workspace13 output $secodMonitor
-workspace  $workspace14 output $secodMonitor
-workspace  $workspace15 output $secodMonitor
-workspace  $workspace16 output $secodMonitor
-workspace  $workspace17 output $secodMonitor
-workspace  $workspace18 output $secodMonitor
-workspace  $workspace19 output $secodMonitor
-workspace  $workspace20 output $secodMonitor
-workspace  $workspace21 output $secodMonitor
-workspace  $workspace22 output $secodMonitor
+workspace  $workspace9  output $secondMonitor
+workspace  $workspace0  output $secondMonitor
+workspace  $workspace11 output $secondMonitor
+workspace  $workspace12 output $secondMonitor
+workspace  $workspace13 output $secondMonitor
+workspace  $workspace14 output $secondMonitor
+workspace  $workspace15 output $secondMonitor
+workspace  $workspace16 output $secondMonitor
+workspace  $workspace17 output $secondMonitor
+workspace  $workspace18 output $secondMonitor
+workspace  $workspace19 output $secondMonitor
+workspace  $workspace20 output $secondMonitor
+workspace  $workspace21 output $secondMonitor
+workspace  $workspace22 output $secondMonitor
 
 # Always open some programs on specified workspace
 assign [class="Alacritty"]                           $workspace1
@@ -358,8 +358,3 @@ exec --no-startup-id udisksctl mount -b /dev/sda1
 #exec --no-startup-id caffeine-indicator 
 #exec --no-startup-id  /usr/lib/pentablet/pentablet.sh
 exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
-
-
-
-
-# exec --no-startup-id i3-msg reload
