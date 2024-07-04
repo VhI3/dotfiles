@@ -103,7 +103,8 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
+bindsym $mod+a exec ~/.local/bin/find-cursor
 
 
 # Name the workspaces
@@ -245,7 +246,7 @@ for_window [class="Spotify"]                         move to workspace $workspac
 
 
 # Move all figures to workspace 19
-for_window [title="^Figure.*" class="MATLAB R202*"] move to workspace $workspace19
+# for_window [title="^Figure.*" class="MATLAB R202*"] move to workspace $workspace19
 # Enable float for all figures
 # for_window [title="^Figure.*" class="MATLAB R202*"] floating enable
 
@@ -254,7 +255,7 @@ for_window [title="^Figure.*" class="MATLAB R202*"] move to workspace $workspace
 # Enable float for some windows
 for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
-# for_window [class="MATLAB R202*"] floating enable 
+for_window [class="MATLAB R202*"] floating enable 
 
 
 # reload the configuration file
