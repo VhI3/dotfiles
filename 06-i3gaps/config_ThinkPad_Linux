@@ -1,0 +1,368 @@
+# Default modkey
+set $mod Mod4
+
+# Hide titlebar
+new_window pixel
+
+# i3-gaps
+gaps inner 13
+
+# Font for window titles.
+font pango: SpaceMono Nerd Font Mono Medium 13
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec alacritty
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Set monitor arrangement on TinkStation with 3 Monitors
+#exec --no-startup-id ~/.config/setMonitors/setMonitor.sh
+
+# variables for left and right monitor 
+set $firstMonitor DP-2 
+set $secondMonitor DP-4 
+
+# set $aboveMonitor DP-1 
+# set $belowMonitor eDP-1 
+# set $aboveMonitor DP-2 
+# set $aboveMonitor HDMI-2 
+
+# Set Keyboard layouts
+# exec setxkbmap -option caps:swapescape
+# exec setxkbmap -layout us,ir
+# exec setxkbmap -option 'grp:alt_shift_toggle'
+# exec_always "setxkbmap -layout us,de,ir"
+# exec_always "setxkbmap -option 'grp:alt_shift_toggle'"
+# To add the umlauts
+# sudo dpkg-reconfigure keyboard-configuration
+# choose 1: Generic 105-key PC (int.)
+# choose 2: English (US) 
+# choose 3: English (US) 
+# choose 4: No AltGr key 
+# choose 5: Right Alt (AltGr) 
+# AltGr + u + "          ----> ü
+# AltGr + Shift + u + "  ----> Ü
+# AltGr + a + "          ----> ä
+# AltGr + Shift + a + "  ----> Ä
+# AltGr + o + "          ----> ö
+# AltGr + Shift + o + "  ----> Ö 
+# AltGr + s + s          ----> ß 
+#
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Start rofi
+bindsym $mod+d exec rofi -show drun -columns 3
+
+# Move between windows
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split in horizontal orientation
+bindsym $mod+o split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+# bindsym $mod+a focus parent
+bindsym $mod+a exec ~/.local/bin/find-cursor
+
+
+# Name the workspaces
+# Alacritty
+set $workspace1 "1: " 
+# Zathura 
+set $workspace2 "2: " 
+# FireFox 
+set $workspace3 "3: " 
+# VScode
+set $workspace4 "4:﬏ " 
+# Matlab
+set $workspace5 "5: " 
+# Clion
+set $workspace6 "6: " 
+# Telegram
+set $workspace7 "7: " 
+# Xournalpp
+set $workspace8 "8:" 
+# Nemo
+set $workspace9 "9: " 
+# Spotify
+set $workspace0 "10:" 
+# qpdfview
+set $workspace11 "11:"
+# Powerpoint
+set $workspace12 "12:"
+set $workspace13 "13:"
+set $workspace14 "14:"
+set $workspace15 "15:"
+set $workspace16 "16:"
+# GitHub
+set $workspace17 "17:"
+set $workspace18 "18:"
+set $workspace19 "19:"
+# Hiri
+set $workspace20 "20:﫯"
+# Thunderbird
+set $workspace21 "21:﫯" 
+# WebEx
+set $workspace22 "22:" 
+
+# Switch to workspace
+bindsym $mod+1   workspace $workspace1
+bindsym $mod+2   workspace $workspace2
+bindsym $mod+3   workspace $workspace3
+bindsym $mod+4   workspace $workspace4
+bindsym $mod+5   workspace $workspace5
+bindsym $mod+6   workspace $workspace6
+bindsym $mod+7   workspace $workspace7
+bindsym $mod+8   workspace $workspace8
+bindsym $mod+9   workspace $workspace9
+bindsym $mod+0   workspace $workspace0
+bindsym $mod+F1  workspace $workspace11
+bindsym $mod+F2  workspace $workspace12
+bindsym $mod+F3  workspace $workspace13
+bindsym $mod+F4  workspace $workspace14
+bindsym $mod+F5  workspace $workspace15
+bindsym $mod+F6  workspace $workspace16
+bindsym $mod+F7  workspace $workspace17
+bindsym $mod+F8  workspace $workspace18
+bindsym $mod+F9  workspace $workspace19
+bindsym $mod+F10 workspace $workspace20
+bindsym $mod+F11 workspace $workspace21
+bindsym $mod+F12 workspace $workspace22
+
+# Move focused container to workspace
+bindsym $mod+Shift+1   move container to workspace $workspace1
+bindsym $mod+Shift+2   move container to workspace $workspace2
+bindsym $mod+Shift+3   move container to workspace $workspace3
+bindsym $mod+Shift+4   move container to workspace $workspace4
+bindsym $mod+Shift+5   move container to workspace $workspace5
+bindsym $mod+Shift+6   move container to workspace $workspace6
+bindsym $mod+Shift+7   move container to workspace $workspace7
+bindsym $mod+Shift+8   move container to workspace $workspace8
+bindsym $mod+Shift+9   move container to workspace $workspace9
+bindsym $mod+Shift+0   move container to workspace $workspace0
+bindsym $mod+Shift+F1  move container to workspace $workspace11
+bindsym $mod+Shift+F2  move container to workspace $workspace12
+bindsym $mod+Shift+F3  move container to workspace $workspace13
+bindsym $mod+Shift+F4  move container to workspace $workspace14
+bindsym $mod+Shift+F5  move container to workspace $workspace15
+bindsym $mod+Shift+F6  move container to workspace $workspace16
+bindsym $mod+Shift+F7  move container to workspace $workspace17
+bindsym $mod+Shift+F8  move container to workspace $workspace18
+bindsym $mod+Shift+F9  move container to workspace $workspace19
+bindsym $mod+Shift+F10 move container to workspace $workspace20
+bindsym $mod+Shift+F11 move container to workspace $workspace21
+bindsym $mod+Shift+F12 move container to workspace $workspace22
+
+workspace  $workspace1  output $firstMonitor
+workspace  $workspace2  output $firstMonitor
+workspace  $workspace3  output $secondMonitor
+workspace  $workspace4  output $firstMonitor
+workspace  $workspace5  output $firstMonitor
+workspace  $workspace6  output $firstMonitor
+workspace  $workspace7  output $secondMonitor
+workspace  $workspace8  output $firstMonitor
+workspace  $workspace9  output $secondMonitor
+workspace  $workspace0  output $secondMonitor
+workspace  $workspace11 output $secondMonitor
+workspace  $workspace12 output $secondMonitor
+workspace  $workspace13 output $secondMonitor
+workspace  $workspace14 output $secondMonitor
+workspace  $workspace15 output $secondMonitor
+workspace  $workspace16 output $secondMonitor
+workspace  $workspace17 output $secondMonitor
+workspace  $workspace18 output $secondMonitor
+workspace  $workspace19 output $secondMonitor
+workspace  $workspace20 output $secondMonitor
+workspace  $workspace21 output $secondMonitor
+workspace  $workspace22 output $secondMonitor
+
+# Always open some programs on specified workspace
+assign [class="Alacritty"]                           $workspace1
+assign [class="Zathura"]                             $workspace1
+assign [class="firefox"]                             $workspace3
+assign [class="VSCodium"]                            $workspace4
+assign [class="MATLAB R202*"]                        $workspace5
+assign [class="jetbrains-clion"]                     $workspace6
+assign [class="TelegramDesktop"]                     $workspace7
+assign [class="Xournalpp"]  	                     $workspace8
+assign [class="okular"]  	                         $workspace8
+assign [class="Nemo"]                                $workspace9
+assign [class="Spotify"]                             $workspace0
+assign [class="qpdfview"]                            $workspace11
+assign [class="libreoffice-impress"]                 $workspace12
+assign [class="GitHub Desktop"]                      $workspace17
+assign [class="Zotero"]                              $workspace18
+assign [class="Mendeley Desktop"]                    $workspace18
+assign [class="hiri"]                                $workspace20
+for_window [class="hiri"] floating enable
+assign [class="thunderbird"]                         $workspace21
+assign [class="webex*"]                              $workspace22
+for_window [class="Webex*"]                          move to workspace $workspace22
+for_window [class="Spotify"]                         move to workspace $workspace0
+# Open all figures in workspace 19 and in float format
+# for_window [title="Figure*" class="MATLAB R202*"] move to workspace $workspace19, floating enable
+
+
+# Move all figures to workspace 19
+# for_window [title="^Figure.*" class="MATLAB R202*"] move to workspace $workspace19
+# Enable float for all figures
+# for_window [title="^Figure.*" class="MATLAB R202*"] floating enable
+
+
+# for_window [title="Figure*"class="MATLAB R202*"]     move to workspace $workspace19
+# Enable float for some windows
+for_window [class="^Arandr$"] floating enable
+for_window [class="Yad"] floating enable
+for_window [class="MATLAB R202*"] floating enable 
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu -font "Hack Nerd Font Mono 13" -width 15   -lines 6
+
+#Lock the screen 
+bindsym $mod+Shift+x exec ~/.config/betterlockscreen/betterlockscreen --lock blur
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+# This a dracula theme
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+
+
+
+# exec_always --no-startup-id polybar -c ~/.config/polybar/config & 
+
+
+
+
+bar {
+    status_command    python3 ~/.config/i3pystatus/i3pystatus.conf
+    # i3bar_command polybar -c ~/.config/polybar/config
+    # status_command    polybar -c ~/.config/polybar/config
+    position          top
+    workspace_buttons yes
+        font pango:Hack Nerd Font Mono 13
+    colors {
+        background #282A36
+        statusline #F8F8F2
+        separator  #44475A
+  
+        focused_workspace  #44475A #44475A #F8F8F2
+        active_workspace   #282A36 #44475A #F8F8F2
+        inactive_workspace #282A36 #282A36 #BFBFBF
+        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        binding_mode       #FF5555 #FF5555 #F8F8F2
+   }
+
+ }
+
+
+# Spotify related key bindings
+bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+
+# Increase brightness Still notworking
+# bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xrandr --output eDP-1 --brightness $(/usr/bin/python3 -c "print(min(1, $(/usr/bin/xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') + 0.1))")
+
+# Decrease brightness Still notworking
+# bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xrandr --output eDP-1 --brightness $(/usr/bin/python3 -c "print(max(0, $(/usr/bin/xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1))")
+
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/betterlockscreen/betterlockscreen
+
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s noblank
+
+
+exec_always --no-startup-id ~/.config/setWallpaper/wallpapers.sh
+# exec --no-startup-id xautolock -time 1 -locker ~/.config/matrixlock/matrixlock.py
+exec --no-startup-id nm-applet
+exec --no-startup-id ~/.screenlayout/twoMonitor.sh
+exec --no-startup-id ~/.opt/hiri/hiri.sh
+exec --no-startup-id volumeicon
+exec --no-startup-id Nextcloud
+# exec --no-startup-id GitHubDesktop 
+exec --no-startup-id compton 
+exec --no-startup-id thunderbird
+exec --no-startup-id pcloud 
+exec --no-startup-id udisksctl mount -b /dev/sda1
+# exec --no-startup-id protonvpn-cli r
+#exec --no-startup-id caffeine-indicator 
+#exec --no-startup-id  /usr/lib/pentablet/pentablet.sh
+exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
