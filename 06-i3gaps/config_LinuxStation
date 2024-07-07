@@ -299,8 +299,16 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
 
 
+
+# exec_always --no-startup-id polybar -c ~/.config/polybar/config & 
+
+
+
+
 bar {
     status_command    python3 ~/.config/i3pystatus/i3pystatus.conf
+    # i3bar_command polybar -c ~/.config/polybar/config
+    # status_command    polybar -c ~/.config/polybar/config
     position          top
     workspace_buttons yes
         font pango:Hack Nerd Font Mono 13
