@@ -54,6 +54,9 @@ type = internal/tray
 format-margin = 8pt
 tray-spacing = 16pt
 
+tray-detached = true
+
+
 [module/xworkspaces]
 type = internal/xworkspaces
 
