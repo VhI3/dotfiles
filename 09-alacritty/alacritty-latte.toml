@@ -1,0 +1,165 @@
+[window]
+
+opacity = 0.9
+
+padding.x = 10
+padding.y = 10
+
+decorations = "Full"
+decorations_theme_variant = "Dark" # "Light"
+
+# [font]
+# normal = {family="JetBrainsMono", style="Regular"}
+[font]
+normal.family = "JetBrainsMono Nerd Font"
+bold.family = "JetBrainsMono Nerd Font"
+italic.family = "JetBrainsMono Nerd Font"
+bold_italic.family = "JetBrainsMono Nerd Font"
+#
+offset.x = 0  # For letter spacing (default: 0)
+offset.y = 0  # For line spacing (default: 0)
+
+size = 15.0
+
+[scrolling]
+
+# Maximum number of lines in the scrollback buffer
+history = 10000  # Default: 10000
+
+# Number of lines scrolled for every input scroll increment
+multiplier = 3  # Default: 3
+
+
+[env]
+TERM = "xterm-256color"
+
+[colors.primary]
+background = "#eff1f5"
+foreground = "#4c4f69"
+dim_foreground = "#8c8fa1"
+bright_foreground = "#4c4f69"
+
+[colors.cursor]
+text = "#eff1f5"
+cursor = "#dc8a78"
+
+[colors.vi_mode_cursor]
+text = "#eff1f5"
+cursor = "#7287fd"
+
+[colors.search.matches]
+foreground = "#eff1f5"
+background = "#6c6f85"
+
+[colors.search.focused_match]
+foreground = "#eff1f5"
+background = "#40a02b"
+
+[colors.footer_bar]
+foreground = "#eff1f5"
+background = "#6c6f85"
+
+[colors.hints.start]
+foreground = "#eff1f5"
+background = "#df8e1d"
+
+[colors.hints.end]
+foreground = "#eff1f5"
+background = "#6c6f85"
+
+[colors.selection]
+text = "#eff1f5"
+background = "#dc8a78"
+
+[colors.normal]
+black = "#bcc0cc"
+red = "#d20f39"
+green = "#40a02b"
+yellow = "#df8e1d"
+blue = "#1e66f5"
+magenta = "#ea76cb"
+cyan = "#179299"
+white = "#5c5f77"
+
+[colors.bright]
+black = "#acb0be"
+red = "#d20f39"
+green = "#40a02b"
+yellow = "#df8e1d"
+blue = "#1e66f5"
+magenta = "#ea76cb"
+cyan = "#179299"
+white = "#6c6f85"
+
+[colors.dim]
+black = "#bcc0cc"
+red = "#d20f39"
+green = "#40a02b"
+yellow = "#df8e1d"
+blue = "#1e66f5"
+magenta = "#ea76cb"
+cyan = "#179299"
+white = "#5c5f77"
+
+[[colors.indexed_colors]]
+index = 16
+color = "#fe640b"
+
+[[colors.indexed_colors]]
+index = 17
+color = "#dc8a78"
+
+########
+# BELL #
+########
+
+[bell]
+
+# Visual bell animation effect
+animation = "Linear"  # Default: "Linear"
+
+# Duration of the visual bell flash in milliseconds
+duration = 0  # Default: 0
+
+# Visual bell animation color
+color = "#ffffff"  # Default: "#ffffff"
+
+# Command executed when the bell is rung
+command = "None"  # Default: "None"
+
+#############
+# SELECTION #
+#############
+
+[selection]
+
+# Characters that are used as separators for "semantic words" in Alacritty
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\\t"  # Default: ",│`|:\"' ()[]{}<>\\t"
+
+# When set to true, selected text will be copied to the primary clipboard
+save_to_clipboard = false  # Default: false
+
+##########
+# CURSOR #
+##########
+
+[cursor]
+
+# Cursor style
+style = { shape = "Block", blinking = "On" }  # Default: shape = "Block", blinking = "Off"
+
+# Vi mode cursor style (falls back to the active value of the normal cursor if "None")
+vi_mode_style = "None"  # Default: "None"
+
+# Cursor blinking interval in milliseconds
+blink_interval = 750  # Default: 750
+
+# Time after which cursor stops blinking, in seconds
+blink_timeout = 0  # Default: 5
+
+# When true, the cursor will be rendered as a hollow box when the window is not focused
+unfocused_hollow = true  # Default: true
+
+# Thickness of the cursor relative to the cell width
+thickness = 0.15  # Default: 0.15
+

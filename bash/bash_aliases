@@ -1,7 +1,7 @@
 #######################################################
 # GENERAL ALIAS'S
 #######################################################
-# To temporarily bypass an alias, we preceed the command with a \
+# To temporarily bypass an alias, we proceed the command with a \
 # EG: the ls command is aliased, but to use the normal ls command you would type \ls
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -46,7 +46,7 @@ alias .....='cd ../../../..'
 alias bd='cd "$OLDPWD"'
 
 # Single Line update, upgrade ..
-alias aaa='sudo apt update && sudo apt upgrade && sudo apt autoremove && sudo apt autoclean'
+alias aaa='sudo apt update && sudo apt upgrade &&  ~/dotfiles/18-githubDesktop/githubDesktopUpdate.sh && sudo apt autoremove && sudo apt autoclean'
 
 alias bye="sudo systemctl poweroff"
 alias reboot="sudo systemctl reboot"
@@ -60,9 +60,9 @@ alias gall='git add -A'
 alias gap='git add -p'
 
 function lazygit() {
-	git add .
-	git commit -a -m "$1"
-	git push
+  git add .
+  git commit -a -m "$1"
+  git push
 }
 
 # Remove a directory and all files
