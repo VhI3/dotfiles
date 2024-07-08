@@ -8,9 +8,9 @@ return {
     opts = {
       -- catppuccin/nvim
       -- colorscheme = "catppuccin-macchiato",
-      -- colorscheme = "catppuccin-latte",
+      colorscheme = "catppuccin-latte",
       -- colorscheme = "catppuccin-frappe",
-      colorscheme = "catppuccin-mocha",
+      -- colorscheme = "catppuccin-mocha",
 
       -- colorscheme = "modus_operandi",
       -- colorscheme = "modus_vivendi",
