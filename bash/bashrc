@@ -339,3 +339,18 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export DENO_INSTALL="/home/vahab/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/home/vahab/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/home/vahab/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<
