@@ -113,6 +113,7 @@ int main(int argc, char* argv[]) {
 	int wait = 400;
 	int line_width = 4;
 	char color_name[64] = "black";
+	// char color_name[64] = "pink"; // For Anspi
 	char ocolor_name[64];
 	int follow = 0;
 	int transparent = 0;
