@@ -47,5 +47,3 @@ set highlight-fg              rgba(245,194,231,0.5)
 set highlight-active-color	  rgba(245,194,231,0.5)
 set highlight-transparency    .3
 set adjust-open			          "width"
-
-
