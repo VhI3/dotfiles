@@ -46,7 +46,7 @@ alias .....='cd ../../../..'
 alias bd='cd "$OLDPWD"'
 
 # Single Line update, upgrade ..
-alias aaa='sudo apt update && sudo apt upgrade &&  ~/dotfiles/18-githubDesktop/githubDesktopUpdate.sh && sudo apt autoremove && sudo apt autoclean'
+alias aaa='sudo apt update && sudo apt upgrade &&  ~/dotfiles/18-githubDesktop/githubDesktopUpdate.sh && ~/dotfiles/nvim/manage_nvim.sh && sudo apt autoremove && sudo apt autoclean'
 
 alias bye="sudo systemctl poweroff"
 alias reboot="sudo systemctl reboot"
