@@ -154,3 +154,6 @@ alias sfcd='cd /home/vahab/iRMB/Projects/statFEM/Codes/src/sampling_free_statFEM
 alias ekey='e /home/vahab/iRMB/Learn/nvim/shortcuts.txt'
 
 alias mbsync="mbsync -c \"/home/vahab/.config/isync/mbsyncrc\""
+
+# Alias for Matlab run on command line
+alias mat='matlab -nodesktop -nosplash'
