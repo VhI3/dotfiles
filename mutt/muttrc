@@ -7,7 +7,7 @@ set realname = "Vahab Narouie"
 set smtp_url = "smtp://mail.gmx.net:587/"
 set smtp_pass = "PASS"
 set imap_user = "nvahab@gmx.de"
-set imap_pass = "BigBaraBoom"
+set imap_pass = "PASS"
 
 # My mailboxes
 set folder = "imaps://imap.gmx.net:993"
