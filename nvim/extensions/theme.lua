@@ -15,8 +15,8 @@ return {
       -- colorscheme = "modus_operandi",
       -- colorscheme = "modus_vivendi",
 
-      -- colorscheme = "github_dark",
-      colorscheme = "github_light",
+      colorscheme = "github_dark",
+      -- colorscheme = "github_light",
       -- colorscheme = "github_dark_dimmed",
       -- colorscheme = "github_dark_default",
       -- colorscheme = "github_light_default",
