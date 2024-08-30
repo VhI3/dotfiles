@@ -249,6 +249,7 @@ for_window [class="Spotify"]                         move to workspace $workspac
 for_window [title="^Figure.*" class="MATLAB R202*"] move to workspace $workspace19
 # Enable float for all figures
 # for_window [title="^Figure.*" class="MATLAB R202*"] floating enable
+for_window [class="gnuplot_qt"] floating enable
 
 
 # for_window [title="Figure*"class="MATLAB R202*"]     move to workspace $workspace19
