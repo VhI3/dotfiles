@@ -106,6 +106,8 @@ bindsym $mod+space focus mode_toggle
 # bindsym $mod+a focus parent
 bindsym $mod+a exec ~/.local/bin/find-cursor
 
+# Swap Escape with CapsLock if it is not working
+bindsym $mod+Tab exec ~/dotfiles/swapEscape/swapEscape.sh 
 
 # Name the workspaces
 # Alacritty
