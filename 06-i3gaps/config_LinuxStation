@@ -217,7 +217,7 @@ workspace  $workspace17 output $secondMonitor
 workspace  $workspace18 output $secondMonitor
 workspace  $workspace19 output $secondMonitor
 workspace  $workspace20 output $secondMonitor
-workspace  $workspace21 output $secondMonitor
+workspace  $workspace21 output $firstMonitor
 workspace  $workspace22 output $secondMonitor
 
 # Always open some programs on specified workspace
