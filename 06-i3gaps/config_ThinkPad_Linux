@@ -306,7 +306,7 @@ client.background       #F8F8F2
 
 
 bar {
-    status_command    python3 ~/.config/i3pystatus/i3pystatus.conf
+    status_command    python3.8 ~/.config/i3pystatus/i3pystatus.conf
     # i3bar_command polybar -c ~/.config/polybar/config
     # status_command    polybar -c ~/.config/polybar/config
     position          top
