@@ -18,7 +18,7 @@ fetch_latest_neovim_version() {
 # Function to download the latest Neovim AppImage
 download_neovim_appimage() {
   local version="$1"
-  local url="https://github.com/neovim/neovim/releases/download/${version}/nvim.appimage"
+  local url="https://github.com/neovim/neovim/releases/download/${version}/nvim-linux-x86_64.appimage"
   if ! wget "$url" -O nvim.appimage; then
     echo "Failed to download Neovim AppImage. Please check your network connection."
     exit 1
