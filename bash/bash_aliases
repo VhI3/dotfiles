@@ -149,7 +149,7 @@ alias ex='joshuto'
 
 # Alias's for statFEM Project
 alias cdsf='cd ~/iRMB/Projects/statFEM/Publications/Sampling-Free-StatFEM/'
-alias cdsi='cd ~/iRMB/Projects/statFEM_Stress/Publications/statFEM_stress_Infarance/'
+alias cdsi='cd ~/iRMB/Projects/statFEM_Stress/'
 # alias sfcd='cd /home/vahab/iRMB/Projects/statFEM/Codes/src/sampling_free_statFEM/infinitePlate'
 # Alias's for opening the VHI3 keybindings for nvim
 alias ekey='e /home/vahab/iRMB/Learn/nvim/shortcuts.txt'

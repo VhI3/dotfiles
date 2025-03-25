@@ -205,7 +205,7 @@ workspace  $workspace5  output $firstMonitor
 workspace  $workspace6  output $firstMonitor
 workspace  $workspace7  output $secondMonitor
 workspace  $workspace8  output $firstMonitor
-workspace  $workspace9  output $firstMonitor
+workspace  $workspace9  output $secondMonitor
 workspace  $workspace0  output $secondMonitor
 workspace  $workspace11 output $secondMonitor
 workspace  $workspace12 output $secondMonitor
