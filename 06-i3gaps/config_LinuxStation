@@ -258,6 +258,7 @@ for_window [class="gnuplot_qt"] floating enable
 # Enable float for some windows
 for_window [class="^Arandr$"] floating enable
 for_window [class="Yad"] floating enable
+for_window [class="kate"] floating enable
 # for_window [class="MATLAB R202*"] floating enable 
 
 # Execute the script whenever a window gains focus
