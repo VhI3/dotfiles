@@ -111,8 +111,7 @@ if ! shopt -oq posix; then
 fi
 # For latest rust compiler
 . "$HOME/.cargo/env"
-#source $(dirname $(gem which colorls))/tab_complete.sh
-alias lc='colorls -lA --sd --dark'
+alias lc='eza -la --group-directories-first --icons'
 
 #######################################################
 # SPECIAL FUNCTIONS
@@ -247,9 +246,9 @@ up() {
 # Automatically do an ls after each cd
 cd() {
   if [ -n "$1" ]; then
-    builtin cd "$@" && colorls -a
+    builtin cd "$@" && eza -a --icons
   else
-    builtin cd ~ && colorls -a
+    builtin cd ~ && eza -a --icons
   fi
 }
 

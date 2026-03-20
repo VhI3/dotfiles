@@ -1,0 +1,377 @@
+### Sway config
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+exec hash dbus-update-activation-environment >/dev/null 2>&1 && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+
+
+xwayland enable
+
+
+# Gaps
+gaps inner 13
+# Wallpaper
+exec_always swaybg -i /home/vahab/Pictures/Wallpaper1.jpg -m fill
+# Clipboard (Wayland)
+# sudo apt install wl-clipboard
+
+### Variables
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+# set $term konsole 
+# set $term alacritty 
+set $term kitty 
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu dmenu_run
+
+
+# Monitor settings 
+output HDMI-A-2 scale 2.01 
+output HDMI-A-2 pos 0 0 res 3840x2160 
+output eDP-1 pos  0 1080 res 1920x1080
+
+# set monitors
+set $firstMonitor eDP-1
+set $secondMonitor HDMI-A-2
+
+### Output configuration
+# set $background /usr/share/backgrounds/sway/Sway_Wjllpaper_Blue_1920x1080.png
+# output * bg $background fill
+
+### Key bindings
+# Basics:
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    set $menu rofi -show drun
+    bindsym $mod+d exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+r reload
+
+    # Exit sway (logs you out of your Wayland session)
+    # bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e  exec rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu -font "Hack Nerd Font Mono 13" -width 15   -lines 6
+
+# Moving around:
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+
+    # --- Workspace names (unchanged) ---
+    set $workspace1  "1:  "
+    set $workspace2  "2:  "
+    set $workspace3  "3:  "
+    set $workspace4  "4:  "
+    set $workspace5  "5:  "
+    set $workspace6  "6:  "
+    set $workspace7  "7:  "
+    set $workspace8  "8: 󰠮 "
+    set $workspace9  "9:   "
+    set $workspace0  "10:  "
+    set $workspace11 "11:  "
+    set $workspace12 "12:"
+    set $workspace13 "13:"
+    set $workspace14 "14:"
+    set $workspace15 "15:"
+    set $workspace16 "16:"
+    set $workspace17 "17:  "
+    set $workspace18 "18:"
+    set $workspace19 "19:"
+    set $workspace20 "20:﫯"
+    set $workspace21 "21:  "
+    set $workspace22 "22:  "
+    
+    # --- Switch bindings (unchanged) ---
+    bindsym $mod+1   workspace $workspace1
+    bindsym $mod+2   workspace $workspace2
+    bindsym $mod+3   workspace $workspace3
+    bindsym $mod+4   workspace $workspace4
+    bindsym $mod+5   workspace $workspace5
+    bindsym $mod+6   workspace $workspace6
+    bindsym $mod+7   workspace $workspace7
+    bindsym $mod+8   workspace $workspace8
+    bindsym $mod+9   workspace $workspace9
+    bindsym $mod+0   workspace $workspace0
+    bindsym $mod+F1  workspace $workspace11
+    bindsym $mod+F2  workspace $workspace12
+    bindsym $mod+F3  workspace $workspace13
+    bindsym $mod+F4  workspace $workspace14
+    bindsym $mod+F5  workspace $workspace15
+    bindsym $mod+F6  workspace $workspace16
+    bindsym $mod+F7  workspace $workspace17
+    bindsym $mod+F8  workspace $workspace18
+    bindsym $mod+F9  workspace $workspace19
+    bindsym $mod+F10 workspace $workspace20
+    bindsym $mod+F11 workspace $workspace21
+    bindsym $mod+F12 workspace $workspace22
+    
+    # --- Move focused container (unchanged) ---
+    bindsym $mod+Shift+1   move container to workspace $workspace1
+    bindsym $mod+Shift+2   move container to workspace $workspace2
+    bindsym $mod+Shift+3   move container to workspace $workspace3
+    bindsym $mod+Shift+4   move container to workspace $workspace4
+    bindsym $mod+Shift+5   move container to workspace $workspace5
+    bindsym $mod+Shift+6   move container to workspace $workspace6
+    bindsym $mod+Shift+7   move container to workspace $workspace7
+    bindsym $mod+Shift+8   move container to workspace $workspace8
+    bindsym $mod+Shift+9   move container to workspace $workspace9
+    bindsym $mod+Shift+0   move container to workspace $workspace0
+    bindsym $mod+Shift+F1  move container to workspace $workspace11
+    bindsym $mod+Shift+F2  move container to workspace $workspace12
+    bindsym $mod+Shift+F3  move container to workspace $workspace13
+    bindsym $mod+Shift+F4  move container to workspace $workspace14
+    bindsym $mod+Shift+F5  move container to workspace $workspace15
+    bindsym $mod+Shift+F6  move container to workspace $workspace16
+    bindsym $mod+Shift+F7  move container to workspace $workspace17
+    bindsym $mod+Shift+F8  move container to workspace $workspace18
+    bindsym $mod+Shift+F9  move container to workspace $workspace19
+    bindsym $mod+Shift+F10 move container to workspace $workspace20
+    bindsym $mod+Shift+F11 move container to workspace $workspace21
+    bindsym $mod+Shift+F12 move container to workspace $workspace22
+    
+    # --- Pin workspaces to outputs (ensure $firstMonitor/$secondMonitor are set above) ---
+    workspace $workspace1  output $secondMonitor
+    workspace $workspace2  output $firstMonitor
+    workspace $workspace3  output $secondMonitor
+    workspace $workspace4  output $secondMonitor
+    workspace $workspace5  output $secondMonitor
+    workspace $workspace6  output $firstMonitor
+    workspace $workspace7  output $secondMonitor
+    workspace $workspace8  output $firstMonitor
+    workspace $workspace9  output $secondMonitor
+    workspace $workspace0  output $secondMonitor
+    workspace $workspace11 output $secondMonitor
+    workspace $workspace12 output $secondMonitor
+    workspace $workspace13 output $secondMonitor
+    workspace $workspace14 output $secondMonitor
+    workspace $workspace15 output $secondMonitor
+    workspace $workspace16 output $secondMonitor
+    workspace $workspace17 output $secondMonitor
+    workspace $workspace18 output $secondMonitor
+    workspace $workspace19 output $firstMonitor
+    workspace $workspace20 output $secondMonitor
+    workspace $workspace21 output $secondMonitor
+    workspace $workspace22 output $secondMonitor
+    
+
+### Assignments (put this ABOVE your exec/autostart lines)
+
+# 1
+assign [app_id="kitty"]                        $workspace1
+assign [app_id="org.pwmt.zathura"]                 $workspace1
+assign [class="Zathura"]                           $workspace1
+
+# 3
+assign [app_id="firefox"]                          $workspace3
+assign [class="firefox"]                           $workspace3
+
+# 4 (VSCodium)
+assign [app_id="codium"]                           $workspace4
+assign [app_id="com.vscodium.codium"]              $workspace4   
+assign [app_id="code"]                             $workspace4   
+assign [class="VSCodium"]                          $workspace4
+
+# 5 (MATLAB is XWayland)
+assign [class="MATLAB R202.*"]                     $workspace5
+
+# 6 (CLion often XWayland)
+assign [app_id="jetbrains-clion"]                  $workspace6
+assign [class="jetbrains-clion"]                   $workspace6
+
+# 7 (Telegram)
+assign [app_id="telegramdesktop"]                  $workspace7
+assign [app_id="org.telegram.desktop"]             $workspace7   
+assign [class="TelegramDesktop"]                   $workspace7
+
+# 8 (Xournal++ / Okular)
+assign [app_id="xournalpp"]                        $workspace8
+assign [class="Xournalpp"]                         $workspace8
+assign [app_id="org.kde.okular"]                   $workspace8
+assign [class="okular"]                            $workspace8
+
+# 9 (Nemo)
+assign [app_id="nemo"]                             $workspace9
+assign [class="Nemo"]                              $workspace9
+
+# 10 (Spotify)
+assign [app_id="spotify"]                          $workspace0
+assign [app_id="com.spotify.Client"]               $workspace0  
+assign [class="Spotify"]                           $workspace0
+
+# 11 (qpdfview)
+assign [app_id="qpdfview"]                         $workspace11
+assign [class="qpdfview"]                          $workspace11
+
+# 12 (Impress)
+assign [app_id="libreoffice-impress"]              $workspace12
+assign [class="libreoffice-impress"]               $workspace12
+assign [app_id="libreoffice"]                      $workspace12  
+
+# 17 (GitHub Desktop)
+assign [app_id="github-desktop"]                   $workspace17
+assign [app_id="io.github.shiftey.Desktop"]        $workspace17  
+assign [class="GitHub Desktop"]                    $workspace17
+
+# 18 (Mendeley – XWayland)
+assign [class="Mendeley Desktop"]                  $workspace18
+
+# 20 (Hiri)
+assign [app_id="hiri"]                             $workspace20
+assign [class="hiri"]                              $workspace20
+
+# 21 (Thunderbird)
+assign [app_id="thunderbird"]                      $workspace21
+assign [class="thunderbird"]                       $workspace21
+
+# 22 (Webex varies)
+assign [app_id="webex"]                            $workspace22
+assign [app_id="CiscoCollabHost"]                  $workspace22
+assign [class="Webex"]                             $workspace22
+assign [class="CiscoCollabHost"]                   $workspace22
+   
+    # --- Window rules ---
+    for_window [app_id="hiri" class="hiri"]                     floating enable
+    for_window [title="^Figure.*" class="MATLAB R202.*"]        move to workspace $workspace19
+    for_window [app_id="webex" class="Webex"]                   move to workspace $workspace22
+    for_window [app_id="spotify" class="Spotify"]               move to workspace $workspace0
+
+
+
+# Layout stuff:
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+
+# Scratchpad:
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+
+# Resizing containers:
+    mode "resize" {
+        bindsym $left resize shrink width 10px
+        bindsym $down resize grow height 10px
+        bindsym $up resize shrink height 10px
+        bindsym $right resize grow width 10px
+
+        # Ditto, with arrow keys
+        bindsym Left resize shrink width 10px
+        bindsym Down resize grow height 10px
+        bindsym Up resize shrink height 10px
+        bindsym Right resize grow width 10px
+
+        # Return to default mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+    bindsym $mod+r mode "resize"
+
+# exec_always waybar --config ~/.config/waybar/config.jsonc --style ~/.config/waybar/style.css
+exec waybar
+
+input type:touchpad {
+  tap enabled
+  natural_scroll enabled
+  dwt enabled
+}
+
+
+input * {
+    xkb_layout us,ir
+    xkb_options caps:swapescape,grp:alt_shift_toggle,compose:ralt
+}
+# Helpful command
+# swaymsg -t get_tree
+
+# Thinkpada keys
+## Volume
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym	XF86AudioLowerVolume exec pactl	set-sink-volume	@DEFAULT_SINK@ -5%
+bindsym	XF86AudioMute exec pactl	set-sink-mute	@DEFAULT_SINK@ toggle
+## Mic
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+## Thinkvantage Button = Terminal
+bindsym XF86Launch1 exec $term
+## Brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+## Printscreen
+bindsym	Print exec grim
+
+#Lock the screen 
+bindsym $mod+Shift+x exec swaylock 
+exec mako
+
+exec --no-startup-id /usr/bin/kwalletd6
+exec --no-startup-id nm-applet
+exec --no-startup-id ~/.local/bin/Nextcloud
+exec --no-startup-id ~/.local/bin/thunderbird 
+exec --no-startup-id ~/.local/bin/pcloud 
+exec --no-startup-id /usr/bin/indicator-sound-switcher
+# exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
+
+include @sysconfdir@/sway/config.d/*
