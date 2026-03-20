@@ -5,7 +5,7 @@ echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -Install Ranger - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
 sudo apt update
-sudo apt install ranger caca-utils highlight atool w3m poppler-utils mediainfo
+sudo apt install ranger caca-utils highlight ueberzug atool w3m poppler-utils mediainfo
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - -Setting Ranger - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
@@ -16,4 +16,3 @@ cp ~/dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf
 echo "- - - - - - - - - - - - - - - - -"
 echo "- - - - - End Ranger - - - - - -"
 echo "- - - - - - - - - - - - - - - - -"
-

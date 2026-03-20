@@ -6,8 +6,7 @@ MONITOR_RESOLUTIONS=(
 )
 # BASE_URL="https://source.unsplash.com/featured/RESOLUTION/?minimalism"
 # BASE_URL="https://source.unsplash.com/featured/RESOLUTION/?minimalism"
-# BASE_WALLPAPER=~/.images/wallpaper_RESOLUTION.jpeg
-BASE_WALLPAPER=~/.images/dillon-hunt-HD1-fEco1p8-unsplash.jpg
+BASE_WALLPAPER=~/.images/wallpaper_RESOLUTION.jpeg
 
 function wallpaper_existence_validator() {
   COUNTER=1
