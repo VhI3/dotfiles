@@ -5,18 +5,19 @@ read -n 1 colorlsInstall
 echo
 echo
 if [ $colorlsInstall == "y" ] || [ $colorlsInstall == "Y" ]; then
-    echo "- - - - - - - - - - - - - - - - -"
-    echo "- - - - - colorls - - - - - - - - - -"
-    echo "- - - - - - - - - - - - - - - - -"
-    sudo apt update
-    sudo apt upgrade
-    sudo apt autoremove
-    sudo apt install ruby-full
-    sudo gem install colorls
-    mkdir -p ~/.config/colorls/
-    cp dark_colors.yaml ~/.config/colorls/dark_colors.yaml
-    sudo apt upgrade
-    echo "- - - - - - - - - - - - - - - - -"
-    echo "- - - - - - End colorls - - - - - - -"
-    echo "- - - - - - - - - - - - - - - - -"
+  echo "- - - - - - - - - - - - - - - - -"
+  echo "- - - - - colorls - - - - - - - - - -"
+  echo "- - - - - - - - - - - - - - - - -"
+  sudo apt update
+  sudo apt upgrade
+  sudo apt autoremove
+  sudo apt install ruby-full
+  sudo gem install colorls
+  mkdir -p ~/.config/colorls/
+  ln -sf ~/dotfiles/15-colorls/dark_colors.yaml ./
+  # cp dark_colors.yaml ~/.config/colorls/dark_colors.yaml
+  sudo apt upgrade
+  echo "- - - - - - - - - - - - - - - - -"
+  echo "- - - - - - End colorls - - - - - - -"
+  echo "- - - - - - - - - - - - - - - - -"
 fi

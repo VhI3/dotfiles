@@ -21,7 +21,7 @@ LATEST_VERSION=$(curl -s $API_URL | jq -r '.tag_name' | sed 's/^release-//' | se
 INSTALLED_VERSION=$(apt list --installed | grep github-desktop | grep -oP 'github-desktop/now \K[^\s]+')
 
 # Check if the versions were fetched successfully
-if [ -z "$LATEST_VERSION" ] || [ -z "$INSTALLED_VERSION" ]; then
+if [ -z "$LATEST_VERSION" ]; then
   echo "Error: Unable to determine the versions."
   exit 1
 fi
