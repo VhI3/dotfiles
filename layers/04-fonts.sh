@@ -2,6 +2,7 @@
 set -euo pipefail
 
 echo "==> [04] Nerd Fonts"
+# Nerd Fonts patch regular fonts with icons (used by waybar, kitty, eza, lazygit, nvim)
 FONTS_DIR="$HOME/.local/share/fonts"
 mkdir -p "$FONTS_DIR"
 
@@ -19,8 +20,11 @@ install_nerd_font() {
     rm "/tmp/${file}"
 }
 
-install_nerd_font "JetBrainsMono"  "JetBrainsMono.zip"
-install_nerd_font "SpaceMono"      "SpaceMono.zip"
+# JetBrainsMono — used in kitty, waybar, rofi, mako
+install_nerd_font "JetBrainsMono" "JetBrainsMono.zip"
+
+# SpaceMono — used in waybar modules
+install_nerd_font "SpaceMono" "SpaceMono.zip"
 
 fc-cache -f
 echo "==> [04] Done."

@@ -13,6 +13,7 @@ echo "║       dotfiles installer         ║"
 echo "╚══════════════════════════════════╝"
 echo ""
 echo "Layers:"
+echo "  0) sudo     — add user to sudoers (run as root on fresh Debian install)"
 echo "  1) base     — apt essentials, Python, nvm/Node, Rust"
 echo "  2) cli      — Neovim AppImage, fzf, ranger, ripgrep, eza, lazygit, bat"
 echo "  3) wayland  — sway, waybar, kitty, rofi, mako, grim, swaylock, brightnessctl"
@@ -25,8 +26,9 @@ echo "  q) quit"
 echo ""
 
 while true; do
-    read -rp "Select layer(s) [1-6/a/l/q]: " choice
+    read -rp "Select layer(s) [0-6/a/l/q]: " choice
     case "$choice" in
+        0) bash "$LAYERS/00-sudo.sh" ;;
         1) run_layer 01-base.sh ;;
         2) run_layer 02-cli.sh ;;
         3) run_layer 03-wayland.sh ;;
