@@ -1,8 +1,10 @@
-import = [
-    # "~/.config/alacritty/themes/themes/atom_one_light.toml"
-    # "~/.config/alacritty/themes/themes/atom_one_dark.toml"
-    # "~/.config/alacritty/themes/themes/Cobalt2.toml"
-    "~/.config/alacritty/themes/themes/monokai_charcoal.toml"
+general.import = [
+    # "~/dotfiles/09-alacritty/themes/themes/atom_one_light.toml"
+    # "~/dotfiles/09-alacritty/themes/themes/atom_one_dark.toml"
+    # "~/dotfiles/09-alacritty/themes/themes/Cobalt2.toml"
+    # "~/dotfiles/09-alacritty/themes/themes/monokai_charcoal.toml"
+    # "~/dotfiles/09-alacritty/themes/themes/dark_pastels.toml"
+    "~/dotfiles/09-alacritty/themes/themes/tokyo-night.toml"
 ]
 [window]
 

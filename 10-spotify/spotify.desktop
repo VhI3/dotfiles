@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Spotify
+Comment=Spotify Music Player
+Exec=spotify
+Icon=spotify
+Type=Application
+Terminal=false
+Categories=Audio;Music;Player;
+StartupNotify=true
+
