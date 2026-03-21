@@ -1,1 +1,0 @@
-/home/vahab/dotfiles/ranger/dracula.py

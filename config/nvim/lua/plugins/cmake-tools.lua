@@ -1,1 +1,1 @@
-/home/vahab/dotfiles/nvim/extensions/cmake-tools.lua
+return { "Civitasv/cmake-tools.nvim", opts = {} }
