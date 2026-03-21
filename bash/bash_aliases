@@ -45,8 +45,8 @@ alias .....='cd ../../../..'
 # cd into the old directory
 alias bd='cd "$OLDPWD"'
 
-# Single Line update, upgrade ..
-alias aaa='sudo apt update && sudo apt upgrade &&  ~/dotfiles/18-githubDesktop/githubDesktopUpdate.sh && ~/dotfiles/nvim/manage_nvim.sh && sudo apt autoremove && sudo apt autoclean'
+# Single Line update, upgrade — also updates Neovim AppImage if a new version is available
+alias aaa='sudo apt update && sudo apt upgrade && ~/dotfiles/nvim/manage_nvim.sh && sudo apt autoremove && sudo apt autoclean'
 
 alias bye="sudo systemctl poweroff"
 alias reboot="sudo systemctl reboot"
@@ -85,26 +85,20 @@ alias rmd='/bin/rm  --recursive --force --verbose '
 # alias ldir="ls -l | egrep '^d'"   # directories only
 #
 
-# Alias's for multiple directory listing commands
-alias la='colorls -Alh'               # show hidden files
-alias ls='colorls -A'                 # add colors and file type extensions
-alias lx='colorls -lXh'               # sort by extension
-alias lk='colorls -lSrh'              # sort by size
-alias lc='colorls -lcrh'              # sort by change time
-alias lu='ls -lurh'                   # sort by access time
-alias lr='ls -lRh'                    # recursive ls
-alias lt='colorls -ltrh'              # sort by date
-alias lm='colorls -alh |more'         # pipe through 'more'
-alias lw='colorls -xAh'               # wide listing format
-alias ll='colorls -al'                # long listing format
-alias labc='colorls -lap'             #alphabetical sort
-alias lf="colorls -l | egrep -v '^d'" # files only
-alias ldir="colorls -l | egrep '^d'"  # directories only
-#
-# some more ls aliases
-# alias ll='ls -alF'
-# alias la='ls -A'
-# alias l='ls -CF'
+# Alias's for multiple directory listing commands (eza replaces colorls)
+alias la='eza -lah --icons --group-directories-first'   # show hidden files, long
+alias ls='eza -a --icons --group-directories-first'     # short with icons
+alias lx='eza -lX --icons'                              # sort by extension
+alias lk='eza -lSr --icons'                             # sort by size (largest last)
+alias lc='eza -l --sort=changed --icons'                # sort by change time
+alias lu='eza -l --sort=accessed --icons'               # sort by access time
+alias lr='eza -lR --icons'                              # recursive
+alias lt='eza -l --sort=newest --icons'                 # sort by date
+alias lm='eza -lah --icons | more'                      # pipe through more
+alias ll='eza -la --icons --group-directories-first'    # long listing
+alias ldir='eza -lD --icons'                            # directories only
+alias lf='eza -lf --icons'                              # files only
+alias tree='eza --tree --icons'                         # tree view
 
 # alias chmod commands
 alias mx='chmod a+x'
@@ -144,8 +138,7 @@ alias rebootforce='sudo shutdown -r -n now'
 alias diskspace="du -S | sort -n -r |more"
 alias folders='du -h --max-depth=1'
 alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
-alias tree='tree -CAhF --dirsfirst'
-alias treed='tree -CAFd'
+alias treed='eza --tree --icons -D'
 alias mountedinfo='df -hT'
 
 # Alias's for archives
@@ -163,7 +156,7 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 # alias sha1='openssl sha1'
 #
 #
-# Alias's for i3-config
+# Sway config
 alias esway='e ~/.config/sway/config'
 
 # Alias for ranger

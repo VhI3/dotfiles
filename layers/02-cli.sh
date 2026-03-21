@@ -7,7 +7,13 @@ echo "==> [02] CLI tools"
 sudo apt install -y fzf
 
 # Terminal file manager with vim keybindings
-sudo apt install -y ranger
+# highlight — syntax highlighting in previews
+# atool — archive previews (zip, tar, etc.)
+# poppler-utils — PDF previews (pdftotext)
+# mediainfo — video/audio file info
+# w3m — HTML previews (text-mode browser)
+# Note: ueberzug (X11 image preview) intentionally excluded — kitty image protocol used instead
+sudo apt install -y ranger highlight atool poppler-utils mediainfo w3m
 
 # Fast grep replacement — used by Neovim live grep (Telescope)
 sudo apt install -y ripgrep
@@ -30,6 +36,19 @@ sudo apt install -y xdg-utils
 mkdir -p "$HOME/.local/bin"
 [ ! -e "$HOME/.local/bin/fd" ]  && ln -s /usr/bin/fdfind "$HOME/.local/bin/fd"
 [ ! -e "$HOME/.local/bin/bat" ] && ln -s /usr/bin/batcat "$HOME/.local/bin/bat"
+
+echo "==> [02] Vim"
+# Fallback editor — vim-gtk3 includes clipboard support (+clipboard flag)
+sudo apt install -y vim-gtk3
+# Vundle — vim plugin manager
+if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git "$HOME/.vim/bundle/Vundle.vim"
+fi
+# Dracula theme for vim
+if [ ! -d "$HOME/.vim/pack/themes/start/dracula" ]; then
+    mkdir -p "$HOME/.vim/pack/themes/start"
+    git clone https://github.com/dracula/vim.git "$HOME/.vim/pack/themes/start/dracula"
+fi
 
 echo "==> [02] eza"
 # Modern ls replacement (replaces colorls) — icons, git status, tree view
