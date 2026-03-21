@@ -19,8 +19,21 @@ sudo apt install -y libfuse2
 # JSON parsing — used by install scripts and lazygit version detection
 sudo apt install -y jq
 
+# Process viewer
+sudo apt install -y htop
+
+# Recursive directory listing (used alongside eza for legacy scripts)
+sudo apt install -y tree
+
+# Intel CPU microcode updates — stability and security fixes (ThinkPad/workstation)
+sudo apt install -y intel-microcode
+
 # Python — used by Neovim plugins (LSP, DAP, etc.)
 sudo apt install -y python3 python3-pip python3-venv
+
+echo "==> [01] SSD optimization"
+# Enable periodic TRIM — prevents SSD write amplification over time
+sudo systemctl enable fstrim.timer
 
 echo "==> [01] Node.js via nvm"
 # nvm lets you switch Node versions per project; avoids system Node version conflicts

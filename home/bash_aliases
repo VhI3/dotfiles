@@ -46,7 +46,7 @@ alias .....='cd ../../../..'
 alias bd='cd "$OLDPWD"'
 
 # Single Line update, upgrade — also updates Neovim AppImage if a new version is available
-alias aaa='sudo apt update && sudo apt upgrade && ~/dotfiles/nvim/manage_nvim.sh && sudo apt autoremove && sudo apt autoclean'
+alias aaa='sudo apt update && sudo apt upgrade && update-nvim && sudo apt autoremove && sudo apt autoclean'
 
 alias bye="sudo systemctl poweroff"
 alias reboot="sudo systemctl reboot"

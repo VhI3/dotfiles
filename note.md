@@ -1,61 +1,23 @@
-# Linux Notes.
+# Notes
 
-<!--toc:start-->
-- [Linux Notes.](#linux-notes)
-  - [The problem with running Chrome, Github-dektop, ...](#the-problem-with-running-chrome-github-dektop)
-  - [To preview the markdown for notes taking](#to-preview-the-markdown-for-notes-taking)
-  - [How to install polybar on Linux from source file](#how-to-install-polybar-on-linux-from-source-file)
-<!--toc:end-->
+## Chrome / GitHub Desktop / XWayland GPU fix
 
-## The problem with running Chrome, Github-dektop, ...
+If apps launched via XWayland crash or show GPU errors, add to `/etc/environment`:
 
-One way is to add a this commend in /etc/environment
+```
+LIBVA_DRIVER_NAME=disable
+```
 
-sudo vim /etc/environment
-
-add following this:
-export LIBVA_DRIVER_NAME=disable
-
+Then reload:
+```bash
 source /etc/environment
-
-## To preview the markdown for notes taking
-
-1. Install the ungoogle-chromium
-
-   make link in ~/.local/
-
-   ln -s -f ~/.opt/chromium/ungoogled-chromium.AppImage ~/.local/bin/ungoogled-chromium
-
-2. Install deno
-   ```bash
-   curl -fsSL https://deno.land/install.sh | sh 
-   ```
-   Manually add the directory to your $HOME/.bashrc (or similar)
-   
-   ```bash
-   export DENO_INSTALL="/home/vahab/.deno"
-   export PATH="/$DENO_INSTALL/bin:$PATH"
-   ```
-3. Open neovim and run: 
-   ```bash
-   Lazy build peek.nvim
-   ```
-4. To preview the code, you need to run:
-    
-   ```
-   :PeekOpen
-   ```
-## How to install poly bar on Linux from the source file
-refer to 
-
-https://github.com/polybar/polybar/wiki/Compiling
-
-Don't forget these to command:
-
-```
-pip install --upgrade jinja2
-pip install --upgrade sphinx
 ```
 
-TODO:
-Write a bash file.
+## Markdown preview in Neovim (peek.nvim)
+
+Requires Deno (installed via `layers/01-base.sh`) and a Chromium-based browser.
+
+Open preview:
+```
+:PeekOpen
+```

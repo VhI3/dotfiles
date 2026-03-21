@@ -57,6 +57,9 @@ sudo apt install -y network-manager-gnome
 # pactl — PulseAudio/PipeWire CLI, used by sway volume keybindings
 sudo apt install -y pulseaudio-utils
 
+# libnotify-bin — provides notify-send, used by mako and scripts (toggle_audio, alert alias)
+sudo apt install -y libnotify-bin
+
 # playerctl — media player control (play/pause/next from waybar)
 sudo apt install -y playerctl
 

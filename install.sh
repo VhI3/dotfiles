@@ -19,14 +19,16 @@ echo "  2) cli      — Neovim AppImage, fzf, ranger, ripgrep, eza, lazygit, bat
 echo "  3) wayland  — sway, waybar, kitty, rofi, mako, grim, swaylock, brightnessctl"
 echo "  4) fonts    — JetBrainsMono & SpaceMono Nerd Fonts"
 echo "  5) dev      — gcc, g++, cmake, ninja, clangd, gdb, rust-analyzer"
-echo "  6) apps     — zathura, LaTeX (texlive-full), Spotify, GitHub Desktop"
+echo "  6) apps     — zathura, LaTeX (texlive-full), Spotify, GitHub Desktop, Firefox"
+echo "  7) grub     — GRUB bootloader theme"
+echo "  8) octave   — GNU Octave with symbolic & statistics packages"
 echo "  a) all      — run all layers in order"
 echo "  l) link     — symlink configs only"
 echo "  q) quit"
 echo ""
 
 while true; do
-    read -rp "Select layer(s) [0-6/a/l/q]: " choice
+    read -rp "Select layer(s) [0-8/a/l/q]: " choice
     case "$choice" in
         0) bash "$LAYERS/00-sudo.sh" ;;
         1) run_layer 01-base.sh ;;
@@ -35,6 +37,8 @@ while true; do
         4) run_layer 04-fonts.sh ;;
         5) run_layer 05-dev.sh ;;
         6) run_layer 06-apps.sh ;;
+        7) run_layer 07-grub.sh ;;
+        8) run_layer 08-octave.sh ;;
         a)
             run_layer 01-base.sh
             run_layer 02-cli.sh
@@ -42,6 +46,8 @@ while true; do
             run_layer 04-fonts.sh
             run_layer 05-dev.sh
             run_layer 06-apps.sh
+            run_layer 07-grub.sh
+            run_layer 08-octave.sh
             bash "$DOTFILES/dots/link.sh"
             ;;
         l) bash "$DOTFILES/dots/link.sh" ;;
