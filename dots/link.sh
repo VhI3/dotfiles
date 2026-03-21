@@ -38,5 +38,8 @@ mkdir -p "$HOME/.local/bin"
 symlink "$DOTFILES/bin/toggle_audio.sh" "$HOME/.local/bin/toggle_audio"
 symlink "$DOTFILES/bin/wallpaper.sh"    "$HOME/.local/bin/wallpaper"
 symlink "$DOTFILES/bin/update-nvim.sh"  "$HOME/.local/bin/update-nvim"
+symlink "$DOTFILES/bin/select-sway-host.sh" "$HOME/.local/bin/select-sway-host"
+
+"$DOTFILES/bin/select-sway-host.sh"
 
 echo "==> Done."

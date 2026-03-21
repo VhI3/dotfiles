@@ -10,8 +10,6 @@ xwayland enable
 
 # Gaps
 gaps inner 13
-# Wallpaper
-exec_always swaybg -i /home/vahab/Pictures/Wallpaper1.jpg -m fill
 exec_always kanshi  # auto display profile management (multi-monitor)
 # Clipboard (Wayland)
 # sudo apt install wl-clipboard
@@ -32,16 +30,6 @@ set $term kitty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu dmenu_run
-
-
-# Monitor settings 
-output HDMI-A-2 scale 2.01 
-output HDMI-A-2 pos 0 0 res 3840x2160 
-output eDP-1 pos  0 1080 res 1920x1080
-
-# set monitors
-set $firstMonitor eDP-1
-set $secondMonitor HDMI-A-2
 
 ### Output configuration
 # set $background /usr/share/backgrounds/sway/Sway_Wjllpaper_Blue_1920x1080.png
@@ -168,31 +156,8 @@ set $secondMonitor HDMI-A-2
     bindsym $mod+Shift+F10 move container to workspace $workspace20
     bindsym $mod+Shift+F11 move container to workspace $workspace21
     bindsym $mod+Shift+F12 move container to workspace $workspace22
-    
-    # --- Pin workspaces to outputs (ensure $firstMonitor/$secondMonitor are set above) ---
-    workspace $workspace1  output $secondMonitor
-    workspace $workspace2  output $firstMonitor
-    workspace $workspace3  output $secondMonitor
-    workspace $workspace4  output $secondMonitor
-    workspace $workspace5  output $secondMonitor
-    workspace $workspace6  output $firstMonitor
-    workspace $workspace7  output $secondMonitor
-    workspace $workspace8  output $firstMonitor
-    workspace $workspace9  output $secondMonitor
-    workspace $workspace0  output $secondMonitor
-    workspace $workspace11 output $secondMonitor
-    workspace $workspace12 output $secondMonitor
-    workspace $workspace13 output $secondMonitor
-    workspace $workspace14 output $secondMonitor
-    workspace $workspace15 output $secondMonitor
-    workspace $workspace16 output $secondMonitor
-    workspace $workspace17 output $secondMonitor
-    workspace $workspace18 output $secondMonitor
-    workspace $workspace19 output $firstMonitor
-    workspace $workspace20 output $secondMonitor
-    workspace $workspace21 output $secondMonitor
-    workspace $workspace22 output $secondMonitor
-    
+
+include ~/.config/sway/host.local.conf
 
 ### Assignments (put this ABOVE your exec/autostart lines)
 
@@ -366,13 +331,6 @@ bindsym	Print exec grim
 #Lock the screen 
 bindsym $mod+Shift+x exec swaylock 
 exec mako
-
-exec --no-startup-id /usr/bin/kwalletd6
-exec --no-startup-id nm-applet
-exec --no-startup-id ~/.local/bin/Nextcloud
-exec --no-startup-id ~/.local/bin/thunderbird 
-exec --no-startup-id ~/.local/bin/pcloud 
-exec --no-startup-id /usr/bin/indicator-sound-switcher
 # exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
 
 include @sysconfdir@/sway/config.d/*

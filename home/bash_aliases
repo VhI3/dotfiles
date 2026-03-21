@@ -59,7 +59,7 @@ alias ga='git add'
 alias gall='git add -A'
 alias gap='git add -p'
 
-function lazygit() {
+quickpush() {
   git add .
   git commit -a -m "$1"
   git push
