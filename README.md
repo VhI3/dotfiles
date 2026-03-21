@@ -100,8 +100,10 @@ dotfiles/
 ├── dots/
 │   └── link.sh         ← symlinks everything to the right place
 ├── config/             ← ~/.config/* (sway, waybar, nvim, rofi, ...)
+│   ├── kitty/          ← minimal Kitty config
+│   └── sway/hosts/     ← per-machine Sway settings
 ├── home/               ← ~/.*  (bashrc, bash_aliases, vimrc)
-├── bin/                ← ~/.local/bin/ (toggle_audio, update-nvim, ...)
+├── bin/                ← ~/.local/bin/ (toggle_audio, update-nvim, wallpaper, ...)
 └── assets/
     ├── wallpapers/     ← Dracula wallpapers
     └── grub/           ← GRUB theme
@@ -124,11 +126,47 @@ cd ~/dotfiles
 
 The installer presents a menu. Run layers in order (0 → 8) on a fresh machine, or pick individual layers to update specific tools. Run `l` at any time to symlink configs without reinstalling anything.
 
+Linking also runs the Sway host selector automatically. If the current hostname matches a file in `config/sway/hosts/`, it becomes the active per-machine Sway config.
+
+Example:
+
+```bash
+~/.local/bin/select-sway-host laptop
+```
+
+---
+
+## Host-Specific Sway Setup
+
+Shared Sway behavior lives in `config/sway/config`.
+
+Machine-specific settings such as:
+
+- monitor layout / scaling
+- workspace-to-output mapping
+- wallpaper path
+- personal autostart programs
+
+belong in `config/sway/hosts/<hostname>.conf`.
+
+Current host profiles:
+
+- `laptop`
+
+To add another machine:
+
+```bash
+cp config/sway/hosts/laptop.conf config/sway/hosts/workstation.conf
+~/.local/bin/select-sway-host workstation
+```
+
+The generated file `config/sway/host.local.conf` is local state and is intentionally not tracked by git.
+
 ---
 
 ## Theme
 
-**Dracula** throughout — terminal, Neovim, Vim, Rofi, Mako, Lazygit, Mutt, FZF, Ranger.
+**Dracula** throughout — Kitty, Neovim, Vim, Rofi, Mako, Lazygit, Mutt, FZF, Ranger.
 Font: **JetBrainsMono Nerd Font** (terminals, status bar, editors).
 
 ---
