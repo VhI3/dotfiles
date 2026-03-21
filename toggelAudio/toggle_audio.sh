@@ -22,7 +22,7 @@ done
 
 # Ensure a valid sink is found before switching
 if [[ -z "$next_sink" ]]; then
-  dunstify -r 91194 -u critical "Audio Error: No valid sink found!"
+  notify-send -u critical "Audio Error" "No valid sink found!"
   exit 1
 fi
 
@@ -38,4 +38,4 @@ done
 sink_name=$(pactl list sinks | grep -A 10 "Name: $next_sink" | grep "Description" | cut -d ' ' -f2-)
 
 # Show notification with the new sink
-dunstify -r 91194 -u low "Audio Output: $sink_name 🎵"
+notify-send -h string:x-canonical-private-synchronous:audio -u low "Audio Output" "$sink_name"

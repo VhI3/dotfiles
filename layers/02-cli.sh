@@ -41,11 +41,20 @@ sudo apt install -y eza 2>/dev/null || {
 }
 
 echo "==> [02] Neovim AppImage"
-# Always pulls the latest stable release; AppImage runs without system dependencies
-NVIM_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage"
-mkdir -p "$HOME/.local/bin"
-curl -fLo "$HOME/.local/bin/nvim" "$NVIM_URL"
-chmod +x "$HOME/.local/bin/nvim"
+# AppImage runs without system dependencies — version-aware install/update
+mkdir -p "$HOME/.opt/nvim" "$HOME/.local/bin"
+_nvim_installed=$(command -v nvim >/dev/null 2>&1 && nvim --version | head -1 | awk '{print $2}' || echo "none")
+_nvim_latest=$(curl -s https://api.github.com/repos/neovim/neovim/releases/latest \
+    | grep -Po '"tag_name": "\K.*?(?=")')
+if [ "$_nvim_installed" != "$_nvim_latest" ]; then
+    echo "    Installing Neovim $_nvim_latest (current: $_nvim_installed)"
+    curl -fLo "$HOME/.opt/nvim/nvim.appimage" \
+        "https://github.com/neovim/neovim/releases/download/${_nvim_latest}/nvim-linux-x86_64.appimage"
+    chmod u+x "$HOME/.opt/nvim/nvim.appimage"
+    ln -sf "$HOME/.opt/nvim/nvim.appimage" "$HOME/.local/bin/nvim"
+else
+    echo "    Neovim $_nvim_installed already up-to-date, skipping."
+fi
 
 echo "==> [02] lazygit"
 # Terminal UI for git — Dracula theme configured in dotfiles/lazygitUI/

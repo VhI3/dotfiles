@@ -21,24 +21,25 @@ echo "==> Linking configs"
 symlink "$DOTFILES/bash/bashrc"       "$HOME/.bashrc"
 symlink "$DOTFILES/bash/bash_aliases" "$HOME/.bash_aliases"
 
-# Editor
-symlink "$DOTFILES/nvim"              "$HOME/.config/nvim"
+# Editors
+symlink "$DOTFILES/config/nvim"       "$HOME/.config/nvim"
 symlink "$DOTFILES/vim/vimrc"         "$HOME/.vimrc"
 
 # CLI tools
 symlink "$DOTFILES/ranger"            "$HOME/.config/ranger"
-symlink "$DOTFILES/FZF"               "$HOME/.config/fzf"
 
-# Wayland / Sway
-symlink "$DOTFILES/config/sway"   "$HOME/.config/sway"
-symlink "$DOTFILES/config/waybar" "$HOME/.config/waybar"
-symlink "$DOTFILES/config/mako"   "$HOME/.config/mako"
+# Wayland / Sway stack
+symlink "$DOTFILES/config/sway"       "$HOME/.config/sway"
+symlink "$DOTFILES/config/waybar"     "$HOME/.config/waybar"
+symlink "$DOTFILES/config/mako"       "$HOME/.config/mako"
+symlink "$DOTFILES/config/kanshi"     "$HOME/.config/kanshi"
+symlink "$DOTFILES/config/kitty"      "$HOME/.config/kitty"
 
-# App launcher (rofi — works with rofi-wayland)
-symlink "$DOTFILES/11-rofi"           "$HOME/.config/rofi"
+# App launcher
+symlink "$DOTFILES/config/rofi"       "$HOME/.config/rofi"
 
-# Lazygit theme
-mkdir -p "$HOME/.config/lazygit"
-symlink "$DOTFILES/lazygitUI/dracula.yml" "$HOME/.config/lazygit/config.yml"
+# Apps
+symlink "$DOTFILES/config/lazygit"    "$HOME/.config/lazygit"
+symlink "$DOTFILES/config/mutt"       "$HOME/.config/mutt"
 
 echo "==> Done."

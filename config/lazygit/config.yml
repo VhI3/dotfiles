@@ -1,0 +1,7 @@
+# lazygit config
+# Dracula theme sourced via @include
+@include: dracula.yml
+
+gui:
+  # Use nerd font icons
+  nerdFontsVersion: "3"

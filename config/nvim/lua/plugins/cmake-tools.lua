@@ -1,0 +1,1 @@
+/home/vahab/dotfiles/nvim/extensions/cmake-tools.lua

@@ -6,6 +6,10 @@ echo "==> [03] Wayland / Sway stack"
 # Sway — tiling Wayland compositor (i3-compatible)
 sudo apt install -y sway
 
+# kanshi — automatic display profile management (Wayland replacement for xrandr scripts)
+# Reads ~/.config/kanshi/config and applies the matching profile on output connect/disconnect
+sudo apt install -y kanshi
+
 # swaybg — sets the wallpaper on Wayland outputs
 sudo apt install -y swaybg
 

@@ -1,51 +1,20 @@
 #!/bin/bash
+# wallpapers.sh — set wallpaper on all Wayland outputs via swaymsg
+# Usage: wallpapers.sh [path/to/image]
+# Falls back to artWork/dracula-spooky if no argument given
 
-MONITOR_RESOLUTIONS=(
-  '1920x1200'
-  '1920x1080'
-)
-# BASE_URL="https://source.unsplash.com/featured/RESOLUTION/?minimalism"
-# BASE_URL="https://source.unsplash.com/featured/RESOLUTION/?minimalism"
-BASE_WALLPAPER=~/.images/wallpaper_RESOLUTION.jpeg
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DEFAULT_WALLPAPER="$DOTFILES_DIR/artWork/dracula-spooky-6272a4.png"
 
-function wallpaper_existence_validator() {
-  COUNTER=1
-  WALLPAPER_1=
-  WALLPAPER_2=
-  WALLPAPERS_EXIST=true
-  for i in "${MONITOR_RESOLUTIONS[@]}"; do
-    WALLPAPER=${BASE_WALLPAPER/RESOLUTION/$i}
-    if test -f "$WALLPAPER"; then
-      declare WALLPAPER_"${COUNTER}"="${WALLPAPER}"
-      ((COUNTER += 1))
-      continue
-    fi
-    WALLPAPERS_EXIST=false
-  done
+WALLPAPER="${1:-$DEFAULT_WALLPAPER}"
 
-  if [ "$WALLPAPERS_EXIST" ]; then
-    feh --bg-scale "$WALLPAPER_1" --bg-scale "$WALLPAPER_2"
-  fi
-}
-
-function wallpaper_downloader() {
-  COUNTER=1
-  WALLPAPER_1=
-  WALLPAPER_2=
-  for i in "${MONITOR_RESOLUTIONS[@]}"; do
-    URL=${BASE_URL/RESOLUTION/$i}
-    WALLPAPER=${BASE_WALLPAPER/RESOLUTION/$i}
-    RES=$(curl -L "$URL" -o "$WALLPAPER" --create-dirs)
-
-    if [ -z "$RES" ]; then
-      declare WALLPAPER_"${COUNTER}"="${WALLPAPER}"
-      ((COUNTER += 1))
-      continue
-    fi
+if [ ! -f "$WALLPAPER" ]; then
+    notify-send -u critical "wallpapers.sh" "File not found: $WALLPAPER"
     exit 1
-  done
-  feh --bg-scale "$WALLPAPER_1" --bg-scale "$WALLPAPER_2"
-}
+fi
 
-wallpaper_existence_validator
-# wallpaper_downloader
+# Apply to all outputs
+swaymsg output '*' bg "$WALLPAPER" fill
+
+notify-send -h string:x-canonical-private-synchronous:wallpaper \
+    "Wallpaper" "$(basename "$WALLPAPER")"

@@ -12,6 +12,7 @@ xwayland enable
 gaps inner 13
 # Wallpaper
 exec_always swaybg -i /home/vahab/Pictures/Wallpaper1.jpg -m fill
+exec_always kanshi  # auto display profile management (multi-monitor)
 # Clipboard (Wayland)
 # sudo apt install wl-clipboard
 
@@ -356,9 +357,9 @@ bindsym	XF86AudioMute exec pactl	set-sink-mute	@DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 ## Thinkvantage Button = Terminal
 bindsym XF86Launch1 exec $term
-## Brightness
-bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
-bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+## Brightness (notify-send shows OSD via mako)
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+ && notify-send -h int:value:$(brightnessctl -m | awk -F, '{print substr($4,0,length($4)-1)}') -h string:x-canonical-private-synchronous:brightness "Brightness" "$(brightnessctl -m | awk -F, '{print $4}')"
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%- && notify-send -h int:value:$(brightnessctl -m | awk -F, '{print substr($4,0,length($4)-1)}') -h string:x-canonical-private-synchronous:brightness "Brightness" "$(brightnessctl -m | awk -F, '{print $4}')"
 ## Printscreen
 bindsym	Print exec grim
 

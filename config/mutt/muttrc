@@ -1,0 +1,51 @@
+# vi ~/.muttrc
+# About Me
+set from = "nvahab@gmx.de"
+set realname = "Vahab Narouie"
+
+# My credentials
+set smtp_url = "smtp://mail.gmx.net:587/"
+set smtp_pass = "PASS"
+set imap_user = "nvahab@gmx.de"
+set imap_pass = "PASS"
+
+# My mailboxes
+set folder = "imaps://imap.gmx.net:993"
+#set spoolfile = "+INBOX"
+#set mbox_type=Maildir
+
+set spoolfile="~/Maildir/"
+set folder="~/Maildir/"
+set mask="!^\\.[^.]"
+set record="+.Sent"
+set postponed="+.Drafts"
+
+mailboxes ! + `\
+for file in ~/Maildir/.*; do \
+  box=$(basename "$file"); \
+  if [ ! "$box" = '.' -a ! "$box" = '..' -a ! "$box" = '.customflags' \
+      -a ! "$box" = '.subscriptions' ]; then \
+    echo -n "\"+$box\" "; \
+  fi; \
+done`
+
+macro index c "<change-folder>?<toggle-mailboxes>" "open a different folder"
+macro pager c "<change-folder>?<toggle-mailboxes>" "open a different folder"
+
+# Where to put the stuff
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+
+# Etc
+set mail_check = 30
+set move = no
+set imap_keepalive = 900
+set sort = threads
+set editor = "nvim"
+
+# Dracula color theme
+source ~/.config/mutt/dracula.muttrc
+
+# GnuPG bootstrap
+# source ~/.mutt/gpg.rc
