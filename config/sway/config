@@ -315,16 +315,16 @@ input * {
 
 # Thinkpada keys
 ## Volume
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym	XF86AudioLowerVolume exec pactl	set-sink-volume	@DEFAULT_SINK@ -5%
-bindsym	XF86AudioMute exec pactl	set-sink-mute	@DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && $HOME/.local/bin/notify-volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && $HOME/.local/bin/notify-volume
+bindsym XF86AudioMute        exec pactl set-sink-mute   @DEFAULT_SINK@ toggle && $HOME/.local/bin/notify-volume
 ## Mic
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 ## Thinkvantage Button = Terminal
 bindsym XF86Launch1 exec $term
-## Brightness (notify-send shows OSD via mako)
-bindsym XF86MonBrightnessUp exec brightnessctl set 10%+ && notify-send -h int:value:$(brightnessctl -m | awk -F, '{print substr($4,0,length($4)-1)}') -h string:x-canonical-private-synchronous:brightness "Brightness" "$(brightnessctl -m | awk -F, '{print $4}')"
-bindsym XF86MonBrightnessDown exec brightnessctl set 10%- && notify-send -h int:value:$(brightnessctl -m | awk -F, '{print substr($4,0,length($4)-1)}') -h string:x-canonical-private-synchronous:brightness "Brightness" "$(brightnessctl -m | awk -F, '{print $4}')"
+## Brightness
+bindsym XF86MonBrightnessUp   exec brightnessctl set 10%+ && $HOME/.local/bin/notify-brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%- && $HOME/.local/bin/notify-brightness
 ## Printscreen
 bindsym	Print exec grim
 
