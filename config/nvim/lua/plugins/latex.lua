@@ -56,17 +56,17 @@ return {
           filetypes = { "tex", "bib", "markdown", "rst", "text" },
           settings = {
             ltex = {
-              language = "auto",           -- auto-detects de-DE / en-US per paragraph
+              language = "auto", -- auto-detects de-DE / en-US per paragraph
               additionalRules = {
-                enablePickyRules = true,   -- stricter grammar suggestions
-                motherTongue = "de-DE",    -- reduces false positives for native German speaker
+                enablePickyRules = true, -- stricter grammar suggestions
+                motherTongue = "de-DE", -- reduces false positives for native German speaker
               },
               disabledRules = {
                 ["en-US"] = { "WHITESPACE_RULE" },
                 ["de-DE"] = { "WHITESPACE_RULE" },
               },
               dictionary = {
-                ["de-DE"] = {},            -- add personal German words here
+                ["de-DE"] = {}, -- add personal German words here
                 ["en-US"] = {},
               },
               hiddenFalsePositives = {},
