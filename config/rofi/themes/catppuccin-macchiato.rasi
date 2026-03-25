@@ -1,0 +1,28 @@
+* {
+    rosewater: rgba ( 244, 219, 214, 100 % );
+    flamingo: rgba ( 240, 198, 198, 100 % );
+    pink: rgba ( 245, 189, 230, 100 % );
+    mauve: rgba ( 198, 160, 246, 100 % );
+    red: rgba ( 237, 135, 150, 100 % );
+    maroon: rgba ( 238, 153, 160, 100 % );
+    peach: rgba ( 245, 169, 127, 100 % );
+    yellow: rgba ( 238, 212, 159, 100 % );
+    green: rgba ( 166, 218, 149, 100 % );
+    teal: rgba ( 139, 213, 202, 100 % );
+    sky: rgba ( 145, 215, 227, 100 % );
+    sapphire: rgba ( 125, 196, 228, 100 % );
+    blue: rgba ( 138, 173, 244, 100 % );
+    lavender: rgba ( 183, 189, 248, 100 % );
+    text: rgba ( 202, 211, 245, 100 % );
+    subtext1: rgba ( 184, 192, 224, 100 % );
+    subtext0: rgba ( 165, 173, 203, 100 % );
+    overlay2: rgba ( 147, 154, 183, 100 % );
+    overlay1: rgba ( 128, 135, 162, 100 % );
+    overlay0: rgba ( 110, 115, 141, 100 % );
+    surface2: rgba ( 91, 96, 120, 100 % );
+    surface1: rgba ( 73, 77, 100, 100 % );
+    surface0: rgba ( 54, 58, 79, 100 % );
+    base: rgba ( 36, 39, 58, 100 % );
+    mantle: rgba ( 30, 32, 48, 100 % );
+    crust: rgba ( 24, 25, 38, 100 % );
+}

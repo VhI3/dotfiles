@@ -3,3 +3,9 @@ config/sway/host.local.conf
 config/kitty/theme.local.conf
 config/nvim/lua/config/theme.local.lua
 config/nvim/lua/config/theme_local.lua
+config/ranger/colorschemes/catppuccin_current.py
+config/eza/theme.local.sh
+config/sway/theme.local.conf
+config/swaylock/current.conf
+config/rofi/theme.local.rasi
+config/zathura/catppuccin-current

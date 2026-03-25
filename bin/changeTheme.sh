@@ -6,9 +6,21 @@ CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 KITTY_DIR="$CONFIG_HOME/kitty"
 KITTY_THEMES_DIR="$KITTY_DIR/themes"
 KITTY_LOCAL_THEME_FILE="$KITTY_DIR/theme.local.conf"
+EZA_DIR="$CONFIG_HOME/eza"
+EZA_LOCAL_THEME_FILE="$EZA_DIR/theme.local.sh"
 
 NVIM_THEME_FILE="$CONFIG_HOME/nvim/lua/config/theme_local.lua"
 LEGACY_NVIM_THEME_FILE="$CONFIG_HOME/nvim/lua/config/theme.local.lua"
+RANGER_COLORSCHEMES_DIR="$CONFIG_HOME/ranger/colorschemes"
+RANGER_CURRENT_THEME_FILE="$RANGER_COLORSCHEMES_DIR/catppuccin_current.py"
+SWAY_DIR="$CONFIG_HOME/sway"
+SWAY_CURRENT_THEME_FILE="$SWAY_DIR/theme.local.conf"
+SWAYLOCK_DIR="$CONFIG_HOME/swaylock"
+SWAYLOCK_CURRENT_THEME_FILE="$SWAYLOCK_DIR/current.conf"
+ZATHURA_DIR="$CONFIG_HOME/zathura"
+ZATHURA_CURRENT_THEME_FILE="$ZATHURA_DIR/catppuccin-current"
+ROFI_DIR="$CONFIG_HOME/rofi"
+ROFI_LOCAL_THEME_FILE="$ROFI_DIR/theme.local.rasi"
 
 DEFAULT_THEME="Catppuccin-Mocha"
 
@@ -82,15 +94,65 @@ EOF
     fi
 }
 
+write_eza_theme_file() {
+    local flavour="$1"
+    mkdir -p "$EZA_DIR"
+    ln -sfn "themes/catppuccin-${flavour}.sh" "$EZA_LOCAL_THEME_FILE"
+}
+
+write_ranger_theme_file() {
+    local flavour="$1"
+    mkdir -p "$RANGER_COLORSCHEMES_DIR"
+    cat >"$RANGER_CURRENT_THEME_FILE" <<EOF
+from .catppuccin_${flavour} import Scheme
+EOF
+}
+
+write_sway_theme_file() {
+    local flavour="$1"
+    mkdir -p "$SWAY_DIR"
+    cat >"$SWAY_CURRENT_THEME_FILE" <<EOF
+include themes/catppuccin-${flavour}.conf
+EOF
+}
+
+write_swaylock_theme_file() {
+    local flavour="$1"
+    mkdir -p "$SWAYLOCK_DIR"
+    ln -sfn "themes/catppuccin-${flavour}.conf" "$SWAYLOCK_CURRENT_THEME_FILE"
+}
+
+write_rofi_theme_file() {
+    local flavour="$1"
+    mkdir -p "$ROFI_DIR"
+    cat >"$ROFI_LOCAL_THEME_FILE" <<EOF
+@import "themes/catppuccin-${flavour}.rasi"
+EOF
+}
+
+write_zathura_theme_file() {
+    local flavour="$1"
+    mkdir -p "$ZATHURA_DIR"
+    cat >"$ZATHURA_CURRENT_THEME_FILE" <<EOF
+include catppuccin-${flavour}
+EOF
+}
+
 reload_kitty() {
     pkill -USR1 kitty >/dev/null 2>&1 || true
+}
+
+reload_sway() {
+    if command -v swaymsg >/dev/null 2>&1; then
+        swaymsg reload >/dev/null 2>&1 || true
+    fi
 }
 
 notify_theme() {
     local theme="$1"
     if command -v notify-send >/dev/null 2>&1; then
         notify-send -h string:x-canonical-private-synchronous:shared-theme \
-            "Theme Updated" "${theme} for Kitty and Neovim" >/dev/null 2>&1 || true
+            "Theme Updated" "${theme} for Kitty, Neovim, Ranger, Zathura, and Sway" >/dev/null 2>&1 || true
     fi
 }
 
@@ -101,7 +163,14 @@ set_theme() {
 
     write_kitty_theme_file "$theme"
     write_nvim_theme_file "$flavour"
+    write_eza_theme_file "$flavour"
+    write_ranger_theme_file "$flavour"
+    write_sway_theme_file "$flavour"
+    write_swaylock_theme_file "$flavour"
+    write_rofi_theme_file "$flavour"
+    write_zathura_theme_file "$flavour"
     reload_kitty
+    reload_sway
     notify_theme "$theme"
 }
 
@@ -125,6 +194,30 @@ init_theme() {
 
     if [ ! -f "$NVIM_THEME_FILE" ]; then
         write_nvim_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
+    if [ ! -e "$EZA_LOCAL_THEME_FILE" ]; then
+        write_eza_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
+    if [ ! -f "$RANGER_CURRENT_THEME_FILE" ]; then
+        write_ranger_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
+    if [ ! -f "$SWAY_CURRENT_THEME_FILE" ]; then
+        write_sway_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
+    if [ ! -e "$SWAYLOCK_CURRENT_THEME_FILE" ]; then
+        write_swaylock_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
+    if [ ! -f "$ROFI_LOCAL_THEME_FILE" ]; then
+        write_rofi_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
+    if [ ! -f "$ZATHURA_CURRENT_THEME_FILE" ]; then
+        write_zathura_theme_file "$(theme_to_flavour "$theme")"
     fi
 }
 

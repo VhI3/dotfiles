@@ -10,6 +10,7 @@ if [ -f "$HOST_SOURCE" ]; then
     ln -sfn "hosts/${HOST_NAME}.conf" "$HOST_LOCAL"
     echo "==> Using sway host config: ${HOST_NAME}"
 else
+    rm -f "$HOST_LOCAL"
     : > "$HOST_LOCAL"
     echo "==> No sway host config for ${HOST_NAME}; using shared config only."
 fi

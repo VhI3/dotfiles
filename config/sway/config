@@ -1,5 +1,7 @@
 ### Sway config
 
+include ~/.config/sway/theme.local.conf
+
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 exec hash dbus-update-activation-environment >/dev/null 2>&1 && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
@@ -10,7 +12,7 @@ xwayland enable
 
 # Gaps
 gaps inner 13
-exec_always kanshi  # auto display profile management (multi-monitor)
+# exec_always kanshi  # auto display profile management (multi-monitor)
 # Clipboard (Wayland)
 # sudo apt install wl-clipboard
 
@@ -46,6 +48,7 @@ set $menu dmenu_run
     # Start your launcher
     set $menu rofi -show drun
     bindsym $mod+d exec $menu
+    bindsym $mod+Shift+t exec ~/.local/bin/changeTheme
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -329,7 +332,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 10%- && $HOME/.local/bin/no
 bindsym	Print exec grim
 
 #Lock the screen 
-bindsym $mod+Shift+x exec swaylock 
+bindsym $mod+Shift+x exec swaylock -C ~/.config/swaylock/current.conf
 exec mako
 # exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
 
