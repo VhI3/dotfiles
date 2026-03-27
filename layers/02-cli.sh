@@ -32,6 +32,9 @@ sudo apt install -y wl-clipboard
 # XDG utilities — xdg-open, used to open files from terminal in the right app
 sudo apt install -y xdg-utils
 
+# System summary — themed terminal system info
+sudo apt install -y fastfetch
+
 # Debian renames fd and bat — symlink to canonical names expected by tools/configs
 mkdir -p "$HOME/.local/bin"
 [ ! -e "$HOME/.local/bin/fd" ]  && ln -s /usr/bin/fdfind "$HOME/.local/bin/fd"

@@ -9,3 +9,4 @@ config/sway/theme.local.conf
 config/swaylock/current.conf
 config/rofi/theme.local.rasi
 config/zathura/catppuccin-current
+config/waybar/theme.local.css

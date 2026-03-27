@@ -21,6 +21,8 @@ ZATHURA_DIR="$CONFIG_HOME/zathura"
 ZATHURA_CURRENT_THEME_FILE="$ZATHURA_DIR/catppuccin-current"
 ROFI_DIR="$CONFIG_HOME/rofi"
 ROFI_LOCAL_THEME_FILE="$ROFI_DIR/theme.local.rasi"
+WAYBAR_DIR="$CONFIG_HOME/waybar"
+WAYBAR_LOCAL_THEME_FILE="$WAYBAR_DIR/theme.local.css"
 
 DEFAULT_THEME="Catppuccin-Mocha"
 
@@ -130,6 +132,14 @@ write_rofi_theme_file() {
 EOF
 }
 
+write_waybar_theme_file() {
+    local flavour="$1"
+    mkdir -p "$WAYBAR_DIR"
+    cat >"$WAYBAR_LOCAL_THEME_FILE" <<EOF
+@import "themes/catppuccin-${flavour}.css";
+EOF
+}
+
 write_zathura_theme_file() {
     local flavour="$1"
     mkdir -p "$ZATHURA_DIR"
@@ -148,11 +158,15 @@ reload_sway() {
     fi
 }
 
+reload_waybar() {
+    pkill -SIGUSR2 waybar >/dev/null 2>&1 || true
+}
+
 notify_theme() {
     local theme="$1"
     if command -v notify-send >/dev/null 2>&1; then
         notify-send -h string:x-canonical-private-synchronous:shared-theme \
-            "Theme Updated" "${theme} for Kitty, Neovim, Ranger, Zathura, and Sway" >/dev/null 2>&1 || true
+            "Theme Updated" "${theme} for Kitty, Neovim, Ranger, Waybar, Zathura, and Sway" >/dev/null 2>&1 || true
     fi
 }
 
@@ -168,9 +182,11 @@ set_theme() {
     write_sway_theme_file "$flavour"
     write_swaylock_theme_file "$flavour"
     write_rofi_theme_file "$flavour"
+    write_waybar_theme_file "$flavour"
     write_zathura_theme_file "$flavour"
     reload_kitty
     reload_sway
+    reload_waybar
     notify_theme "$theme"
 }
 
@@ -214,6 +230,10 @@ init_theme() {
 
     if [ ! -f "$ROFI_LOCAL_THEME_FILE" ]; then
         write_rofi_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
+    if [ ! -f "$WAYBAR_LOCAL_THEME_FILE" ]; then
+        write_waybar_theme_file "$(theme_to_flavour "$theme")"
     fi
 
     if [ ! -f "$ZATHURA_CURRENT_THEME_FILE" ]; then
