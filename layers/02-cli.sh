@@ -32,6 +32,9 @@ sudo apt install -y wl-clipboard
 # XDG utilities — xdg-open, used to open files from terminal in the right app
 sudo apt install -y xdg-utils
 
+# Minimal password store — GPG-backed secret management
+sudo apt install -y pass gnupg
+
 # System summary — themed terminal system info
 sudo apt install -y fastfetch
 

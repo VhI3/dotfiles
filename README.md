@@ -37,6 +37,7 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 | [eza](https://github.com/eza-community/eza) | Modern `ls` replacement with icons |
 | [bat](https://github.com/sharkdp/bat) | `cat` with syntax highlighting |
 | [ranger](https://github.com/ranger/ranger) | Terminal file manager |
+| [pass](https://www.passwordstore.org/) | Minimal GPG-backed password manager |
 
 ### Editors
 | Tool | Role |
@@ -90,7 +91,7 @@ dotfiles/
 ├── layers/             ← install scripts, run in order
 │   ├── 00-sudo.sh      ← add user to sudoers (run as root first)
 │   ├── 01-base.sh      ← apt essentials, Python, Node (nvm), Rust
-│   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, vim
+│   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, vim
 │   ├── 03-wayland.sh   ← sway stack, kitty, rofi, mako, grim, swaylock
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
