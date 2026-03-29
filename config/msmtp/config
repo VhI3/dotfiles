@@ -1,0 +1,15 @@
+defaults
+auth on
+tls on
+tls_starttls off
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile ~/.cache/msmtp/msmtp.log
+
+account mailbox
+host smtp.mailbox.org
+port 465
+from v.narouie@mailbox.org
+user v.narouie@mailbox.org
+passwordeval "pass show mail/mailbox.org/smtp | head -n 1"
+
+account default : mailbox

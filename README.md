@@ -78,7 +78,7 @@ Neovim is configured with LSP support for C/C++ (clangd), Python (pylsp), Rust (
 | Spotify | Music |
 | GitHub Desktop | Git GUI |
 | VSCodium | Telemetry-free VS Code |
-| Mutt | Terminal email client |
+| NeoMutt | Terminal email client |
 | Lazygit | Terminal Git UI |
 
 ---
@@ -95,7 +95,7 @@ dotfiles/
 │   ├── 03-wayland.sh   ← sway stack, kitty, rofi, mako, grim, swaylock
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
-│   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium
+│   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium, neomutt
 │   ├── 07-grub.sh      ← GRUB bootloader theme
 │   └── 08-octave.sh    ← GNU Octave with symbolic & statistics packages
 ├── dots/
@@ -167,7 +167,7 @@ The generated file `config/sway/host.local.conf` is local state and is intention
 
 ## Theme
 
-**Dracula** throughout — Kitty, Neovim, Vim, Rofi, Mako, Lazygit, Mutt, FZF, Ranger.
+**Dracula** throughout — Kitty, Neovim, Vim, Rofi, Mako, Lazygit, NeoMutt, FZF, Ranger.
 Font: **JetBrainsMono Nerd Font** (terminals, status bar, editors).
 
 ---

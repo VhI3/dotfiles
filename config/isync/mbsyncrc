@@ -1,0 +1,25 @@
+IMAPAccount mailbox
+Host imap.mailbox.org
+Port 993
+User v.narouie@mailbox.org
+PassCmd "pass show mail/mailbox.org/imap | head -n 1"
+TLSType IMAPS
+AuthMechs LOGIN
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore mailbox-remote
+Account mailbox
+
+MaildirStore mailbox-local
+SubFolders Verbatim
+Path ~/Mail/
+Inbox ~/Mail/INBOX
+
+Channel mailbox
+Far :mailbox-remote:
+Near :mailbox-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
+Sync All

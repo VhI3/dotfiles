@@ -23,6 +23,8 @@ ROFI_DIR="$CONFIG_HOME/rofi"
 ROFI_LOCAL_THEME_FILE="$ROFI_DIR/theme.local.rasi"
 WAYBAR_DIR="$CONFIG_HOME/waybar"
 WAYBAR_LOCAL_THEME_FILE="$WAYBAR_DIR/theme.local.css"
+MUTT_DIR="$CONFIG_HOME/mutt"
+MUTT_LOCAL_THEME_FILE="$MUTT_DIR/theme.local.muttrc"
 
 DEFAULT_THEME="Catppuccin-Mocha"
 
@@ -140,6 +142,27 @@ write_waybar_theme_file() {
 EOF
 }
 
+write_mutt_theme_file() {
+    local flavour="$1"
+    mkdir -p "$MUTT_DIR"
+    case "$flavour" in
+        latte)
+            cat >"$MUTT_LOCAL_THEME_FILE" <<EOF
+source ~/.config/mutt/themes/catppuccin-latte.muttrc
+EOF
+            ;;
+        frappe|macchiato|mocha)
+            cat >"$MUTT_LOCAL_THEME_FILE" <<EOF
+source ~/.config/mutt/themes/catppuccin-dark.muttrc
+EOF
+            ;;
+        *)
+            echo "Unsupported NeoMutt flavour: $flavour" >&2
+            exit 1
+            ;;
+    esac
+}
+
 write_zathura_theme_file() {
     local flavour="$1"
     mkdir -p "$ZATHURA_DIR"
@@ -166,7 +189,7 @@ notify_theme() {
     local theme="$1"
     if command -v notify-send >/dev/null 2>&1; then
         notify-send -h string:x-canonical-private-synchronous:shared-theme \
-            "Theme Updated" "${theme} for Kitty, Neovim, Ranger, Waybar, Zathura, and Sway" >/dev/null 2>&1 || true
+            "Theme Updated" "${theme} for Kitty, NeoMutt, Neovim, Ranger, Waybar, Zathura, and Sway" >/dev/null 2>&1 || true
     fi
 }
 
@@ -183,6 +206,7 @@ set_theme() {
     write_swaylock_theme_file "$flavour"
     write_rofi_theme_file "$flavour"
     write_waybar_theme_file "$flavour"
+    write_mutt_theme_file "$flavour"
     write_zathura_theme_file "$flavour"
     reload_kitty
     reload_sway
@@ -234,6 +258,10 @@ init_theme() {
 
     if [ ! -f "$WAYBAR_LOCAL_THEME_FILE" ]; then
         write_waybar_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
+    if [ ! -f "$MUTT_LOCAL_THEME_FILE" ]; then
+        write_mutt_theme_file "$(theme_to_flavour "$theme")"
     fi
 
     if [ ! -f "$ZATHURA_CURRENT_THEME_FILE" ]; then

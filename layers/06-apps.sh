@@ -65,10 +65,13 @@ else
     echo "    LibreWolf already installed, skipping."
 fi
 
-echo "==> [06] Mutt"
-# Terminal email client with vim keybindings — config at ~/.config/mutt/muttrc
-# isync (mbsync) syncs IMAP to local Maildir; msmtp sends via SMTP
-sudo apt install -y mutt isync msmtp
+echo "==> [06] NeoMutt"
+# Terminal email stack:
+# - neomutt for the UI
+# - isync (mbsync) syncs IMAP to local Maildir
+# - msmtp sends mail via SMTP
+# - urlscan opens URLs from mail nicely inside the terminal workflow
+sudo apt install -y neomutt isync msmtp urlscan
 
 echo "==> [06] Thunderbird"
 # Downloaded directly from Mozilla (not Debian's outdated ESR package)

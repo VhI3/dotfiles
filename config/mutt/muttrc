@@ -1,51 +1,106 @@
-# vi ~/.muttrc
-# About Me
-set from = "nvahab@gmx.de"
+# NeoMutt
 set realname = "Vahab Narouie"
+set from = "v.narouie@mailbox.org"
+set use_from = yes
+set envelope_from = yes
+set mailcap_path = "$HOME/.config/mutt/mailcap"
+set rfc2047_parameters = yes
+set check_mbox_size = yes
 
-# My credentials
-set smtp_url = "smtp://mail.gmx.net:587/"
-set smtp_pass = "PASS"
-set imap_user = "nvahab@gmx.de"
-set imap_pass = "PASS"
+# Local Maildir managed by mbsync
+set folder = "~/Mail"
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+set mbox_type = Maildir
 
-# My mailboxes
-set folder = "imaps://imap.gmx.net:993"
-#set spoolfile = "+INBOX"
-#set mbox_type=Maildir
+mailboxes =INBOX =Sent =Drafts =Trash =Archive
 
-set spoolfile="~/Maildir/"
-set folder="~/Maildir/"
-set mask="!^\\.[^.]"
-set record="+.Sent"
-set postponed="+.Drafts"
+# Sending mail through msmtp
+set sendmail = "/usr/bin/msmtp --file /home/vahab/.config/msmtp/config"
+set use_envelope_from = yes
+set ssl_starttls = yes
 
-mailboxes ! + `\
-for file in ~/Maildir/.*; do \
-  box=$(basename "$file"); \
-  if [ ! "$box" = '.' -a ! "$box" = '..' -a ! "$box" = '.customflags' \
-      -a ! "$box" = '.subscriptions' ]; then \
-    echo -n "\"+$box\" "; \
-  fi; \
-done`
+# Caches
+set header_cache = "~/.cache/neomutt/headers"
+set message_cachedir = "~/.cache/neomutt/bodies"
+set certificate_file = "~/.cache/neomutt/certificates"
 
-macro index c "<change-folder>?<toggle-mailboxes>" "open a different folder"
-macro pager c "<change-folder>?<toggle-mailboxes>" "open a different folder"
-
-# Where to put the stuff
-set header_cache = "~/.mutt/cache/headers"
-set message_cachedir = "~/.mutt/cache/bodies"
-set certificate_file = "~/.mutt/certificates"
-
-# Etc
-set mail_check = 30
+# General behavior
+unset help
+set sleep_time = 0
+set mail_check = 60
+set timeout = 5
 set move = no
-set imap_keepalive = 900
-set sort = threads
+set sort = reverse-date-received
 set editor = "nvim"
+set charset = "utf-8"
+set mark_old = no
+set mime_forward = no
+unset wait_key
+set fast_reply
+set fcc_attach
+set forward_format = "FW: %s"
+set forward_quote
+set reverse_name
+set reverse_realname = yes
+set auto_tag
+set include
+set count_alternatives = yes
+set thorough_search = no
+set flag_safe
 
-# Dracula color theme
-source ~/.config/mutt/dracula.muttrc
+# Headers
+ignore *
+unignore from: to: cc: date: subject:
+unhdr_order *
+hdr_order from: to: cc: date: subject:
 
-# GnuPG bootstrap
-# source ~/.mutt/gpg.rc
+# View
+set allow_ansi
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop
+set menu_scroll
+set smart_wrap
+set wrap = 90
+set date_format = "%a %d %b %H:%M"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set reply_regexp = "^(([Rr][Ee]?(\\[[0-9]+\\])?: *)?(\\[[^]]+\\] *)?)*"
+
+# Prefer plain text, but render HTML mail via mailcap/w3m if needed
+auto_view text/plain
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+# Date ordering
+set sort_aux = reverse-date-received
+
+# Sidebar
+set sidebar_visible = yes
+set sidebar_next_new_wrap = yes
+set sidebar_short_path = yes
+set sidebar_non_empty_mailbox_only = no
+set sidebar_folder_indent = yes
+set sidebar_divider_char = '│'
+set sidebar_width = 28
+set sidebar_format = "%D%?F? [%F]?%* %?N?%N/?%S"
+
+# Free the g prefix for folder-jump macros
+bind index g noop
+bind pager g noop
+
+# Macros
+macro index,pager R "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode<enter><pipe-message>urlscan<enter><enter-command>set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<enter>" "open URLs with urlscan"
+macro index,pager O "<shell-escape>sync-mail<enter>" "sync mailbox"
+macro index,pager S "<shell-escape>sync-mail<enter><change-folder>!<enter><check-stats>" "sync mail and refresh"
+macro index,pager c "<change-folder>?<toggle-mailboxes>" "open a different folder"
+macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
+macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
+macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
+macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
+macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
+
+# Theme
+source ~/.config/mutt/theme.local.muttrc

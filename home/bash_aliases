@@ -163,6 +163,9 @@ alias esway='e ~/.config/sway/config'
 alias z='zathura'
 
 # alias mbsync="mbsync -c \"~/.config/isync/mbsyncrc\""
+alias mbs='mbsync -c "$HOME/.config/isync/mbsyncrc" -a'
+alias mail-sync='sync-mail'
+alias mail='neomutt -F "$HOME/.config/mutt/muttrc"'
 # alias to Bewerbung folders
 alias cdbw='cd ~/iRMB/Administration/Bewerbung'
 
