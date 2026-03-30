@@ -1,6 +1,6 @@
 # dotfiles
 
-A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No desktop environment — just the tools that matter. Everything is intentional: dark themes, Vim keybindings, and a clean Wayland compositor stack.
+A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No desktop environment — just the tools that matter. Everything is intentional: Catppuccin theming, Vim keybindings, local-first terminal workflows, and a clean Wayland compositor stack.
 
 ---
 
@@ -8,7 +8,7 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 
 - Start from Debian minimal (server ISO) — no GNOME, no KDE, no bloat
 - Build up only what is needed, layer by layer
-- Consistent dark theme (Dracula) across every tool
+- Consistent Catppuccin theme switching across terminal, editor, desktop, and mail
 - Keyboard-first workflow — mouse is optional
 - Wayland-native where possible; XWayland only as fallback
 
@@ -38,6 +38,7 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 | [bat](https://github.com/sharkdp/bat) | `cat` with syntax highlighting |
 | [ranger](https://github.com/ranger/ranger) | Terminal file manager |
 | [pass](https://www.passwordstore.org/) | Minimal GPG-backed password manager |
+| [Fastfetch](https://github.com/fastfetch-cli/fastfetch) | Terminal system summary |
 
 ### Editors
 | Tool | Role |
@@ -79,6 +80,8 @@ Neovim is configured with LSP support for C/C++ (clangd), Python (pylsp), Rust (
 | GitHub Desktop | Git GUI |
 | VSCodium | Telemetry-free VS Code |
 | NeoMutt | Terminal email client |
+| [mbsync](https://isync.sourceforge.io/) | Sync IMAP mail to local Maildir |
+| [msmtp](https://marlam.de/msmtp/) | Send mail through SMTP |
 | Lazygit | Terminal Git UI |
 
 ---
@@ -91,22 +94,28 @@ dotfiles/
 ├── layers/             ← install scripts, run in order
 │   ├── 00-sudo.sh      ← add user to sudoers (run as root first)
 │   ├── 01-base.sh      ← apt essentials, Python, Node (nvm), Rust
-│   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, vim
-│   ├── 03-wayland.sh   ← sway stack, kitty, rofi, mako, grim, swaylock
+│   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, fastfetch, vim
+│   ├── 03-wayland.sh   ← sway stack, kitty, rofi, mako, grim, swaylock, kanshi
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
-│   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium, neomutt
+│   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium, neomutt, mbsync, msmtp
 │   ├── 07-grub.sh      ← GRUB bootloader theme
 │   └── 08-octave.sh    ← GNU Octave with symbolic & statistics packages
 ├── dots/
 │   └── link.sh         ← symlinks everything to the right place
 ├── config/             ← ~/.config/* (sway, waybar, nvim, rofi, ...)
-│   ├── kitty/          ← minimal Kitty config
+│   ├── fastfetch/      ← Fastfetch config
+│   ├── isync/          ← mbsync IMAP config
+│   ├── msmtp/          ← SMTP sending config
+│   ├── mutt/           ← NeoMutt config + Catppuccin themes
+│   ├── kitty/          ← Kitty config + Catppuccin themes
+│   ├── rofi/           ← Rofi config + Catppuccin themes
+│   ├── waybar/         ← Waybar config + Catppuccin themes
 │   └── sway/hosts/     ← per-machine Sway settings
 ├── home/               ← ~/.*  (bashrc, bash_aliases, vimrc)
-├── bin/                ← ~/.local/bin/ (toggle_audio, update-nvim, wallpaper, ...)
+├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, wallpaper, ...)
 └── assets/
-    ├── wallpapers/     ← Dracula wallpapers
+    ├── wallpapers/     ← wallpapers
     └── grub/           ← GRUB theme
 ```
 
@@ -127,7 +136,13 @@ cd ~/dotfiles
 
 The installer presents a menu. Run layers in order (0 → 8) on a fresh machine, or pick individual layers to update specific tools. Run `l` at any time to symlink configs without reinstalling anything.
 
-Linking also runs the Sway host selector automatically. If the current hostname matches a file in `config/sway/hosts/`, it becomes the active per-machine Sway config.
+Linking also:
+
+- runs the Sway host selector automatically
+- initializes the shared Catppuccin theme files
+- links helper scripts into `~/.local/bin`
+
+If the current hostname matches a file in `config/sway/hosts/`, it becomes the active per-machine Sway config.
 
 Example:
 
@@ -152,6 +167,7 @@ belong in `config/sway/hosts/<hostname>.conf`.
 
 Current host profiles:
 
+- `debian`
 - `laptop`
 
 To add another machine:
@@ -163,12 +179,76 @@ cp config/sway/hosts/laptop.conf config/sway/hosts/workstation.conf
 
 The generated file `config/sway/host.local.conf` is local state and is intentionally not tracked by git.
 
+For the current `debian` host, monitor switching is handled dynamically by `kanshi`:
+
+- if `HDMI-A-2` is connected, use the external monitor only
+- otherwise, use the laptop screen only
+
+That logic lives in `config/kanshi/config`, while the Sway host file keeps machine-specific autostarts and wallpaper commands.
+
 ---
 
 ## Theme
 
-**Dracula** throughout — Kitty, Neovim, Vim, Rofi, Mako, Lazygit, NeoMutt, FZF, Ranger.
+**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, and eza.
+
+Theme switching is unified through:
+
+- `changeTheme`
+- `changeTheme.sh`
+- `Mod+Shift+t` in Sway
+
+Available flavours:
+
+- Latte
+- Frappe
+- Macchiato
+- Mocha
+
 Font: **JetBrainsMono Nerd Font** (terminals, status bar, editors).
+
+Note: NeoMutt follows the official Catppuccin NeoMutt setup, which ships a Latte variant and one shared dark variant for Frappe, Macchiato, and Mocha.
+
+---
+
+## Mail
+
+Mail is configured as a local-first terminal workflow:
+
+- `neomutt` for reading and composing
+- `mbsync` for syncing IMAP to `~/Mail`
+- `msmtp` for SMTP sending
+- `pass` for secret storage
+
+Config locations:
+
+- `config/mutt/muttrc`
+- `config/isync/mbsyncrc`
+- `config/msmtp/config`
+
+Helper commands:
+
+- `mail` → start NeoMutt
+- `sync-mail` → sync mailboxes
+- `mbs` → run mbsync directly
+
+Pass entries expected by the mail setup:
+
+- `mail/mailbox.org/imap`
+- `mail/mailbox.org/smtp`
+
+---
+
+## Helpers
+
+Useful local scripts linked into `~/.local/bin`:
+
+- `changeTheme` → switch the shared Catppuccin flavour
+- `sync-mail` → sync NeoMutt mailboxes
+- `mount-sd` → mount a removable SD card to `/mnt/sdcard`
+- `select-sway-host` → choose the active host-specific Sway file
+- `wallpaper` → set wallpaper with fallback behavior
+- `update-nvim` → refresh the Neovim AppImage
 
 ---
 
@@ -178,6 +258,7 @@ Font: **JetBrainsMono Nerd Font** (terminals, status bar, editors).
 |-----|--------|
 | `Mod+Return` | Open terminal (kitty) |
 | `Mod+d` | App launcher (rofi) |
+| `Mod+Shift+t` | Open Catppuccin theme picker |
 | `Mod+Shift+e` | Power menu (rofi) |
 | `Mod+Shift+x` | Lock screen (swaylock) |
 | `Mod+h/j/k/l` | Focus left/down/up/right |

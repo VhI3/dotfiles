@@ -12,7 +12,7 @@ xwayland enable
 
 # Gaps
 gaps inner 13
-# exec_always kanshi  # auto display profile management (multi-monitor)
+exec_always kanshi  # auto display profile management
 # Clipboard (Wayland)
 # sudo apt install wl-clipboard
 

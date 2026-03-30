@@ -1,39 +1,14 @@
-# kanshi — automatic display profile management (Wayland replacement for xrandr scripts)
-# Profiles are matched by connected outputs and applied automatically.
-# Run: exec kanshi (add to sway config)
-# Wayland output names differ from X11: LVDS-1→eDP-1, HDMI-1→HDMI-A-1
+# kanshi — automatic display profile management
+#
+# Desired behavior for this machine:
+# - If HDMI-A-2 is connected, use only the external monitor
+# - Otherwise, fall back to the laptop panel
 
-# Laptop screen only
-profile laptop {
-    output eDP-1 enable mode 1366x768 position 0,0
+profile external_only {
+    output HDMI-A-2 enable mode 3840x2160 position 0,0 scale 2.01
+    output eDP-1 disable
 }
 
-# Laptop + external HDMI (external on top, laptop below)
-# Replaces: set2Monitor.sh
-profile dual_hdmi {
-    output HDMI-A-1 enable mode 1920x1080 position 0,0
-    output eDP-1    enable mode 1366x768  position 240,1080
-}
-
-# ThinkPad docked — external only (HDMI-A-1 1920x1200)
-# Replaces: setMonitor_laptop.sh
-profile thinkpad_docked {
-    output HDMI-A-1 enable mode 1920x1200 position 0,0
-    output eDP-1    disable
-}
-
-# ThinkPad office — laptop + ultrawide DP-2 (3440x1440 on top)
-# Replaces: setMonitor_ThinkPad_Office.sh
-profile thinkpad_office {
-    output DP-2  enable mode 3440x1440 position 0,0
-    output eDP-1 enable mode 1920x1080 position 853,1440
-}
-
-# TinkStation — three-monitor setup (portrait | landscape | portrait)
-# Replaces: setMonitor_TinkStation.sh
-# Note: positions assume 1080x1920 effective size for rotated displays
-profile tinkstation {
-    output DP-3 enable mode 1920x1080 position 0,0    transform 90
-    output DP-0 enable mode 1920x1080 position 1080,432
-    output DP-6 enable mode 1920x1080 position 3000,0 transform 270
+profile laptop_only {
+    output eDP-1 enable
 }
