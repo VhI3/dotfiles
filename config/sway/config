@@ -63,6 +63,7 @@ set $menu dmenu_run
     # Exit sway (logs you out of your Wayland session)
     # bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
     bindsym $mod+Shift+e  exec rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu -font "Hack Nerd Font Mono 13" -width 15   -lines 6
+    bindsym $mod+Shift+n exec swaync-client -t -sw
 
 # Moving around:
     # Move your focus around
@@ -328,12 +329,20 @@ bindsym XF86Launch1 exec $term
 ## Brightness
 bindsym XF86MonBrightnessUp   exec brightnessctl set 10%+ && $HOME/.local/bin/notify-brightness
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%- && $HOME/.local/bin/notify-brightness
+
+# Media keys
+bindsym --locked XF86AudioPlay exec $HOME/.local/bin/notify-media play-pause
+bindsym --locked XF86AudioPause exec $HOME/.local/bin/notify-media play-pause
+bindsym --locked XF86AudioNext exec $HOME/.local/bin/notify-media next
+bindsym --locked XF86AudioPrev exec $HOME/.local/bin/notify-media previous
+
+
 ## Printscreen
 bindsym	Print exec grim
 
 #Lock the screen 
 bindsym $mod+Shift+x exec swaylock -C ~/.config/swaylock/current.conf
-exec mako
+exec swaync
 # exec --no-startup-id  /opt/Webex/bin/CiscoCollabHost
 
 include @sysconfdir@/sway/config.d/*

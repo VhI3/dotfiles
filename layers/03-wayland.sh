@@ -29,9 +29,11 @@ sudo apt install -y kitty
 # rofi-wayland is the native Wayland port; same config as X11 rofi
 sudo apt install -y rofi
 
-# Mako — notification daemon for Wayland (replaces dunst)
-# Dracula theme configured in dotfiles/config/mako/
-sudo apt install -y mako-notifier
+# Sway Notification Center — notification daemon + control center for wlroots
+sudo apt install -y sway-notification-center
+systemctl --user disable --now dunst.service 2>/dev/null || true
+systemctl --user mask dunst.service 2>/dev/null || true
+systemctl --user enable swaync.service 2>/dev/null || true
 
 # Grim — screenshot tool for Wayland (bound to Print key in sway config)
 sudo apt install -y grim
@@ -57,7 +59,7 @@ sudo apt install -y network-manager-gnome
 # pactl — PulseAudio/PipeWire CLI, used by sway volume keybindings
 sudo apt install -y pulseaudio-utils
 
-# libnotify-bin — provides notify-send, used by mako and scripts (toggle_audio, alert alias)
+# libnotify-bin — provides notify-send, used by swaync and helper scripts
 sudo apt install -y libnotify-bin
 
 # playerctl — media player control (play/pause/next from waybar)

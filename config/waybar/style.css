@@ -345,3 +345,8 @@ label:focus {
 #privacy-item.audio-out {
     background-color: @blue;
 }
+
+#custom-notification {
+    padding: 0 10px;
+    color: @text;
+}

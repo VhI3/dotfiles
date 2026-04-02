@@ -22,7 +22,7 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 | [Sway](https://swaywm.org) | Tiling Wayland compositor (i3-compatible) |
 | [Waybar](https://github.com/Alexays/Waybar) | Status bar |
 | [Rofi](https://github.com/davatorium/rofi) | App launcher + power menu |
-| [Mako](https://github.com/emersion/mako) | Notification daemon |
+| [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter) | Notification daemon + control center |
 | [Kanshi](https://git.sr.ht/~emersion/kanshi) | Automatic display profiles |
 | [Swaylock](https://github.com/swaywm/swaylock) | Screen locker |
 | [Swaybg](https://github.com/swaywm/swaybg) | Wallpaper |
@@ -95,7 +95,7 @@ dotfiles/
 │   ├── 00-sudo.sh      ← add user to sudoers (run as root first)
 │   ├── 01-base.sh      ← apt essentials, Python, Node (nvm), Rust
 │   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, fastfetch, vim
-│   ├── 03-wayland.sh   ← sway stack, kitty, rofi, mako, grim, swaylock, kanshi
+│   ├── 03-wayland.sh   ← sway stack, kitty, rofi, swaync, grim, swaylock, kanshi
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
 │   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium, neomutt, mbsync, msmtp
@@ -104,16 +104,17 @@ dotfiles/
 ├── dots/
 │   └── link.sh         ← symlinks everything to the right place
 ├── config/             ← ~/.config/* (sway, waybar, nvim, rofi, ...)
-│   ├── fastfetch/      ← Fastfetch config
+│   ├── fastfetch/      ← Fastfetch config (Hyprdots-inspired layout)
 │   ├── isync/          ← mbsync IMAP config
 │   ├── msmtp/          ← SMTP sending config
 │   ├── mutt/           ← NeoMutt config + Catppuccin themes
 │   ├── kitty/          ← Kitty config + Catppuccin themes
 │   ├── rofi/           ← Rofi config + Catppuccin themes
+│   ├── swaync/         ← SwayNotificationCenter config + CSS
 │   ├── waybar/         ← Waybar config + Catppuccin themes
 │   └── sway/hosts/     ← per-machine Sway settings
 ├── home/               ← ~/.*  (bashrc, bash_aliases, vimrc)
-├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, wallpaper, ...)
+├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, wallpaper, nextcloud, ...)
 └── assets/
     ├── wallpapers/     ← wallpapers
     └── grub/           ← GRUB theme
@@ -141,6 +142,7 @@ Linking also:
 - runs the Sway host selector automatically
 - initializes the shared Catppuccin theme files
 - links helper scripts into `~/.local/bin`
+- links `~/.config/swaync` for notifications
 
 If the current hostname matches a file in `config/sway/hosts/`, it becomes the active per-machine Sway config.
 
@@ -186,11 +188,19 @@ For the current `debian` host, monitor switching is handled dynamically by `kans
 
 That logic lives in `config/kanshi/config`, while the Sway host file keeps machine-specific autostarts and wallpaper commands.
 
+For the current `debian` host, those autostarts include:
+
+- `nm-applet`
+- `nextcloud` via a local wrapper script
+- `thunderbird`
+- `pcloud`
+- `indicator-sound-switcher`
+
 ---
 
 ## Theme
 
-**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, and eza.
+**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, eza, and the notification stack.
 
 Theme switching is unified through:
 
@@ -208,6 +218,8 @@ Available flavours:
 Font: **JetBrainsMono Nerd Font** (terminals, status bar, editors).
 
 Note: NeoMutt follows the official Catppuccin NeoMutt setup, which ships a Latte variant and one shared dark variant for Frappe, Macchiato, and Mocha.
+
+Waybar and SwayNotificationCenter keep their own config/style files, but both are part of the same desktop theme direction.
 
 ---
 
@@ -244,11 +256,49 @@ Pass entries expected by the mail setup:
 Useful local scripts linked into `~/.local/bin`:
 
 - `changeTheme` → switch the shared Catppuccin flavour
+- `kitty-theme` → compatibility wrapper for the shared theme switcher
 - `sync-mail` → sync NeoMutt mailboxes
 - `mount-sd` → mount a removable SD card to `/mnt/sdcard`
+- `notify-media` → show song/artist notifications for media transport keys
+- `nextcloud` → start the Nextcloud AppImage with the XWayland/Qt wrapper needed on Sway
+- `cleanup-pcloud-metadata` → move old Nextcloud/ownCloud sync metadata out of `~/pCloudDrive`
 - `select-sway-host` → choose the active host-specific Sway file
 - `wallpaper` → set wallpaper with fallback behavior
 - `update-nvim` → refresh the Neovim AppImage
+
+`mount-sd` accepts an explicit block device like `mount-sd /dev/mmcblk0p1`, but will also mount to `/mnt/sdcard` with the default helper path.
+
+`notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track.
+
+`nextcloud` exists because the AppImage ships only the `xcb` Qt platform plugin, so on Sway it is launched through XWayland via `QT_QPA_PLATFORM=xcb`.
+
+`cleanup-pcloud-metadata` is a safe migration helper: it only moves stale `.nextcloudsync.log`, `.owncloudsync.log`, and `.sync_*.db*` files into a timestamped backup folder.
+
+---
+
+## Notifications
+
+Notifications are handled by **SwayNotificationCenter** (`swaync`) instead of Mako or Dunst.
+
+- `swaync` starts from Sway
+- `Mod+Shift+n` toggles the notification center
+- Waybar shows a notification icon module with left-click to open and right-click to toggle Do Not Disturb
+
+Config lives in:
+
+- `config/swaync/config.json`
+- `config/swaync/style.css`
+
+If you previously had `dunst` installed, the Wayland layer tries to disable it so `org.freedesktop.Notifications` is owned by `swaync`.
+
+---
+
+## Cloud Apps
+
+- `nextcloud` is started from the host-specific Sway config through `~/.local/bin/nextcloud`
+- `pcloud` is started from the current `debian` host profile
+
+The pCloud helper `cleanup-pcloud-metadata` is intended for cleaning migrated Nextcloud/ownCloud sync state out of `~/pCloudDrive` without touching normal documents.
 
 ---
 
@@ -259,6 +309,7 @@ Useful local scripts linked into `~/.local/bin`:
 | `Mod+Return` | Open terminal (kitty) |
 | `Mod+d` | App launcher (rofi) |
 | `Mod+Shift+t` | Open Catppuccin theme picker |
+| `Mod+Shift+n` | Toggle notification center (`swaync`) |
 | `Mod+Shift+e` | Power menu (rofi) |
 | `Mod+Shift+x` | Lock screen (swaylock) |
 | `Mod+h/j/k/l` | Focus left/down/up/right |
@@ -267,3 +318,4 @@ Useful local scripts linked into `~/.local/bin`:
 | `Mod+r` | Resize mode |
 | `Caps Lock` | Escape (remapped) |
 | `Print` | Screenshot (grim) |
+| `XF86AudioPlay / Pause / Next / Prev` | Spotify transport with track notifications |
