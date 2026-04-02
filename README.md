@@ -114,7 +114,7 @@ dotfiles/
 │   ├── waybar/         ← Waybar config + Catppuccin themes
 │   └── sway/hosts/     ← per-machine Sway settings
 ├── home/               ← ~/.*  (bashrc, bash_aliases, vimrc)
-├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, wallpaper, nextcloud, ...)
+├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, wallpaper, ...)
 └── assets/
     ├── wallpapers/     ← wallpapers
     └── grub/           ← GRUB theme
@@ -188,13 +188,7 @@ For the current `debian` host, monitor switching is handled dynamically by `kans
 
 That logic lives in `config/kanshi/config`, while the Sway host file keeps machine-specific autostarts and wallpaper commands.
 
-For the current `debian` host, those autostarts include:
-
-- `nm-applet`
-- `nextcloud` via a local wrapper script
-- `thunderbird`
-- `pcloud`
-- `indicator-sound-switcher`
+For the current `debian` host, those autostarts include desktop helpers like `nm-applet`, `thunderbird`, `pcloud`, and audio utilities.
 
 ---
 
@@ -260,19 +254,13 @@ Useful local scripts linked into `~/.local/bin`:
 - `sync-mail` → sync NeoMutt mailboxes
 - `mount-sd` → mount a removable SD card to `/mnt/sdcard`
 - `notify-media` → show song/artist notifications for media transport keys
-- `nextcloud` → start the Nextcloud AppImage with the XWayland/Qt wrapper needed on Sway
-- `cleanup-pcloud-metadata` → move old Nextcloud/ownCloud sync metadata out of `~/pCloudDrive`
 - `select-sway-host` → choose the active host-specific Sway file
 - `wallpaper` → set wallpaper with fallback behavior
 - `update-nvim` → refresh the Neovim AppImage
 
 `mount-sd` accepts an explicit block device like `mount-sd /dev/mmcblk0p1`, but will also mount to `/mnt/sdcard` with the default helper path.
 
-`notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track.
-
-`nextcloud` exists because the AppImage ships only the `xcb` Qt platform plugin, so on Sway it is launched through XWayland via `QT_QPA_PLATFORM=xcb`.
-
-`cleanup-pcloud-metadata` is a safe migration helper: it only moves stale `.nextcloudsync.log`, `.owncloudsync.log`, and `.sync_*.db*` files into a timestamped backup folder.
+`notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track for the active MPRIS player.
 
 ---
 
@@ -293,15 +281,6 @@ If you previously had `dunst` installed, the Wayland layer tries to disable it s
 
 ---
 
-## Cloud Apps
-
-- `nextcloud` is started from the host-specific Sway config through `~/.local/bin/nextcloud`
-- `pcloud` is started from the current `debian` host profile
-
-The pCloud helper `cleanup-pcloud-metadata` is intended for cleaning migrated Nextcloud/ownCloud sync state out of `~/pCloudDrive` without touching normal documents.
-
----
-
 ## Key Bindings (Sway)
 
 | Key | Action |
@@ -318,4 +297,4 @@ The pCloud helper `cleanup-pcloud-metadata` is intended for cleaning migrated Ne
 | `Mod+r` | Resize mode |
 | `Caps Lock` | Escape (remapped) |
 | `Print` | Screenshot (grim) |
-| `XF86AudioPlay / Pause / Next / Prev` | Spotify transport with track notifications |
+| `XF86AudioPlay / Pause / Next / Prev` | Active media player transport with track notifications |

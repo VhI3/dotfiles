@@ -1,7 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-PLAYER="${PLAYER:-spotify}"
 ACTION="${1:-}"
 
 if [ -z "$ACTION" ]; then
@@ -9,11 +8,12 @@ if [ -z "$ACTION" ]; then
     exit 1
 fi
 
-playerctl -p "$PLAYER" "$ACTION" >/dev/null 2>&1 || exit 0
+playerctl "$ACTION" >/dev/null 2>&1 || exit 0
 
-status="$(playerctl -p "$PLAYER" status 2>/dev/null || true)"
-title="$(playerctl -p "$PLAYER" metadata xesam:title 2>/dev/null || true)"
-artist="$(playerctl -p "$PLAYER" metadata xesam:artist 2>/dev/null | paste -sd ', ' - || true)"
+status="$(playerctl status 2>/dev/null || true)"
+title="$(playerctl metadata xesam:title 2>/dev/null || true)"
+artist="$(playerctl metadata xesam:artist 2>/dev/null | paste -sd ', ' - || true)"
+player_name="$(playerctl metadata --format '{{playerName}}' 2>/dev/null || true)"
 
 if [ -z "$title" ]; then
     title="No track information"
@@ -21,8 +21,10 @@ fi
 
 if [ -n "$artist" ]; then
     body="$artist"
+elif [ -n "$player_name" ]; then
+    body="$player_name"
 else
-    body="$PLAYER"
+    body="media"
 fi
 
 case "$status" in
