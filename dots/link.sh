@@ -52,6 +52,7 @@ symlink "$DOTFILES/bin/update-nvim.sh"  "$HOME/.local/bin/update-nvim"
 symlink "$DOTFILES/bin/changeTheme.sh"  "$HOME/.local/bin/changeTheme"
 symlink "$DOTFILES/bin/changeTheme.sh"  "$HOME/.local/bin/changeTheme.sh"
 symlink "$DOTFILES/bin/kitty-theme.sh"   "$HOME/.local/bin/kitty-theme"
+symlink "$DOTFILES/bin/nextcloud.sh"    "$HOME/.local/bin/nextcloud"
 symlink "$DOTFILES/bin/select-sway-host.sh" "$HOME/.local/bin/select-sway-host"
 
 "$DOTFILES/bin/changeTheme.sh" --init mocha
