@@ -162,16 +162,16 @@ set $menu dmenu_run
     bindsym $mod+Shift+F12 move container to workspace $workspace22
 
     # --- Quick app launchers ---
-    bindsym $mod+w exec ~/.local/bin/focus-or-launch --workspace 2 --app-id firefox --class firefox -- firefox
-    bindsym $mod+e exec ~/.local/bin/focus-or-launch --workspace 9 --app-id org.gnome.Nautilus --class org.gnome.Nautilus --class Nautilus -- nautilus
-    bindsym $mod+c exec ~/.local/bin/focus-or-launch --workspace 3 --app-id code --app-id codium --app-id com.vscodium.codium --class Code --class VSCodium -- code
-    bindsym $mod+t exec ~/.local/bin/focus-or-launch --workspace 7 --app-id telegramdesktop --app-id org.telegram.desktop --class TelegramDesktop -- telegram-desktop
-    bindsym $mod+m exec ~/.local/bin/focus-or-launch --workspace 8 --app-id thunderbird --class thunderbird --class Thunderbird -- thunderbird
-    bindsym $mod+g exec ~/.local/bin/focus-or-launch --workspace 6 --app-id github-desktop --app-id io.github.shiftey.Desktop --class GitHub Desktop -- github-desktop
-    bindsym $mod+p exec ~/.local/bin/focus-or-launch --workspace 10 --app-id spotify --app-id com.spotify.Client --class Spotify -- spotify
-    bindsym $mod+z workspace number 4, exec zathura
-    bindsym $mod+x exec ~/.local/bin/focus-or-launch --workspace 4 --app-id xournalpp --class Xournalpp -- xournalpp
-    bindsym $mod+y exec ~/.local/bin/focus-or-launch --workspace 5 --class-prefix "MATLAB R202" -- matlab -desktop
+    bindsym $mod+w exec ~/.local/bin/focus-or-launch --workspace-var workspace2 --workspace-number 2 --app-id firefox --class firefox -- firefox
+    bindsym $mod+e exec ~/.local/bin/focus-or-launch --workspace-var workspace9 --workspace-number 9 --app-id org.gnome.Nautilus --class org.gnome.Nautilus --class Nautilus -- nautilus
+    bindsym $mod+c exec ~/.local/bin/focus-or-launch --workspace-var workspace3 --workspace-number 3 --app-id code --app-id codium --app-id com.vscodium.codium --class Code --class VSCodium -- code
+    bindsym $mod+t exec ~/.local/bin/focus-or-launch --workspace-var workspace7 --workspace-number 7 --app-id telegramdesktop --app-id org.telegram.desktop --class TelegramDesktop -- gtk-launch org.telegram.desktop._6509c22aaabe182b8b0f4012ab60a62f
+    bindsym $mod+m exec ~/.local/bin/focus-or-launch --workspace-var workspace8 --workspace-number 8 --app-id thunderbird --class thunderbird --class Thunderbird -- ~/.local/bin/thunderbird
+    bindsym $mod+g exec ~/.local/bin/focus-or-launch --workspace-var workspace6 --workspace-number 6 --app-id github-desktop --app-id io.github.shiftey.Desktop --class "GitHub Desktop" -- /usr/bin/github-desktop
+    bindsym $mod+p exec ~/.local/bin/focus-or-launch --workspace-var workspace0 --workspace-number 10 --app-id spotify --app-id com.spotify.Client --class Spotify -- spotify
+    bindsym $mod+z workspace $workspace4, exec zathura
+    bindsym $mod+x exec ~/.local/bin/focus-or-launch --workspace-var workspace4 --workspace-number 4 --app-id xournalpp --class Xournalpp -- xournalpp
+    bindsym $mod+y exec ~/.local/bin/focus-or-launch --workspace-var workspace5 --workspace-number 5 --class-prefix "MATLAB R202" -- ~/.local/bin/matlab-sway
 
 include ~/.config/sway/host.local.conf
 

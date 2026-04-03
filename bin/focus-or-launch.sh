@@ -1,7 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-workspace=""
+workspace_var=""
+workspace_number=""
 launch_cmd=()
 app_ids=()
 classes=()
@@ -9,8 +10,12 @@ class_prefixes=()
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
-        --workspace)
-            workspace="$2"
+        --workspace-var)
+            workspace_var="$2"
+            shift 2
+            ;;
+        --workspace-number)
+            workspace_number="$2"
             shift 2
             ;;
         --app-id)
@@ -31,15 +36,51 @@ while [ "$#" -gt 0 ]; do
             break
             ;;
         *)
-            echo "Usage: focus-or-launch.sh --workspace N [--app-id ID] [--class CLASS] [--class-prefix PREFIX] -- command ..." >&2
+            echo "Usage: focus-or-launch.sh --workspace-var NAME --workspace-number N [--app-id ID] [--class CLASS] [--class-prefix PREFIX] -- command ..." >&2
             exit 1
             ;;
     esac
 done
 
-if [ -z "$workspace" ] || [ "${#launch_cmd[@]}" -eq 0 ]; then
-    echo "Usage: focus-or-launch.sh --workspace N [--app-id ID] [--class CLASS] [--class-prefix PREFIX] -- command ..." >&2
+if [ -z "$workspace_var" ] || [ -z "$workspace_number" ] || [ "${#launch_cmd[@]}" -eq 0 ]; then
+    echo "Usage: focus-or-launch.sh --workspace-var NAME --workspace-number N [--app-id ID] [--class CLASS] [--class-prefix PREFIX] -- command ..." >&2
     exit 1
+fi
+
+workspace_name="$(
+WORKSPACE_VAR="$workspace_var" WORKSPACE_NUMBER="$workspace_number" python3 - <<'PY'
+import json
+import os
+import pathlib
+import re
+import subprocess
+
+workspace_var = os.environ["WORKSPACE_VAR"]
+workspace_number = int(os.environ["WORKSPACE_NUMBER"])
+config_path = pathlib.Path.home() / ".config" / "sway" / "config"
+
+if config_path.exists():
+    pattern = re.compile(r'^\s*set\s+\$' + re.escape(workspace_var) + r'\s+"?(.*?)"?\s*$')
+    for line in config_path.read_text(encoding="utf-8").splitlines():
+        m = pattern.match(line)
+        if m:
+            print(m.group(1))
+            raise SystemExit(0)
+
+try:
+    workspaces = json.loads(subprocess.check_output(["swaymsg", "-t", "get_workspaces", "-r"], text=True))
+except Exception:
+    raise SystemExit(0)
+
+for ws in workspaces:
+    if ws.get("num") == workspace_number and ws.get("name"):
+        print(ws["name"])
+        raise SystemExit(0)
+PY
+)"
+
+if [ -z "$workspace_name" ]; then
+    workspace_name="$workspace_number"
 fi
 
 match_id="$(
@@ -92,7 +133,7 @@ PY
 )"
 
 if [ -n "$match_id" ]; then
-    swaymsg "[con_id=$match_id]" focus >/dev/null
+    swaymsg "[con_id=$match_id] focus" >/dev/null
 else
-    swaymsg "workspace number $workspace; exec ${launch_cmd[*]}" >/dev/null
+    swaymsg "workspace \"$workspace_name\"; exec ${launch_cmd[*]}" >/dev/null
 fi

@@ -20,6 +20,7 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 | Tool | Role |
 |------|------|
 | [Sway](https://swaywm.org) | Tiling Wayland compositor (i3-compatible) |
+| [SDDM](https://github.com/sddm/sddm) | Optional display manager / login screen |
 | [Waybar](https://github.com/Alexays/Waybar) | Status bar |
 | [Rofi](https://github.com/davatorium/rofi) | App launcher + power menu |
 | [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter) | Notification daemon + control center |
@@ -100,7 +101,8 @@ dotfiles/
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
 │   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium, neomutt, mbsync, msmtp
 │   ├── 07-grub.sh      ← Catppuccin GRUB theme installer
-│   └── 08-octave.sh    ← GNU Octave with symbolic & statistics packages
+│   ├── 08-octave.sh    ← GNU Octave with symbolic & statistics packages
+│   └── 09-sddm.sh      ← SDDM + Catppuccin login theme installer
 ├── dots/
 │   └── link.sh         ← symlinks everything to the right place
 ├── config/             ← ~/.config/* (sway, waybar, nvim, rofi, ...)
@@ -114,7 +116,7 @@ dotfiles/
 │   ├── waybar/         ← Waybar config + Catppuccin themes
 │   └── sway/hosts/     ← per-machine Sway settings
 ├── home/               ← ~/.*  (bashrc, bash_aliases, vimrc)
-├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, setup-epos, focus-or-launch, wallpaper, ...)
+├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, setup-epos, focus-or-launch, matlab-sway, wallpaper, ...)
 └── assets/
     └── wallpapers/     ← wallpapers
 ```
@@ -134,7 +136,7 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-The installer presents a menu. Run layers in order (0 → 8) on a fresh machine, or pick individual layers to update specific tools. Run `l` at any time to symlink configs without reinstalling anything.
+The installer presents a menu. Run layers in order (0 → 9) on a fresh machine, or pick individual layers to update specific tools. Run `l` at any time to symlink configs without reinstalling anything.
 
 Linking also:
 
@@ -169,6 +171,44 @@ Available GRUB flavours:
 - `frappe`
 - `macchiato`
 - `mocha`
+
+To install the Catppuccin SDDM theme directly:
+
+```bash
+./layers/09-sddm.sh
+```
+
+To pick a different flavour and accent:
+
+```bash
+SDDM_THEME_FLAVOUR=macchiato SDDM_THEME_ACCENT=blue ./layers/09-sddm.sh
+```
+
+Available SDDM flavours:
+
+- `latte`
+- `frappe`
+- `macchiato`
+- `mocha`
+
+Available SDDM accents:
+
+- `rosewater`
+- `flamingo`
+- `pink`
+- `mauve`
+- `red`
+- `maroon`
+- `peach`
+- `yellow`
+- `green`
+- `teal`
+- `sky`
+- `sapphire`
+- `blue`
+- `lavender`
+
+Note: upstream recommends running the SDDM greeter on Wayland if the Catppuccin theme renders incorrectly on X11.
 
 ---
 
@@ -212,7 +252,7 @@ For the current `debian` host, those autostarts include desktop helpers like `nm
 
 ## Theme
 
-**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, eza, and the notification stack.
+**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, eza, SDDM, and the notification stack.
 
 Theme switching is unified through:
 
@@ -232,6 +272,11 @@ Font: **JetBrainsMono Nerd Font** (terminals, status bar, editors).
 Note: NeoMutt follows the official Catppuccin NeoMutt setup, which ships a Latte variant and one shared dark variant for Frappe, Macchiato, and Mocha.
 
 Waybar and SwayNotificationCenter keep their own config/style files, but both are part of the same desktop theme direction.
+
+Boot/login theming is handled separately through the install layers:
+
+- `07-grub.sh` for GRUB
+- `09-sddm.sh` for SDDM
 
 ---
 
@@ -273,6 +318,7 @@ Useful local scripts linked into `~/.local/bin`:
 - `mount-sd` → mount a removable SD card to `/mnt/sdcard`
 - `setup-epos` → restore the EPOS ADAPT E1 / BTD 900c media-key setup on a fresh install
 - `focus-or-launch` → jump to an existing app window or launch it on the target workspace
+- `matlab-sway` → start MATLAB with the Sway / XWayland compatibility environment
 - `notify-media` → show song/artist notifications for media transport keys
 - `notify-layout` → watch keyboard layout changes and show `EN` / `IR` notifications
 - `select-sway-host` → choose the active host-specific Sway file
@@ -284,6 +330,8 @@ Useful local scripts linked into `~/.local/bin`:
 `setup-epos` checks for `playerctl`, detects the EPOS consumer-control device when the dongle is plugged in, and ensures the Sway media-key bindings are present without duplicating them.
 
 `focus-or-launch` is used by most `Mod+letter` launcher bindings. If the app is already open, it focuses the existing window and jumps to its workspace; otherwise it launches the app on the assigned workspace.
+
+`matlab-sway` wraps your MATLAB install with the environment variables and launch flags needed for stable startup under Sway/XWayland.
 
 `notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track for the active MPRIS player.
 
@@ -339,3 +387,8 @@ If you previously had `dunst` installed, the Wayland layer tries to disable it s
 | `Caps Lock` | Escape (remapped) |
 | `Print` | Screenshot (grim) |
 | `XF86AudioPlay / Pause / Next / Prev` | Active media player transport with track notifications |
+
+Notes:
+
+- `Mod+z` intentionally stays a plain Zathura launch.
+- `Mod+Return` intentionally stays a plain Kitty launch on the current workspace.

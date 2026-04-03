@@ -49,6 +49,7 @@ symlink "$DOTFILES/bin/notify-brightness.sh" "$HOME/.local/bin/notify-brightness
 symlink "$DOTFILES/bin/notify-media.sh"      "$HOME/.local/bin/notify-media"
 symlink "$DOTFILES/bin/notify-layout.sh"     "$HOME/.local/bin/notify-layout"
 symlink "$DOTFILES/bin/focus-or-launch.sh"   "$HOME/.local/bin/focus-or-launch"
+symlink "$DOTFILES/bin/matlab-sway.sh"       "$HOME/.local/bin/matlab-sway"
 symlink "$DOTFILES/bin/wallpaper.sh"    "$HOME/.local/bin/wallpaper"
 symlink "$DOTFILES/bin/mount-sd.sh"     "$HOME/.local/bin/mount-sd"
 symlink "$DOTFILES/bin/setup-epos.sh"   "$HOME/.local/bin/setup-epos"
