@@ -39,6 +39,7 @@ symlink "$DOTFILES/config/zathura"    "$HOME/.config/zathura"
 symlink "$DOTFILES/config/swaylock"   "$HOME/.config/swaylock"
 symlink "$DOTFILES/config/lazygit"    "$HOME/.config/lazygit"
 symlink "$DOTFILES/config/mutt"       "$HOME/.config/mutt"
+symlink "$DOTFILES/config/applications/spotify.desktop" "$HOME/.local/share/applications/spotify.desktop"
 
 echo "==> Linking bin/ → ~/.local/bin/"
 mkdir -p "$HOME/.local/bin"

@@ -99,7 +99,7 @@ dotfiles/
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
 │   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium, neomutt, mbsync, msmtp
-│   ├── 07-grub.sh      ← GRUB bootloader theme
+│   ├── 07-grub.sh      ← Catppuccin GRUB theme installer
 │   └── 08-octave.sh    ← GNU Octave with symbolic & statistics packages
 ├── dots/
 │   └── link.sh         ← symlinks everything to the right place
@@ -116,8 +116,7 @@ dotfiles/
 ├── home/               ← ~/.*  (bashrc, bash_aliases, vimrc)
 ├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, setup-epos, focus-or-launch, wallpaper, ...)
 └── assets/
-    ├── wallpapers/     ← wallpapers
-    └── grub/           ← GRUB theme
+    └── wallpapers/     ← wallpapers
 ```
 
 ---
@@ -151,6 +150,25 @@ Example:
 ```bash
 ~/.local/bin/select-sway-host laptop
 ```
+
+To install the Catppuccin GRUB theme directly:
+
+```bash
+./layers/07-grub.sh
+```
+
+To pick a different flavor:
+
+```bash
+GRUB_THEME_FLAVOUR=macchiato ./layers/07-grub.sh
+```
+
+Available GRUB flavours:
+
+- `latte`
+- `frappe`
+- `macchiato`
+- `mocha`
 
 ---
 
