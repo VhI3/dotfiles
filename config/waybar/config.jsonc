@@ -61,6 +61,15 @@
             "unlocked": ""
         }
     },
+    "sway/language": {
+        "format": "{}",
+        "min-length": 2,
+        "tooltip": false,
+        "format-en": "EN",
+        "format-us": "EN",
+        "format-fa": "IR",
+        "format-ir": "IR"
+    },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },

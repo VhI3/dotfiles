@@ -114,7 +114,7 @@ dotfiles/
 │   ├── waybar/         ← Waybar config + Catppuccin themes
 │   └── sway/hosts/     ← per-machine Sway settings
 ├── home/               ← ~/.*  (bashrc, bash_aliases, vimrc)
-├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, setup-epos, wallpaper, ...)
+├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, setup-epos, focus-or-launch, wallpaper, ...)
 └── assets/
     ├── wallpapers/     ← wallpapers
     └── grub/           ← GRUB theme
@@ -254,7 +254,9 @@ Useful local scripts linked into `~/.local/bin`:
 - `sync-mail` → sync NeoMutt mailboxes
 - `mount-sd` → mount a removable SD card to `/mnt/sdcard`
 - `setup-epos` → restore the EPOS ADAPT E1 / BTD 900c media-key setup on a fresh install
+- `focus-or-launch` → jump to an existing app window or launch it on the target workspace
 - `notify-media` → show song/artist notifications for media transport keys
+- `notify-layout` → watch keyboard layout changes and show `EN` / `IR` notifications
 - `select-sway-host` → choose the active host-specific Sway file
 - `wallpaper` → set wallpaper with fallback behavior
 - `update-nvim` → refresh the Neovim AppImage
@@ -263,7 +265,11 @@ Useful local scripts linked into `~/.local/bin`:
 
 `setup-epos` checks for `playerctl`, detects the EPOS consumer-control device when the dongle is plugged in, and ensures the Sway media-key bindings are present without duplicating them.
 
+`focus-or-launch` is used by most `Mod+letter` launcher bindings. If the app is already open, it focuses the existing window and jumps to its workspace; otherwise it launches the app on the assigned workspace.
+
 `notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track for the active MPRIS player.
+
+`notify-layout` runs in the background from Sway, shows a desktop notification when you switch keyboard layout, and works together with the Waybar language module so you can see `EN` / `IR` at a glance.
 
 ---
 
@@ -274,6 +280,7 @@ Notifications are handled by **SwayNotificationCenter** (`swaync`) instead of Ma
 - `swaync` starts from Sway
 - `Mod+Shift+n` toggles the notification center
 - Waybar shows a notification icon module with left-click to open and right-click to toggle Do Not Disturb
+- Waybar also shows the active keyboard layout as `EN` / `IR`
 
 Config lives in:
 
@@ -290,16 +297,16 @@ If you previously had `dunst` installed, the Wayland layer tries to disable it s
 |-----|--------|
 | `Mod+Return` | Open terminal (kitty) |
 | `Mod+d` | App launcher (rofi) |
-| `Mod+w` | Launch Firefox |
-| `Mod+e` | Launch Nautilus |
-| `Mod+c` | Launch VSCodium |
-| `Mod+t` | Launch Telegram |
-| `Mod+m` | Launch Thunderbird |
-| `Mod+g` | Launch GitHub Desktop |
-| `Mod+p` | Launch Spotify |
+| `Mod+w` | Focus or launch Firefox on workspace 2 |
+| `Mod+e` | Focus or launch Nautilus on workspace 9 |
+| `Mod+c` | Focus or launch VS Code on workspace 3 |
+| `Mod+t` | Focus or launch Telegram on workspace 7 |
+| `Mod+m` | Focus or launch Thunderbird on workspace 8 |
+| `Mod+g` | Focus or launch GitHub Desktop on workspace 6 |
+| `Mod+p` | Focus or launch Spotify on workspace 10 |
 | `Mod+z` | Launch Zathura |
-| `Mod+x` | Launch Xournal++ |
-| `Mod+y` | Launch MATLAB |
+| `Mod+x` | Focus or launch Xournal++ on workspace 4 |
+| `Mod+y` | Focus or launch MATLAB on workspace 5 |
 | `Mod+Shift+t` | Open Catppuccin theme picker |
 | `Mod+Shift+n` | Toggle notification center (`swaync`) |
 | `Mod+Shift+e` | Power menu (rofi) |

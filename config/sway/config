@@ -162,16 +162,16 @@ set $menu dmenu_run
     bindsym $mod+Shift+F12 move container to workspace $workspace22
 
     # --- Quick app launchers ---
-    bindsym $mod+w exec firefox
-    bindsym $mod+e exec nautilus
-    bindsym $mod+c exec codium
-    bindsym $mod+t exec telegram-desktop
-    bindsym $mod+m exec thunderbird
-    bindsym $mod+g exec github-desktop
-    bindsym $mod+p exec spotify
-    bindsym $mod+z exec zathura
-    bindsym $mod+x exec xournalpp
-    bindsym $mod+y exec matlab -desktop
+    bindsym $mod+w exec ~/.local/bin/focus-or-launch --workspace 2 --app-id firefox --class firefox -- firefox
+    bindsym $mod+e exec ~/.local/bin/focus-or-launch --workspace 9 --app-id org.gnome.Nautilus --class org.gnome.Nautilus --class Nautilus -- nautilus
+    bindsym $mod+c exec ~/.local/bin/focus-or-launch --workspace 3 --app-id code --app-id codium --app-id com.vscodium.codium --class Code --class VSCodium -- code
+    bindsym $mod+t exec ~/.local/bin/focus-or-launch --workspace 7 --app-id telegramdesktop --app-id org.telegram.desktop --class TelegramDesktop -- telegram-desktop
+    bindsym $mod+m exec ~/.local/bin/focus-or-launch --workspace 8 --app-id thunderbird --class thunderbird --class Thunderbird -- thunderbird
+    bindsym $mod+g exec ~/.local/bin/focus-or-launch --workspace 6 --app-id github-desktop --app-id io.github.shiftey.Desktop --class GitHub Desktop -- github-desktop
+    bindsym $mod+p exec ~/.local/bin/focus-or-launch --workspace 10 --app-id spotify --app-id com.spotify.Client --class Spotify -- spotify
+    bindsym $mod+z workspace number 4, exec zathura
+    bindsym $mod+x exec ~/.local/bin/focus-or-launch --workspace 4 --app-id xournalpp --class Xournalpp -- xournalpp
+    bindsym $mod+y exec ~/.local/bin/focus-or-launch --workspace 5 --class-prefix "MATLAB R202" -- matlab -desktop
 
 include ~/.config/sway/host.local.conf
 
@@ -296,6 +296,7 @@ assign [class="Mendeley Desktop"]                  $workspace18
 
 # exec_always waybar --config ~/.config/waybar/config.jsonc --style ~/.config/waybar/style.css
 exec waybar
+exec_always sh -lc 'pkill -f "$HOME/.local/bin/notify-layout" 2>/dev/null || true; exec "$HOME/.local/bin/notify-layout"'
 
 input type:touchpad {
   tap enabled
