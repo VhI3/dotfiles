@@ -48,6 +48,7 @@ symlink "$DOTFILES/bin/notify-brightness.sh" "$HOME/.local/bin/notify-brightness
 symlink "$DOTFILES/bin/notify-media.sh"      "$HOME/.local/bin/notify-media"
 symlink "$DOTFILES/bin/wallpaper.sh"    "$HOME/.local/bin/wallpaper"
 symlink "$DOTFILES/bin/mount-sd.sh"     "$HOME/.local/bin/mount-sd"
+symlink "$DOTFILES/bin/setup-epos.sh"   "$HOME/.local/bin/setup-epos"
 symlink "$DOTFILES/bin/sync-mail.sh"    "$HOME/.local/bin/sync-mail"
 symlink "$DOTFILES/bin/update-nvim.sh"  "$HOME/.local/bin/update-nvim"
 symlink "$DOTFILES/bin/changeTheme.sh"  "$HOME/.local/bin/changeTheme"

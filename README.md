@@ -114,7 +114,7 @@ dotfiles/
 │   ├── waybar/         ← Waybar config + Catppuccin themes
 │   └── sway/hosts/     ← per-machine Sway settings
 ├── home/               ← ~/.*  (bashrc, bash_aliases, vimrc)
-├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, wallpaper, ...)
+├── bin/                ← ~/.local/bin/ (changeTheme, sync-mail, mount-sd, setup-epos, wallpaper, ...)
 └── assets/
     ├── wallpapers/     ← wallpapers
     └── grub/           ← GRUB theme
@@ -253,12 +253,15 @@ Useful local scripts linked into `~/.local/bin`:
 - `kitty-theme` → compatibility wrapper for the shared theme switcher
 - `sync-mail` → sync NeoMutt mailboxes
 - `mount-sd` → mount a removable SD card to `/mnt/sdcard`
+- `setup-epos` → restore the EPOS ADAPT E1 / BTD 900c media-key setup on a fresh install
 - `notify-media` → show song/artist notifications for media transport keys
 - `select-sway-host` → choose the active host-specific Sway file
 - `wallpaper` → set wallpaper with fallback behavior
 - `update-nvim` → refresh the Neovim AppImage
 
 `mount-sd` accepts an explicit block device like `mount-sd /dev/mmcblk0p1`, but will also mount to `/mnt/sdcard` with the default helper path.
+
+`setup-epos` checks for `playerctl`, detects the EPOS consumer-control device when the dongle is plugged in, and ensures the Sway media-key bindings are present without duplicating them.
 
 `notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track for the active MPRIS player.
 
@@ -287,12 +290,25 @@ If you previously had `dunst` installed, the Wayland layer tries to disable it s
 |-----|--------|
 | `Mod+Return` | Open terminal (kitty) |
 | `Mod+d` | App launcher (rofi) |
+| `Mod+w` | Launch Firefox |
+| `Mod+e` | Launch Nautilus |
+| `Mod+c` | Launch VSCodium |
+| `Mod+t` | Launch Telegram |
+| `Mod+m` | Launch Thunderbird |
+| `Mod+g` | Launch GitHub Desktop |
+| `Mod+p` | Launch Spotify |
+| `Mod+z` | Launch Zathura |
+| `Mod+x` | Launch Xournal++ |
+| `Mod+y` | Launch MATLAB |
 | `Mod+Shift+t` | Open Catppuccin theme picker |
 | `Mod+Shift+n` | Toggle notification center (`swaync`) |
 | `Mod+Shift+e` | Power menu (rofi) |
 | `Mod+Shift+x` | Lock screen (swaylock) |
 | `Mod+h/j/k/l` | Focus left/down/up/right |
 | `Mod+Shift+h/j/k/l` | Move window |
+| `Mod+Ctrl+s` | Stacking layout |
+| `Mod+Ctrl+w` | Tabbed layout |
+| `Mod+Ctrl+e` | Toggle split layout |
 | `Mod+f` | Fullscreen |
 | `Mod+r` | Resize mode |
 | `Caps Lock` | Escape (remapped) |

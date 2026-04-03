@@ -89,16 +89,16 @@ set $menu dmenu_run
     bindsym $mod+Shift+Right move right
 
 
-    # --- Workspace names (unchanged) ---
+    # --- Workspace names ---
     set $workspace1  "1:  "
-    set $workspace2  "2:  "
-    set $workspace3  "3:  "
-    set $workspace4  "4:  "
+    set $workspace2  "2:  "
+    set $workspace3  "3:  "
+    set $workspace4  "4:  "
     set $workspace5  "5:  "
-    set $workspace6  "6:  "
+    set $workspace6  "6:  "
     set $workspace7  "7:  "
-    set $workspace8  "8: 󰠮 "
-    set $workspace9  "9:   "
+    set $workspace8  "8:  "
+    set $workspace9  "9:  "
     set $workspace0  "10:  "
     set $workspace11 "11:  "
     set $workspace12 "12:"
@@ -161,87 +161,81 @@ set $menu dmenu_run
     bindsym $mod+Shift+F11 move container to workspace $workspace21
     bindsym $mod+Shift+F12 move container to workspace $workspace22
 
+    # --- Quick app launchers ---
+    bindsym $mod+w exec firefox
+    bindsym $mod+e exec nautilus
+    bindsym $mod+c exec codium
+    bindsym $mod+t exec telegram-desktop
+    bindsym $mod+m exec thunderbird
+    bindsym $mod+g exec github-desktop
+    bindsym $mod+p exec spotify
+    bindsym $mod+z exec zathura
+    bindsym $mod+x exec xournalpp
+    bindsym $mod+y exec matlab -desktop
+
 include ~/.config/sway/host.local.conf
 
 ### Assignments (put this ABOVE your exec/autostart lines)
 
-# 1
-assign [app_id="kitty"]                        $workspace1
-assign [app_id="org.pwmt.zathura"]                 $workspace1
-assign [class="Zathura"]                           $workspace1
+# 1 (Terminal)
+assign [app_id="kitty"]                            $workspace1
 
-# 3
-assign [app_id="firefox"]                          $workspace3
-assign [class="firefox"]                           $workspace3
+# 2 (Browser)
+assign [app_id="firefox"]                          $workspace2
+assign [class="firefox"]                           $workspace2
 
-# 4 (VSCodium)
-assign [app_id="codium"]                           $workspace4
-assign [app_id="com.vscodium.codium"]              $workspace4   
-assign [app_id="code"]                             $workspace4   
-assign [class="VSCodium"]                          $workspace4
+# 3 (Editors / IDEs)
+assign [app_id="codium"]                           $workspace3
+assign [app_id="com.vscodium.codium"]              $workspace3
+assign [app_id="code"]                             $workspace3
+assign [class="VSCodium"]                          $workspace3
+assign [app_id="jetbrains-clion"]                  $workspace3
+assign [class="jetbrains-clion"]                   $workspace3
+
+# 4 (Reading / Notes / PDFs)
+assign [app_id="org.pwmt.zathura"]                 $workspace4
+assign [class="Zathura"]                           $workspace4
+assign [app_id="xournalpp"]                        $workspace4
+assign [class="Xournalpp"]                         $workspace4
+assign [app_id="org.kde.okular"]                   $workspace4
+assign [class="okular"]                            $workspace4
+assign [app_id="qpdfview"]                         $workspace4
+assign [class="qpdfview"]                          $workspace4
 
 # 5 (MATLAB is XWayland)
 assign [class="MATLAB R202.*"]                     $workspace5
 
-# 6 (CLion often XWayland)
-assign [app_id="jetbrains-clion"]                  $workspace6
-assign [class="jetbrains-clion"]                   $workspace6
+# 6 (Git tools)
+assign [app_id="github-desktop"]                   $workspace6
+assign [app_id="io.github.shiftey.Desktop"]        $workspace6
+assign [class="GitHub Desktop"]                    $workspace6
 
 # 7 (Telegram)
 assign [app_id="telegramdesktop"]                  $workspace7
-assign [app_id="org.telegram.desktop"]             $workspace7   
+assign [app_id="org.telegram.desktop"]             $workspace7
 assign [class="TelegramDesktop"]                   $workspace7
 
-# 8 (Xournal++ / Okular)
-assign [app_id="xournalpp"]                        $workspace8
-assign [class="Xournalpp"]                         $workspace8
-assign [app_id="org.kde.okular"]                   $workspace8
-assign [class="okular"]                            $workspace8
+# 8 (Mail / office)
+assign [app_id="thunderbird"]                      $workspace8
+assign [class="thunderbird"]                       $workspace8
+assign [app_id="libreoffice-impress"]              $workspace8
+assign [class="libreoffice-impress"]               $workspace8
+assign [app_id="libreoffice"]                      $workspace8
 
-# 9 (Nemo)
-assign [app_id="nemo"]                             $workspace9
-assign [class="Nemo"]                              $workspace9
+# 9 (Files)
+assign [app_id="org.gnome.Nautilus"]               $workspace9
+assign [class="org.gnome.Nautilus"]                $workspace9
 
-# 10 (Spotify)
+# 10 (Music)
 assign [app_id="spotify"]                          $workspace0
-assign [app_id="com.spotify.Client"]               $workspace0  
+assign [app_id="com.spotify.Client"]               $workspace0
 assign [class="Spotify"]                           $workspace0
-
-# 11 (qpdfview)
-assign [app_id="qpdfview"]                         $workspace11
-assign [class="qpdfview"]                          $workspace11
-
-# 12 (Impress)
-assign [app_id="libreoffice-impress"]              $workspace12
-assign [class="libreoffice-impress"]               $workspace12
-assign [app_id="libreoffice"]                      $workspace12  
-
-# 17 (GitHub Desktop)
-assign [app_id="github-desktop"]                   $workspace17
-assign [app_id="io.github.shiftey.Desktop"]        $workspace17  
-assign [class="GitHub Desktop"]                    $workspace17
 
 # 18 (Mendeley – XWayland)
 assign [class="Mendeley Desktop"]                  $workspace18
-
-# 20 (Hiri)
-assign [app_id="hiri"]                             $workspace20
-assign [class="hiri"]                              $workspace20
-
-# 21 (Thunderbird)
-assign [app_id="thunderbird"]                      $workspace21
-assign [class="thunderbird"]                       $workspace21
-
-# 22 (Webex varies)
-assign [app_id="webex"]                            $workspace22
-assign [app_id="CiscoCollabHost"]                  $workspace22
-assign [class="Webex"]                             $workspace22
-assign [class="CiscoCollabHost"]                   $workspace22
    
     # --- Window rules ---
-    for_window [app_id="hiri" class="hiri"]                     floating enable
     for_window [title="^Figure.*" class="MATLAB R202.*"]        move to workspace $workspace19
-    for_window [app_id="webex" class="Webex"]                   move to workspace $workspace22
     for_window [app_id="spotify" class="Spotify"]               move to workspace $workspace0
 
 
@@ -254,9 +248,9 @@ assign [class="CiscoCollabHost"]                   $workspace22
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+Ctrl+s layout stacking
+    bindsym $mod+Ctrl+w layout tabbed
+    bindsym $mod+Ctrl+e layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen

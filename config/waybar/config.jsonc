@@ -2,9 +2,10 @@
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 32, // Slightly slimmer bar, keeps the original layout
+    "height": 30, // Compact height, closer to the reference layout
+    "margin": "10 12 0 12",
     // "width": 1280, // Waybar width
-    "spacing": 2, // Tighter spacing without changing module behavior
+    "spacing": 0, // Per-module spacing is handled in CSS
     // Choose the order of the modules
     "modules-left": [
         "sway/workspaces",
@@ -104,8 +105,8 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
-        "spacing": 10
+        "icon-size": 16,
+        "spacing": 0
     },
     "clock": {
         // "timezone": "America/New_York",
