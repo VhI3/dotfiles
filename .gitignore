@@ -11,3 +11,4 @@ config/rofi/theme.local.rasi
 config/zathura/catppuccin-current
 config/waybar/theme.local.css
 config/mutt/theme.local.muttrc
+.codex

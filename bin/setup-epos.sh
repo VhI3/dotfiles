@@ -14,6 +14,8 @@ bindsym --locked XF86AudioPlay exec $HOME/.local/bin/notify-media play-pause
 bindsym --locked XF86AudioPause exec $HOME/.local/bin/notify-media play-pause
 bindsym --locked XF86AudioNext exec $HOME/.local/bin/notify-media next
 bindsym --locked XF86AudioPrev exec $HOME/.local/bin/notify-media previous
+bindsym --locked XF86AudioForward exec $HOME/.local/bin/notify-media next
+bindsym --locked XF86AudioRewind exec $HOME/.local/bin/notify-media previous
 # END managed block: EPOS media keys
 EOF
 
@@ -49,7 +51,9 @@ ensure_block() {
     if grep -Fq 'bindsym --locked XF86AudioPlay exec $HOME/.local/bin/notify-media play-pause' "$file" \
         && grep -Fq 'bindsym --locked XF86AudioPause exec $HOME/.local/bin/notify-media play-pause' "$file" \
         && grep -Fq 'bindsym --locked XF86AudioNext exec $HOME/.local/bin/notify-media next' "$file" \
-        && grep -Fq 'bindsym --locked XF86AudioPrev exec $HOME/.local/bin/notify-media previous' "$file"; then
+        && grep -Fq 'bindsym --locked XF86AudioPrev exec $HOME/.local/bin/notify-media previous' "$file" \
+        && grep -Fq 'bindsym --locked XF86AudioForward exec $HOME/.local/bin/notify-media next' "$file" \
+        && grep -Fq 'bindsym --locked XF86AudioRewind exec $HOME/.local/bin/notify-media previous' "$file"; then
         echo "Sway media-key bindings are already present."
         return 0
     fi

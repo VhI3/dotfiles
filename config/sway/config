@@ -330,6 +330,8 @@ bindsym --locked XF86AudioPlay exec $HOME/.local/bin/notify-media play-pause
 bindsym --locked XF86AudioPause exec $HOME/.local/bin/notify-media play-pause
 bindsym --locked XF86AudioNext exec $HOME/.local/bin/notify-media next
 bindsym --locked XF86AudioPrev exec $HOME/.local/bin/notify-media previous
+bindsym --locked XF86AudioForward exec $HOME/.local/bin/notify-media next
+bindsym --locked XF86AudioRewind exec $HOME/.local/bin/notify-media previous
 
 
 ## Printscreen

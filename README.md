@@ -327,13 +327,13 @@ Useful local scripts linked into `~/.local/bin`:
 
 `mount-sd` accepts an explicit block device like `mount-sd /dev/mmcblk0p1`, but will also mount to `/mnt/sdcard` with the default helper path.
 
-`setup-epos` checks for `playerctl`, detects the EPOS consumer-control device when the dongle is plugged in, and ensures the Sway media-key bindings are present without duplicating them.
+`setup-epos` checks for `playerctl`, detects the EPOS consumer-control device when the dongle is plugged in, and ensures the Sway media-key bindings are present without duplicating them. It also installs fallback bindings for `XF86AudioForward` and `XF86AudioRewind`, which some headsets expose instead of `Next` / `Prev`.
 
 `focus-or-launch` is used by most `Mod+letter` launcher bindings. If the app is already open, it focuses the existing window and jumps to its workspace; otherwise it launches the app on the assigned workspace.
 
 `matlab-sway` wraps your MATLAB install with the environment variables and launch flags needed for stable startup under Sway/XWayland.
 
-`notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track for the active MPRIS player.
+`notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track for the active MPRIS player. When the player exposes album art through MPRIS, the notification also shows a thumbnail.
 
 `notify-layout` runs in the background from Sway, shows a desktop notification when you switch keyboard layout, and works together with the Waybar language module so you can see `EN` / `IR` at a glance.
 
@@ -386,7 +386,7 @@ If you previously had `dunst` installed, the Wayland layer tries to disable it s
 | `Mod+r` | Resize mode |
 | `Caps Lock` | Escape (remapped) |
 | `Print` | Screenshot (grim) |
-| `XF86AudioPlay / Pause / Next / Prev` | Active media player transport with track notifications |
+| `XF86AudioPlay / Pause / Next / Prev / Forward / Rewind` | Active media player transport with track notifications and album art when available |
 
 Notes:
 
