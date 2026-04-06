@@ -295,7 +295,7 @@ assign [class="Mendeley Desktop"]                  $workspace18
     bindsym $mod+r mode "resize"
 
 # exec_always waybar --config ~/.config/waybar/config.jsonc --style ~/.config/waybar/style.css
-exec waybar
+exec_always sh -lc 'pkill waybar 2>/dev/null || true; exec waybar'
 exec_always sh -lc 'pkill -f "$HOME/.local/bin/notify-layout" 2>/dev/null || true; exec "$HOME/.local/bin/notify-layout"'
 
 input type:touchpad {

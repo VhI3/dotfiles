@@ -291,7 +291,7 @@ reload_sway() {
 }
 
 reload_waybar() {
-    pkill -SIGUSR2 waybar >/dev/null 2>&1 || true
+    :
 }
 
 reload_swaync() {
