@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
 CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 KITTY_DIR="$CONFIG_HOME/kitty"
@@ -26,8 +27,12 @@ ROFI_DIR="$CONFIG_HOME/rofi"
 ROFI_LOCAL_THEME_FILE="$ROFI_DIR/theme.local.rasi"
 WAYBAR_DIR="$CONFIG_HOME/waybar"
 WAYBAR_LOCAL_THEME_FILE="$WAYBAR_DIR/theme.local.css"
+SWAYNC_DIR="$CONFIG_HOME/swaync"
+SWAYNC_LOCAL_THEME_FILE="$SWAYNC_DIR/theme.local.css"
 MUTT_DIR="$CONFIG_HOME/mutt"
 MUTT_LOCAL_THEME_FILE="$MUTT_DIR/theme.local.muttrc"
+WALLPAPER_DIR="$CONFIG_HOME/wallpaper"
+WALLPAPER_THEME_FILE="$WALLPAPER_DIR/theme.local"
 
 DEFAULT_THEME="Catppuccin-Mocha"
 
@@ -232,6 +237,14 @@ write_waybar_theme_file() {
 EOF
 }
 
+write_swaync_theme_file() {
+    local flavour="$1"
+    mkdir -p "$SWAYNC_DIR"
+    cat >"$SWAYNC_LOCAL_THEME_FILE" <<EOF
+@import "themes/catppuccin-${flavour}.css";
+EOF
+}
+
 write_mutt_theme_file() {
     local flavour="$1"
     mkdir -p "$MUTT_DIR"
@@ -251,6 +264,12 @@ EOF
             exit 1
             ;;
     esac
+}
+
+write_wallpaper_theme_file() {
+    local flavour="$1"
+    mkdir -p "$WALLPAPER_DIR"
+    printf '%s\n' "$flavour" >"$WALLPAPER_THEME_FILE"
 }
 
 write_zathura_theme_file() {
@@ -275,11 +294,26 @@ reload_waybar() {
     pkill -SIGUSR2 waybar >/dev/null 2>&1 || true
 }
 
+reload_swaync() {
+    if command -v swaync-client >/dev/null 2>&1; then
+        swaync-client -rs >/dev/null 2>&1 || true
+    fi
+}
+
+reload_wallpaper() {
+    local flavour="$1"
+    if [ -x "$HOME/.local/bin/wallpaper" ]; then
+        "$HOME/.local/bin/wallpaper" --theme "$flavour" >/dev/null 2>&1 || true
+    elif [ -x "$SCRIPT_DIR/wallpaper.sh" ]; then
+        "$SCRIPT_DIR/wallpaper.sh" --theme "$flavour" >/dev/null 2>&1 || true
+    fi
+}
+
 notify_theme() {
     local theme="$1"
     if command -v notify-send >/dev/null 2>&1; then
         notify-send -h string:x-canonical-private-synchronous:shared-theme \
-            "Theme Updated" "${theme} for Kitty, NeoMutt, Neovim, Ranger, Waybar, Zathura, eza, and Sway" >/dev/null 2>&1 || true
+            "Theme Updated" "${theme} for Kitty, NeoMutt, Neovim, Ranger, Waybar, SwayNC, Zathura, eza, wallpaper, and Sway" >/dev/null 2>&1 || true
     fi
 }
 
@@ -297,11 +331,15 @@ set_theme() {
     write_swaylock_theme_file "$flavour"
     write_rofi_theme_file "$flavour"
     write_waybar_theme_file "$flavour"
+    write_swaync_theme_file "$flavour"
     write_mutt_theme_file "$flavour"
+    write_wallpaper_theme_file "$flavour"
     write_zathura_theme_file "$flavour"
     reload_kitty
     reload_sway
     reload_waybar
+    reload_swaync
+    reload_wallpaper "$flavour"
     notify_theme "$theme"
 }
 
@@ -353,8 +391,16 @@ init_theme() {
         write_waybar_theme_file "$(theme_to_flavour "$theme")"
     fi
 
+    if [ ! -f "$SWAYNC_LOCAL_THEME_FILE" ]; then
+        write_swaync_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
     if [ ! -f "$MUTT_LOCAL_THEME_FILE" ]; then
         write_mutt_theme_file "$(theme_to_flavour "$theme")"
+    fi
+
+    if [ ! -f "$WALLPAPER_THEME_FILE" ]; then
+        write_wallpaper_theme_file "$(theme_to_flavour "$theme")"
     fi
 
     if [ ! -f "$ZATHURA_CURRENT_THEME_FILE" ]; then

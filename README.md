@@ -252,7 +252,7 @@ For the current `debian` host, those autostarts include desktop helpers like `nm
 
 ## Theme
 
-**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, eza, VS Code / VSCodium, VS Code icons, SDDM, and the notification stack.
+**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, eza, VS Code / VSCodium, VS Code icons, SDDM, wallpapers, and the notification stack.
 
 Theme switching is unified through:
 
@@ -271,7 +271,16 @@ Font: **JetBrainsMono Nerd Font** (terminals, status bar, editors).
 
 Note: NeoMutt follows the official Catppuccin NeoMutt setup, which ships a Latte variant and one shared dark variant for Frappe, Macchiato, and Mocha.
 
-Waybar and SwayNotificationCenter keep their own config/style files, but both are part of the same desktop theme direction.
+Waybar and SwayNotificationCenter keep their own config/style files, but both are part of the same desktop theme direction and follow the shared Catppuccin flavour through generated local theme files.
+
+Wallpaper is part of the same shared theme flow too:
+
+- `Latte` → light wallpaper
+- `Frappe` → dark wallpaper
+- `Macchiato` → dark wallpaper
+- `Mocha` → dark wallpaper
+
+The wallpaper helper stores the active flavour in `~/.config/wallpaper/theme.local` and reapplies the matching image when `changeTheme` runs.
 
 For VS Code / VSCodium, the shared theme switcher updates both:
 
@@ -336,7 +345,7 @@ Useful local scripts linked into `~/.local/bin`:
 - `select-sway-host` → choose the active host-specific Sway file
 - `setup-claudecode` → clean out old Codeium pieces and prepare the Claude Code Neovim setup
 - `setup-vscode-catppuccin` → install the Catppuccin VS Code / VSCodium theme and icon extensions
-- `wallpaper` → set wallpaper with fallback behavior
+- `wallpaper` → set wallpaper from the current shared flavour or an explicit image path
 - `update-nvim` → refresh the Neovim AppImage
 
 `mount-sd` accepts an explicit block device like `mount-sd /dev/mmcblk0p1`, but will also mount to `/mnt/sdcard` with the default helper path.
@@ -354,6 +363,8 @@ Useful local scripts linked into `~/.local/bin`:
 `notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track for the active MPRIS player. When the player exposes album art through MPRIS, the notification also shows a thumbnail.
 
 `notify-layout` runs in the background from Sway, shows a desktop notification when you switch keyboard layout, and works together with the Waybar language module so you can see `EN` / `IR` at a glance.
+
+`wallpaper` can be used manually as `wallpaper /path/to/image`, but the normal path is through `changeTheme`, which maps each Catppuccin flavour to the corresponding wallpaper image in `assets/wallpapers/`.
 
 Claude Code in Neovim also has a history picker:
 
@@ -377,6 +388,8 @@ Config lives in:
 - `config/swaync/style.css`
 
 If you previously had `dunst` installed, the Wayland layer tries to disable it so `org.freedesktop.Notifications` is owned by `swaync`.
+
+The `swaync` stylesheet is also part of the shared Catppuccin setup, so notification colors follow the same flavour as the rest of the desktop.
 
 ---
 

@@ -10,5 +10,7 @@ config/swaylock/current.conf
 config/rofi/theme.local.rasi
 config/zathura/catppuccin-current
 config/waybar/theme.local.css
+config/swaync/theme.local.css
+config/wallpaper/theme.local
 config/mutt/theme.local.muttrc
 .codex
