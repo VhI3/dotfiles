@@ -8,6 +8,9 @@ KITTY_THEMES_DIR="$KITTY_DIR/themes"
 KITTY_LOCAL_THEME_FILE="$KITTY_DIR/theme.local.conf"
 EZA_DIR="$CONFIG_HOME/eza"
 EZA_LOCAL_THEME_FILE="$EZA_DIR/theme.local.sh"
+VSCODE_USER_DIR="$CONFIG_HOME/Code/User"
+VSCODIUM_USER_DIR="$CONFIG_HOME/VSCodium/User"
+CODE_OSS_USER_DIR="$CONFIG_HOME/Code - OSS/User"
 
 NVIM_THEME_FILE="$CONFIG_HOME/nvim/lua/config/theme_local.lua"
 LEGACY_NVIM_THEME_FILE="$CONFIG_HOME/nvim/lua/config/theme.local.lua"
@@ -104,6 +107,93 @@ write_eza_theme_file() {
     ln -sfn "themes/catppuccin-${flavour}.sh" "$EZA_LOCAL_THEME_FILE"
 }
 
+write_vscode_theme_file() {
+    local flavour="$1"
+    local theme=""
+    local icon_theme=""
+
+    case "$flavour" in
+        latte)
+            theme="Catppuccin Latte"
+            icon_theme="catppuccin-latte"
+            ;;
+        frappe)
+            theme="Catppuccin Frappé"
+            icon_theme="catppuccin-frappe"
+            ;;
+        macchiato)
+            theme="Catppuccin Macchiato"
+            icon_theme="catppuccin-macchiato"
+            ;;
+        mocha)
+            theme="Catppuccin Mocha"
+            icon_theme="catppuccin-mocha"
+            ;;
+        *)
+            echo "Unsupported VS Code flavour: $flavour" >&2
+            exit 1
+            ;;
+    esac
+
+    for user_dir in "$VSCODE_USER_DIR" "$VSCODIUM_USER_DIR" "$CODE_OSS_USER_DIR"; do
+        local settings_file tmp_file
+        settings_file="$user_dir/settings.json"
+        mkdir -p "$user_dir"
+
+        if [ ! -f "$settings_file" ]; then
+            cat >"$settings_file" <<EOF
+{
+  "workbench.colorTheme": "$theme"
+}
+EOF
+            continue
+        fi
+
+        tmp_file="$(mktemp)"
+        python3 - "$settings_file" "$tmp_file" "$theme" "$icon_theme" <<'PY'
+import pathlib
+import re
+import sys
+
+settings_path = pathlib.Path(sys.argv[1])
+tmp_path = pathlib.Path(sys.argv[2])
+theme = sys.argv[3]
+icon_theme = sys.argv[4]
+text = settings_path.read_text(encoding="utf-8")
+
+settings = [
+    ("workbench.colorTheme", theme),
+    ("workbench.preferredDarkColorTheme", theme),
+    ("workbench.preferredLightColorTheme", theme),
+    ("workbench.preferredHighContrastColorTheme", theme),
+    ("workbench.preferredHighContrastLightColorTheme", theme),
+    ("workbench.iconTheme", icon_theme),
+]
+
+for key, value in settings:
+    pattern = re.compile(r'("' + re.escape(key) + r'"\s*:\s*)(?:"[^"]*"|null|true|false|-?\d+(?:\.\d+)?)')
+    if pattern.search(text):
+        text = pattern.sub(lambda m: m.group(1) + '"' + value + '"', text, count=1)
+        continue
+
+    stripped = text.rstrip()
+    idx = stripped.rfind("}")
+    if idx == -1:
+        text = '{\n  "' + key + '": "' + value + '"\n}\n'
+    else:
+        before = stripped[:idx].rstrip()
+        if before.endswith("{"):
+            insertion = '\n  "' + key + '": "' + value + '"\n'
+        else:
+            insertion = ',\n  "' + key + '": "' + value + '"\n'
+        text = before + insertion + "}\n"
+
+tmp_path.write_text(text, encoding="utf-8")
+PY
+        mv "$tmp_file" "$settings_file"
+    done
+}
+
 write_ranger_theme_file() {
     local flavour="$1"
     mkdir -p "$RANGER_COLORSCHEMES_DIR"
@@ -189,7 +279,7 @@ notify_theme() {
     local theme="$1"
     if command -v notify-send >/dev/null 2>&1; then
         notify-send -h string:x-canonical-private-synchronous:shared-theme \
-            "Theme Updated" "${theme} for Kitty, NeoMutt, Neovim, Ranger, Waybar, Zathura, and Sway" >/dev/null 2>&1 || true
+            "Theme Updated" "${theme} for Kitty, NeoMutt, Neovim, Ranger, Waybar, Zathura, eza, and Sway" >/dev/null 2>&1 || true
     fi
 }
 
@@ -201,6 +291,7 @@ set_theme() {
     write_kitty_theme_file "$theme"
     write_nvim_theme_file "$flavour"
     write_eza_theme_file "$flavour"
+    write_vscode_theme_file "$flavour"
     write_ranger_theme_file "$flavour"
     write_sway_theme_file "$flavour"
     write_swaylock_theme_file "$flavour"
@@ -239,6 +330,8 @@ init_theme() {
     if [ ! -e "$EZA_LOCAL_THEME_FILE" ]; then
         write_eza_theme_file "$(theme_to_flavour "$theme")"
     fi
+
+    write_vscode_theme_file "$(theme_to_flavour "$theme")"
 
     if [ ! -f "$RANGER_CURRENT_THEME_FILE" ]; then
         write_ranger_theme_file "$(theme_to_flavour "$theme")"

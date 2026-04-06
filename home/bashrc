@@ -116,6 +116,15 @@ fi
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/eza/theme.local.sh" ]; then
   . "${XDG_CONFIG_HOME:-$HOME/.config}/eza/theme.local.sh"
 fi
+
+eza() {
+  local theme_file="${XDG_CONFIG_HOME:-$HOME/.config}/eza/theme.local.sh"
+  if [ -f "$theme_file" ]; then
+    . "$theme_file"
+  fi
+  command eza "$@"
+}
+
 alias lc='eza -la --group-directories-first --icons'
 
 #######################################################

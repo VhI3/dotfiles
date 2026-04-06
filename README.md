@@ -252,7 +252,7 @@ For the current `debian` host, those autostarts include desktop helpers like `nm
 
 ## Theme
 
-**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, eza, SDDM, and the notification stack.
+**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, eza, VS Code / VSCodium, VS Code icons, SDDM, and the notification stack.
 
 Theme switching is unified through:
 
@@ -272,6 +272,18 @@ Font: **JetBrainsMono Nerd Font** (terminals, status bar, editors).
 Note: NeoMutt follows the official Catppuccin NeoMutt setup, which ships a Latte variant and one shared dark variant for Frappe, Macchiato, and Mocha.
 
 Waybar and SwayNotificationCenter keep their own config/style files, but both are part of the same desktop theme direction.
+
+For VS Code / VSCodium, the shared theme switcher updates both:
+
+- `workbench.colorTheme`
+- `workbench.iconTheme`
+
+So each flavour maps cleanly to the matching Catppuccin editor theme and icon pack:
+
+- `Latte` → `Catppuccin Latte` + `catppuccin-latte`
+- `Frappe` → `Catppuccin Frappé` + `catppuccin-frappe`
+- `Macchiato` → `Catppuccin Macchiato` + `catppuccin-macchiato`
+- `Mocha` → `Catppuccin Mocha` + `catppuccin-mocha`
 
 Boot/login theming is handled separately through the install layers:
 
@@ -322,6 +334,8 @@ Useful local scripts linked into `~/.local/bin`:
 - `notify-media` → show song/artist notifications for media transport keys
 - `notify-layout` → watch keyboard layout changes and show `EN` / `IR` notifications
 - `select-sway-host` → choose the active host-specific Sway file
+- `setup-claudecode` → clean out old Codeium pieces and prepare the Claude Code Neovim setup
+- `setup-vscode-catppuccin` → install the Catppuccin VS Code / VSCodium theme and icon extensions
 - `wallpaper` → set wallpaper with fallback behavior
 - `update-nvim` → refresh the Neovim AppImage
 
@@ -333,9 +347,18 @@ Useful local scripts linked into `~/.local/bin`:
 
 `matlab-sway` wraps your MATLAB install with the environment variables and launch flags needed for stable startup under Sway/XWayland.
 
+`setup-claudecode` removes stale Codeium leftovers from the Neovim config, keeps the Claude Code plugin files in the expected places, and helps verify that the Claude CLI is installed.
+
+`setup-vscode-catppuccin` installs the Catppuccin theme extension and Catppuccin icon pack for `code` / `codium`, while `changeTheme` keeps both `workbench.colorTheme` and `workbench.iconTheme` in sync with the shared Catppuccin flavour.
+
 `notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track for the active MPRIS player. When the player exposes album art through MPRIS, the notification also shows a thumbnail.
 
 `notify-layout` runs in the background from Sway, shows a desktop notification when you switch keyboard layout, and works together with the Waybar language module so you can see `EN` / `IR` at a glance.
+
+Claude Code in Neovim also has a history picker:
+
+- `<leader>ah` → open Claude session history and resume a session
+- `:ClaudeCodeHistory` → command form of the same picker
 
 ---
 
