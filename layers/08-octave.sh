@@ -21,10 +21,12 @@ sudo apt install -y \
     libarpack2-dev libsundials-dev \
     libqscintilla2-qt5-dev libglpk-dev \
     libbz2-dev icoutils rapidjson-dev portaudio19-dev \
-    build-essential python3 python3-pip
+    build-essential python3 python3-sympy
 
 echo "==> [08] SymPy (required for Octave symbolic package)"
-python3 -m pip install --user sympy
+# Debian marks the system Python as externally managed (PEP 668),
+# so use the distro package instead of pip here.
+python3 -c "import sympy" >/dev/null 2>&1 || sudo apt install -y python3-sympy
 
 echo "==> [08] Octave $OCTAVE_VERSION — build & install to $INSTALL_DIR"
 if [ ! -f "$INSTALL_DIR/bin/octave" ]; then
