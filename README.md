@@ -101,7 +101,7 @@ dotfiles/
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
 │   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium, neomutt, mbsync, msmtp
 │   ├── 07-grub.sh      ← Catppuccin GRUB theme installer
-│   ├── 08-octave.sh    ← GNU Octave with symbolic & statistics packages
+│   ├── 08-octave.sh    ← latest stable GNU Octave with symbolic & statistics packages
 │   └── 09-sddm.sh      ← SDDM + Catppuccin login theme installer
 ├── dots/
 │   └── link.sh         ← symlinks everything to the right place
@@ -209,6 +209,41 @@ Available SDDM accents:
 - `lavender`
 
 Note: upstream recommends running the SDDM greeter on Wayland if the Catppuccin theme renders incorrectly on X11.
+
+To install the latest stable Octave directly:
+
+```bash
+./layers/08-octave.sh
+```
+
+To install the faster Debian-packaged version with common add-on packages:
+
+```bash
+OCTAVE_INSTALL_MODE=apt ./layers/08-octave.sh
+```
+
+This installs:
+
+- `octave`
+- `octave-control`
+- `octave-image`
+- `octave-io`
+- `octave-optim`
+- `octave-signal`
+- `octave-statistics`
+- `octave-symbolic`
+
+To pin a specific version instead:
+
+```bash
+OCTAVE_VERSION=11.1.0 ./layers/08-octave.sh
+```
+
+To rebuild the current source version with updated dependencies (for example, to restore GUI support):
+
+```bash
+OCTAVE_FORCE_REBUILD=1 ./layers/08-octave.sh
+```
 
 ---
 

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=GNU Octave
+GenericName=Scientific Computing
+Comment=MATLAB-compatible scientific computing
+Exec=/home/vahab/.local/bin/octave-launch %F
+Terminal=false
+Icon=octave
+Categories=Science;Math;Education;
+Keywords=math;matlab;numerical;scientific;
+StartupNotify=true
