@@ -4,7 +4,7 @@ set -euo pipefail
 last=""
 
 get_layout() {
-    swaymsg -t get_inputs -r 2>/dev/null | python3 - <<'PY'
+    swaymsg -t get_inputs -r 2>/dev/null | python3 -c '
 import json
 import sys
 
@@ -18,7 +18,7 @@ for dev in data:
     if name:
         print(name)
         break
-PY
+'
 }
 
 format_layout() {
