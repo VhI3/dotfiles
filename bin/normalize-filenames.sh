@@ -3,10 +3,11 @@ set -euo pipefail
 
 apply=0
 target_dir="."
+mode="all"
 
 usage() {
     cat <<'EOF'
-Usage: normalize-filenames.sh [--apply] [directory]
+Usage: normalize-filenames.sh [--apply] [--folders-only|--files-only] [directory]
 
 Normalizes file and directory names to a POSIX-friendly portable style:
 - lowercase
@@ -16,7 +17,7 @@ Normalizes file and directory names to a POSIX-friendly portable style:
 - only letters, numbers, dots, underscores, and hyphens
 - no leading dash
 
-Default mode is dry-run. Use --apply to actually rename files.
+Default mode is dry-run. Use --apply to actually rename entries.
 EOF
 }
 
@@ -96,6 +97,12 @@ while [ $# -gt 0 ]; do
         --apply)
             apply=1
             ;;
+        --folders-only)
+            mode="folders"
+            ;;
+        --files-only)
+            mode="files"
+            ;;
         -h|--help)
             usage
             exit 0
@@ -113,6 +120,14 @@ if [ ! -d "$target_dir" ]; then
 fi
 
 find "$target_dir" -depth -mindepth 1 | while IFS= read -r path; do
+    if [ "$mode" = "folders" ] && [ ! -d "$path" ]; then
+        continue
+    fi
+
+    if [ "$mode" = "files" ] && [ ! -f "$path" ]; then
+        continue
+    fi
+
     dir="$(dirname "$path")"
     name="$(basename "$path")"
     sanitized="$(sanitize_name "$name")"
