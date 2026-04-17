@@ -373,6 +373,8 @@ Useful local scripts linked into `~/.local/bin`:
 - `kitty-theme` → compatibility wrapper for the shared theme switcher
 - `sync-mail` → sync NeoMutt mailboxes
 - `mount-sd` → mount a removable SD card to `/mnt/sdcard`
+- `show-keybindings` → open a Rofi cheat sheet for your main Sway shortcuts
+- `rofi-wifi` → manage Wi-Fi networks from a Rofi menu via NetworkManager (`nmcli`)
 - `setup-epos` → restore the EPOS ADAPT E1 / BTD 900c media-key setup on a fresh install
 - `focus-or-launch` → jump to an existing app window or launch it on the target workspace
 - `matlab-sway` → start MATLAB with the Sway / XWayland compatibility environment
@@ -385,6 +387,10 @@ Useful local scripts linked into `~/.local/bin`:
 - `update-nvim` → refresh the Neovim AppImage
 
 `mount-sd` accepts an explicit block device like `mount-sd /dev/mmcblk0p1`, but will also mount to `/mnt/sdcard` with the default helper path.
+
+`show-keybindings` opens a read-only Rofi overview of the most important launch, system, workspace, media, and layout shortcuts, so you can quickly remind yourself of the current Sway setup.
+
+`rofi-wifi` gives you a small Wi-Fi control center in Rofi: scan, connect, disconnect, toggle Wi-Fi on/off, and view the current connection without leaving Sway.
 
 `setup-epos` checks for `playerctl`, detects the EPOS consumer-control device when the dongle is plugged in, and ensures the Sway media-key bindings are present without duplicating them. It also installs fallback bindings for `XF86AudioForward` and `XF86AudioRewind`, which some headsets expose instead of `Next` / `Prev`.
 
@@ -435,6 +441,8 @@ The `swaync` stylesheet is also part of the shared Catppuccin setup, so notifica
 |-----|--------|
 | `Mod+Return` | Open terminal (kitty) |
 | `Mod+d` | App launcher (rofi) |
+| `Mod+i` | Wi-Fi menu (Rofi + NetworkManager) |
+| `Mod+/` | Show keybinding cheat sheet |
 | `Mod+w` | Focus or launch Firefox on workspace 2 |
 | `Mod+e` | Focus or launch Nautilus on workspace 9 |
 | `Mod+c` | Focus or launch VS Code on workspace 3 |
