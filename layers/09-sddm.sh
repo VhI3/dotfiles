@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$SCRIPT_DIR/lib-package-manager.sh"
+
 echo "==> [09] SDDM theme"
 # Catppuccin SDDM theme
 # Upstream: https://github.com/catppuccin/sddm
@@ -40,7 +43,7 @@ cleanup() {
 trap cleanup EXIT
 
 echo "    Installing SDDM and Catppuccin dependencies..."
-sudo apt install -y --no-install-recommends \
+pm_install --no-install-recommends \
     sddm \
     unzip \
     qml-module-qtquick-layouts \

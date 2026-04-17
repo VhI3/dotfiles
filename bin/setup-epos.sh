@@ -74,7 +74,7 @@ echo "==> EPOS media key setup"
 
 if ! command -v playerctl >/dev/null 2>&1; then
     echo "playerctl is not installed." >&2
-    echo "Install it with: sudo apt install playerctl" >&2
+    echo "Install it with: sudo nala install playerctl" >&2
     exit 1
 fi
 

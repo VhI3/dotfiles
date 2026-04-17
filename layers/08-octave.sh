@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$SCRIPT_DIR/lib-package-manager.sh"
+
 # Octave is built from source because:
 # - Debian's apt version often lags behind
 # - Source build enables JIT compilation (--enable-jit)
@@ -60,7 +63,7 @@ INSTALLED_VERSION="$(installed_octave_version || true)"
 
 if [ "$OCTAVE_INSTALL_MODE" = "apt" ]; then
     echo "==> [08] Octave — fast apt mode"
-    sudo apt install -y "${APT_OCTAVE_PACKAGES[@]}"
+    pm_install "${APT_OCTAVE_PACKAGES[@]}"
     echo "==> [08] Done."
     exit 0
 fi
@@ -72,7 +75,7 @@ if [ "$OCTAVE_INSTALL_MODE" != "source" ]; then
 fi
 
 echo "==> [08] Octave $OCTAVE_VERSION — dependencies"
-sudo apt install -y \
+pm_install \
     g++ gfortran make \
     libblas-dev liblapack-dev libopenblas-dev \
     libreadline-dev libncurses5-dev \

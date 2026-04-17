@@ -238,7 +238,8 @@ assign [class="Mendeley Desktop"]                  $workspace18
     for_window [title="^Figure.*" class="MATLAB R202.*"]        move to workspace $workspace19
     for_window [app_id="spotify" class="Spotify"]               move to workspace $workspace0
 
-
+# Make an app floating
+for_window [app_id="dev.postbote.postbote"]  floating enable
 
 # Layout stuff:
     # You can "split" the current object of your focus with

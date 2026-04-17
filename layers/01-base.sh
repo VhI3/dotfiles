@@ -1,35 +1,40 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 echo "==> [01] Base packages"
 sudo apt update && sudo apt upgrade -y
+sudo apt install -y nala
+
+. "$SCRIPT_DIR/lib-package-manager.sh"
 
 # Core utilities
-sudo apt install -y git curl wget unzip
+pm_install git curl wget unzip
 
 # Compiler toolchain — required to build anything from source
-sudo apt install -y build-essential
+pm_install build-essential
 
 # TLS certs + repo management
-sudo apt install -y ca-certificates software-properties-common
+pm_install ca-certificates software-properties-common
 
 # AppImage support — required to run Neovim AppImage
-sudo apt install -y libfuse2
+pm_install libfuse2
 
 # JSON parsing — used by install scripts and lazygit version detection
-sudo apt install -y jq
+pm_install jq
 
 # Process viewer
-sudo apt install -y htop
+pm_install htop
 
 # Recursive directory listing (used alongside eza for legacy scripts)
-sudo apt install -y tree
+pm_install tree
 
 # Intel CPU microcode updates — stability and security fixes (ThinkPad/workstation)
-sudo apt install -y intel-microcode
+pm_install intel-microcode
 
 # Python — used by Neovim plugins (LSP, DAP, etc.)
-sudo apt install -y python3 python3-pip python3-venv
+pm_install python3 python3-pip python3-venv
 
 echo "==> [01] SSD optimization"
 # Enable periodic TRIM — prevents SSD write amplification over time

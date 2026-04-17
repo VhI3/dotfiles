@@ -1,10 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$SCRIPT_DIR/lib-package-manager.sh"
+
 echo "==> [02] CLI tools"
 
 # Fuzzy finder — used in shell (Ctrl+R history, Ctrl+T file search) and Neovim (Telescope)
-sudo apt install -y fzf
+pm_install fzf
 
 # Terminal file manager with vim keybindings
 # highlight — syntax highlighting in previews
@@ -13,30 +16,30 @@ sudo apt install -y fzf
 # mediainfo — video/audio file info
 # w3m — HTML previews (text-mode browser)
 # Note: ueberzug (X11 image preview) intentionally excluded — kitty image protocol used instead
-sudo apt install -y ranger highlight atool poppler-utils mediainfo w3m
+pm_install ranger highlight atool poppler-utils mediainfo w3m
 
 # Fast grep replacement — used by Neovim live grep (Telescope)
-sudo apt install -y ripgrep
+pm_install ripgrep
 
 # Fast find replacement — used by Neovim file finder (Telescope)
 # Debian ships it as 'fdfind'; symlinked to 'fd' below
-sudo apt install -y fd-find
+pm_install fd-find
 
 # Better cat with syntax highlighting — used as pager and in fzf previews
 # Debian ships it as 'batcat'; symlinked to 'bat' below
-sudo apt install -y bat
+pm_install bat
 
 # Wayland clipboard — wl-copy / wl-paste, used by Neovim and shell
-sudo apt install -y wl-clipboard
+pm_install wl-clipboard
 
 # XDG utilities — xdg-open, used to open files from terminal in the right app
-sudo apt install -y xdg-utils
+pm_install xdg-utils
 
 # Minimal password store — GPG-backed secret management
-sudo apt install -y pass gnupg
+pm_install pass gnupg
 
 # System summary — themed terminal system info
-sudo apt install -y fastfetch
+pm_install fastfetch
 
 # Debian renames fd and bat — symlink to canonical names expected by tools/configs
 mkdir -p "$HOME/.local/bin"
@@ -45,7 +48,7 @@ mkdir -p "$HOME/.local/bin"
 
 echo "==> [02] Vim"
 # Fallback editor — vim-gtk3 includes clipboard support (+clipboard flag)
-sudo apt install -y vim-gtk3
+pm_install vim-gtk3
 # Vundle — vim plugin manager
 if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git "$HOME/.vim/bundle/Vundle.vim"
@@ -58,7 +61,7 @@ fi
 
 echo "==> [02] eza"
 # Modern ls replacement (replaces colorls) — icons, git status, tree view
-sudo apt install -y eza 2>/dev/null || {
+pm_install eza 2>/dev/null || {
     # Fallback: install via cargo if not in apt (older Debian)
     . "$HOME/.cargo/env"
     cargo install eza

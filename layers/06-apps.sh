@@ -1,15 +1,18 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$SCRIPT_DIR/lib-package-manager.sh"
+
 echo "==> [06] Zathura"
 # Minimal PDF/document viewer with vim keybindings
 # zathura-pdf-poppler adds PDF support (not included by default)
-sudo apt install -y zathura zathura-pdf-poppler
+pm_install zathura zathura-pdf-poppler
 
 echo "==> [06] LaTeX (texlive-full — ~4GB)"
 # Full LaTeX distribution: includes pdflatex, xelatex, lualatex, beamer, tikz, etc.
 # Use texlive-latex-extra instead if disk space is a concern (~800MB)
-sudo apt install -y texlive-full
+pm_install texlive-full
 
 echo "==> [06] Spotify"
 # Official Spotify apt repository — not in Debian repos by default
@@ -18,7 +21,7 @@ if ! command -v spotify &>/dev/null; then
         | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
     echo "deb http://repository.spotify.com stable non-free" \
         | sudo tee /etc/apt/sources.list.d/spotify.list
-    sudo apt update && sudo apt install -y spotify-client
+    pm_update && pm_install spotify-client
 else
     echo "    Spotify already installed, skipping."
 fi
@@ -32,7 +35,7 @@ if ! command -v github-desktop &>/dev/null; then
         | sudo tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main" \
         | sudo tee /etc/apt/sources.list.d/shiftkey-packages.list
-    sudo apt update && sudo apt install -y github-desktop
+    pm_update && pm_install github-desktop
     rm /tmp/shiftkey.gpg
 else
     echo "    GitHub Desktop already installed, skipping."
@@ -49,8 +52,8 @@ if ! command -v firefox &>/dev/null; then
     echo 'Package: *
 Pin: origin packages.mozilla.org
 Pin-Priority: 1000' | sudo tee /etc/apt/preferences.d/mozilla > /dev/null
-    sudo apt update && sudo apt install -y firefox
-    sudo apt remove --purge -y firefox-esr 2>/dev/null || true
+    pm_update && pm_install firefox
+    pm_remove --purge firefox-esr 2>/dev/null || true
 else
     echo "    Firefox already installed, skipping."
 fi
@@ -58,9 +61,9 @@ fi
 echo "==> [06] LibreWolf"
 # Privacy-hardened Firefox fork — installed via extrepo (Debian's external repo manager)
 if ! command -v librewolf &>/dev/null; then
-    sudo apt install -y extrepo
+    pm_install extrepo
     sudo extrepo enable librewolf
-    sudo apt update && sudo apt install -y librewolf
+    pm_update && pm_install librewolf
 else
     echo "    LibreWolf already installed, skipping."
 fi
@@ -71,7 +74,7 @@ echo "==> [06] NeoMutt"
 # - isync (mbsync) syncs IMAP to local Maildir
 # - msmtp sends mail via SMTP
 # - urlscan opens URLs from mail nicely inside the terminal workflow
-sudo apt install -y neomutt isync msmtp urlscan
+pm_install neomutt isync msmtp urlscan
 
 echo "==> [06] Thunderbird"
 # Downloaded directly from Mozilla (not Debian's outdated ESR package)
@@ -113,7 +116,7 @@ if ! command -v codium &>/dev/null; then
         | sudo gpg --dearmor | sudo tee /usr/share/keyrings/vscodium.gpg > /dev/null
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/vscodium.gpg] https://download.vscodium.com/debs vscodium main" \
         | sudo tee /etc/apt/sources.list.d/vscodium.list
-    sudo apt update && sudo apt install -y codium
+    pm_update && pm_install codium
 else
     echo "    VSCodium already installed, skipping."
 fi

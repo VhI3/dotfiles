@@ -27,7 +27,8 @@ alias ps='ps auxf'
 alias ping='ping -c 10'
 alias less='less -R'
 alias cls='clear'
-alias apt='sudo apt'
+alias apt='sudo nala'
+alias nala='sudo nala'
 alias multitail='multitail --no-repeat -c'
 #alias freshclam='sudo freshclam'
 alias e='nvim'
@@ -47,7 +48,7 @@ alias .....='cd ../../../..'
 alias bd='cd "$OLDPWD"'
 
 # Single Line update, upgrade — also updates Neovim AppImage if a new version is available
-alias aaa='sudo apt update && sudo apt upgrade && update-nvim && sudo apt autoremove && sudo apt autoclean'
+alias aaa='sudo nala update && sudo nala upgrade && update-nvim && sudo nala autoremove && sudo nala clean'
 
 alias bye="sudo systemctl poweroff"
 alias reboot="sudo systemctl reboot"

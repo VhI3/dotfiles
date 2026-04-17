@@ -34,6 +34,7 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 | [Kitty](https://sw.kovidgoyal.net/kitty/) | GPU-accelerated terminal (default) |
 | [Ghostty](https://ghostty.org) | Alternative terminal |
 | Bash | Shell with custom aliases and functions |
+| [Nala](https://gitlab.com/volian/nala) | Friendlier frontend for Debian's apt package manager |
 | [FZF](https://github.com/junegunn/fzf) | Fuzzy finder (Ctrl+R, Ctrl+T) |
 | [eza](https://github.com/eza-community/eza) | Modern `ls` replacement with icons |
 | [bat](https://github.com/sharkdp/bat) | `cat` with syntax highlighting |
@@ -94,7 +95,7 @@ dotfiles/
 ├── install.sh          ← interactive installer
 ├── layers/             ← install scripts, run in order
 │   ├── 00-sudo.sh      ← add user to sudoers (run as root first)
-│   ├── 01-base.sh      ← apt essentials, Python, Node (nvm), Rust
+│   ├── 01-base.sh      ← nala bootstrap, base packages, Python, Node (nvm), Rust
 │   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, fastfetch, vim
 │   ├── 03-wayland.sh   ← sway stack, kitty, rofi, swaync, grim, swaylock, kanshi
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts

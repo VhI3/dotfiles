@@ -1,35 +1,38 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$SCRIPT_DIR/lib-package-manager.sh"
+
 echo "==> [05] C/C++ development tools"
 
 # GCC/G++ — C and C++ compilers
-sudo apt install -y gcc g++
+pm_install gcc g++
 
 # GDB — GNU debugger for C/C++
-sudo apt install -y gdb
+pm_install gdb
 
 # CMake — build system generator used by most C/C++ projects
-sudo apt install -y cmake
+pm_install cmake
 
 # Ninja — fast build system, used as CMake backend (cmake -G Ninja)
-sudo apt install -y ninja-build
+pm_install ninja-build
 
 # Clangd — C/C++ language server (LSP), used by Neovim for completion/diagnostics
-sudo apt install -y clangd
+pm_install clangd
 
 # Clang-format — C/C++ code formatter, used by Neovim conform.nvim
-sudo apt install -y clang-format
+pm_install clang-format
 
 # Valgrind — memory error detector and profiler for C/C++
-sudo apt install -y valgrind
+pm_install valgrind
 
 # Make — still required by many legacy C/C++ projects
-sudo apt install -y make
+pm_install make
 
 echo "==> [05] Lua + LuaRocks"
 # Lua 5.1 — required by Neovim (uses LuaJIT which is Lua 5.1 compatible)
-sudo apt install -y lua5.1 liblua5.1-dev
+pm_install lua5.1 liblua5.1-dev
 # LuaRocks — Lua package manager, built from source to ensure Lua 5.1 target
 if ! command -v luarocks &>/dev/null; then
     LUAROCKS_VER="3.12.2"
@@ -44,7 +47,7 @@ fi
 echo "==> [05] Gnuplot"
 # Plotting tool used for scientific/data visualization
 # apt version is sufficient; old dotfiles built from source for Qt5 which is unnecessary
-sudo apt install -y gnuplot
+pm_install gnuplot
 
 echo "==> [05] Rust (via rustup — idempotent)"
 # Rust toolchain manager — also installs cargo, rustc, and rust-std

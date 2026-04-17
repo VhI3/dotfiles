@@ -14,7 +14,7 @@ echo "╚═══════════════════════�
 echo ""
 echo "Layers:"
 echo "  0) sudo     — add user to sudoers (run as root on fresh Debian install)"
-echo "  1) base     — apt essentials, Python, nvm/Node, Rust"
+echo "  1) base     — nala bootstrap, base packages, Python, nvm/Node, Rust"
 echo "  2) cli      — Neovim AppImage, fzf, ranger, ripgrep, eza, lazygit, bat"
 echo "  3) wayland  — sway, waybar, kitty, rofi, swaync, grim, swaylock, kanshi"
 echo "  4) fonts    — JetBrainsMono & SpaceMono Nerd Fonts"
