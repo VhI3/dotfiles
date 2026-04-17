@@ -48,6 +48,8 @@ set $menu dmenu_run
     # Start your launcher
     set $menu rofi -show drun
     bindsym $mod+d exec $menu
+    bindsym $mod+i exec ~/.local/bin/rofi-wifi
+    bindsym $mod+slash exec ~/.local/bin/show-keybindings
     bindsym $mod+Shift+t exec ~/.local/bin/changeTheme
 
     # Drag floating windows by holding down $mod and left mouse button.
