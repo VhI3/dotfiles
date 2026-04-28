@@ -313,7 +313,7 @@ notify_theme() {
     local theme="$1"
     if command -v notify-send >/dev/null 2>&1; then
         notify-send -h string:x-canonical-private-synchronous:shared-theme \
-            "Theme Updated" "${theme} for Kitty, NeoMutt, Neovim, Ranger, Waybar, SwayNC, Zathura, eza, wallpaper, and Sway" >/dev/null 2>&1 || true
+            "Theme Updated" "${theme}" >/dev/null 2>&1 || true
     fi
 }
 
