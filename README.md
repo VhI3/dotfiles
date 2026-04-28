@@ -48,6 +48,9 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 | [Neovim](https://neovim.io) | Primary editor (AppImage, always latest) |
 | [LazyVim](https://lazyvim.org) | Neovim config framework |
 | Vim | Fallback editor (vim-gtk3 + Vundle + Dracula) |
+| [ipynb.nvim](https://github.com/ajbucci/ipynb.nvim) | Jupyter notebook editing with inline image rendering (Kitty graphics protocol) |
+| [Codeium / Windsurf](https://codeium.com) | AI inline completion |
+| [claudecode.nvim](https://github.com/coder/claudecode.nvim) | Claude Code integration |
 
 Neovim is configured with LSP support for C/C++ (clangd), Python (pylsp), Rust (rust-analyzer), and LaTeX (vimtex + Zathura).
 
@@ -472,3 +475,44 @@ Notes:
 
 - `Mod+z` intentionally stays a plain Zathura launch.
 - `Mod+Return` intentionally stays a plain Kitty launch on the current workspace.
+
+---
+
+## Key Bindings (Neovim)
+
+### AI / Claude Code (`<leader>a`)
+
+| Key | Action |
+|-----|--------|
+| `<leader>ac` | Toggle Claude |
+| `<leader>af` | Focus Claude |
+| `<leader>ar` | Resume Claude (`--resume`) |
+| `<leader>aC` | Continue Claude (`--continue`) |
+| `<leader>ah` | Claude session history picker |
+| `<leader>am` | Select Claude model |
+| `<leader>ab` | Add current buffer to context |
+| `<leader>as` | Send visual selection to Claude |
+| `<leader>ae` | Explain selection (visual mode) |
+| `<leader>av` | Review selection (visual mode) |
+| `<leader>aa` | Accept diff |
+| `<leader>ad` | Deny diff |
+| `<leader>at` | Toggle Codeium |
+
+### Codeium (insert mode)
+
+| Key | Action |
+|-----|--------|
+| `<C-g>` | Accept suggestion |
+| `<C-l>` | Next suggestion |
+| `<C-j>` | Previous suggestion |
+| `<C-x>` | Dismiss suggestion |
+
+### Jupyter Notebooks (`ipynb.nvim`)
+
+| Key | Action |
+|-----|--------|
+| `<C-CR>` | Run current cell |
+| `<S-CR>` | Run current cell and move to next |
+| `<M-CR>` | Run current cell and insert below |
+| `]]` / `[[` | Next / previous cell |
+| `<leader>kj` | Cell picker |
