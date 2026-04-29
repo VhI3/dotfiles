@@ -6,7 +6,8 @@ ROFI_THEME="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/config.rasi"
 cat <<'EOF' | rofi -dmenu -i -no-custom -p "Sway Keys" -theme "$ROFI_THEME" \
     -theme-str 'window { width: 52%; } listview { lines: 24; }'
 Apps
-Mod+Return    Kitty
+Mod+Return    Ghostty
+Mod+Shift+Return  Kitty
 Mod+d         Rofi app launcher
 Mod+w         Firefox
 Mod+e         Nautilus

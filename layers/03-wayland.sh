@@ -6,6 +6,21 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "==> [03] Wayland / Sway stack"
 
+echo "==> [03] Ghostty Debian repository"
+sudo mkdir -p /usr/share/keyrings
+if [ ! -f /usr/share/keyrings/debian.griffo.io.gpg ]; then
+    curl -fsSL https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc |
+        sudo gpg --dearmor -o /usr/share/keyrings/debian.griffo.io.gpg
+fi
+
+ghostty_list_file="/etc/apt/sources.list.d/debian.griffo.io.list"
+ghostty_repo_line="deb [signed-by=/usr/share/keyrings/debian.griffo.io.gpg] https://debian.griffo.io/apt $(lsb_release -sc) main"
+if [ ! -f "$ghostty_list_file" ] || ! grep -Fxq "$ghostty_repo_line" "$ghostty_list_file"; then
+    printf '%s\n' "$ghostty_repo_line" | sudo tee "$ghostty_list_file" >/dev/null
+fi
+
+pm_update
+
 # Sway — tiling Wayland compositor (i3-compatible)
 pm_install sway
 
@@ -25,7 +40,10 @@ pm_install swayidle
 # Waybar — status bar (replaces polybar; configured in dotfiles/config/waybar/)
 pm_install waybar
 
-# Kitty — GPU-accelerated terminal, set as $term in sway config
+# Ghostty — default terminal in Sway
+pm_install ghostty
+
+# Kitty — secondary GPU-accelerated terminal, kept alongside Ghostty
 pm_install kitty
 
 # Rofi — app launcher and power menu ($mod+d, $mod+Shift+e in sway config)

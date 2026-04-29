@@ -25,9 +25,9 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-# set $term konsole 
-# set $term alacritty 
-set $term kitty 
+# set $term konsole
+# set $term alacritty
+set $term ghostty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -41,6 +41,7 @@ set $menu dmenu_run
 # Basics:
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec kitty
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -180,6 +181,8 @@ include ~/.config/sway/host.local.conf
 ### Assignments (put this ABOVE your exec/autostart lines)
 
 # 1 (Terminal)
+assign [app_id="com.mitchellh.ghostty"]            $workspace1
+assign [class="ghostty"]                           $workspace1
 assign [app_id="kitty"]                            $workspace1
 
 # 2 (Browser)

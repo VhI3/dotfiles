@@ -31,8 +31,8 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 ### Terminal & Shell
 | Tool | Role |
 |------|------|
-| [Kitty](https://sw.kovidgoyal.net/kitty/) | GPU-accelerated terminal (default) |
-| [Ghostty](https://ghostty.org) | Alternative terminal |
+| [Ghostty](https://ghostty.org) | Default terminal |
+| [Kitty](https://sw.kovidgoyal.net/kitty/) | Secondary GPU-accelerated terminal |
 | Bash | Shell with custom aliases and functions |
 | [Nala](https://gitlab.com/volian/nala) | Friendlier frontend for Debian's apt package manager |
 | [FZF](https://github.com/junegunn/fzf) | Fuzzy finder (Ctrl+R, Ctrl+T) |
@@ -100,7 +100,7 @@ dotfiles/
 │   ├── 00-sudo.sh      ← add user to sudoers (run as root first)
 │   ├── 01-base.sh      ← nala bootstrap, base packages, Python, Node (nvm), Rust
 │   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, fastfetch, vim
-│   ├── 03-wayland.sh   ← sway stack, kitty, rofi, swaync, grim, swaylock, kanshi
+│   ├── 03-wayland.sh   ← sway stack, ghostty, kitty, rofi, swaync, grim, swaylock, kanshi
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
 │   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium, neomutt, mbsync, msmtp
@@ -291,7 +291,7 @@ For the current `debian` host, those autostarts include desktop helpers like `nm
 
 ## Theme
 
-**Catppuccin** throughout — Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, eza, VS Code / VSCodium, VS Code icons, SDDM, wallpapers, and the notification stack.
+**Catppuccin** throughout — Ghostty, Kitty, Neovim, NeoMutt, Ranger, Rofi, Sway, Swaylock, Waybar, Zathura, eza, VS Code / VSCodium, VS Code icons, SDDM, wallpapers, and the notification stack.
 
 Theme switching is unified through:
 
@@ -442,7 +442,8 @@ The `swaync` stylesheet is also part of the shared Catppuccin setup, so notifica
 
 | Key | Action |
 |-----|--------|
-| `Mod+Return` | Open terminal (kitty) |
+| `Mod+Return` | Open terminal (Ghostty) |
+| `Mod+Shift+Return` | Open Kitty |
 | `Mod+d` | App launcher (rofi) |
 | `Mod+i` | Wi-Fi menu (Rofi + NetworkManager) |
 | `Mod+/` | Show keybinding cheat sheet |
@@ -474,7 +475,7 @@ The `swaync` stylesheet is also part of the shared Catppuccin setup, so notifica
 Notes:
 
 - `Mod+z` intentionally stays a plain Zathura launch.
-- `Mod+Return` intentionally stays a plain Kitty launch on the current workspace.
+- `Mod+Return` intentionally stays a plain Ghostty launch on the current workspace.
 
 ---
 
