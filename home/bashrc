@@ -409,3 +409,4 @@ export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f
 . "/home/vahab/.deno/env"
 export PATH="/home/vahab/.opt/octave/bin:$PATH"
 export PATH="$HOME/development/flutter/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

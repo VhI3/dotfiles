@@ -1,0 +1,11 @@
+# ~/.bash_profile
+
+# Keep the login environment in sync with ~/.profile.
+if [ -f "$HOME/.profile" ]; then
+  . "$HOME/.profile"
+fi
+
+# Auto-start Sway on tty1 when no Wayland session is active.
+if [ -z "${WAYLAND_DISPLAY:-}" ] && [ "$(tty)" = "/dev/tty1" ]; then
+  exec sway
+fi

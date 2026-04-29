@@ -51,6 +51,7 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 | [ipynb.nvim](https://github.com/ajbucci/ipynb.nvim) | Jupyter notebook editing with inline image rendering (Kitty graphics protocol) |
 | [Codeium / Windsurf](https://codeium.com) | AI inline completion |
 | [claudecode.nvim](https://github.com/coder/claudecode.nvim) | Claude Code integration |
+| [llama.vscode](https://github.com/ggml-org/llama.vscode) | Local offline VS Code code completion |
 
 Neovim is configured with LSP support for C/C++ (clangd), Python (pylsp), Rust (rust-analyzer), and LaTeX (vimtex + Zathura).
 
@@ -385,7 +386,9 @@ Useful local scripts linked into `~/.local/bin`:
 - `notify-layout` → watch keyboard layout changes and show `EN` / `IR` notifications
 - `select-sway-host` → choose the active host-specific Sway file
 - `setup-claudecode` → clean out old Codeium pieces and prepare the Claude Code Neovim setup
+- `setup-llama-vscode` → link a local `llama-server` binary into `~/.local/bin` for `llama.vscode`
 - `setup-vscode-catppuccin` → install the Catppuccin VS Code / VSCodium theme and icon extensions
+- `llama-vscode-cpu` → start the small CPU-only `llama.vscode` completion server on `127.0.0.1:8012`
 - `wallpaper` → set wallpaper from the current shared flavour or an explicit image path
 - `update-nvim` → refresh the Neovim AppImage
 
@@ -403,7 +406,34 @@ Useful local scripts linked into `~/.local/bin`:
 
 `setup-claudecode` removes stale Codeium leftovers from the Neovim config, keeps the Claude Code plugin files in the expected places, and helps verify that the Claude CLI is installed.
 
+`setup-llama-vscode` is the lightweight helper for local VS Code completions with `llama.vscode`. It prefers `~/src/llama.cpp/build/bin/llama-server`, falls back to `~/.unsloth/llama.cpp/build/bin/llama-server`, and links the chosen binary into `~/.local/bin/llama-server` so the extension can find it.
+
 `setup-vscode-catppuccin` installs the Catppuccin theme extension and Catppuccin icon pack for `code` / `codium`, while `changeTheme` keeps both `workbench.colorTheme` and `workbench.iconTheme` in sync with the shared Catppuccin flavour.
+
+`llama-vscode-cpu` starts the small CPU-friendly completion server used by the `Local, only completions - CPU` environment in `llama.vscode`. It uses `ggml-org/Qwen2.5-Coder-1.5B-Q8_0-GGUF` and binds to `127.0.0.1:8012` by default so it stays local-only.
+
+Quick start for the local VS Code completion flow:
+
+```bash
+./dots/link.sh
+setup-llama-vscode
+which llama-server
+llama-vscode-cpu
+```
+
+Then in another terminal:
+
+```bash
+curl http://127.0.0.1:8012/health
+```
+
+After that, start VS Code from a shell with:
+
+```bash
+code
+```
+
+and in `llama.vscode` choose the `Local, only completions - CPU` environment. Keep RAG, chat, and agent models disabled on CPU-only hardware unless you intentionally want the extra load.
 
 `notify-media` is used by the Sway media-key bindings so play/pause/next/previous show a desktop notification with the current track for the active MPRIS player. When the player exposes album art through MPRIS, the notification also shows a thumbnail.
 
