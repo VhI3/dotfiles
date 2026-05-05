@@ -41,6 +41,11 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 | [ranger](https://github.com/ranger/ranger) | Terminal file manager |
 | [pass](https://www.passwordstore.org/) | Minimal GPG-backed password manager |
 | [Fastfetch](https://github.com/fastfetch-cli/fastfetch) | Terminal system summary |
+| [duf](https://github.com/muesli/duf) | Better `df` for mounted filesystems |
+| [ncdu](https://dev.yorhel.nl/ncdu) | Terminal disk usage explorer |
+| [btop](https://github.com/aristocratos/btop) | Keyboard-friendly process and system monitor |
+| [trash-cli](https://github.com/andreafrancia/trash-cli) | Safer file deletion to trash |
+| [glow](https://github.com/charmbracelet/glow) | Markdown reader in terminal |
 
 ### Editors
 | Tool | Role |
@@ -100,7 +105,7 @@ dotfiles/
 ├── layers/             ← install scripts, run in order
 │   ├── 00-sudo.sh      ← add user to sudoers (run as root first)
 │   ├── 01-base.sh      ← nala bootstrap, base packages, Python, Node (nvm), Rust
-│   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, fastfetch, vim
+│   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, fastfetch, duf, ncdu, btop, trash-cli, glow, vim
 │   ├── 03-wayland.sh   ← sway stack, ghostty, kitty, rofi, swaync, grim, swaylock, kanshi
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua

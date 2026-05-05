@@ -41,6 +41,21 @@ pm_install pass gnupg
 # System summary — themed terminal system info
 pm_install fastfetch
 
+# Better disk space overview than df
+pm_install duf
+
+# NCurses disk usage viewer — quick way to inspect large directories in terminal
+pm_install ncdu
+
+# Process/system monitor — keyboard-friendly, better than htop for this setup
+pm_install btop
+
+# Safer delete via trash instead of permanent rm when wanted
+pm_install trash-cli
+
+# Markdown viewer in terminal
+pm_install glow
+
 # Debian renames fd and bat — symlink to canonical names expected by tools/configs
 mkdir -p "$HOME/.local/bin"
 [ ! -e "$HOME/.local/bin/fd" ]  && ln -s /usr/bin/fdfind "$HOME/.local/bin/fd"

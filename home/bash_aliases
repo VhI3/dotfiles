@@ -145,6 +145,8 @@ alias folders='du -h --max-depth=1'
 alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 alias treed='eza --tree --icons -D'
 alias mountedinfo='df -hT'
+alias df='duf'
+alias top='btop'
 
 # Alias's for archives
 alias mktar='tar -cvf'
