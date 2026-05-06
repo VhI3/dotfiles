@@ -384,6 +384,7 @@ Useful local scripts linked into `~/.local/bin`:
 - `mount-sd` → mount a removable SD card to `/mnt/sdcard`
 - `show-keybindings` → open a Rofi cheat sheet for your main Sway shortcuts
 - `rofi-wifi` → manage Wi-Fi networks from a Rofi menu via NetworkManager (`nmcli`)
+- `connect-keychron` → reconnect the trusted Keychron keyboard over Bluetooth
 - `setup-epos` → restore the EPOS ADAPT E1 / BTD 900c media-key setup on a fresh install
 - `focus-or-launch` → jump to an existing app window or launch it on the target workspace
 - `matlab-sway` → start MATLAB with the Sway / XWayland compatibility environment
@@ -402,6 +403,8 @@ Useful local scripts linked into `~/.local/bin`:
 `show-keybindings` opens a read-only Rofi overview of the most important launch, system, workspace, media, and layout shortcuts, so you can quickly remind yourself of the current Sway setup.
 
 `rofi-wifi` gives you a small Wi-Fi control center in Rofi: scan, connect, disconnect, toggle Wi-Fi on/off, and view the current connection without leaving Sway.
+
+`connect-keychron` reconnects the already-paired Keychron keyboard using `bluetoothctl`. Override the default device address with `KEYCHRON_BT_MAC=... connect-keychron` if needed.
 
 `setup-epos` checks for `playerctl`, detects the EPOS consumer-control device when the dongle is plugged in, and ensures the Sway media-key bindings are present without duplicating them. It also installs fallback bindings for `XF86AudioForward` and `XF86AudioRewind`, which some headsets expose instead of `Next` / `Prev`.
 
