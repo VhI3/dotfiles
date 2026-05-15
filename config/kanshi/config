@@ -1,11 +1,11 @@
 # kanshi — automatic display profile management
 #
 # Desired behavior for this machine:
-# - If HDMI-A-2 is connected, use only the external monitor
+# - If DP-5 is connected, use only the external monitor
 # - Otherwise, fall back to the laptop panel
 
 profile external_only {
-    output HDMI-A-2 enable mode 3840x2160 position 0,0 scale 2.01
+    output DP-5 enable mode 3840x2160 position 0,0 scale 2.01
     output eDP-1 disable
 }
 
