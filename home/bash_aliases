@@ -50,8 +50,8 @@ alias .....='cd ../../../..'
 # cd into the old directory
 alias bd='cd "$OLDPWD"'
 
-# Single Line update, upgrade — also updates Neovim AppImage if a new version is available
-alias aaa='sudo nala update && sudo nala upgrade && update-nvim && sudo nala autoremove && sudo nala clean'
+# Single Line update, upgrade — also updates Neovim AppImage and GitHub Desktop
+alias aaa='sudo nala update && sudo nala upgrade && update-nvim && update-github-desktop --yes && sudo nala autoremove && sudo nala clean'
 
 alias bye="sudo systemctl poweroff"
 alias reboot="sudo systemctl reboot"

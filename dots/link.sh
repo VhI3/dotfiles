@@ -80,6 +80,7 @@ symlink "$DOTFILES/bin/setup-vscode-catppuccin.sh" "$HOME/.local/bin/setup-vscod
 symlink "$DOTFILES/bin/llama-vscode-cpu.sh" "$HOME/.local/bin/llama-vscode-cpu"
 symlink "$DOTFILES/bin/sync-mail.sh"    "$HOME/.local/bin/sync-mail"
 symlink "$DOTFILES/bin/update-nvim.sh"  "$HOME/.local/bin/update-nvim"
+symlink "$DOTFILES/bin/update-github-desktop.sh" "$HOME/.local/bin/update-github-desktop"
 symlink "$DOTFILES/bin/changeTheme.sh"  "$HOME/.local/bin/changeTheme"
 symlink "$DOTFILES/bin/changeTheme.sh"  "$HOME/.local/bin/changeTheme.sh"
 symlink "$DOTFILES/bin/kitty-theme.sh"   "$HOME/.local/bin/kitty-theme"
