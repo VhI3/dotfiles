@@ -45,6 +45,13 @@ symlink "$DOTFILES/config/mutt"       "$HOME/.config/mutt"
 symlink "$DOTFILES/config/applications/spotify.desktop" "$HOME/.local/share/applications/spotify.desktop"
 symlink "$DOTFILES/config/applications/octave.desktop" "$HOME/.local/share/applications/octave.desktop"
 
+# Clean up stale local desktop overrides that hide packaged launchers.
+if [ -f "$HOME/.local/share/applications/qpdfview.desktop" ] && grep -q '^NoDisplay=true$' "$HOME/.local/share/applications/qpdfview.desktop"; then
+    mkdir -p "$HOME/.local/share/applications/codex-backup"
+    mv "$HOME/.local/share/applications/qpdfview.desktop" "$HOME/.local/share/applications/codex-backup/qpdfview.desktop"
+    echo "    removed stale hidden qpdfview.desktop override"
+fi
+
 echo "==> Linking bin/ → ~/.local/bin/"
 mkdir -p "$HOME/.local/bin"
 symlink "$DOTFILES/bin/toggle_audio.sh"  "$HOME/.local/bin/toggle_audio"
@@ -59,6 +66,7 @@ symlink "$DOTFILES/bin/matlab-sway.sh"       "$HOME/.local/bin/matlab-sway"
 symlink "$DOTFILES/bin/octave-launch.sh"     "$HOME/.local/bin/octave-launch"
 symlink "$DOTFILES/bin/blk.sh"               "$HOME/.local/bin/blk"
 symlink "$DOTFILES/bin/normalize-filenames.sh" "$HOME/.local/bin/normalize-filenames"
+symlink "$DOTFILES/bin/clean-latex.sh"         "$HOME/.local/bin/clean-latex"
 symlink "$DOTFILES/bin/rofi-wifi.sh"         "$HOME/.local/bin/rofi-wifi"
 symlink "$DOTFILES/bin/connect-keychron.sh"  "$HOME/.local/bin/connect-keychron"
 symlink "$DOTFILES/bin/ghostty.sh"           "$HOME/.local/bin/ghostty"
