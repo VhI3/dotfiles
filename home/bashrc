@@ -400,6 +400,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Setting for starting Matlab
 export JAVA_TOOL_OPTIONS='-Djogl.disable.openglarbcontext=1'
+export OLLAMA_MODELS="$HOME/.local/share/ollama/models"
 
 # Set the editor
 export EDITOR=nvim
