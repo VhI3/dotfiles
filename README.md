@@ -46,6 +46,7 @@ A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No 
 | [btop](https://github.com/aristocratos/btop) | Keyboard-friendly process and system monitor |
 | [trash-cli](https://github.com/andreafrancia/trash-cli) | Safer file deletion to trash |
 | [glow](https://github.com/charmbracelet/glow) | Markdown reader in terminal |
+| `cifs-utils` + `ntfs-3g` | SMB/NAS shares and NTFS external drive mounting |
 
 ### Editors
 | Tool | Role |
@@ -105,7 +106,7 @@ dotfiles/
 ├── layers/             ← install scripts, run in order
 │   ├── 00-sudo.sh      ← add user to sudoers (run as root first)
 │   ├── 01-base.sh      ← nala bootstrap, base packages, Python, Node (nvm), Rust
-│   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, fastfetch, duf, ncdu, btop, trash-cli, glow, vim
+│   ├── 02-cli.sh       ← Neovim, fzf, ranger, eza, lazygit, bat, pass, fastfetch, duf, ncdu, btop, trash-cli, glow, cifs-utils, ntfs-3g, vim
 │   ├── 03-wayland.sh   ← sway stack, ghostty, kitty, rofi, swaync, grim, swaylock, kanshi
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
@@ -382,6 +383,8 @@ Useful local scripts linked into `~/.local/bin`:
 - `kitty-theme` → compatibility wrapper for the shared theme switcher
 - `sync-mail` → sync NeoMutt mailboxes
 - `mount-sd` → mount a removable SD card to `/mnt/sdcard`
+- `mount-smb-share` → mount an SMB/CIFS share using a credentials file such as `~/.smb/casaos`
+- `mount-ntfs` → mount an NTFS partition to a mountpoint under `/mnt`
 - `show-keybindings` → open a Rofi cheat sheet for your main Sway shortcuts
 - `rofi-wifi` → manage Wi-Fi networks from a Rofi menu via NetworkManager (`nmcli`)
 - `connect-keychron` → reconnect the trusted Keychron keyboard over Bluetooth
@@ -399,6 +402,27 @@ Useful local scripts linked into `~/.local/bin`:
 - `update-nvim` → refresh the Neovim AppImage
 
 `mount-sd` accepts an explicit block device like `mount-sd /dev/mmcblk0p1`, but will also mount to `/mnt/sdcard` with the default helper path.
+
+`mount-smb-share` is for NAS / CasaOS-style SMB mounts. It expects a credentials file at `~/.smb/casaos` by default and auto-creates the mountpoint under `/mnt` if you pass a short name:
+
+```bash
+mount-smb-share "//192.168.178.114/Filme" filme
+mount-smb-share "//192.168.178.114/TV Shows" /mnt/tv_show
+```
+
+Credential file format:
+
+```text
+username=your-user
+password=your-password
+```
+
+`mount-ntfs` wraps the repeated `ntfs-3g` workflow for external disks:
+
+```bash
+mount-ntfs /dev/sda1 oneTB
+mount-ntfs /dev/sdc1 /mnt/oneTB
+```
 
 `show-keybindings` opens a read-only Rofi overview of the most important launch, system, workspace, media, and layout shortcuts, so you can quickly remind yourself of the current Sway setup.
 

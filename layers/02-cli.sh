@@ -35,6 +35,9 @@ pm_install wl-clipboard
 # XDG utilities — xdg-open, used to open files from terminal in the right app
 pm_install xdg-utils
 
+# Filesystem / network share helpers — SMB/CIFS NAS mounts and NTFS external drives
+pm_install cifs-utils ntfs-3g
+
 # Minimal password store — GPG-backed secret management
 pm_install pass gnupg
 
