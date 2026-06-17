@@ -385,6 +385,8 @@ Useful local scripts linked into `~/.local/bin`:
 - `mount-sd` → mount a removable SD card to `/mnt/sdcard`
 - `mount-smb-share` → mount an SMB/CIFS share using a credentials file such as `~/.smb/casaos`
 - `mount-ntfs` → mount an NTFS partition to a mountpoint under `/mnt`
+- `mount-media-shares` → mount the default `Filme` and `TV Shows` SMB shares
+- `install-media-share-startup` → install a root systemd service that mounts the media shares at boot
 - `show-keybindings` → open a Rofi cheat sheet for your main Sway shortcuts
 - `rofi-wifi` → manage Wi-Fi networks from a Rofi menu via NetworkManager (`nmcli`)
 - `connect-keychron` → reconnect the trusted Keychron keyboard over Bluetooth
@@ -423,6 +425,50 @@ password=your-password
 mount-ntfs /dev/sda1 oneTB
 mount-ntfs /dev/sdc1 /mnt/oneTB
 ```
+
+`mount-media-shares` mounts both default CasaOS / Samba media shares in one step:
+
+```bash
+mount-media-shares
+```
+
+Short alias:
+
+```bash
+mntmedia
+```
+
+By default it expects:
+
+- `//192.168.178.114/Filme` → `/mnt/filme`
+- `//192.168.178.114/TV Shows` → `/mnt/tv_show`
+
+Override with environment variables when needed:
+
+```bash
+SMB_HOST=centralperk-server mount-media-shares
+```
+
+`install-media-share-startup` installs a root `systemd` unit that waits for the network and mounts both media shares during boot:
+
+```bash
+./dots/link.sh
+install-media-share-startup
+```
+
+This expects the Samba/CasaOS share definitions on the server to point at the current real paths. If the server-side share still points to an old directory, fix the Samba export first and then enable the startup service.
+
+For the current server setup, the exported Samba share names are still:
+
+- `Filme`
+- `TV Shows`
+
+while the real server-side directories moved to:
+
+- `/DATA/Filme`
+- `/DATA/TV Shows`
+
+So if mounts start failing with `NT_STATUS_BAD_NETWORK_NAME`, check the server's Samba config and make sure those share definitions point at the new `/DATA/...` paths.
 
 `show-keybindings` opens a read-only Rofi overview of the most important launch, system, workspace, media, and layout shortcuts, so you can quickly remind yourself of the current Sway setup.
 

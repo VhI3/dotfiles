@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+run_as_root() {
+    if [ "$(id -u)" -eq 0 ]; then
+        "$@"
+    else
+        sudo "$@"
+    fi
+}
+
 usage() {
     cat <<'EOF'
 Usage: mount-ntfs /dev/sdXN [mountpoint-or-name]
@@ -40,7 +48,7 @@ if mount | grep -Fq "$device on "; then
     exit 0
 fi
 
-sudo mkdir -p "$mount_point"
-sudo mount -t ntfs-3g "$device" "$mount_point"
+run_as_root mkdir -p "$mount_point"
+run_as_root mount -t ntfs-3g "$device" "$mount_point"
 
 echo "Mounted $device at $mount_point"

@@ -40,6 +40,7 @@ alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
 alias mntsmb='mount-smb-share'
 alias mntntfs='mount-ntfs'
+alias mntmedia='mount-media-shares'
 alias cdm='cd /media/$USER'
 # Change directory aliases
 alias home='cd ~'

@@ -6,6 +6,14 @@ SMB_VERSION="${SMB_VERSION:-3.0}"
 UID_VALUE="${SMB_UID:-$(id -u)}"
 GID_VALUE="${SMB_GID:-$(id -g)}"
 
+run_as_root() {
+    if [ "$(id -u)" -eq 0 ]; then
+        "$@"
+    else
+        sudo "$@"
+    fi
+}
+
 usage() {
     cat <<'EOF'
 Usage: mount-smb-share //<host>/<share> [mountpoint-or-name]
@@ -62,8 +70,8 @@ if mount | grep -Fq " on $mount_point "; then
     exit 0
 fi
 
-sudo mkdir -p "$mount_point"
-sudo mount -t cifs "$share" "$mount_point" \
+run_as_root mkdir -p "$mount_point"
+run_as_root mount -t cifs "$share" "$mount_point" \
     -o "credentials=$CREDENTIALS_FILE,uid=$UID_VALUE,gid=$GID_VALUE,iocharset=utf8,vers=$SMB_VERSION"
 
 echo "Mounted $share at $mount_point"
