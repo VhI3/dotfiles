@@ -45,6 +45,7 @@ symlink "$DOTFILES/config/lazygit"    "$HOME/.config/lazygit"
 symlink "$DOTFILES/config/mutt"       "$HOME/.config/mutt"
 symlink "$DOTFILES/config/applications/spotify.desktop" "$HOME/.local/share/applications/spotify.desktop"
 symlink "$DOTFILES/config/applications/octave.desktop" "$HOME/.local/share/applications/octave.desktop"
+symlink "$DOTFILES/config/applications/calibre.desktop" "$HOME/.local/share/applications/calibre.desktop"
 
 # Clean up stale local desktop overrides that hide packaged launchers.
 if [ -f "$HOME/.local/share/applications/qpdfview.desktop" ] && grep -q '^NoDisplay=true$' "$HOME/.local/share/applications/qpdfview.desktop"; then

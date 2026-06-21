@@ -9,6 +9,15 @@ echo "==> [06] Zathura"
 # zathura-pdf-poppler adds PDF support (not included by default)
 pm_install zathura zathura-pdf-poppler
 
+echo "==> [06] Calibre"
+# Official Calibre installer — not packaged the way upstream recommends on Debian
+# Desktop launcher is managed in dotfiles/config/applications/calibre.desktop
+if ! command -v calibre &>/dev/null; then
+    wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+else
+    echo "    Calibre already installed, skipping."
+fi
+
 echo "==> [06] LaTeX (texlive-full — ~4GB)"
 # Full LaTeX distribution: includes pdflatex, xelatex, lualatex, beamer, tikz, etc.
 # Use texlive-latex-extra instead if disk space is a concern (~800MB)

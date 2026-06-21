@@ -88,6 +88,7 @@ Neovim is configured with LSP support for C/C++ (clangd), Python (pylsp), Rust (
 | Firefox | Browser (from Mozilla's official apt repo) |
 | LibreWolf | Privacy-hardened Firefox fork |
 | Thunderbird | Email client |
+| Calibre | E-book manager |
 | Spotify | Music |
 | GitHub Desktop | Git GUI |
 | VSCodium | Telemetry-free VS Code |
@@ -110,7 +111,7 @@ dotfiles/
 │   ├── 03-wayland.sh   ← sway stack, ghostty, kitty, rofi, swaync, grim, swaylock, kanshi
 │   ├── 04-fonts.sh     ← JetBrainsMono & SpaceMono Nerd Fonts
 │   ├── 05-dev.sh       ← gcc, cmake, ninja, clangd, gdb, rust-analyzer, lua
-│   ├── 06-apps.sh      ← firefox, librewolf, spotify, thunderbird, vscodium, neomutt, mbsync, msmtp
+│   ├── 06-apps.sh      ← firefox, librewolf, calibre, spotify, thunderbird, vscodium, neomutt, mbsync, msmtp
 │   ├── 07-grub.sh      ← Catppuccin GRUB theme installer
 │   ├── 08-octave.sh    ← latest stable GNU Octave with symbolic & statistics packages
 │   └── 09-sddm.sh      ← SDDM + Catppuccin login theme installer
