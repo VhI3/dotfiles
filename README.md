@@ -388,6 +388,9 @@ Useful local scripts linked into `~/.local/bin`:
 - `mount-ntfs` → mount an NTFS partition to a mountpoint under `/mnt`
 - `mount-media-shares` → mount the default `Filme` and `TV Shows` SMB shares
 - `install-media-share-startup` → install a root systemd service that mounts the media shares at boot
+- `sort-pdfs` → deduplicate PDFs first, then sort them into `books`, `theses`, `papers`, `others`, and `duplicates`
+- `sort-library` → sort a mixed library folder into PDFs, archives, images, audio, videos, ebooks, documents, and duplicates
+- `rename-pdf-from-title` → rename PDF files from their embedded `Title` metadata
 - `show-keybindings` → open a Rofi cheat sheet for your main Sway shortcuts
 - `rofi-wifi` → manage Wi-Fi networks from a Rofi menu via NetworkManager (`nmcli`)
 - `connect-keychron` → reconnect the trusted Keychron keyboard over Bluetooth
@@ -426,6 +429,58 @@ password=your-password
 mount-ntfs /dev/sda1 oneTB
 mount-ntfs /dev/sdc1 /mnt/oneTB
 ```
+
+`sort-pdfs` is the main PDF triage helper now. It removes duplicates first, including obvious same-content files with different names, then sorts the remaining PDFs into `books`, `theses`, `papers`, `others`, and `duplicates`:
+
+```bash
+sort-pdfs --source ~/Downloads/books-final --dest ~/Downloads/books-final
+sort-pdfs --source ~/Downloads/books-final --dest ~/Downloads/books-final --apply
+```
+
+You can tune the classification thresholds or run it on a wider tree if needed:
+
+```bash
+sort-pdfs --source ~/Downloads --dest ~/Downloads/pdf-library --recursive --apply
+sort-pdfs --min-book-pages 120 --source ~/Downloads/books-final --dest ~/Downloads/books-final --apply
+sort-pdfs --copy --source ~/Downloads/books-final --dest ~/Downloads/books-final --apply
+```
+
+After sorting, you can import the curated books into Calibre with:
+
+```bash
+calibredb add ~/Downloads/books-final/books/*.pdf
+```
+
+`rename-pdf-from-title` still fits well in the new workflow. After `sort-pdfs`, it is useful when you want cleaner filenames inside `books/` or `papers/` before importing into Calibre:
+
+```bash
+rename-pdf-from-title --source ~/Downloads/books-final/books
+rename-pdf-from-title --source ~/Downloads/books-final/books --with-author --apply
+rename-pdf-from-title --source ~/Downloads/books-final/papers --apply
+```
+
+It reads the PDF `Title` metadata, optionally prefixes the `Author`, then normalizes the result into a POSIX-friendly filename. It is best used after sorting, and usually not on `duplicates/` or `others/`.
+
+`sort-library` is the broader intake helper for mixed folders that contain PDFs plus other file types like archives, photos, audio, or ebooks. It sends PDFs through `sort-pdfs`, deduplicates exact-match non-PDF files by hash, and places the rest into sensible category folders:
+
+```bash
+sort-library --source ~/Downloads/tmpp --dest ~/Downloads/tmpp
+sort-library --source ~/Downloads/tmpp --dest ~/Downloads/tmpp --apply
+sort-library --source ~/Downloads/tmpp --dest ~/Downloads/library --recursive --apply
+```
+
+Non-PDF outputs are grouped into:
+
+- `archives/`
+- `images/`
+- `audio/`
+- `videos/`
+- `ebooks/`
+- `documents/`
+- `misc/`
+- `duplicates/`
+
+This is useful as the first cleanup pass before you manually review the curated `books/`, `papers/`, or `others/` folders.
 
 `mount-media-shares` mounts both default CasaOS / Samba media shares in one step:
 
@@ -524,6 +579,14 @@ Claude Code in Neovim also has a history picker:
 
 - `<leader>ah` → open Claude session history and resume a session
 - `:ClaudeCodeHistory` → command form of the same picker
+
+Ranger is also customized for faster document triage:
+
+- PDF previews use `pdftoppm` through `~/.config/ranger/scope.sh`
+- `x` sends the selected file to trash immediately via `trash-put`
+- `dd` cuts and `pp` pastes for file moves
+- `gz` opens the current file in Zathura
+- `gq` opens the current file in qpdfview
 
 ---
 

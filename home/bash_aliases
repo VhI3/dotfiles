@@ -105,7 +105,7 @@ alias lt='eza -l --sort=newest --icons'                 # sort by date
 alias lm='eza -lah --icons | more'                      # pipe through more
 alias ll='eza -la --icons --group-directories-first'    # long listing
 alias ldir='eza -lD --icons'                            # directories only
-alias lf='eza -lf --icons'                              # files only
+alias lsf='eza -lf --icons'                             # files only
 alias tree='eza --tree --icons'                         # tree view
 
 # alias chmod commands

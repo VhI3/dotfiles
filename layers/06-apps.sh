@@ -97,10 +97,11 @@ if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
     echo "    Installing Thunderbird $LATEST_VERSION"
     mkdir -p "$HOME/.opt"
     rm -rf "$INSTALL_DIR"
-    wget -q -O /tmp/thunderbird.tar.bz2 \
-        "https://download.mozilla.org/?product=thunderbird-latest&os=linux64&lang=en-US"
-    tar -xjf /tmp/thunderbird.tar.bz2 -C "$HOME/.opt"
-    rm /tmp/thunderbird.tar.bz2
+    curl -fsSL \
+        "https://download.mozilla.org/?product=thunderbird-latest&os=linux64&lang=en-US" \
+        -o /tmp/thunderbird.tar
+    tar -xf /tmp/thunderbird.tar -C "$HOME/.opt"
+    rm /tmp/thunderbird.tar
     mkdir -p "$HOME/.local/bin" "$HOME/.local/share/applications"
     ln -sf "$THUNDERBIRD_BIN" "$HOME/.local/bin/thunderbird"
     cat > "$HOME/.local/share/applications/thunderbird.desktop" <<EOF
