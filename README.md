@@ -1,6 +1,63 @@
-# dotfiles
+<div align="center">
 
-A minimalist, keyboard-driven Linux setup built on **Debian (server base)**. No desktop environment — just the tools that matter. Everything is intentional: Catppuccin theming, Vim keybindings, local-first terminal workflows, and a clean Wayland compositor stack.
+# VhI3 Dotfiles
+
+**A portable Debian/Sway workstation, tuned for keyboard-first daily work, local documents, and fast restore after a fresh install.**
+
+![Debian](https://img.shields.io/badge/Debian-minimal-A81D33?style=for-the-badge&logo=debian&logoColor=white)
+![Sway](https://img.shields.io/badge/Sway-Wayland-4C7899?style=for-the-badge)
+![Waybar](https://img.shields.io/badge/Waybar-status-89B4FA?style=for-the-badge)
+![Neovim](https://img.shields.io/badge/Neovim-LazyVim-A6E3A1?style=for-the-badge&logo=neovim&logoColor=white)
+![Catppuccin](https://img.shields.io/badge/Catppuccin-themed-F5C2E7?style=for-the-badge)
+
+<img src="assets/screenshots/desktop.svg" alt="Desktop preview" width="920">
+
+</div>
+
+---
+
+## At A Glance
+
+This repo is not just a theme dump. It is a complete, repeatable Linux workstation setup:
+
+- Minimal Debian install path, from base packages to Wayland desktop
+- Sway, Waybar, Rofi, SwayNotificationCenter, Ghostty, Kitty, Neovim, and terminal tools
+- Catppuccin theme switching across desktop, terminal, editor, notifications, eza, fzf, lazygit, VS Code, Ghostty, wallpapers, and PDF tools
+- Paperless-ngx scanning helpers, SMB share mounting, document-drive mirroring, and server restore notes
+- Local-only config pattern for private values, credentials, hostnames, LAN IPs, and machine-specific mounts
+
+## Showcase
+
+Replace these placeholder SVGs with real screenshots when you are ready. The README is already wired for a gallery.
+
+| Desktop | Neovim |
+|---|---|
+| <img src="assets/screenshots/desktop.svg" alt="Sway desktop preview" width="440"> | <img src="assets/screenshots/nvim.svg" alt="Neovim preview" width="440"> |
+
+| Paperless Workflow | Home Server Workflow |
+|---|---|
+| <img src="assets/screenshots/paperless.svg" alt="Paperless workflow preview" width="440"> | <img src="assets/screenshots/workflow.svg" alt="Home server workflow preview" width="440"> |
+
+## Workflow Map
+
+```text
+Fresh Debian
+    -> install.sh --fresh-minimal
+    -> dots/link.sh
+    -> setup-local-configs
+    -> post-install-check
+
+Laptop
+    -> Sway + Waybar + Rofi + Ghostty
+    -> Neovim + CLI tools
+    -> scan-to-paperless
+
+Home server
+    -> Paperless-ngx
+    -> media shares
+    -> Documents_1 master
+    -> Documents_2 mirror
+```
 
 ---
 

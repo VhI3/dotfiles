@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Paperless workflow placeholder</title>
+  <desc id="desc">A stylized Paperless document workflow card.</desc>
+  <rect width="1200" height="760" rx="34" fill="#eff1f5"/>
+  <circle cx="1040" cy="120" r="190" fill="#dc8a78" opacity="0.18"/>
+  <circle cx="150" cy="650" r="210" fill="#1e66f5" opacity="0.12"/>
+  <text x="70" y="90" fill="#4c4f69" font-family="monospace" font-size="42">Paperless document flow</text>
+  <g font-family="monospace" font-size="26">
+    <rect x="80" y="170" width="230" height="120" rx="22" fill="#1e66f5"/>
+    <text x="122" y="240" fill="#ffffff">Scanner</text>
+    <rect x="365" y="170" width="260" height="120" rx="22" fill="#40a02b"/>
+    <text x="402" y="240" fill="#ffffff">Consume Inbox</text>
+    <rect x="680" y="170" width="250" height="120" rx="22" fill="#8839ef"/>
+    <text x="722" y="240" fill="#ffffff">Paperless</text>
+    <rect x="350" y="430" width="250" height="120" rx="22" fill="#df8e1d"/>
+    <text x="392" y="500" fill="#ffffff">Export</text>
+    <rect x="660" y="430" width="250" height="120" rx="22" fill="#d20f39"/>
+    <text x="696" y="500" fill="#ffffff">HDD Mirror</text>
+  </g>
+  <g stroke="#6c6f85" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M310 230 H365"/>
+    <path d="M625 230 H680"/>
+    <path d="M805 290 V430"/>
+    <path d="M600 490 H660"/>
+  </g>
+  <text x="86" y="650" fill="#6c6f85" font-family="monospace" font-size="24">scan-to-paperless -> OCR/search/metadata -> export -> mirror</text>
+</svg>
