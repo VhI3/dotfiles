@@ -24,3 +24,10 @@ config/lazygit/theme.local.yml
 config/systemd/user/*.wants/
 projects/paperless-tools/paperless-tools.local.conf
 .codex
+
+# Raw screenshots often contain usernames, hostnames, LAN details, or document names.
+# Only explicitly allow public-safe screenshots that are used by the README.
+assets/screenshots/*.png
+!assets/screenshots/rofi-launcher.png
+!assets/screenshots/nvim.png
+!assets/screenshots/theme.png

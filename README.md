@@ -10,7 +10,7 @@
 ![Neovim](https://img.shields.io/badge/Neovim-LazyVim-A6E3A1?style=for-the-badge&logo=neovim&logoColor=white)
 ![Catppuccin](https://img.shields.io/badge/Catppuccin-themed-F5C2E7?style=for-the-badge)
 
-<img src="assets/screenshots/desktop.svg" alt="Desktop preview" width="920">
+<img src="assets/screenshots/rofi-launcher.png" alt="Rofi launcher preview" width="920">
 
 </div>
 
@@ -28,15 +28,19 @@ This repo is not just a theme dump. It is a complete, repeatable Linux workstati
 
 ## Showcase
 
-Replace these placeholder SVGs with real screenshots when you are ready. The README is already wired for a gallery.
+The public gallery uses screenshots that do not expose private documents, real LAN details, or local account configuration.
 
-| Desktop | Neovim |
+| Launcher | Neovim |
 |---|---|
-| <img src="assets/screenshots/desktop.svg" alt="Sway desktop preview" width="440"> | <img src="assets/screenshots/nvim.svg" alt="Neovim preview" width="440"> |
+| <img src="assets/screenshots/rofi-launcher.png" alt="Rofi launcher preview" width="440"> | <img src="assets/screenshots/nvim.png" alt="Neovim preview" width="440"> |
 
-| Paperless Workflow | Home Server Workflow |
+| Theme Switcher | Workflow |
 |---|---|
-| <img src="assets/screenshots/paperless.svg" alt="Paperless workflow preview" width="440"> | <img src="assets/screenshots/workflow.svg" alt="Home server workflow preview" width="440"> |
+| <img src="assets/screenshots/theme.png" alt="Theme switcher preview" width="440"> | <img src="assets/screenshots/workflow.svg" alt="Home server workflow preview" width="440"> |
+
+| Desktop Placeholder | Paperless Workflow |
+|---|---|
+| <img src="assets/screenshots/desktop.svg" alt="Desktop preview placeholder" width="440"> | <img src="assets/screenshots/paperless.svg" alt="Paperless workflow preview" width="440"> |
 
 ## Workflow Map
 

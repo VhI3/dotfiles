@@ -11,6 +11,13 @@ fi
 
 SMB_HOST="${SMB_HOST:-media-server.local}"
 
+# Values loaded from the local env file must be exported for mount-smb-share.sh.
+export SMB_CREDENTIALS_FILE="${SMB_CREDENTIALS_FILE:-}"
+export SMB_VERSION="${SMB_VERSION:-}"
+export SMB_EXTRA_OPTIONS="${SMB_EXTRA_OPTIONS:-}"
+export SMB_UID="${SMB_UID:-}"
+export SMB_GID="${SMB_GID:-}"
+
 FILME_SHARE="${FILME_SHARE:-Filme}"
 TV_SHOWS_SHARE="${TV_SHOWS_SHARE:-Series}"
 AUDIOBOOKS_SHARE="${AUDIOBOOKS_SHARE:-}"
