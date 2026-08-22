@@ -1,0 +1,155 @@
+#!/bin/bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$SCRIPT_DIR/lib-bootstrap.sh"
+. "$SCRIPT_DIR/lib-package-manager.sh"
+
+ensure_user_bootstrap_tools
+ensure_apt_keyring_dir
+
+echo "==> [06] Zathura"
+# Minimal PDF/document viewer with vim keybindings
+# zathura-pdf-poppler adds PDF support (not included by default)
+pm_install zathura zathura-pdf-poppler
+
+echo "==> [06] Desktop productivity apps used by Sway bindings"
+# File manager, notes/annotation, messaging, and lightweight PDF viewer
+pm_install nautilus xournalpp telegram-desktop qpdfview
+
+echo "==> [06] Signal Desktop"
+# Official Signal apt repository — not in Debian repos by default
+if ! command -v signal-desktop &>/dev/null; then
+    curl -fsSL https://updates.signal.org/desktop/apt/keys.asc \
+        | sudo gpg --dearmor --yes -o /usr/share/keyrings/signal-desktop-keyring.gpg
+    signal_sources_tmp="$(mktemp)"
+    curl -fsSL -o "$signal_sources_tmp" https://updates.signal.org/static/desktop/apt/signal-desktop.sources
+    sudo install -m 0644 "$signal_sources_tmp" /etc/apt/sources.list.d/signal-desktop.sources
+    rm -f "$signal_sources_tmp"
+    pm_update && pm_install signal-desktop
+else
+    echo "    Signal Desktop already installed, skipping."
+fi
+
+echo "==> [06] Calibre"
+# Official Calibre installer — not packaged the way upstream recommends on Debian
+# Desktop launcher is managed in dotfiles/config/applications/calibre.desktop
+if ! command -v calibre &>/dev/null; then
+    wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+else
+    echo "    Calibre already installed, skipping."
+fi
+
+echo "==> [06] LaTeX (texlive-full — ~4GB)"
+# Full LaTeX distribution: includes pdflatex, xelatex, lualatex, beamer, tikz, etc.
+# Use texlive-latex-extra instead if disk space is a concern (~800MB)
+pm_install texlive-full
+
+echo "==> [06] Spotify"
+# Official Spotify apt repository — not in Debian repos by default
+if ! command -v spotify &>/dev/null; then
+    curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg \
+        | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+    write_repo_line /etc/apt/sources.list.d/spotify.list "deb http://repository.spotify.com stable non-free"
+    pm_update && pm_install spotify-client
+else
+    echo "    Spotify already installed, skipping."
+fi
+
+echo "==> [06] GitHub Desktop"
+# Official Linux build maintained by shiftkey (not in Debian repos)
+# Assigned to workspace 17 in sway config
+if ! command -v github-desktop &>/dev/null; then
+    wget -qO /tmp/shiftkey.gpg https://apt.packages.shiftkey.dev/gpg.key
+    gpg --dearmor < /tmp/shiftkey.gpg \
+        | sudo tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
+    write_repo_line /etc/apt/sources.list.d/shiftkey-packages.list \
+        "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main"
+    pm_update && pm_install github-desktop
+    rm /tmp/shiftkey.gpg
+else
+    echo "    GitHub Desktop already installed, skipping."
+fi
+
+echo "==> [06] Firefox"
+# Mozilla's official apt repo — installs stable Firefox, not Debian's ESR fork
+# Pin-priority 1000 ensures Mozilla's version always wins over Debian's
+if ! command -v firefox &>/dev/null; then
+    wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- \
+        | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+    write_repo_line /etc/apt/sources.list.d/mozilla.list \
+        "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main"
+    echo 'Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000' | sudo tee /etc/apt/preferences.d/mozilla > /dev/null
+    pm_update && pm_install firefox
+    pm_remove --purge firefox-esr 2>/dev/null || true
+else
+    echo "    Firefox already installed, skipping."
+fi
+
+echo "==> [06] LibreWolf"
+# Privacy-hardened Firefox fork — installed via extrepo (Debian's external repo manager)
+if ! command -v librewolf &>/dev/null; then
+    pm_install extrepo
+    sudo extrepo enable librewolf
+    pm_update && pm_install librewolf
+else
+    echo "    LibreWolf already installed, skipping."
+fi
+
+echo "==> [06] NeoMutt"
+# Terminal email stack:
+# - neomutt for the UI
+# - isync (mbsync) syncs IMAP to local Maildir
+# - msmtp sends mail via SMTP
+# - urlscan opens URLs from mail nicely inside the terminal workflow
+pm_install neomutt isync msmtp urlscan
+
+echo "==> [06] Thunderbird"
+# Downloaded directly from Mozilla (not Debian's outdated ESR package)
+# Installs to ~/.opt/thunderbird, symlinked to ~/.local/bin/thunderbird
+INSTALL_DIR="$HOME/.opt/thunderbird"
+THUNDERBIRD_BIN="$INSTALL_DIR/thunderbird"
+CURRENT_VERSION=$( [ -x "$THUNDERBIRD_BIN" ] && "$THUNDERBIRD_BIN" --version | awk '{print $2}' || echo "none" )
+LATEST_VERSION=$(curl -sI "https://download.mozilla.org/?product=thunderbird-latest&os=linux64&lang=en-US" \
+    | grep -i "location" | grep -oE "[0-9]+\.[0-9]+(\.[0-9]+)?")
+if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
+    echo "    Installing Thunderbird $LATEST_VERSION"
+    mkdir -p "$HOME/.opt"
+    rm -rf "$INSTALL_DIR"
+    curl -fsSL \
+        "https://download.mozilla.org/?product=thunderbird-latest&os=linux64&lang=en-US" \
+        -o /tmp/thunderbird.tar
+    tar -xf /tmp/thunderbird.tar -C "$HOME/.opt"
+    rm /tmp/thunderbird.tar
+    mkdir -p "$HOME/.local/bin" "$HOME/.local/share/applications"
+    ln -sf "$THUNDERBIRD_BIN" "$HOME/.local/bin/thunderbird"
+    cat > "$HOME/.local/share/applications/thunderbird.desktop" <<EOF
+[Desktop Entry]
+Name=Thunderbird
+GenericName=Email Client
+Exec=$HOME/.local/bin/thunderbird
+Icon=$INSTALL_DIR/chrome/icons/default/default128.png
+Terminal=false
+Type=Application
+Categories=Network;Email;
+StartupWMClass=thunderbird
+EOF
+else
+    echo "    Thunderbird $CURRENT_VERSION already up-to-date, skipping."
+fi
+
+echo "==> [06] VSCodium"
+# VSCodium — telemetry-free VS Code build from official apt repo
+if ! command -v codium &>/dev/null; then
+    curl -fSsL https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+        | sudo gpg --dearmor | sudo tee /usr/share/keyrings/vscodium.gpg > /dev/null
+    write_repo_line /etc/apt/sources.list.d/vscodium.list \
+        "deb [arch=amd64 signed-by=/usr/share/keyrings/vscodium.gpg] https://download.vscodium.com/debs vscodium main"
+    pm_update && pm_install codium
+else
+    echo "    VSCodium already installed, skipping."
+fi
+
+echo "==> [06] Done."

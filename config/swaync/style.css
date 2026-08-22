@@ -1,0 +1,129 @@
+@import "theme.local.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 13px;
+}
+
+.control-center,
+.notification-row,
+.notification-group,
+.floating-notifications,
+.blank-window {
+  background: alpha(@base, 0.95);
+  color: @text;
+}
+
+.control-center {
+  border-radius: 16px;
+  border: 1px solid @surface1;
+  padding: 12px;
+}
+
+.control-center .widget-title,
+.control-center .widget-dnd,
+.control-center .widget-mpris,
+.control-center .widget-volume,
+.control-center .widget-backlight {
+  background: @surface0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 0 0 10px 0;
+}
+
+.notification-row .notification-background {
+  background: transparent;
+  border-radius: 14px;
+  margin: 6px 10px;
+}
+
+.notification-row .notification-background .notification {
+  background: @surface0;
+  border: 1px solid @surface1;
+  padding: 10px;
+  border-radius: 14px;
+}
+
+.notification-row .notification-background .close-button {
+  background: @surface1;
+  color: @text;
+  border-radius: 999px;
+}
+
+.notification-row .notification-background .close-button:hover {
+  background: @surface2;
+}
+
+.notification-row .notification-background .notification .notification-action,
+.notification-row .notification-background .notification .notification-default-action {
+  background: transparent;
+  color: @text;
+  border: none;
+  box-shadow: none;
+}
+
+.notification-row .notification-background .notification .notification-action:hover,
+.notification-row .notification-background .notification .notification-default-action:hover {
+  background: alpha(@surface1, 0.7);
+}
+
+.notification-row .notification-background .notification .notification-default-action {
+  border-radius: 12px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content {
+  background: transparent;
+  border-radius: 12px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary,
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body,
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+  background: transparent;
+  color: @text;
+  text-shadow: none;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body,
+.notification-row .time {
+  color: @subtext1;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .body-image {
+  background: @mantle;
+  border-radius: 12px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry,
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button {
+  background: @surface0;
+  color: @text;
+  border: 1px solid @surface1;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button:hover {
+  background: @surface1;
+}
+
+.notification-row .notification-background .notification.critical {
+  border: 1px solid @red;
+}
+
+.notification-row .summary,
+.notification-group-header {
+  color: @text;
+  font-weight: 700;
+}
+
+.notification-row .body,
+.notification-row .time,
+.control-center .widget-label > label {
+  color: @subtext1;
+}
+
+.widget-dnd > switch:checked,
+.widget-mpris button:hover,
+.widget-title button:hover {
+  background: @blue;
+  color: @base;
+}

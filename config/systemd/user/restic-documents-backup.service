@@ -1,0 +1,7 @@
+[Unit]
+Description=Run restic snapshots for external document SSD
+After=default.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/restic-documents-backup-service

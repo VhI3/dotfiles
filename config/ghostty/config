@@ -1,0 +1,4 @@
+# Ghostty base config
+# Theme selection is managed by theme.local.conf via changeTheme.sh.
+
+config-file = ?theme.local.conf

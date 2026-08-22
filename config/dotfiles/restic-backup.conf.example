@@ -1,0 +1,9 @@
+RESTIC_REPOSITORY=/media/$USER/Documents_2/restic-laptop
+RESTIC_PASSWORD_FILE=$HOME/.config/restic/password
+BACKUP_SOURCES="$HOME/Documents $HOME/dotfiles $HOME/.config"
+RESTIC_TAGS="laptop local"
+KEEP_DAILY=7
+KEEP_WEEKLY=4
+KEEP_MONTHLY=6
+KEEP_YEARLY=2
+RESTORE_TARGET=$HOME/restore-restic

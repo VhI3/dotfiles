@@ -1,0 +1,118 @@
+#!/bin/bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$SCRIPT_DIR/lib-bootstrap.sh"
+. "$SCRIPT_DIR/lib-package-manager.sh"
+
+ensure_user_bootstrap_tools
+ensure_local_bin
+
+echo "==> [02] CLI tools"
+
+# Fuzzy finder — used in shell (Ctrl+R history, Ctrl+T file search) and Neovim (Telescope)
+pm_install fzf
+
+# Terminal file manager with vim keybindings
+# highlight — syntax highlighting in previews
+# atool — archive previews (zip, tar, etc.)
+# poppler-utils — PDF previews (pdftotext)
+# mediainfo — video/audio file info
+# w3m — HTML previews (text-mode browser)
+# Note: ueberzug (X11 image preview) intentionally excluded — kitty image protocol used instead
+pm_install ranger highlight atool poppler-utils mediainfo w3m
+
+# Fast grep replacement — used by Neovim live grep (Telescope)
+pm_install ripgrep
+
+# Fast find replacement — used by Neovim file finder (Telescope)
+# Debian ships it as 'fdfind'; symlinked to 'fd' below
+pm_install fd-find
+
+# Better cat with syntax highlighting — used as pager and in fzf previews
+# Debian ships it as 'batcat'; symlinked to 'bat' below
+pm_install bat
+
+# Wayland clipboard — wl-copy / wl-paste, used by Neovim and shell
+pm_install wl-clipboard
+
+# XDG utilities — xdg-open, used to open files from terminal in the right app
+pm_install xdg-utils
+
+# Filesystem / network share helpers — SMB/CIFS NAS mounts and NTFS external drives
+pm_install cifs-utils ntfs-3g inotify-tools
+
+# Minimal password store — GPG-backed secret management
+pm_install pass gnupg
+
+# System summary — themed terminal system info
+pm_install fastfetch
+
+# Better disk space overview than df
+pm_install duf
+
+# NCurses disk usage viewer — quick way to inspect large directories in terminal
+pm_install ncdu
+
+# Process/system monitor — keyboard-friendly, better than htop for this setup
+pm_install btop
+
+# Safer delete via trash instead of permanent rm when wanted
+pm_install trash-cli
+
+# Markdown viewer in terminal
+pm_install glow
+
+# Debian renames fd and bat — symlink to canonical names expected by tools/configs
+[ ! -e "$HOME/.local/bin/fd" ]  && ln -s /usr/bin/fdfind "$HOME/.local/bin/fd"
+[ ! -e "$HOME/.local/bin/bat" ] && ln -s /usr/bin/batcat "$HOME/.local/bin/bat"
+
+echo "==> [02] Vim"
+# Fallback editor — vim-gtk3 includes clipboard support (+clipboard flag)
+pm_install vim-gtk3
+# Vundle — vim plugin manager
+if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git "$HOME/.vim/bundle/Vundle.vim"
+fi
+# Dracula theme for vim
+if [ ! -d "$HOME/.vim/pack/themes/start/dracula" ]; then
+    mkdir -p "$HOME/.vim/pack/themes/start"
+    git clone https://github.com/dracula/vim.git "$HOME/.vim/pack/themes/start/dracula"
+fi
+
+echo "==> [02] eza"
+# Modern ls replacement (replaces colorls) — icons, git status, tree view
+pm_install eza 2>/dev/null || {
+    # Fallback: install via cargo if not in apt (older Debian)
+    . "$HOME/.cargo/env"
+    cargo install eza
+    cp "$HOME/.cargo/bin/eza" "$HOME/.local/bin/eza"
+}
+
+echo "==> [02] Neovim AppImage"
+# AppImage runs without system dependencies — version-aware install/update
+mkdir -p "$HOME/.opt/nvim" "$HOME/.local/bin"
+_nvim_installed=$(command -v nvim >/dev/null 2>&1 && nvim --version | head -1 | awk '{print $2}' || echo "none")
+_nvim_latest=$(curl -s https://api.github.com/repos/neovim/neovim/releases/latest \
+    | grep -Po '"tag_name": "\K.*?(?=")')
+if [ "$_nvim_installed" != "$_nvim_latest" ]; then
+    echo "    Installing Neovim $_nvim_latest (current: $_nvim_installed)"
+    curl -fLo "$HOME/.opt/nvim/nvim.appimage" \
+        "https://github.com/neovim/neovim/releases/download/${_nvim_latest}/nvim-linux-x86_64.appimage"
+    chmod u+x "$HOME/.opt/nvim/nvim.appimage"
+    ln -sf "$HOME/.opt/nvim/nvim.appimage" "$HOME/.local/bin/nvim"
+else
+    echo "    Neovim $_nvim_installed already up-to-date, skipping."
+fi
+
+echo "==> [02] lazygit"
+# Terminal UI for git — Dracula theme configured in dotfiles/lazygitUI/
+LAZYGIT_VERSION=$(curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest \
+    | grep '"tag_name"' | cut -d'"' -f4 | sed 's/v//')
+curl -fLo /tmp/lazygit.tar.gz \
+    "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar -xf /tmp/lazygit.tar.gz -C /tmp lazygit
+install /tmp/lazygit "$HOME/.local/bin/lazygit"
+rm /tmp/lazygit.tar.gz /tmp/lazygit
+
+echo "==> [02] Done."

@@ -1,0 +1,13 @@
+# ~/.bash_profile
+
+# Keep the login environment in sync with ~/.profile.
+if [ -f "$HOME/.profile" ]; then
+  . "$HOME/.profile"
+fi
+
+# Auto-start Sway on tty1 when no Wayland session is active.
+# SDDM (layer 09) is the primary session starter; this is the fallback for
+# minimal installs without a display manager or when logging in on tty1.
+if [ -z "${WAYLAND_DISPLAY:-}" ] && [ "$(tty)" = "/dev/tty1" ] && command -v sway >/dev/null 2>&1; then
+  exec sway
+fi

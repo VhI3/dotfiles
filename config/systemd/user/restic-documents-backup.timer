@@ -1,0 +1,13 @@
+[Unit]
+Description=Run restic snapshots for external document SSD on a schedule
+
+[Timer]
+OnBootSec=20m
+OnUnitActiveSec=6h
+Persistent=true
+RandomizedDelaySec=15m
+Unit=restic-documents-backup.service
+
+[Install]
+WantedBy=timers.target
+

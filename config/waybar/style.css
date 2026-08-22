@@ -1,0 +1,247 @@
+@import "theme.local.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: JetBrainsMono Nerd Font, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+    transition: none;
+}
+
+button:hover {
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#workspaces {
+    margin-right: 8px;
+    border-radius: 12px;
+    background: @surface0;
+}
+
+#workspaces button {
+    transition: none;
+    color: @overlay1;
+    background: transparent;
+    padding: 4px 8px;
+    font-size: 17px;
+}
+
+#workspaces button.persistent {
+    color: @subtext0;
+    font-size: 12px;
+}
+
+#workspaces button:hover {
+    color: @base;
+    background: @subtext0;
+    border-radius: 12px;
+}
+
+#workspaces button.focused {
+    color: @base;
+    background: @lavender;
+    border-radius: 12px;
+}
+
+#workspaces button.urgent {
+    color: @base;
+    background: @red;
+    border-radius: 12px;
+}
+
+#mode,
+#scratchpad,
+#custom-media,
+#window,
+#mpd,
+#idle_inhibitor,
+#pulseaudio,
+#network,
+#power-profiles-daemon,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#keyboard-state,
+#language,
+#battery,
+#custom-notification,
+#clock,
+#tray,
+#custom-power {
+    margin-right: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    border-radius: 12px;
+    transition: none;
+    color: @text;
+    background: @surface0;
+}
+
+#window {
+    margin: 0 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+.modules-right > widget:last-child > #custom-power {
+    margin-right: 0;
+}
+
+#mode {
+    color: @base;
+    background: @mauve;
+}
+
+#scratchpad.empty {
+    background: transparent;
+}
+
+#custom-media {
+    min-width: 120px;
+}
+
+#mpd.disconnected,
+#mpd.stopped,
+#network.disconnected,
+#pulseaudio.muted {
+    background: @surface1;
+    color: @subtext1;
+}
+
+#mpd.paused,
+#idle_inhibitor.activated,
+#custom-notification {
+    background: @surface1;
+}
+
+#power-profiles-daemon.performance,
+#temperature.critical,
+#battery.critical:not(.charging) {
+    background: @red;
+    color: @base;
+}
+
+#power-profiles-daemon.balanced {
+    background: @blue;
+    color: @base;
+}
+
+#power-profiles-daemon.power-saver,
+#battery.charging,
+#battery.plugged {
+    background: @green;
+    color: @base;
+}
+
+#battery.warning:not(.charging) {
+    background: @yellow;
+    color: @base;
+}
+
+#keyboard-state {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#keyboard-state > label {
+    padding: 0 6px;
+}
+
+#keyboard-state > label.locked {
+    background: alpha(@lavender, 0.35);
+    border-radius: 10px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: alpha(@red, 0.9);
+    border-radius: 10px;
+}
+
+#custom-power,
+#custom-notification,
+#clock,
+#pulseaudio,
+#network,
+#backlight,
+#battery,
+#power-profiles-daemon,
+#cpu,
+#memory,
+#temperature,
+#custom-media,
+#tray,
+#mpd,
+#idle_inhibitor,
+#mode,
+#scratchpad,
+#window,
+#language,
+#keyboard-state {
+    box-shadow: 0 1px 0 alpha(@crust, 0.45);
+}
+
+#custom-power:hover,
+#custom-notification:hover,
+#clock:hover,
+#pulseaudio:hover,
+#network:hover,
+#backlight:hover,
+#battery:hover,
+#power-profiles-daemon:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#custom-media:hover,
+#tray:hover,
+#mpd:hover,
+#idle_inhibitor:hover,
+#mode:hover,
+#scratchpad:hover,
+#window:hover,
+#language:hover,
+#keyboard-state:hover {
+    background: @surface1;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

@@ -1,0 +1,13 @@
+[Unit]
+Description=Run Paperless export backup every hour
+
+[Timer]
+OnBootSec=10m
+OnUnitActiveSec=1h
+Persistent=true
+RandomizedDelaySec=5m
+Unit=paperless-export-backup.service
+
+[Install]
+WantedBy=timers.target
+

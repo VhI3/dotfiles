@@ -1,0 +1,126 @@
+* {
+    background: @base;
+    background-alt: @mantle;
+    foreground: @text;
+    selected: @lavender;
+    active: @green;
+    urgent: @red;
+    border: @lavender;
+}
+
+* {
+    normal-normal-background: @background;
+    normal-normal-foreground: @foreground;
+    normal-urgent-background: @urgent;
+    normal-urgent-foreground: @base;
+    normal-active-background: @mantle;
+    normal-active-foreground: @foreground;
+    selected-normal-background: @selected;
+    selected-normal-foreground: @base;
+    selected-urgent-background: @urgent;
+    selected-urgent-foreground: @base;
+    selected-active-background: @green;
+    selected-active-foreground: @base;
+    alternate-normal-background: @background-alt;
+    alternate-normal-foreground: @foreground;
+    alternate-urgent-background: @urgent;
+    alternate-urgent-foreground: @base;
+    alternate-active-background: @mantle;
+    alternate-active-foreground: @foreground;
+    normal-background: @background;
+    normal-foreground: @foreground;
+    alternate-normal-background: @background-alt;
+    alternate-normal-foreground: @foreground;
+    active-background: @mantle;
+    active-foreground: @foreground;
+    selected-active-background: @green;
+    selected-active-foreground: @base;
+    urgent-background: @urgent;
+    urgent-foreground: @base;
+    selected-urgent-background: @urgent;
+    selected-urgent-foreground: @base;
+    border-color: @border;
+    separatorcolor: @border;
+    background-color: @background;
+    text-color: @foreground;
+}
+
+window {
+    border: 3;
+    padding: 10;
+    border-color: @border;
+    background-color: @background;
+}
+
+mainbox {
+    background-color: @background;
+    border: 0;
+    padding: 0;
+}
+
+inputbar {
+    spacing: 8;
+    padding: 8 10;
+    background-color: @mantle;
+    text-color: @foreground;
+}
+
+prompt,
+entry,
+case-indicator {
+    text-color: @foreground;
+}
+
+listview {
+    lines: 10;
+    columns: 1;
+    fixed-height: false;
+    border: 0;
+    spacing: 6;
+    scrollbar: false;
+    padding: 8 0 0;
+}
+
+element {
+    border: 0;
+    padding: 8 10;
+    background-color: @background;
+    text-color: @foreground;
+}
+
+element normal.normal {
+    background-color: @background;
+    text-color: @foreground;
+}
+
+element alternate.normal {
+    background-color: @background-alt;
+    text-color: @foreground;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color: @base;
+}
+
+element selected.active {
+    background-color: @green;
+    text-color: @base;
+}
+
+element selected.urgent {
+    background-color: @urgent;
+    text-color: @base;
+}
+
+element-icon,
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+}
+
+mode-switcher {
+    padding: 8 10 0;
+    background-color: @background;
+    text-color: @subtext1;
+}

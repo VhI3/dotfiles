@@ -1,0 +1,12 @@
+[Unit]
+Description=Watch document SSD and mirror changes to document HDD
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/watch-ssd-hdd-mirror
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

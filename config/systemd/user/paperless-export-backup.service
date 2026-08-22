@@ -1,0 +1,7 @@
+[Unit]
+Description=Export Paperless documents and sync backups
+After=default.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/backup-paperless-to-pcloud

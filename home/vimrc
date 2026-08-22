@@ -1,0 +1,208 @@
+
+" =========================
+"   General Settings
+" =========================
+set nocompatible
+set encoding=utf-8
+set number
+set ruler
+set belloff=esc
+set visualbell
+set hidden
+set clipboard=unnamed
+set ttyfast
+set laststatus=2
+set showmode
+set showcmd
+syntax enable
+syntax on
+
+
+if &term =~ 'xterm'
+  let &t_SI = "\e[6 q"   " Insert mode: bar
+  let &t_EI = "\e[2 q"   " Normal mode: block
+endif
+
+" Tabs & Indentation
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set noshiftround
+set wrap
+set scrolloff=3
+
+" Searching
+nnoremap / /\v
+vnoremap / /\v
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+
+" Leader Key (LazyVim uses Space)
+let mapleader = " "
+let maplocalleader = "\\"
+
+" =========================
+"   Plugin Management (Vundle)
+" =========================
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" --- UI / Icons / Statusline ---
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'bryanmylee/vim-colorscheme-icons'
+
+" --- Colorschemes ---
+Plugin 'dracula/vim'
+Plugin 'morhetz/gruvbox'
+
+" --- Start & Navigation ---
+Plugin 'mhinz/vim-startify'
+Plugin 'preservim/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'liuchengxu/vim-which-key'
+
+" --- Git Integration ---
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+
+" --- Commenting / Surround ---
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdcommenter'
+
+" --- Syntax & Highlighting ---
+Plugin 'sheerun/vim-polyglot'
+
+" --- Fuzzy Finder ---
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
+" --- Autopairs & Alignment ---
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'junegunn/vim-easy-align'
+
+" --- Debugging ---
+Plugin 'puremourning/vimspector'
+
+" --- Async Linting & Formatting ---
+Plugin 'dense-analysis/ale'
+
+" --- LaTeX Support ---
+Plugin 'lervag/vimtex'
+
+" --- Distraction-Free Writing ---
+Plugin 'junegunn/goyo.vim'
+
+" --- Snippets ---
+Plugin 'honza/vim-snippets'
+Plugin 'ervandew/supertab'
+
+call vundle#end()
+filetype plugin indent on
+
+" =========================
+"   Colorscheme
+" =========================
+packadd! dracula
+colorscheme dracula
+
+" =========================
+"   Plugin Configurations
+" =========================
+
+" --- NERDTree ---
+let NERDTreeShowHidden=1
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>E :NERDTreeFind<CR>
+
+" --- Vim-airline ---
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline_powerline_fonts = 1
+
+" --- FZF (LazyVim telescope replacement) ---
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fh :History<CR>
+set rtp+=/usr/local/opt/fzf
+
+" --- ALE (Linting + Formatting) ---
+let g:ale_fix_on_save = 1
+let g:ale_linters = {
+\   'python': ['pylsp'],
+\   'cpp': ['clangd'],
+\   'c': ['clangd'],
+\ }
+nnoremap <leader>ld :ALEDetail<CR>
+nnoremap <leader>lf :ALEFix<CR>
+nnoremap <leader>ln :ALENext<CR>
+nnoremap <leader>lp :ALEPrevious<CR>
+
+" --- Vimspector (Debugging) ---
+let g:vimspector_enable_mappings = 'HUMAN'
+
+" --- Which-key ---
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
+" --- Vimtex ---
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
+" --- Easy Align ---
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" =========================
+"   LazyVim-like Keymaps
+" =========================
+
+" Better up/down with wrapped lines
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Buffer navigation
+nnoremap <S-h> :bprevious<CR>
+nnoremap <S-l> :bnext<CR>
+nnoremap [b :bprevious<CR>
+nnoremap ]b :bnext<CR>
+nnoremap <leader>bb <C-^>
+nnoremap <leader>bd :bd<CR>
+nnoremap <leader>bo :bufdo bd<CR>
+nnoremap <leader>bD :bd<CR><C-w>q<CR>
+
+" Quickfix & location lists
+nnoremap <leader>xl :lopen<CR>
+nnoremap <leader>xq :copen<CR>
+nnoremap [q :cprevious<CR>
+nnoremap ]q :cnext<CR>
+
+" Tabs
+nnoremap <leader><tab>l :tablast<CR>
+nnoremap <leader><tab>o :tabonly<CR>
+nnoremap <leader><tab>f :tabfirst<CR>
+nnoremap <leader><tab><tab> :tabnew<CR>
+nnoremap <leader><tab>] :tabnext<CR>
+nnoremap <leader><tab>[ :tabprevious<CR>
+nnoremap <leader><tab>d :tabclose<CR>
+
+" Misc utilities
+nnoremap <C-s> :update<CR>
+inoremap <C-s> <Esc>:update<CR>a
+inoremap jj <ESC>
+set listchars=tab:▸\ ,eol:¬
+map <leader>l :set list!<CR> " Toggle invisibles
+

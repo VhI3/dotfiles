@@ -1,0 +1,7 @@
+# lazygit config
+# The Catppuccin theme is layered on top via LG_CONFIG_FILE (set in bashrc),
+# which appends theme.local.yml managed by changeTheme.sh.
+
+gui:
+  # Use nerd font icons
+  nerdFontsVersion: "3"

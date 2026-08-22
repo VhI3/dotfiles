@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Copy this file to:
+#   ~/.config/dotfiles/paperless-tools.local.conf
+# and adjust only the values that differ on this machine.
+
+# Example Paperless consume / scan location:
+# PAPERLESS_CONSUME_DIR="$HOME/Documents/Scan-Inbox"
+# Backward-compatible alias if you still want to override the old name:
+# SCAN_INBOX="$PAPERLESS_CONSUME_DIR"
+
+# Example server-based Paperless setup:
+# PAPERLESS_SERVER_ONLY=1
+# PAPERLESS_URL="http://192.168.1.10:8000"
+# PAPERLESS_CONSUME_DIR="/mnt/paperless-consume"
+# PAPERLESS_CONSUME_MOUNT="/mnt/paperless-consume"
+# PAPERLESS_CONSUME_MUST_BE_MOUNTED=1
+# PAPERLESS_CONSUME_SMB_SHARE="//192.168.1.10/Paperless-Consume"
+# PAPERLESS_SMB_CREDENTIALS_FILE="$HOME/.smb/home-server"
+# PAPERLESS_OCR_LANGUAGE="deu+eng"
+
+# Example NAPS2 profile:
+# NAPS2_PROFILE_NAME="Brother ADS profile"
+
+# Example compose directory if you keep Paperless somewhere else:
+# PAPERLESS_COMPOSE_DIR="$HOME/Projects/paperless-ngx"
+
+# Example backup targets:
+# PCLOUD_BACKUP_TARGET="$HOME/pCloudDrive/Document/Paperless-Backup"
+# SSD_BACKUP_TARGET="/media/$USER/Documents_1/20-Referenz/paperless-export"

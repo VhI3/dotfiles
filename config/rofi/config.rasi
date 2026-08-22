@@ -1,0 +1,6 @@
+configuration {
+    show-icons: true;
+}
+
+@import "theme.local.rasi"
+@import "catppuccin-default.rasi"

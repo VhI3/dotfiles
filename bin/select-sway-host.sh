@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+
+DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
+HOST_NAME="${1:-$(hostname -s)}"
+HOST_SOURCE="$DOTFILES/config/sway/hosts/${HOST_NAME}.conf"
+HOST_LOCAL="${XDG_CONFIG_HOME:-$HOME/.config}/sway/host.local.conf"
+
+mkdir -p "$(dirname "$HOST_LOCAL")"
+
+if [ -f "$HOST_SOURCE" ]; then
+    ln -sfn "hosts/${HOST_NAME}.conf" "$HOST_LOCAL"
+    echo "==> Using sway host config: ${HOST_NAME}"
+else
+    rm -f "$HOST_LOCAL"
+    : > "$HOST_LOCAL"
+    echo "==> No sway host config for ${HOST_NAME}; using shared config only."
+fi

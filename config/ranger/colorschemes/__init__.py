@@ -1,0 +1,1 @@
+# Local ranger colorschemes

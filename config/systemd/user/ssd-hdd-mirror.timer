@@ -1,0 +1,12 @@
+[Unit]
+Description=Run document-drive mirror on a schedule
+
+[Timer]
+OnBootSec=5m
+OnUnitActiveSec=1h
+Persistent=true
+RandomizedDelaySec=10m
+Unit=ssd-hdd-mirror.service
+
+[Install]
+WantedBy=timers.target
