@@ -1,96 +1,144 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "--------🅥 🅗 🅘 ➌------ᴺᵉᵒⱽⁱᵐ------ {"
-# Function to check if Neovim is installed and get its version
-get_installed_neovim_version() {
-  if command -v nvim >/dev/null 2>&1; then
-    nvim --version | head -n 1 | awk '{print $2}'
-  else
-    echo "none"
-  fi
+yes=0
+
+usage() {
+  cat <<'EOF'
+Usage: update-nvim [--yes]
+
+Install or update the official Neovim AppImage in:
+  ~/.opt/nvim/nvim.appimage
+
+Options:
+  --yes    Do not ask before installing/updating.
+  -h       Show this help.
+EOF
 }
 
-# Function to fetch the latest Neovim version from GitHub
-fetch_latest_neovim_version() {
-  curl -s https://api.github.com/repos/neovim/neovim/releases/latest | grep -Po '"tag_name": "\K.*?(?=")'
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --yes|-y)
+      yes=1
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "update-nvim: unknown option: $1" >&2
+      usage >&2
+      exit 2
+      ;;
+  esac
+  shift
+done
+
+log() {
+  printf '%s\n' "$*"
 }
 
-# Function to download the latest Neovim AppImage
-download_neovim_appimage() {
+normalize_version() {
   local version="$1"
-  local url="https://github.com/neovim/neovim/releases/download/${version}/nvim-linux-x86_64.appimage"
-  if ! wget "$url" -O nvim.appimage; then
-    echo "Failed to download Neovim AppImage. Please check your network connection."
-    exit 1
-  fi
+  version="${version#v}"
+  printf '%s\n' "$version"
 }
 
-# Function to install Neovim AppImage
-install_neovim_appimage() {
-  mkdir -p ~/.opt/nvim
-  mv nvim.appimage ~/.opt/nvim/
-  chmod u+x ~/.opt/nvim/nvim.appimage
-  mkdir -p ~/.local/bin
-  ln -sf ~/.opt/nvim/nvim.appimage ~/.local/bin/nvim
-  echo "Neovim $1 installed successfully."
-}
+get_installed_version() {
+  local output first_line version
 
-# Function to compare versions
-version_compare() {
-  if [ "$1" = "$2" ]; then
+  if ! command -v nvim >/dev/null 2>&1; then
+    printf 'none\n'
     return 0
   fi
 
-  local IFS=.
-  local i ver1=($1) ver2=($2)
-  for ((i = ${#ver1[@]}; i < ${#ver2[@]}; i++)); do
-    ver1[i]=0
-  done
-  for ((i = 0; i < ${#ver1[@]}; i++)); do
-    if [ -z "${ver2[i]}" ]; then
-      ver2[i]=0
-    fi
-    if ((10#${ver1[i]} > 10#${ver2[i]})); then
-      return 1
-    fi
-    if ((10#${ver1[i]} < 10#${ver2[i]})); then
-      return 2
-    fi
-  done
-  return 0
+  if ! output="$(nvim --version 2>/dev/null)"; then
+    printf 'none\n'
+    return 0
+  fi
+
+  first_line="$(printf '%s\n' "$output" | sed -n '1p')"
+  version="$(printf '%s\n' "$first_line" | sed -E 's/^NVIM v?([0-9][^[:space:]]*).*/\1/')"
+
+  if [ -z "$version" ] || [ "$version" = "$first_line" ]; then
+    printf 'none\n'
+  else
+    normalize_version "$version"
+  fi
 }
 
-# Main script logic
-installed_version=$(get_installed_neovim_version)
-latest_version=$(fetch_latest_neovim_version)
+fetch_latest_tag() {
+  curl -fsSL https://api.github.com/repos/neovim/neovim/releases/latest |
+    sed -nE 's/.*"tag_name": "([^"]+)".*/\1/p' |
+    head -n 1
+}
 
-if [ "$installed_version" == "none" ]; then
-  echo "Neovim is not installed."
-  read -p "Do you want to install the latest version of Neovim ($latest_version)? (y/n) " response
-  if [[ "$response" == "y" || "$response" == "Y" ]]; then
-    echo "Downloading Neovim $latest_version..."
-    download_neovim_appimage "$latest_version"
-    install_neovim_appimage "$latest_version"
+should_install() {
+  local installed="$1"
+  local latest="$2"
+
+  [ "$installed" = "none" ] && return 0
+  dpkg --compare-versions "$installed" lt "$latest"
+}
+
+confirm_install() {
+  local installed="$1"
+  local latest_tag="$2"
+
+  if [ "$yes" -eq 1 ]; then
+    return 0
+  fi
+
+  if [ "$installed" = "none" ]; then
+    read -r -p "Install Neovim $latest_tag AppImage? [y/N] " response
   else
-    echo "Installation aborted by user."
+    read -r -p "Update Neovim $installed -> $latest_tag? [y/N] " response
+  fi
+
+  [[ "$response" = [yY] || "$response" = [yY][eE][sS] ]]
+}
+
+install_appimage() {
+  local latest_tag="$1"
+  local tmp_file
+
+  tmp_file="$(mktemp /tmp/nvim-appimage.XXXXXX)"
+  trap 'rm -f "$tmp_file"' RETURN
+
+  mkdir -p "$HOME/.opt/nvim" "$HOME/.local/bin"
+  curl -fL \
+    "https://github.com/neovim/neovim/releases/download/${latest_tag}/nvim-linux-x86_64.appimage" \
+    -o "$tmp_file"
+  chmod u+x "$tmp_file"
+  mv "$tmp_file" "$HOME/.opt/nvim/nvim.appimage"
+  ln -sf "$HOME/.opt/nvim/nvim.appimage" "$HOME/.local/bin/nvim"
+  trap - RETURN
+}
+
+echo "--------🅥 🅗 🅘 ➌------ᴺᵉᵒⱽⁱᵐ------ {"
+
+installed_version="$(get_installed_version)"
+
+if ! latest_tag="$(fetch_latest_tag)"; then
+  log "Could not check latest Neovim release from GitHub. Skipping AppImage update."
+  echo "--------🅥 🅗 🅘 ➌------ᴺᵉᵒⱽⁱᵐ------ }"
+  exit 0
+fi
+
+latest_version="$(normalize_version "$latest_tag")"
+
+if should_install "$installed_version" "$latest_version"; then
+  log "Neovim installed version: $installed_version"
+  log "Neovim latest version:    $latest_version"
+  if confirm_install "$installed_version" "$latest_tag"; then
+    log "Downloading Neovim $latest_tag AppImage..."
+    install_appimage "$latest_tag"
+    log "Neovim $latest_version installed successfully."
+  else
+    log "Neovim update skipped."
   fi
 else
-  version_compare "$installed_version" "$latest_version"
-  compare_result=$?
-  if [ $compare_result -eq 2 ]; then
-    echo "Neovim installed version: $installed_version"
-    echo "Neovim latest version: $latest_version"
-    read -p "Do you want to update to the latest version? (y/n) " response
-    if [[ "$response" == "y" || "$response" == "Y" ]]; then
-      echo "Downloading Neovim $latest_version..."
-      download_neovim_appimage "$latest_version"
-      install_neovim_appimage "$latest_version"
-    else
-      echo "Update aborted by user."
-    fi
-  else
-    echo "Neovim is up-to-date (version $installed_version)."
-  fi
+  log "Neovim is up-to-date (version $installed_version)."
 fi
 
 echo "--------🅥 🅗 🅘 ➌------ᴺᵉᵒⱽⁱᵐ------ }"

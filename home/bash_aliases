@@ -230,7 +230,7 @@ aaa() {
   sudo "$pmgr" upgrade -y
 
   if command -v update-nvim >/dev/null 2>&1; then
-    update-nvim
+    update-nvim --yes
   fi
 
   if command -v update-github-desktop >/dev/null 2>&1; then

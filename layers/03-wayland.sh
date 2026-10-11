@@ -20,6 +20,21 @@ ghostty_list_file="/etc/apt/sources.list.d/debian.griffo.io.list"
 ghostty_repo_line="deb [signed-by=/usr/share/keyrings/debian.griffo.io.gpg] https://debian.griffo.io/apt $(lsb_release -sc) main"
 write_repo_line "$ghostty_list_file" "$ghostty_repo_line"
 
+echo "==> [03] Restrict Griffo APT repo to Ghostty only"
+sudo rm -f /etc/apt/preferences.d/99-neovim-appimage
+sudo tee /etc/apt/preferences.d/99-griffo-ghostty-only >/dev/null <<'EOF'
+# Keep the Griffo repository available for Ghostty, but do not let it replace
+# normal Debian packages such as fzf or Neovim. Griffo currently exposes package
+# metadata for multiple tools while some .deb downloads return 401 Unauthorized.
+Package: ghostty
+Pin: origin debian.griffo.io
+Pin-Priority: 990
+
+Package: *
+Pin: origin debian.griffo.io
+Pin-Priority: -1
+EOF
+
 pm_update
 
 # Sway — tiling Wayland compositor (i3-compatible)

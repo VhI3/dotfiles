@@ -180,6 +180,7 @@ symlink "$DOTFILES/bin/setup-kulturzeit-downloader.sh" "$HOME/.local/bin/setup-k
 symlink "$DOTFILES/bin/setup-local-configs.sh" "$HOME/.local/bin/setup-local-configs"
 symlink "$DOTFILES/bin/post-install-check.sh" "$HOME/.local/bin/post-install-check"
 symlink "$DOTFILES/bin/llama-vscode-cpu.sh" "$HOME/.local/bin/llama-vscode-cpu"
+symlink "$DOTFILES/bin/protect-neovim-appimage.sh" "$HOME/.local/bin/protect-neovim-appimage"
 symlink "$DOTFILES/projects/paperless-tools/scan-to-paperless.sh" "$HOME/.local/bin/scan-to-paperless"
 symlink "$DOTFILES/projects/paperless-tools/scan-glass-to-paperless.sh" "$HOME/.local/bin/scan-glass-to-paperless"
 symlink "$DOTFILES/projects/paperless-tools/list-naps2-profiles.sh" "$HOME/.local/bin/list-naps2-profiles"
