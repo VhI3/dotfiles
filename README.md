@@ -414,7 +414,7 @@ The generated file `config/sway/host.local.conf` is local state and is intention
 
 For the current `debian` host, monitor switching is handled dynamically by `kanshi`:
 
-- if `HDMI-A-2` is connected, use the external monitor only
+- if `DP-6` is connected, use the external monitor only at `3840x2160` with scale `2.01`
 - otherwise, use the laptop screen only
 
 That logic lives in `config/kanshi/config`, while the Sway host file keeps machine-specific autostarts and wallpaper commands.
