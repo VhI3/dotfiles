@@ -1135,7 +1135,32 @@ Recommended default:
 
 `rofi-wifi` gives you a small Wi-Fi control center in Rofi: scan, connect, disconnect, toggle Wi-Fi on/off, and view the current connection without leaving Sway.
 
-`connect-keychron` reconnects the already-paired Keychron keyboard using `bluetoothctl`. Override the default device address with `KEYCHRON_BT_MAC=... connect-keychron` if needed.
+`connect-keychron` detects your saved Keychron keyboard and reconnects it using
+`bluetoothctl`. It verifies pairing, the saved bond, and the connection instead
+of assuming that a trusted device is paired. No personal Bluetooth address is
+stored in the script. Select a particular keyboard with `--mac ADDRESS` or
+`KEYCHRON_BT_MAC=...` if more than one is known.
+
+```bash
+connect-keychron --status  # Inspect the saved state; no changes
+connect-keychron           # Reconnect an already-paired keyboard
+connect-keychron --pair    # Discover and pair when the pairing/bond is missing
+```
+
+For pairing, set the K3 Pro's connection switch to **BT** and hold **Fn+1** for
+about four seconds until the indicator flashes quickly. If a passkey appears,
+type it on the Keychron and press Enter. Afterwards, a short **Fn+1** press
+selects that Bluetooth slot; holding it again starts pairing. Slots **Fn+2**
+and **Fn+3** can be used for other computers. Keep the operating-system switch
+on **Win/Android** for Linux. The USB cable can stay plugged in for charging
+while the connection switch is on BT. See the
+[K3 Pro guide](https://www.keychron.com/pages/keychron-k3-pro-quick-start-guide).
+
+The pairing helper temporarily enables controller pairing if necessary and
+restores its previous setting afterwards. It does not remove existing pairings
+or restart Bluetooth. Layer 03 installs `bluez` and `rfkill` and enables the
+Bluetooth service for fresh installations. A new OS installation requires
+pairing again, since Bluetooth bonding keys are local machine state.
 
 `setup-epos` checks for `playerctl`, detects the EPOS consumer-control device when the dongle is plugged in, and ensures the Sway media-key bindings are present without duplicating them. It also installs fallback bindings for `XF86AudioForward` and `XF86AudioRewind`, which some headsets expose instead of `Next` / `Prev`.
 

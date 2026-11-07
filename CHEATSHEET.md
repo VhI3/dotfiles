@@ -191,10 +191,16 @@ Bluetooth helpers:
 
 ```bash
 bluetoothctl
-pair-keychron-bt
+connect-keychron --status
+connect-keychron
+connect-keychron --pair
 ```
 
-Use these to inspect Bluetooth devices and re-pair the Keychron keyboard quickly.
+`--status` checks the saved state. Plain `connect-keychron` reconnects; `--pair`
+repairs a missing pairing/bond. Before pairing, switch the K3 Pro to BT and hold
+Fn+1 until the indicator flashes. Type any displayed passkey on the Keychron,
+then press Enter. For later reconnects, select the same slot with a short Fn+1
+press. Use `--mac ADDRESS` if more than one Keychron is known.
 
 Audio and media:
 

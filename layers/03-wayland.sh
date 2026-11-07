@@ -71,6 +71,10 @@ pm_install dbus-user-session
 # nm-applet — network manager tray icon (exec'd in sway config)
 pm_install network-manager-gnome
 
+# Bluetooth HID keyboards and the radio-block diagnostic helper.
+pm_install bluez rfkill
+sudo systemctl enable --now bluetooth.service
+
 # pactl — PulseAudio/PipeWire CLI, used by sway volume keybindings
 pm_install pulseaudio-utils
 
