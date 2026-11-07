@@ -12,7 +12,8 @@ xwayland enable
 
 # Gaps
 gaps inner 13
-exec_always kanshi  # auto display profile management
+# Reload existing display profiles; the lock prevents duplicates on Sway reload.
+exec_always sh -c 'pkill -HUP -u "$(id -u)" -x kanshi 2>/dev/null || true; exec flock -n "$XDG_RUNTIME_DIR/kanshi.lock" kanshi'
 # Clipboard (Wayland)
 # sudo apt install wl-clipboard
 

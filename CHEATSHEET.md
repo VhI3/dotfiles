@@ -14,7 +14,8 @@ changeTheme latte
 post-install-check
 ```
 
-`aaa` updates the system and runs your routine maintenance helper.
+`aaa` updates system packages, Ghostty, Neovim, and GitHub Desktop, then cleans up.
+It stops on failure and keeps cached packages for a retry.
 `show-keybindings` opens your Sway shortcut reference.
 `changeTheme ...` switches the desktop theme across your themed apps.
 `post-install-check` verifies that a freshly restored machine is ready.
@@ -38,7 +39,20 @@ Update packages and daily maintenance:
 aaa
 ```
 
-Runs your usual package refresh and update flow.
+Runs the package refresh and update flow. Ghostty is downloaded from free GitHub
+releases; old subscription-only Griffo sources are disabled automatically.
+
+Check or update Ghostty separately:
+
+```bash
+update-ghostty --check
+update-ghostty --yes
+update-ghostty --install --yes
+```
+
+`--check` shows versions without changing anything. `--yes` updates an installed
+Ghostty; add `--install` on a fresh machine. Downloads are checked against GitHub's
+SHA-256 digest before installation.
 
 Open editor, list files, and inspect directories:
 

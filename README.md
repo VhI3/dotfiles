@@ -414,10 +414,15 @@ The generated file `config/sway/host.local.conf` is local state and is intention
 
 For the current `debian` host, monitor switching is handled dynamically by `kanshi`:
 
-- if `DP-6` is connected, use the external monitor only at `3840x2160` with scale `2.01`
-- otherwise, use the laptop screen only
+- with one external 4K monitor connected, use only that screen at `3840x2160` with scale `2.01`
+- without an external monitor, enable only the laptop screen (`eDP-1`), reset its scale to `1`, and position it at `0,0`
 
 That logic lives in `config/kanshi/config`, while the Sway host file keeps machine-specific autostarts and wallpaper commands.
+The external profile matches the output other than `eDP-1`, so changing between
+DP/HDMI ports does not require editing connector names. It is configured for one
+external 4K monitor; adjust its mode and scale for a different monitor. Sway
+reloads the profiles without starting duplicate display managers, using `flock`
+from `util-linux` and `pkill` from `procps` (installed by layer 03).
 
 For the current `debian` host, those autostarts include desktop helpers like `nm-applet`, `thunderbird`, `pcloud`, and audio utilities.
 
@@ -542,9 +547,39 @@ Useful local scripts linked into `~/.local/bin`:
 - `llama-vscode-cpu` → start the small CPU-only `llama.vscode` completion server on `127.0.0.1:8012`
 - `wallpaper` → set wallpaper from the current shared flavour or an explicit image path
 - `update-nvim` → refresh the Neovim AppImage
+- `update-ghostty` → update Ghostty from free GitHub release packages for this Debian/Ubuntu release and architecture
 - `nvim-repair` → general Neovim repair toolbox for startup checks and Lazy.nvim cache problems
 - `repair-nvim-lazy-cache` → compatibility shortcut for `nvim-repair lazy-cache`
 - `repair-nvim-lspconfig-cache` → compatibility shortcut for `nvim-repair lspconfig-cache`
+
+`aaa` prepares Ghostty's repository migration, refreshes and upgrades system packages,
+then checks Ghostty, Neovim, and GitHub Desktop before removing unused packages and
+cleaning the package cache. If a stage fails, it stops with a nonzero exit status
+and preserves the cache for troubleshooting or retrying.
+
+Ghostty is installed by layer 03 from the free
+[GitHub releases](https://github.com/dariogriffo/ghostty-debian/releases), because
+Griffo's main APT repository now requires a subscription. The updater checks the
+SHA-256 digest and package identity before using APT to install dependencies.
+Existing Griffo source files are saved with a `.disabled` suffix, and packages
+from its paid repository hosts are pinned out, including Ghostty.
+
+```bash
+update-ghostty --check          # Show installed and available versions; no changes
+update-ghostty --yes            # Migrate old sources and update installed Ghostty
+update-ghostty --install --yes  # Install Ghostty on a fresh machine
+update-ghostty --prepare        # Only migrate the old APT sources and pins
+```
+
+After pulling this change on an existing machine, run `bash dots/link.sh` during
+your normal dotfiles restore, or link only the new helper without reapplying
+other desktop settings:
+
+```bash
+ln -sfn "$PWD/bin/update-ghostty.sh" "$HOME/.local/bin/update-ghostty"
+source ~/.bash_aliases
+aaa
+```
 
 `mount-sd` accepts an explicit block device like `mount-sd /dev/mmcblk0p1`, but will also mount to `/mnt/sdcard` with the default helper path.
 

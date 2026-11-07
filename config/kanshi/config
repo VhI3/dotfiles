@@ -1,14 +1,14 @@
 # kanshi — automatic display profile management
 #
-# Desired behavior for this machine:
-# - If DP-6 is connected, use only the external monitor
-# - Otherwise, fall back to the laptop panel
+# One external 4K monitor: use it alone, regardless of the DP/HDMI port.
+# The explicit laptop match is assigned first; "*" matches the other output.
+# With no external monitor, restore the laptop panel at normal scale.
 
 profile external_only {
-    output DP-6 enable mode 3840x2160 position 0,0 scale 2.01
     output eDP-1 disable
+    output "*" enable mode 3840x2160 position 0,0 scale 2.01
 }
 
 profile laptop_only {
-    output eDP-1 enable
+    output eDP-1 enable position 0,0 scale 1
 }

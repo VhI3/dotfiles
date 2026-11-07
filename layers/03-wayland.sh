@@ -6,34 +6,11 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$SCRIPT_DIR/lib-package-manager.sh"
 
 ensure_user_bootstrap_tools
-ensure_apt_keyring_dir
 
 echo "==> [03] Wayland / Sway stack"
 
-echo "==> [03] Ghostty Debian repository"
-if [ ! -f /usr/share/keyrings/debian.griffo.io.gpg ]; then
-    curl -fsSL https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc |
-        sudo gpg --dearmor -o /usr/share/keyrings/debian.griffo.io.gpg
-fi
-
-ghostty_list_file="/etc/apt/sources.list.d/debian.griffo.io.list"
-ghostty_repo_line="deb [signed-by=/usr/share/keyrings/debian.griffo.io.gpg] https://debian.griffo.io/apt $(lsb_release -sc) main"
-write_repo_line "$ghostty_list_file" "$ghostty_repo_line"
-
-echo "==> [03] Restrict Griffo APT repo to Ghostty only"
-sudo rm -f /etc/apt/preferences.d/99-neovim-appimage
-sudo tee /etc/apt/preferences.d/99-griffo-ghostty-only >/dev/null <<'EOF'
-# Keep the Griffo repository available for Ghostty, but do not let it replace
-# normal Debian packages such as fzf or Neovim. Griffo currently exposes package
-# metadata for multiple tools while some .deb downloads return 401 Unauthorized.
-Package: ghostty
-Pin: origin debian.griffo.io
-Pin-Priority: 990
-
-Package: *
-Pin: origin debian.griffo.io
-Pin-Priority: -1
-EOF
+echo "==> [03] Prepare free Ghostty GitHub updates"
+bash "$SCRIPT_DIR/../bin/update-ghostty.sh" --prepare
 
 pm_update
 
@@ -42,7 +19,7 @@ pm_install sway
 
 # kanshi — automatic display profile management (Wayland replacement for xrandr scripts)
 # Reads ~/.config/kanshi/config and applies the matching profile on output connect/disconnect
-pm_install kanshi
+pm_install kanshi util-linux procps
 
 # swaybg — sets the wallpaper on Wayland outputs
 pm_install swaybg
@@ -57,7 +34,8 @@ pm_install swayidle
 pm_install waybar
 
 # Ghostty — default terminal in Sway
-pm_install ghostty
+pm_install curl jq ca-certificates
+bash "$SCRIPT_DIR/../bin/update-ghostty.sh" --install --yes
 
 # Kitty — secondary GPU-accelerated terminal, kept alongside Ghostty
 pm_install kitty

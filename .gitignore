@@ -1,4 +1,5 @@
 config/ranger/colorschemes/__pycache__/
+tests/__pycache__/
 config/dotfiles/media-shares.env
 config/dotfiles/document-drives.env
 config/isync/mbsyncrc.local

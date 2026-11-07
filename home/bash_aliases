@@ -219,24 +219,40 @@ if command -v zathura >/dev/null 2>&1; then
   alias z='zathura'
 fi
 
+_aaa_step() {
+  local description="$1" status
+  shift
+  printf '\n==> %s\n' "$description"
+  if "$@"; then
+    return 0
+  else
+    status=$?
+    printf 'aaa: %s failed (exit code %s). Stopping; later updates and cache cleanup were skipped.\n' "$description" "$status" >&2
+    return "$status"
+  fi
+}
+
 aaa() {
-  local pmgr="apt"
+  local pmgr="apt" updater
 
   if command -v nala >/dev/null 2>&1; then
     pmgr="nala"
   fi
 
-  sudo "$pmgr" update
-  sudo "$pmgr" upgrade -y
-
-  if command -v update-nvim >/dev/null 2>&1; then
-    update-nvim --yes
+  if command -v update-ghostty >/dev/null 2>&1; then
+    _aaa_step "Prepare Ghostty GitHub updates" update-ghostty --prepare || return $?
   fi
 
-  if command -v update-github-desktop >/dev/null 2>&1; then
-    update-github-desktop --yes
-  fi
+  _aaa_step "Refresh package lists" sudo "$pmgr" update || return $?
+  _aaa_step "Upgrade system packages" sudo "$pmgr" upgrade -y || return $?
 
-  sudo "$pmgr" autoremove -y
-  sudo "$pmgr" clean
+  for updater in update-ghostty update-nvim update-github-desktop; do
+    if command -v "$updater" >/dev/null 2>&1; then
+      _aaa_step "$updater" "$updater" --yes || return $?
+    fi
+  done
+
+  _aaa_step "Remove unused packages" sudo "$pmgr" autoremove -y || return $?
+  _aaa_step "Clean package cache" sudo "$pmgr" clean || return $?
+  printf '\naaa: all update and maintenance steps completed successfully.\n'
 }

@@ -191,6 +191,7 @@ symlink "$DOTFILES/projects/paperless-tools/paperless-gui.sh" "$HOME/.local/bin/
 symlink "$DOTFILES/bin/sync-mail.sh"    "$HOME/.local/bin/sync-mail"
 symlink "$DOTFILES/bin/kulturzeit-downloader.sh" "$HOME/.local/bin/kulturzeit-downloader"
 symlink "$DOTFILES/bin/update-nvim.sh"  "$HOME/.local/bin/update-nvim"
+symlink "$DOTFILES/bin/update-ghostty.sh" "$HOME/.local/bin/update-ghostty"
 symlink "$DOTFILES/bin/nvim-repair.sh" "$HOME/.local/bin/nvim-repair"
 symlink "$DOTFILES/bin/repair-nvim-lazy-cache.sh" "$HOME/.local/bin/repair-nvim-lazy-cache"
 symlink "$DOTFILES/bin/repair-nvim-lspconfig-cache.sh" "$HOME/.local/bin/repair-nvim-lspconfig-cache"
